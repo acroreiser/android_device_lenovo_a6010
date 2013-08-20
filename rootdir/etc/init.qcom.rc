@@ -117,6 +117,10 @@ on early-boot
     start vendor.qseecomd
 
 on boot
+
+# Prevents permission denied error for telephony
+    chmod 0644 /proc/cmdline
+
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
