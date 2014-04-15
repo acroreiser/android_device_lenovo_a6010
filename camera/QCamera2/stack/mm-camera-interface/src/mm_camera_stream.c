@@ -1670,7 +1670,8 @@ int32_t mm_stream_reg_buf(mm_stream_t * my_obj)
         if (my_obj->buf_status[i].initial_reg_flag) {
             rc = mm_stream_qbuf(my_obj, &my_obj->buf[i]);
             if (rc != 0) {
-                CDBG_ERROR("%s: VIDIOC_QBUF rc = %d\n", __func__, rc);
+                CDBG_ERROR("%s: VIDIOC_QBUF rc = %d, errno is %s\n",
+                        __func__, rc, strerror(errno));
                 break;
             }
             my_obj->buf_status[i].buf_refcnt = 0;
@@ -3007,8 +3008,8 @@ int32_t mm_stream_buf_done(mm_stream_t * my_obj,
             CDBG("<DEBUG> : Buf done for buffer:%d", frame->buf_idx);
             rc = mm_stream_qbuf(my_obj, frame);
             if(rc < 0) {
-                CDBG_ERROR("%s: mm_camera_stream_qbuf(idx=%d) err=%d\n",
-                           __func__, frame->buf_idx, rc);
+                CDBG_ERROR("%s: mm_camera_stream_qbuf(idx=%d) errno=%d, %s\n",
+                           __func__, frame->buf_idx, errno, strerror(errno));
             } else {
                 my_obj->buf_status[frame->buf_idx].in_kernel = 1;
             }
