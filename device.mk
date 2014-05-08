@@ -62,7 +62,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.latch_unsignaled=1 \
     persist.debug.wfdenable=1 \
     persist.sys.wfd.virtual=1 \
-    debug.hwui.renderer=opengl
+    debug.hwui.renderer=opengl \
+    ro.qualcomm.cabl=2
 
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
