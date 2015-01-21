@@ -1,5 +1,3 @@
-/dev/color_enhancement                          u:object_r:color_device:s0
-
 /persist/.genmac                                u:object_r:wifi_data_file:s0
 /persist/.bt_nv.bin                             u:object_r:bluetooth_data_file:s0
 
