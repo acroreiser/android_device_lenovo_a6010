@@ -188,6 +188,10 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     power.msm8916
 
+# Sensor HAL
+PRODUCT_PACKAGES += \
+    sensors.msm8916
+
 # QC PROPRIETARY
 ifneq ($(QCPATH),)
 # proprietary wifi display, if available
