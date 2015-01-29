@@ -56,6 +56,5 @@ BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 rm -rf $BASE/*
 
 extract ../../$VENDOR/$DEVICE/proprietary-files-qc.txt $BASE
-extract ../../$VENDOR/$DEVICE/proprietary-files.txt $BASE
 
 ./setup-makefiles.sh

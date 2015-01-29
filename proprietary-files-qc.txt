@@ -21,6 +21,39 @@ vendor/lib/libbtnv.so
 
 # Camera
 bin/mm-qcamera-daemon
+vendor/lib/libactuator_dw9714.so
+vendor/lib/libactuator_dw9714_camcorder.so
+vendor/lib/libactuator_dw9714_camera.so
+vendor/lib/libactuator_dw9714_owt8a12.so
+vendor/lib/libactuator_dw9714_owt8a12_camcorder.so
+vendor/lib/libactuator_dw9714_owt8a12_camera.so
+vendor/lib/libchromatix_gc2355_8916_common.so
+vendor/lib/libchromatix_gc2355_8916_default_video.so
+vendor/lib/libchromatix_gc2355_8916_preview.so
+vendor/lib/libchromatix_ov2680_5987fhq_common.so
+vendor/lib/libchromatix_ov2680_5987fhq_default_video.so
+vendor/lib/libchromatix_ov2680_5987fhq_preview.so
+vendor/lib/libchromatix_ov2680_5987fhq_snapshot.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_common.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_default_video.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_hfr_120fps.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_hfr_60fps.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_hfr_90fps.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_liveshot.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_preview.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_snapshot.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_video_hd.so
+vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_zsl.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_common.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_default_video.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_hfr_120fps.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_hfr_60fps.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_hfr_90fps.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_liveshot.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_preview.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_snapshot.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_video_hd.so
+vendor/lib/libchromatix_ov8865_q8v18a_sunny_zsl.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libmmcamera2_c2d_module.so
@@ -37,9 +70,13 @@ vendor/lib/libmmcamera2_stats_modules.so
 vendor/lib/libmmcamera2_vpe_module.so
 vendor/lib/libmmcamera2_wnr_module.so
 vendor/lib/libmmcamera_faceproc.so
+vendor/lib/libmmcamera_gc2355_8916.so
 vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hdr_lib.so
 vendor/lib/libmmcamera_imglib.so
+vendor/lib/libmmcamera_ov2680_5987fhq.so
+vendor/lib/libmmcamera_ov8865_q8v18a.so
+vendor/lib/libmmcamera_sunny_q8v18a_t86519a1_eeprom.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
 vendor/lib/libmmcamera_tuning.so
@@ -109,8 +146,8 @@ vendor/lib/libsc-a3xx.so
 vendor/lib/libscale.so
 
 # Graphics firmware
-etc/firmware/a420_pfp.fw
-etc/firmware/a420_pm4.fw
+etc/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw
 
 # Media
 vendor/lib/libDivxDrm.so
