@@ -26,15 +26,17 @@
 <!-- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                          -->
 <audio_platform_info>
     <acdb_ids>
-        <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15" />
+        <device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" acdb_id="11" />
+        <device name="SND_DEVICE_IN_VOICE_DMIC" acdb_id="118" />
     </acdb_ids>
 
     <backend_names>
-        <!-- empty -->
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="speaker" />
+        <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" backend="headphones" />
     </backend_names>
 
     <pcm_ids>
-        <!-- empty -->
+        <usecase name="USECASE_AUDIO_PLAYBACK_FM" type="out" id="25" />
     </pcm_ids>
 
     <device_names>
