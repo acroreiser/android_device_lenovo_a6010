@@ -121,7 +121,6 @@
     <ctl name="LHPF4 Mode" value="Low-pass" />
     <!-- wm8998  end-->
 
-    <ctl name="QUATMI2S CLK" value="DISABLE" />
     <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia1" value="0" />
     <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="0" />
     <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia1" value="0" />
@@ -255,17 +254,6 @@
 
     <!-- These are audio route (FE to BE) specific mixer settings -->
     <path name="deep-buffer-playback">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
-        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="1" />
-    </path>
-
-    <path name="deep-buffer-playback speaker">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
-        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="1" />
-    </path>
-
-    <path name="deep-buffer-playback headphones">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="1" />
     </path>
 
@@ -295,17 +283,6 @@
     </path>
 
     <path name="low-latency-playback">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
-        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="1" />
-    </path>
-
-    <path name="low-latency-playback speaker">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
-        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="1" />
-    </path>
-
-    <path name="low-latency-playback headphones">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
@@ -335,7 +312,6 @@
     </path>
 
     <path name="compress-offload-playback">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia4" value="1" />
     </path>
 
@@ -396,13 +372,11 @@
     </path>
 
     <path name="voice-call speaker">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer CSVoice" value="1" />
         <ctl name="Voice_Tx Mixer TERT_MI2S_TX_Voice" value="1" />
     </path>
 
      <path name="voice-call headphones">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer CSVoice" value="1" />
         <ctl name="Voice_Tx Mixer TERT_MI2S_TX_Voice" value="1" />
      </path>
@@ -428,13 +402,11 @@
     </path>
 
     <path name="voice2-call speaker">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="Voice2_Tx Mixer TERT_MI2S_TX_Voice2" value="1" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer Voice2" value="1" />
     </path>
 
     <path name="voice2-call headphones">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="Voice2_Tx Mixer TERT_MI2S_TX_Voice2" value="1" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer Voice2" value="1" />
     </path>
@@ -456,12 +428,10 @@
 
     <path name="play-fm">
         <ctl name="Internal FM RX Volume" value="1" />
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX Port Mixer INTERNAL_FM_TX" value="1" />
     </path>
 
     <path name="vowlan-call">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer VoWLAN" value="1" />
         <ctl name="PRI_MI2S_RX_Voice Mixer VoWLAN" value="1" />
         <ctl name="VoWLAN_Tx Mixer TERT_MI2S_TX_VoWLAN" value="1" />
@@ -488,7 +458,6 @@
     </path>
 
     <path name="hfp-sco">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX Port Mixer INTERNAL_BT_SCO_TX" value="1" />
         <ctl name="PRI_MI2S_RX Port Mixer INTERNAL_BT_SCO_TX" value="1" />
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia6" value="1" />
@@ -552,7 +521,6 @@
    </path>
 
     <path name="volte-call speaker">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer VoLTE" value="1" />
         <ctl name="VoLTE_Tx Mixer TERT_MI2S_TX_VoLTE" value="1" />
     </path>
@@ -583,13 +551,11 @@
     </path>
 
     <path name="compress-voip-call speaker">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer Voip" value="1" />
         <ctl name="Voip_Tx Mixer TERT_MI2S_TX_Voip" value="1" />
     </path>
 
     <path name="compress-voip-call headphones">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer Voip" value="1" />
         <ctl name="Voip_Tx Mixer TERT_MI2S_TX_Voip" value="1" />
     </path>
@@ -626,7 +592,6 @@
     </path>
 
     <path name="qchat-call">
-        <ctl name="QUATMI2S CLK" value="ENABLE" />
         <ctl name="QUAT_MI2S_RX_Voice Mixer QCHAT" value="1" />
         <ctl name="PRI_MI2S_RX_Voice Mixer QCHAT" value="1" />
         <ctl name="QCHAT_Tx Mixer TERT_MI2S_TX_QCHAT" value="1" />
