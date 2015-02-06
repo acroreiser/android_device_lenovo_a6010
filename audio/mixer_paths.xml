@@ -49,8 +49,6 @@
     <ctl name="Voip Evrc Min Max Rate Config" id="1" value="4" />
     <ctl name="Voip Dtx Mode" value="0" />
     <ctl name="TTY Mode" value="Off" />
-    <ctl name="HPHL Volume" value="9" />
-    <ctl name="HPHR Volume" value="9" />
     <ctl name="RX1 Digital Volume" value="84" />
     <ctl name="RX2 Digital Volume" value="84" />
     <ctl name="RX3 Digital Volume" value="84" />
@@ -67,9 +65,7 @@
     <ctl name="DEC1 MUX" value="ZERO" />
     <ctl name="ADC2 MUX" value="ZERO" />
     <ctl name="RDAC2 MUX" value="ZERO" />
-    <ctl name="RX2 MIX2 INP2" value="ZERO" />
     <ctl name="RX2 MIX2 INP1" value="ZERO" />
-    <ctl name="RX1 MIX2 INP2" value="ZERO" />
     <ctl name="RX1 MIX2 INP1" value="ZERO" />
     <ctl name="RX3 MIX1 INP2" value="ZERO" />
     <ctl name="RX3 MIX1 INP1" value="ZERO" />
@@ -82,7 +78,6 @@
     <ctl name="HPHR" value="ZERO" />
     <ctl name="SPK DAC Switch" value="0" />
     <ctl name="Speaker Boost" value="ENABLE" />
-    <ctl name="MICBIAS CAPLESS Switch" value="0" />
     <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     <ctl name="EAR PA Boost" value="ENABLE" />
     <ctl name="MI2S_RX Channels" value="One" />
@@ -137,8 +132,7 @@
     <ctl name="PRI_MI2S_RX_Voice Mixer CSVoice" value="0" />
     <ctl name="QUAT_MI2S_RX_Voice Mixer CSVoice" value="0" />
     <ctl name="Voice_Tx Mixer TERT_MI2S_TX_Voice" value="0" />
-    <ctl name="PRI_MI2S_RX Port Mixer INT_BT_SCO_TX" value="0" />
-    <ctl name="QUAT_MI2S_RX Port Mixer INT_BT_SCO_TX" value="0" />
+    <ctl name="PRI_MI2S_RX Port Mixer INTERNAL_BT_SCO_TX" value="0" />
     <ctl name="VOC_EXT_EC MUX" value="NONE" />
     <!-- Voice BTSCO -->
     <ctl name="Internal BTSCO SampleRate" value="8000" />
@@ -181,7 +175,7 @@
     <ctl name="Internal FM RX Volume" value="0" />
     <ctl name="PRI_MI2S_RX Port Mixer INTERNAL_FM_TX" value="0" />
     <ctl name="QUAT_MI2S_RX Port Mixer INTERNAL_FM_TX" value="0" />
-    <ctl name="MI2S_DL_HL Switch" value="0" />
+    <ctl name="PRI_MI2S_RX_DL_HL Switch" value="0" />
     <ctl name="MultiMedia1 Mixer INTERNAL_FM_TX" value="0" />
     <ctl name="MultiMedia2 Mixer INTERNAL_FM_TX" value="0" />
     <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia1" value="0" />
@@ -458,11 +452,9 @@
     </path>
 
     <path name="hfp-sco">
-        <ctl name="QUAT_MI2S_RX Port Mixer INTERNAL_BT_SCO_TX" value="1" />
         <ctl name="PRI_MI2S_RX Port Mixer INTERNAL_BT_SCO_TX" value="1" />
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia6" value="1" />
         <ctl name="MultiMedia6 Mixer TERT_MI2S_TX" value="1" />
-        <ctl name="MI2S_DL_HL Switch" value="1" />
     </path>
 
     <path name="hfp-sco-wb">
@@ -610,12 +602,10 @@
     <!-- These are actual sound device specific mixer settings -->
     <path name="adc1">
         <ctl name="DEC1 MUX" value="ADC1" />
-        <ctl name="MICBIAS CAPLESS Switch" value="1" />
     </path>
 
     <path name="adc2">
         <ctl name="DEC1 MUX" value="ADC2" />
-        <ctl name="MICBIAS CAPLESS Switch" value="1" />
     </path>
 
     <path name="speaker">
@@ -693,7 +683,16 @@
     <path name="wm8998-headphones">
         <ctl name="DRC1L Input" value="AIF1RX1" />
         <ctl name="DRC1R Input" value="AIF1RX2" />
-        <ctl name="DRC1" value="0 115 8 83 8 40 1 70 02 18" />
+        <ctl name="DRC1" id="0" value="0" />
+        <ctl name="DRC1" id="1" value="115" />
+        <ctl name="DRC1" id="2" value="8" />
+        <ctl name="DRC1" id="3" value="83" />
+        <ctl name="DRC1" id="4" value="8" />
+        <ctl name="DRC1" id="5" value="40" />
+        <ctl name="DRC1" id="6" value="1" />
+        <ctl name="DRC1" id="7" value="70" />
+        <ctl name="DRC1" id="8" value="2" />
+        <ctl name="DRC1" id="9" value="18" />
 
         <ctl name="LHPF1 Input 1" value="DRC1R" />
         <ctl name="LHPF2 Input 1" value="DRC1L" />
@@ -705,15 +704,56 @@
         <ctl name="LHPF3 Mode" value="High-pass" />
         <ctl name="LHPF4 Mode" value="High-pass" />
 
-        <ctl name="LHPF1 Coefficients"  value="247 64" />
-        <ctl name="LHPF2 Coefficients"  value="247 64" />
-
-        <ctl name="LHPF3 Coefficients"  value="240 171" />
-        <ctl name="LHPF4 Coefficients"  value="240 171" />
+        <ctl name="LHPF1 Coefficients" id="0" value="247" />
+        <ctl name="LHPF1 Coefficients" id="1" value="64" />
+        <ctl name="LHPF2 Coefficients" id="0" value="247" />
+        <ctl name="LHPF2 Coefficients" id="1" value="64" />
+        <ctl name="LHPF3 Coefficients" id="0" value="240" />
+        <ctl name="LHPF3 Coefficients" id="1" value="171" />
+        <ctl name="LHPF4 Coefficients" id="0" value="240" />
+        <ctl name="LHPF4 Coefficients" id="1" value="171" />
 
         <ctl name="EQ1 Input" value="LHPF3" />
-        <ctl name="EQ1 Coefficients" value="15 200 3 250 0 224 30 197 241 53 4 10 4 200 28 156 243 54 4 10 12 183 26 69 244 97 4 10 17 87 5 140 5 99 64 0 0 0" />
-        <ctl name="EQ1 Mode Switch" value="0" />
+
+        <ctl name="EQ1 Coefficients" id="0" value="15" />
+        <ctl name="EQ1 Coefficients" id="1" value="200" />
+        <ctl name="EQ1 Coefficients" id="2" value="3" />
+        <ctl name="EQ1 Coefficients" id="3" value="250" />
+        <ctl name="EQ1 Coefficients" id="4" value="0" />
+        <ctl name="EQ1 Coefficients" id="5" value="224" />
+        <ctl name="EQ1 Coefficients" id="6" value="30" />
+        <ctl name="EQ1 Coefficients" id="7" value="197" />
+        <ctl name="EQ1 Coefficients" id="8" value="241" />
+        <ctl name="EQ1 Coefficients" id="9" value="53" />
+        <ctl name="EQ1 Coefficients" id="10" value="4" />
+        <ctl name="EQ1 Coefficients" id="11" value="10" />
+        <ctl name="EQ1 Coefficients" id="12" value="4" />
+        <ctl name="EQ1 Coefficients" id="13" value="200" />
+        <ctl name="EQ1 Coefficients" id="14" value="28" />
+        <ctl name="EQ1 Coefficients" id="15" value="156" />
+        <ctl name="EQ1 Coefficients" id="16" value="243" />
+        <ctl name="EQ1 Coefficients" id="17" value="54" />
+        <ctl name="EQ1 Coefficients" id="18" value="4" />
+        <ctl name="EQ1 Coefficients" id="19" value="10" />
+        <ctl name="EQ1 Coefficients" id="20" value="12" />
+        <ctl name="EQ1 Coefficients" id="21" value="183" />
+        <ctl name="EQ1 Coefficients" id="22" value="26" />
+        <ctl name="EQ1 Coefficients" id="23" value="69" />
+        <ctl name="EQ1 Coefficients" id="24" value="244" />
+        <ctl name="EQ1 Coefficients" id="25" value="97" />
+        <ctl name="EQ1 Coefficients" id="26" value="4" />
+        <ctl name="EQ1 Coefficients" id="27" value="10" />
+        <ctl name="EQ1 Coefficients" id="28" value="17" />
+        <ctl name="EQ1 Coefficients" id="29" value="87" />
+        <ctl name="EQ1 Coefficients" id="30" value="5" />
+        <ctl name="EQ1 Coefficients" id="31" value="140" />
+        <ctl name="EQ1 Coefficients" id="32" value="5" />
+        <ctl name="EQ1 Coefficients" id="33" value="99" />
+        <ctl name="EQ1 Coefficients" id="34" value="64" />
+        <ctl name="EQ1 Coefficients" id="35" value="0" />
+        <ctl name="EQ1 Coefficients" id="36" value="0" />
+        <ctl name="EQ1 Coefficients" id="37" value="0" />
+
         <ctl name="EQ1 B1 Volume" value="12" />
         <ctl name="EQ1 B2 Volume" value="12" />
         <ctl name="EQ1 B3 Volume" value="12" />
@@ -721,8 +761,46 @@
         <ctl name="EQ1 B5 Volume" value="12" />
 
         <ctl name="EQ2 Input" value="LHPF4" />
-        <ctl name="EQ2 Coefficients"  value="15 200 3 250 0 224 31 173 240 82 4 14 1 69 31 128 240 115 4 8 1 199 26 69 244 97 4 10 17 87 5 140 05 99 64 0 0 0" />
-        <ctl name="EQ2 Mode Switch" value="0" />
+
+        <ctl name="EQ2 Coefficients" id="0" value="15" />
+        <ctl name="EQ2 Coefficients" id="1" value="200" />
+        <ctl name="EQ2 Coefficients" id="2" value="3" />
+        <ctl name="EQ2 Coefficients" id="3" value="250" />
+        <ctl name="EQ2 Coefficients" id="4" value="0" />
+        <ctl name="EQ2 Coefficients" id="5" value="224" />
+        <ctl name="EQ2 Coefficients" id="6" value="31" />
+        <ctl name="EQ2 Coefficients" id="7" value="173" />
+        <ctl name="EQ2 Coefficients" id="8" value="240" />
+        <ctl name="EQ2 Coefficients" id="9" value="82" />
+        <ctl name="EQ2 Coefficients" id="10" value="4" />
+        <ctl name="EQ2 Coefficients" id="11" value="14" />
+        <ctl name="EQ2 Coefficients" id="12" value="1" />
+        <ctl name="EQ2 Coefficients" id="13" value="69" />
+        <ctl name="EQ2 Coefficients" id="14" value="31" />
+        <ctl name="EQ2 Coefficients" id="15" value="128" />
+        <ctl name="EQ2 Coefficients" id="16" value="240" />
+        <ctl name="EQ2 Coefficients" id="17" value="115" />
+        <ctl name="EQ2 Coefficients" id="18" value="4" />
+        <ctl name="EQ2 Coefficients" id="19" value="8" />
+        <ctl name="EQ2 Coefficients" id="20" value="1" />
+        <ctl name="EQ2 Coefficients" id="21" value="199" />
+        <ctl name="EQ2 Coefficients" id="22" value="26" />
+        <ctl name="EQ2 Coefficients" id="23" value="69" />
+        <ctl name="EQ2 Coefficients" id="24" value="244" />
+        <ctl name="EQ2 Coefficients" id="25" value="97" />
+        <ctl name="EQ2 Coefficients" id="26" value="4" />
+        <ctl name="EQ2 Coefficients" id="27" value="10" />
+        <ctl name="EQ2 Coefficients" id="28" value="17" />
+        <ctl name="EQ2 Coefficients" id="29" value="87" />
+        <ctl name="EQ2 Coefficients" id="30" value="5" />
+        <ctl name="EQ2 Coefficients" id="31" value="140" />
+        <ctl name="EQ2 Coefficients" id="32" value="5" />
+        <ctl name="EQ2 Coefficients" id="33" value="99" />
+        <ctl name="EQ2 Coefficients" id="34" value="64" />
+        <ctl name="EQ2 Coefficients" id="35" value="0" />
+        <ctl name="EQ2 Coefficients" id="36" value="0" />
+        <ctl name="EQ2 Coefficients" id="37" value="0" />
+
         <ctl name="EQ2 B1 Volume" value="12" />
         <ctl name="EQ2 B2 Volume" value="12" />
         <ctl name="EQ2 B3 Volume" value="12" />
@@ -869,7 +947,6 @@
 
     <path name="listen-headset-mic">
         <ctl name='LOOPBACK Mode' value='ENABLE' />
-        <ctl name="MICBIAS CAPLESS Switch" value="1" />
         <ctl name="DEC1 MUX" value="ADC2" />
         <ctl name="ADC2 MUX" value="INP2" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
