@@ -26,29 +26,12 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8916
 TARGET_NO_BOOTLOADER := true
 
 # Architecture
-ifeq ($(USE_64_BIT),true)
-TARGET_BOARD_SUFFIX := _64
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
-
-TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
-TARGET_2ND_CPU_ABI := armeabi-v7a
-TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53
-
-TARGET_USES_64_BIT_BINDER := true
-else
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a53
-endif
 
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
@@ -60,18 +43,8 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
-TARGET_KERNEL_SOURCE := kernel/yu/msm8916
-
-ifeq ($(USE_64_BIT),true)
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
-
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_USES_UNCOMPRESSED_KERNEL := true
-TARGET_KERNEL_CONFIG := cyanogenmod_lettuce-64_defconfig
-else
 TARGET_KERNEL_CONFIG := cyanogenmod_lettuce_defconfig
-endif
+TARGET_KERNEL_SOURCE := kernel/yu/msm8916
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -164,11 +137,9 @@ BOARD_SEPOLICY_UNION += \
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 
-# QC PROPRIETARY, but not 64bit. The arm64 libcne is broken :(
+# QC PROPRIETARY
 ifneq ($(QCPATH),)
-ifneq ($(USE_64_BIT),true)
 BOARD_USES_QCNE := true
-endif
 endif
 
 # Vold
@@ -187,11 +158,6 @@ TARGET_USES_WCNSS_CTRL := true
 WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-# The uncompressed arm64 is too large, split wifi for now
-ifeq ($(USE_64_BIT),true)
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_NAME          := "wlan"
-endif
 
 # inherit from the proprietary version
 -include vendor/yu/lettuce/BoardConfigVendor.mk
