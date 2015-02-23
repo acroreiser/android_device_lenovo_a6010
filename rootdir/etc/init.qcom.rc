@@ -409,6 +409,9 @@ service rmt_storage /system/bin/rmt_storage
 on property:ro.boot.emmc=true
     start rmt_storage
 
+on property:sys.boot_completed=1
+    swapon_all fstab.qcom
+
 service rfs_access /system/bin/rfs_access
    class core
    user system
