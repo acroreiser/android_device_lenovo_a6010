@@ -79,7 +79,6 @@ vendor/lib/libmmcamera_ov8865_q8v18a.so
 vendor/lib/libmmcamera_sunny_q8v18a_t86519a1_eeprom.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
-vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_wavelet_lib.so
 vendor/lib/libmmipl.so
 vendor/lib/libmmjpeg.so
