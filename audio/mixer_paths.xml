@@ -609,6 +609,129 @@
     </path>
 
     <path name="speaker">
+        <ctl name="DRC1L Input" value="AIF1RX1" />
+        <ctl name="DRC1" id="0" value="0" />
+        <ctl name="DRC1" id="1" value="251" />
+        <ctl name="DRC1" id="2" value="9" />
+        <ctl name="DRC1" id="3" value="51" />
+        <ctl name="DRC1" id="4" value="3" />
+        <ctl name="DRC1" id="5" value="24" />
+        <ctl name="DRC1" id="6" value="2" />
+        <ctl name="DRC1" id="7" value="144" />
+        <ctl name="DRC1" id="8" value="3" />
+        <ctl name="DRC1" id="9" value="26" />
+
+        <ctl name="LHPF1 Input 1" value="EQ2" />
+        <ctl name="LHPF2 Input 1" value="LHPF1" />
+        <ctl name="LHPF1 Mode" value="High-pass" />
+        <ctl name="LHPF1 Coefficients" id="0" value="240" />
+        <ctl name="LHPF1 Coefficients" id="1" value="171" />
+
+        <ctl name="EQ1 Input" value="DRC1L" />
+
+        <ctl name="EQ1 Coefficients" id="0" value="49" />
+        <ctl name="EQ1 Coefficients" id="1" value="128" />
+        <ctl name="EQ1 Coefficients" id="2" value="15" />
+        <ctl name="EQ1 Coefficients" id="3" value="200" />
+        <ctl name="EQ1 Coefficients" id="4" value="3" />
+        <ctl name="EQ1 Coefficients" id="5" value="250" />
+        <ctl name="EQ1 Coefficients" id="6" value="0" />
+        <ctl name="EQ1 Coefficients" id="7" value="224" />
+        <ctl name="EQ1 Coefficients" id="8" value="31" />
+        <ctl name="EQ1 Coefficients" id="9" value="197" />
+        <ctl name="EQ1 Coefficients" id="10" value="240" />
+        <ctl name="EQ1 Coefficients" id="11" value="58" />
+        <ctl name="EQ1 Coefficients" id="12" value="4" />
+        <ctl name="EQ1 Coefficients" id="13" value="8" />
+        <ctl name="EQ1 Coefficients" id="14" value="0" />
+        <ctl name="EQ1 Coefficients" id="15" value="230" />
+        <ctl name="EQ1 Coefficients" id="16" value="31" />
+        <ctl name="EQ1 Coefficients" id="17" value="3" />
+        <ctl name="EQ1 Coefficients" id="18" value="240" />
+        <ctl name="EQ1 Coefficients" id="19" value="171" />
+        <ctl name="EQ1 Coefficients" id="20" value="4" />
+        <ctl name="EQ1 Coefficients" id="21" value="13" />
+        <ctl name="EQ1 Coefficients" id="22" value="2" />
+        <ctl name="EQ1 Coefficients" id="23" value="165" />
+        <ctl name="EQ1 Coefficients" id="24" value="29" />
+        <ctl name="EQ1 Coefficients" id="25" value="64" />
+        <ctl name="EQ1 Coefficients" id="26" value="241" />
+        <ctl name="EQ1 Coefficients" id="27" value="165" />
+        <ctl name="EQ1 Coefficients" id="28" value="4" />
+        <ctl name="EQ1 Coefficients" id="29" value="11" />
+        <ctl name="EQ1 Coefficients" id="30" value="6" />
+        <ctl name="EQ1 Coefficients" id="31" value="131" />
+        <ctl name="EQ1 Coefficients" id="32" value="5" />
+        <ctl name="EQ1 Coefficients" id="33" value="140" />
+        <ctl name="EQ1 Coefficients" id="34" value="5" />
+        <ctl name="EQ1 Coefficients" id="35" value="99" />
+        <ctl name="EQ1 Coefficients" id="36" value="64" />
+        <ctl name="EQ1 Coefficients" id="37" value="0" />
+        <ctl name="EQ1 Coefficients" id="38" value="0" />
+        <ctl name="EQ1 Coefficients" id="39" value="0" />
+
+        <ctl name="EQ1 B1 Volume" value="12" />
+        <ctl name="EQ1 B2 Volume" value="7" />
+        <ctl name="EQ1 B3 Volume" value="14" />
+        <ctl name="EQ1 B4 Volume" value="17" />
+        <ctl name="EQ1 B5 Volume" value="12" />
+
+        <ctl name="EQ2 Input" value="EQ1" />
+
+        <ctl name="EQ2 Coefficients" id="0" value="49" />
+        <ctl name="EQ2 Coefficients" id="1" value="128" />
+        <ctl name="EQ2 Coefficients" id="2" value="15" />
+        <ctl name="EQ2 Coefficients" id="3" value="200" />
+        <ctl name="EQ2 Coefficients" id="4" value="3" />
+        <ctl name="EQ2 Coefficients" id="5" value="250" />
+        <ctl name="EQ2 Coefficients" id="6" value="0" />
+        <ctl name="EQ2 Coefficients" id="7" value="224" />
+        <ctl name="EQ2 Coefficients" id="8" value="30" />
+        <ctl name="EQ2 Coefficients" id="9" value="197" />
+        <ctl name="EQ2 Coefficients" id="10" value="241" />
+        <ctl name="EQ2 Coefficients" id="11" value="53" />
+        <ctl name="EQ2 Coefficients" id="12" value="4" />
+        <ctl name="EQ2 Coefficients" id="13" value="10" />
+        <ctl name="EQ2 Coefficients" id="14" value="4" />
+        <ctl name="EQ2 Coefficients" id="15" value="200" />
+        <ctl name="EQ2 Coefficients" id="16" value="28" />
+        <ctl name="EQ2 Coefficients" id="17" value="156" />
+        <ctl name="EQ2 Coefficients" id="18" value="243" />
+        <ctl name="EQ2 Coefficients" id="19" value="54" />
+        <ctl name="EQ2 Coefficients" id="20" value="0" />
+        <ctl name="EQ2 Coefficients" id="21" value="10" />
+        <ctl name="EQ2 Coefficients" id="22" value="12" />
+        <ctl name="EQ2 Coefficients" id="23" value="183" />
+        <ctl name="EQ2 Coefficients" id="24" value="24" />
+        <ctl name="EQ2 Coefficients" id="25" value="209" />
+        <ctl name="EQ2 Coefficients" id="26" value="242" />
+        <ctl name="EQ2 Coefficients" id="27" value="135" />
+        <ctl name="EQ2 Coefficients" id="28" value="4" />
+        <ctl name="EQ2 Coefficients" id="29" value="10" />
+        <ctl name="EQ2 Coefficients" id="30" value="10" />
+        <ctl name="EQ2 Coefficients" id="31" value="2" />
+        <ctl name="EQ2 Coefficients" id="32" value="5" />
+        <ctl name="EQ2 Coefficients" id="33" value="140" />
+        <ctl name="EQ2 Coefficients" id="34" value="5" />
+        <ctl name="EQ2 Coefficients" id="35" value="99" />
+        <ctl name="EQ2 Coefficients" id="36" value="64" />
+        <ctl name="EQ2 Coefficients" id="37" value="0" />
+        <ctl name="EQ2 Coefficients" id="38" value="0" />
+        <ctl name="EQ2 Coefficients" id="39" value="0" />
+
+        <ctl name="EQ2 B1 Volume" value="12" />
+        <ctl name="EQ2 B2 Volume" value="12" />
+        <ctl name="EQ2 B3 Volume" value="12" />
+        <ctl name="EQ2 B4 Volume" value="9" />
+        <ctl name="EQ2 B5 Volume" value="12" />
+
+        <ctl name="SPKOUTL Input 1" value="LHPF2" />
+        <ctl name="SPKOUTR Input 1" value="None" />
+        <ctl name="Speaker Digital Switch" value="1" />
+        <ctl name="Speaker Digital Volume" value="154" />
+    </path>
+
+    <path name="wm8998-speaker">
         <ctl name="SPKOUTL Input 1" value="AIF1RX1" />
         <ctl name="SPKOUTR Input 1" value="AIF1RX2" />
         <ctl name="Speaker Digital Switch" value="1" />
@@ -618,6 +741,7 @@
     <path name="speaker-mic">
         <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
+        <ctl name="ADC1 Volume" value="6" />
     </path>
 
     <path name="handset">
@@ -636,8 +760,8 @@
     <path name="headphones">
         <ctl name="HPOUTL Input 1" value="AIF1RX1" />
         <ctl name="HPOUTR Input 1" value="AIF1RX2"/>
-        <ctl name="HPOUT Digital Switch" value="1" />    
-        <ctl name="HPOUT Digital Volume" value="128" />
+        <ctl name="HPOUT Digital Switch" value="1" />
+        <ctl name="HPOUT Digital Volume" value="110" />
     </path>
 
     <path name="headset-mic">
@@ -673,152 +797,16 @@
     </path>
 
     <path name="voice-speaker">
-        <path name="speaker" />
+        <path name="wm8998-speaker" />
     </path>
 
     <path name="voice-speaker-mic">
         <path name="speaker-mic" />
     </path>
 
-    <path name="wm8998-headphones">
-        <ctl name="DRC1L Input" value="AIF1RX1" />
-        <ctl name="DRC1R Input" value="AIF1RX2" />
-        <ctl name="DRC1" id="0" value="0" />
-        <ctl name="DRC1" id="1" value="115" />
-        <ctl name="DRC1" id="2" value="8" />
-        <ctl name="DRC1" id="3" value="83" />
-        <ctl name="DRC1" id="4" value="8" />
-        <ctl name="DRC1" id="5" value="40" />
-        <ctl name="DRC1" id="6" value="1" />
-        <ctl name="DRC1" id="7" value="70" />
-        <ctl name="DRC1" id="8" value="2" />
-        <ctl name="DRC1" id="9" value="18" />
-
-        <ctl name="LHPF1 Input 1" value="DRC1R" />
-        <ctl name="LHPF2 Input 1" value="DRC1L" />
-        <ctl name="LHPF3 Input 1" value="LHPF2" />
-        <ctl name="LHPF4 Input 1" value="LHPF1" />
-
-        <ctl name="LHPF1 Mode" value="Low-pass" />
-        <ctl name="LHPF2 Mode" value="Low-pass" />
-        <ctl name="LHPF3 Mode" value="High-pass" />
-        <ctl name="LHPF4 Mode" value="High-pass" />
-
-        <ctl name="LHPF1 Coefficients" id="0" value="247" />
-        <ctl name="LHPF1 Coefficients" id="1" value="64" />
-        <ctl name="LHPF2 Coefficients" id="0" value="247" />
-        <ctl name="LHPF2 Coefficients" id="1" value="64" />
-        <ctl name="LHPF3 Coefficients" id="0" value="240" />
-        <ctl name="LHPF3 Coefficients" id="1" value="171" />
-        <ctl name="LHPF4 Coefficients" id="0" value="240" />
-        <ctl name="LHPF4 Coefficients" id="1" value="171" />
-
-        <ctl name="EQ1 Input" value="LHPF3" />
-
-        <ctl name="EQ1 Coefficients" id="0" value="99" />
-        <ctl name="EQ1 Coefficients" id="1" value="0" />
-        <ctl name="EQ1 Coefficients" id="2" value="15" />
-        <ctl name="EQ1 Coefficients" id="3" value="200" />
-        <ctl name="EQ1 Coefficients" id="4" value="3" />
-        <ctl name="EQ1 Coefficients" id="5" value="250" />
-        <ctl name="EQ1 Coefficients" id="6" value="0" />
-        <ctl name="EQ1 Coefficients" id="7" value="224" />
-        <ctl name="EQ1 Coefficients" id="8" value="30" />
-        <ctl name="EQ1 Coefficients" id="9" value="197" />
-        <ctl name="EQ1 Coefficients" id="10" value="241" />
-        <ctl name="EQ1 Coefficients" id="11" value="53" />
-        <ctl name="EQ1 Coefficients" id="12" value="4" />
-        <ctl name="EQ1 Coefficients" id="13" value="10" />
-        <ctl name="EQ1 Coefficients" id="14" value="4" />
-        <ctl name="EQ1 Coefficients" id="15" value="200" />
-        <ctl name="EQ1 Coefficients" id="16" value="28" />
-        <ctl name="EQ1 Coefficients" id="17" value="156" />
-        <ctl name="EQ1 Coefficients" id="18" value="243" />
-        <ctl name="EQ1 Coefficients" id="19" value="54" />
-        <ctl name="EQ1 Coefficients" id="20" value="4" />
-        <ctl name="EQ1 Coefficients" id="21" value="10" />
-        <ctl name="EQ1 Coefficients" id="22" value="12" />
-        <ctl name="EQ1 Coefficients" id="23" value="183" />
-        <ctl name="EQ1 Coefficients" id="24" value="26" />
-        <ctl name="EQ1 Coefficients" id="25" value="69" />
-        <ctl name="EQ1 Coefficients" id="26" value="244" />
-        <ctl name="EQ1 Coefficients" id="27" value="97" />
-        <ctl name="EQ1 Coefficients" id="28" value="4" />
-        <ctl name="EQ1 Coefficients" id="29" value="10" />
-        <ctl name="EQ1 Coefficients" id="30" value="17" />
-        <ctl name="EQ1 Coefficients" id="31" value="87" />
-        <ctl name="EQ1 Coefficients" id="32" value="5" />
-        <ctl name="EQ1 Coefficients" id="33" value="140" />
-        <ctl name="EQ1 Coefficients" id="34" value="5" />
-        <ctl name="EQ1 Coefficients" id="35" value="99" />
-        <ctl name="EQ1 Coefficients" id="36" value="64" />
-        <ctl name="EQ1 Coefficients" id="37" value="0" />
-        <ctl name="EQ1 Coefficients" id="38" value="0" />
-        <ctl name="EQ1 Coefficients" id="39" value="0" />
-
-        <ctl name="EQ1 B1 Volume" value="12" />
-        <ctl name="EQ1 B2 Volume" value="12" />
-        <ctl name="EQ1 B3 Volume" value="12" />
-        <ctl name="EQ1 B4 Volume" value="16" />
-        <ctl name="EQ1 B5 Volume" value="12" />
-
-        <ctl name="EQ2 Input" value="LHPF4" />
-
-        <ctl name="EQ2 Coefficients" id="0" value="99" />
-        <ctl name="EQ2 Coefficients" id="1" value="0" />
-        <ctl name="EQ2 Coefficients" id="2" value="15" />
-        <ctl name="EQ2 Coefficients" id="3" value="200" />
-        <ctl name="EQ2 Coefficients" id="4" value="3" />
-        <ctl name="EQ2 Coefficients" id="5" value="250" />
-        <ctl name="EQ2 Coefficients" id="6" value="0" />
-        <ctl name="EQ2 Coefficients" id="7" value="224" />
-        <ctl name="EQ2 Coefficients" id="8" value="31" />
-        <ctl name="EQ2 Coefficients" id="9" value="173" />
-        <ctl name="EQ2 Coefficients" id="10" value="240" />
-        <ctl name="EQ2 Coefficients" id="11" value="82" />
-        <ctl name="EQ2 Coefficients" id="12" value="4" />
-        <ctl name="EQ2 Coefficients" id="13" value="14" />
-        <ctl name="EQ2 Coefficients" id="14" value="1" />
-        <ctl name="EQ2 Coefficients" id="15" value="69" />
-        <ctl name="EQ2 Coefficients" id="16" value="31" />
-        <ctl name="EQ2 Coefficients" id="17" value="128" />
-        <ctl name="EQ2 Coefficients" id="18" value="240" />
-        <ctl name="EQ2 Coefficients" id="19" value="115" />
-        <ctl name="EQ2 Coefficients" id="20" value="4" />
-        <ctl name="EQ2 Coefficients" id="21" value="8" />
-        <ctl name="EQ2 Coefficients" id="22" value="1" />
-        <ctl name="EQ2 Coefficients" id="23" value="199" />
-        <ctl name="EQ2 Coefficients" id="24" value="26" />
-        <ctl name="EQ2 Coefficients" id="25" value="69" />
-        <ctl name="EQ2 Coefficients" id="26" value="244" />
-        <ctl name="EQ2 Coefficients" id="27" value="97" />
-        <ctl name="EQ2 Coefficients" id="28" value="4" />
-        <ctl name="EQ2 Coefficients" id="29" value="10" />
-        <ctl name="EQ2 Coefficients" id="30" value="17" />
-        <ctl name="EQ2 Coefficients" id="31" value="87" />
-        <ctl name="EQ2 Coefficients" id="32" value="5" />
-        <ctl name="EQ2 Coefficients" id="33" value="140" />
-        <ctl name="EQ2 Coefficients" id="34" value="5" />
-        <ctl name="EQ2 Coefficients" id="35" value="99" />
-        <ctl name="EQ2 Coefficients" id="36" value="64" />
-        <ctl name="EQ2 Coefficients" id="37" value="0" />
-        <ctl name="EQ2 Coefficients" id="38" value="0" />
-        <ctl name="EQ2 Coefficients" id="39" value="0" />
-
-        <ctl name="EQ2 B1 Volume" value="12" />
-        <ctl name="EQ2 B2 Volume" value="12" />
-        <ctl name="EQ2 B3 Volume" value="12" />
-        <ctl name="EQ2 B4 Volume" value="17" />
-        <ctl name="EQ2 B5 Volume" value="12" />
-
-        <ctl name="HPOUTL Input 1" value="EQ1" />
-        <ctl name="HPOUTR Input 1" value="EQ2"/>
-        <ctl name="HPOUT Digital Switch" value="1" />
-        <ctl name="HPOUT Digital Volume" value="120" />
-    </path>
-
     <path name="voice-headphones">
-        <path name="wm8998-headphones" />
+        <path name="headphones" />
+        <ctl name="HPOUT Digital Volume" value="128" />
     </path>
 
     <path name="voice-headset-mic">
@@ -888,6 +876,8 @@
 
     <path name="voice-dmic-ef">
         <path name="dmic-endfire" />
+        <ctl name="ADC1 Volume" value="7" />
+        <ctl name="ADC3 Volume" value="7" />
     </path>
 
     <path name="voice-speaker-dmic-ef">
