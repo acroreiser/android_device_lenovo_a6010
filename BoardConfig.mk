@@ -136,6 +136,8 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
     bluetooth_loader.te \
+    prebundle_installer.te \
+    property.te \
     qseecomd.te \
     surfaceflinger.te \
     wcnss_service.te \
