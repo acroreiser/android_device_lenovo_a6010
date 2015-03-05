@@ -356,6 +356,10 @@
         <ctl name="MultiMedia1 Mixer INTERNAL_FM_TX" value="1" />
     </path>
 
+    <path name="low-latency-record">
+        <ctl name="MultiMedia5 Mixer TERT_MI2S_TX" value="1" />
+    </path>
+
     <path name="fm-virtual-record capture-fm">
         <ctl name="MultiMedia2 Mixer INTERNAL_FM_TX" value="1" />
     </path>
