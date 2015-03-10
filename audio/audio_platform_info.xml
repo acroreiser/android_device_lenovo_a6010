@@ -31,6 +31,8 @@
     </acdb_ids>
 
     <backend_names>
+        <device name="SND_DEVICE_OUT_HEADPHONES" backend="headphones" />
+        <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" />
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="speaker" />
         <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" backend="headphones" />
     </backend_names>
