@@ -27,6 +27,7 @@
 
 import init.qcom.usb.rc
 import init.target.rc
+import init.lettuce.diag.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -179,6 +180,9 @@ on post-fs-data
 
     #Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
+
+    mkdir /data/diag_logs 0777 system system 5
+    chmod 666 /dev/diag
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
