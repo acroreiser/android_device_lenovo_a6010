@@ -27,5 +27,5 @@ $(call inherit-product, device/yu/lettuce/device.mk)
 PRODUCT_DEVICE := lettuce
 PRODUCT_NAME := full_lettuce
 PRODUCT_BRAND := YU
-PRODUCT_MODEL := LETTUCE
+PRODUCT_MODEL := YU5010
 PRODUCT_MANUFACTURER := YU
