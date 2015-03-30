@@ -165,6 +165,8 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/mode
     chown system graphics /sys/class/graphics/fb0/modes
     chmod 0664 /sys/class/graphics/fb0/modes
+    chown system graphics /sys/devices/virtual/graphics/fb0/mdp/bw_mode_bitmap
+    chmod 0664 /sys/devices/virtual/graphics/fb0/mdp/bw_mode_bitmap
 
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
