@@ -42,6 +42,16 @@ vendor/lib/libchromatix_ov2680_5987fhq_common.so
 vendor/lib/libchromatix_ov2680_5987fhq_default_video.so
 vendor/lib/libchromatix_ov2680_5987fhq_preview.so
 vendor/lib/libchromatix_ov2680_5987fhq_snapshot.so
+vendor/lib/libchromatix_ov5670_q5v41b_common.so
+vendor/lib/libchromatix_ov5670_q5v41b_default_video.so
+vendor/lib/libchromatix_ov5670_q5v41b_hfr_120fps.so
+vendor/lib/libchromatix_ov5670_q5v41b_hfr_60fps.so
+vendor/lib/libchromatix_ov5670_q5v41b_hfr_90fps.so
+vendor/lib/libchromatix_ov5670_q5v41b_liveshot.so
+vendor/lib/libchromatix_ov5670_q5v41b_preview.so
+vendor/lib/libchromatix_ov5670_q5v41b_snapshot.so
+vendor/lib/libchromatix_ov5670_q5v41b_video_hd.so
+vendor/lib/libchromatix_ov5670_q5v41b_zsl.so
 vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_common.so
 vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_default_video.so
 vendor/lib/libchromatix_ov8865_q8v18a_owt8a12_hfr_120fps.so
@@ -83,6 +93,8 @@ vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hdr_lib.so
 vendor/lib/libmmcamera_imglib.so
 vendor/lib/libmmcamera_ov2680_5987fhq.so
+vendor/lib/libmmcamera_ov5670_eeprom.so
+vendor/lib/libmmcamera_ov5670_q5v41b.so
 vendor/lib/libmmcamera_ov8865_q8v18a.so
 vendor/lib/libmmcamera_sunny_q8v18a_t86519a1_eeprom.so
 vendor/lib/libmmcamera_tintless_algo.so
