@@ -87,15 +87,5 @@ LOCAL_SRC_FILES := calmodule.cfg
 
 include $(BUILD_PREBUILT)
 
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := libcalmodule_akm.so
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := lib
-LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)
-LOCAL_SRC_FILES := algo/libakm/libcalmodule_akm.so
-
-include $(BUILD_PREBUILT)
-
 endif #BUILD_TINY_ANDROID
 endif #TARGET_BOARD_PLATFORM
