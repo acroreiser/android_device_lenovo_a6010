@@ -657,113 +657,41 @@
     </path>
 
     <path name="speaker">
-        <ctl name="EQ1 Input" value="AIF1RX1" />
+        <ctl name="LHPF1 Mode" value="Low-pass" />
+        <ctl name="LHPF2 Mode" value="High-pass" />
+        <ctl name="LHPF3 Mode" value="High-pass" />
 
-        <!-- In the first 2 bytes, only the lowest bit is used.
-             See "EQx Bx Volume" controls for setting the other bits
-        -->
-        <ctl name="EQ1 Coefficients" id="0" value="0" />
-        <ctl name="EQ1 Coefficients" id="1" value="0" />
-        <ctl name="EQ1 Coefficients" id="2" value="15" />
-        <ctl name="EQ1 Coefficients" id="3" value="85" />
-        <ctl name="EQ1 Coefficients" id="4" value="4" />
-        <ctl name="EQ1 Coefficients" id="5" value="3" />
-        <ctl name="EQ1 Coefficients" id="6" value="2" />
-        <ctl name="EQ1 Coefficients" id="7" value="172" />
-        <ctl name="EQ1 Coefficients" id="8" value="31" />
-        <ctl name="EQ1 Coefficients" id="9" value="197" />
-        <ctl name="EQ1 Coefficients" id="10" value="240" />
-        <ctl name="EQ1 Coefficients" id="11" value="58" />
-        <ctl name="EQ1 Coefficients" id="12" value="4" />
-        <ctl name="EQ1 Coefficients" id="13" value="8" />
-        <ctl name="EQ1 Coefficients" id="14" value="0" />
-        <ctl name="EQ1 Coefficients" id="15" value="230" />
-        <ctl name="EQ1 Coefficients" id="16" value="31" />
-        <ctl name="EQ1 Coefficients" id="17" value="3" />
-        <ctl name="EQ1 Coefficients" id="18" value="240" />
-        <ctl name="EQ1 Coefficients" id="19" value="171" />
-        <ctl name="EQ1 Coefficients" id="20" value="4" />
-        <ctl name="EQ1 Coefficients" id="21" value="13" />
-        <ctl name="EQ1 Coefficients" id="22" value="2" />
-        <ctl name="EQ1 Coefficients" id="23" value="165" />
-        <ctl name="EQ1 Coefficients" id="24" value="29" />
-        <ctl name="EQ1 Coefficients" id="25" value="64" />
-        <ctl name="EQ1 Coefficients" id="26" value="241" />
-        <ctl name="EQ1 Coefficients" id="27" value="165" />
-        <ctl name="EQ1 Coefficients" id="28" value="4" />
-        <ctl name="EQ1 Coefficients" id="29" value="11" />
-        <ctl name="EQ1 Coefficients" id="30" value="6" />
-        <ctl name="EQ1 Coefficients" id="31" value="131" />
-        <ctl name="EQ1 Coefficients" id="32" value="5" />
-        <ctl name="EQ1 Coefficients" id="33" value="140" />
-        <ctl name="EQ1 Coefficients" id="34" value="5" />
-        <ctl name="EQ1 Coefficients" id="35" value="99" />
-        <ctl name="EQ1 Coefficients" id="36" value="64" />
-        <ctl name="EQ1 Coefficients" id="37" value="0" />
-        <ctl name="EQ1 Coefficients" id="38" value="0" />
-        <ctl name="EQ1 Coefficients" id="39" value="0" />
+        <ctl name="LHPF1 Input 1 Volume" value="26" />
+        <ctl name="LHPF1 Input 2 Volume" value="26" />
 
-        <ctl name="EQ1 B1 Volume" value="0" />
+        <ctl name="LHPF2 Input 1 Volume" value="26" />
+        <ctl name="LHPF2 Input 2 Volume" value="26" />
+
+        <ctl name="LHPF3 Input 1 Volume" value="32" />
+
+        <ctl name="LHPF1 Coefficients" id="0" value="241"/>
+        <ctl name="LHPF1 Coefficients" id="1" value="160"/>
+        <ctl name="LHPF2 Coefficients" id="0" value="241"/>
+        <ctl name="LHPF2 Coefficients" id="1" value="160"/>
+        <ctl name="LHPF3 Coefficients" id="0" value="240"/>
+        <ctl name="LHPF3 Coefficients" id="1" value="143"/>
+
+        <ctl name="LHPF1 Input 1" value="AIF1RX1" />
+        <ctl name="LHPF1 Input 2" value="AIF1RX2" />
+        <ctl name="LHPF2 Input 1" value="AIF1RX1" />
+        <ctl name="LHPF2 Input 2" value="AIF1RX2" />
+        <ctl name="LHPF3 Input 1" value="LHPF1" />
+
+        <ctl name="EQ1 Input" value="LHPF2" />
+
+        <ctl name="EQ1 B1 Volume" value="12" />
         <ctl name="EQ1 B2 Volume" value="12" />
         <ctl name="EQ1 B3 Volume" value="12" />
         <ctl name="EQ1 B4 Volume" value="12" />
         <ctl name="EQ1 B5 Volume" value="12" />
 
-        <ctl name="EQ2 Input" value="AIF1RX2" />
-
-        <!-- In the first 2 bytes, only the lowest bit is used.
-             See "EQx Bx Volume" controls for setting the other bits
-        -->
-        <ctl name="EQ2 Coefficients" id="0" value="0" />
-        <ctl name="EQ2 Coefficients" id="1" value="0" />
-        <ctl name="EQ2 Coefficients" id="2" value="15" />
-        <ctl name="EQ2 Coefficients" id="3" value="85" />
-        <ctl name="EQ2 Coefficients" id="4" value="4" />
-        <ctl name="EQ2 Coefficients" id="5" value="3" />
-        <ctl name="EQ2 Coefficients" id="6" value="2" />
-        <ctl name="EQ2 Coefficients" id="7" value="172" />
-        <ctl name="EQ2 Coefficients" id="8" value="30" />
-        <ctl name="EQ2 Coefficients" id="9" value="197" />
-        <ctl name="EQ2 Coefficients" id="10" value="241" />
-        <ctl name="EQ2 Coefficients" id="11" value="53" />
-        <ctl name="EQ2 Coefficients" id="12" value="4" />
-        <ctl name="EQ2 Coefficients" id="13" value="10" />
-        <ctl name="EQ2 Coefficients" id="14" value="4" />
-        <ctl name="EQ2 Coefficients" id="15" value="200" />
-        <ctl name="EQ2 Coefficients" id="16" value="28" />
-        <ctl name="EQ2 Coefficients" id="17" value="156" />
-        <ctl name="EQ2 Coefficients" id="18" value="243" />
-        <ctl name="EQ2 Coefficients" id="19" value="54" />
-        <ctl name="EQ2 Coefficients" id="20" value="0" />
-        <ctl name="EQ2 Coefficients" id="21" value="10" />
-        <ctl name="EQ2 Coefficients" id="22" value="12" />
-        <ctl name="EQ2 Coefficients" id="23" value="183" />
-        <ctl name="EQ2 Coefficients" id="24" value="24" />
-        <ctl name="EQ2 Coefficients" id="25" value="209" />
-        <ctl name="EQ2 Coefficients" id="26" value="242" />
-        <ctl name="EQ2 Coefficients" id="27" value="135" />
-        <ctl name="EQ2 Coefficients" id="28" value="4" />
-        <ctl name="EQ2 Coefficients" id="29" value="10" />
-        <ctl name="EQ2 Coefficients" id="30" value="10" />
-        <ctl name="EQ2 Coefficients" id="31" value="2" />
-        <ctl name="EQ2 Coefficients" id="32" value="5" />
-        <ctl name="EQ2 Coefficients" id="33" value="140" />
-        <ctl name="EQ2 Coefficients" id="34" value="5" />
-        <ctl name="EQ2 Coefficients" id="35" value="99" />
-        <ctl name="EQ2 Coefficients" id="36" value="64" />
-        <ctl name="EQ2 Coefficients" id="37" value="0" />
-        <ctl name="EQ2 Coefficients" id="38" value="0" />
-        <ctl name="EQ2 Coefficients" id="39" value="0" />
-
-        <ctl name="EQ2 B1 Volume" value="0" />
-        <ctl name="EQ2 B2 Volume" value="12" />
-        <ctl name="EQ2 B3 Volume" value="12" />
-        <ctl name="EQ2 B4 Volume" value="12" />
-        <ctl name="EQ2 B5 Volume" value="12" />
-
-        <ctl name="DRC1L Input" value="EQ1" />
-        <ctl name="DRC1R Input" value="EQ2" />
-
+        <ctl name="DRC1L Input" value="LHPF3" />
+        <ctl name="DRC1R Input" value="EQ1" />
         <ctl name="DRC1" id="0" value="0" />
         <ctl name="DRC1" id="1" value="251" />
         <ctl name="DRC1" id="2" value="9" />
@@ -776,9 +704,10 @@
         <ctl name="DRC1" id="9" value="26" />
 
         <ctl name="SPKOUTL Input 1" value="DRC1L" />
-        <ctl name="SPKOUTR Input 1" value="DRC1R" />
+        <ctl name="SPKOUTL Input 2" value="DRC1R" />
+        <ctl name="Speaker High Performance Switch" value="1" />
         <ctl name="Speaker Digital Switch" value="1" />
-        <ctl name="Speaker Digital Volume" value="126" />
+        <ctl name="Speaker Digital Volume" value="120" />
     </path>
 
     <path name="speaker-mic">
@@ -834,8 +763,18 @@
     </path>
 
     <path name="voice-speaker">
-        <ctl name="SPKOUTL Input 1" value="AIF1RX1" />
-        <ctl name="SPKOUTR Input 1" value="AIF1RX2" />
+        <ctl name="DRC1L Input" value="AIF1RX1" />
+        <ctl name="DRC1" id="0" value="0" />
+        <ctl name="DRC1" id="1" value="251" />
+        <ctl name="DRC1" id="2" value="9" />
+        <ctl name="DRC1" id="3" value="51" />
+        <ctl name="DRC1" id="4" value="3" />
+        <ctl name="DRC1" id="5" value="16" />
+        <ctl name="DRC1" id="6" value="5" />
+        <ctl name="DRC1" id="7" value="14" />
+        <ctl name="DRC1" id="8" value="3" />
+        <ctl name="DRC1" id="9" value="26" />
+        <ctl name="SPKOUTL Input 1" value="DRC1L" />
         <ctl name="Speaker Digital Switch" value="1" />
         <ctl name="Speaker Digital Volume" value="128" />
     </path>
