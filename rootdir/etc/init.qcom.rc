@@ -310,20 +310,9 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # Torch
-    chown system camera /sys/class/leds/torch-light/brightness
-    chmod 0660 /sys/class/leds/torch-light/brightness
-
     # Touchscreen
     chown root system /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0040/gesture
     chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0040/gesture
-
-    # charger
-    chown system system /sys/bus/i2c/drivers/lc709203/batt_capacity
-    chmod 0660 /sys/bus/i2c/drivers/lc709203/batt_capacity
-
-    chown root system /sys/devices/soc.0/78b9000.i2c/i2c-5/5-005d/keypad_enable
-    chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-005d/keypad_enable
 
     # camera sockets
     mkdir /data/misc/camera 0770 camera camera
