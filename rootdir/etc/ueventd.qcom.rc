@@ -174,10 +174,6 @@
 /sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            flush          0660    input    system
 /sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            calibrate      0660    input    system
 
-# vm_bms
-/dev/vm_bms               0660   system     system
-/dev/battery_data         0660   system     system
-
 # wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
