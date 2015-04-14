@@ -656,8 +656,6 @@ service audiod /system/bin/audiod
    group system
 
 on charger
-   wait /dev/block/bootdevice/by-name/system
-   mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
    write /sys/module/lpm_levels/system/cpu0/wfi/idle_enabled Y
    write /sys/module/lpm_levels/system/cpu1/wfi/idle_enabled Y
    write /sys/module/lpm_levels/system/cpu2/wfi/idle_enabled Y
