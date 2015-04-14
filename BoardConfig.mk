@@ -92,6 +92,9 @@ BOARD_CAMERA_SENSORS := \
 TARGET_USE_VENDOR_CAMERA_EXT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
+# CMHW
+BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/src
+
 # malloc implementation
 MALLOC_IMPL := dlmalloc
 
@@ -170,9 +173,11 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
     bluetooth_loader.te \
+    file.te \
     healthd.te \
     qseecomd.te \
     surfaceflinger.te \
+    system_server.te \
     wcnss_service.te \
     file_contexts \
     property_contexts
