@@ -618,7 +618,7 @@ on property:persist.usb.hvdcp.detect=false
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
-    class main
+    class late_start
     user camera
     group camera system inet input graphics
 
