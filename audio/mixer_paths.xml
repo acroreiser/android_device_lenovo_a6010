@@ -707,7 +707,7 @@
         <ctl name="SPKOUTL Input 2" value="DRC1R" />
         <ctl name="Speaker High Performance Switch" value="1" />
         <ctl name="Speaker Digital Switch" value="1" />
-        <ctl name="Speaker Digital Volume" value="120" />
+        <ctl name="Speaker Digital Volume" value="126" />
     </path>
 
     <path name="speaker-mic">
@@ -719,7 +719,7 @@
     <path name="handset">
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="RDAC2 MUX" value="RX1" />
-        <ctl name="RX1 Digital Volume" value="84" />
+        <ctl name="RX1 Digital Volume" value="88" />
         <ctl name="EAR PA Gain" value="POS_6_DB" />
         <ctl name="EAR_S" value="Switch" />
     </path>
@@ -1000,8 +1000,8 @@
 
     <path name="voice-dmic-ef">
         <path name="dmic-endfire" />
-        <ctl name="ADC1 Volume" value="7" />
-        <ctl name="ADC3 Volume" value="7" />
+        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="ADC3 Volume" value="8" />
     </path>
 
     <path name="voice-speaker-dmic-ef">
