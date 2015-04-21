@@ -776,7 +776,7 @@
         <ctl name="DRC1" id="9" value="26" />
         <ctl name="SPKOUTL Input 1" value="DRC1L" />
         <ctl name="Speaker Digital Switch" value="1" />
-        <ctl name="Speaker Digital Volume" value="128" />
+        <ctl name="Speaker Digital Volume" value="130" />
     </path>
 
     <path name="voice-speaker-mic">
