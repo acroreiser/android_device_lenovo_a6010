@@ -741,8 +741,9 @@ int NativeSensorManager::setDelay(int handle, int64_t ns)
 
 	list->delay_ns = delay;
 
-	if (ns < list->sensor->minDelay) {
-		list->delay_ns = list->sensor->minDelay;
+	// min_delay sysfs entry is in microseconds
+	if (ns < list->sensor->minDelay * 1000) {
+		list->delay_ns = list->sensor->minDelay * 1000;
 	}
 
 	if (list->delay_ns == 0)
