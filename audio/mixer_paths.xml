@@ -259,6 +259,11 @@
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="1" />
     </path>
 
+    <path name="deep-buffer-playback speaker-and-headphones">
+        <path name="deep-buffer-playback speaker" />
+        <path name="deep-buffer-playback headphones" />
+    </path>
+
     <path name="deep-buffer-playback bt-sco">
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia1" value="1" />
     </path>
@@ -296,6 +301,11 @@
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
+    <path name="low-latency-playback speaker-and-headphones">
+        <path name="low-latency-playback speaker" />
+        <path name="low-latency-playback headphones" />
+    </path>
+
     <path name="low-latency-playback bt-sco">
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia5" value="1" />
     </path>
@@ -331,6 +341,11 @@
 
     <path name="compress-offload-playback headphones">
         <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia4" value="1" />
+    </path>
+
+    <path name="compress-offload-playback speaker-and-headphones">
+        <path name="compress-offload-playback speaker" />
+        <path name="compress-offload-playback headphones" />
     </path>
 
     <path name="compress-offload-playback bt-sco">
@@ -939,7 +954,13 @@
 
     <path name="speaker-and-headphones">
         <path name="headphones" />
-        <path name="speaker" />
+        <!-- Piggyback on the headphones path.  There isn't enough hardware for independent,
+             simultaneous paths in the current tuning -->
+        <ctl name="SPKOUTL Input 1" value="EQ1" />
+        <ctl name="SPKOUTL Input 2" value="EQ2" />
+        <ctl name="Speaker High Performance Switch" value="1" />
+        <ctl name="Speaker Digital Switch" value="1" />
+        <ctl name="Speaker Digital Volume" value="126" />
     </path>
 
     <path name="usb-headphones">
