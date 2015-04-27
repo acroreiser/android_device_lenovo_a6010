@@ -34,6 +34,9 @@ ro.config.always_show_roaming=true
 # Bluetooth
 ro.qualcomm.bt.hci_transport=smd
 
+# Camera
+persist.camera.hal.debug.mask=268435456
+
 # Display
 debug.composition.type=c2d
 debug.sf.gpu_comp_tiling=1
