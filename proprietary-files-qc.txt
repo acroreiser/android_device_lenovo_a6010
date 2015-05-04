@@ -286,15 +286,6 @@ bin/time_daemon
 vendor/lib64/libTimeService.so
 vendor/lib/libTimeService.so
 
-# Venus (media) firmware
-etc/firmware/venus.b00
-etc/firmware/venus.b01
-etc/firmware/venus.b02
-etc/firmware/venus.b03
-etc/firmware/venus.b04
-etc/firmware/venus.mbn
-etc/firmware/venus.mdt
-
 # WLAN
 lib/libwcnss_qmi.so
 lib64/libwcnss_qmi.so
