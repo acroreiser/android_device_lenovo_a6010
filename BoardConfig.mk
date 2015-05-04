@@ -85,8 +85,6 @@ BLUETOOTH_HCI_USE_MCT := true
 
 # Camera
 BOARD_CAMERA_SENSORS := \
-    ov2680_5987fhq \
-    gc2355_8916 \
     ov5670_q5v41b \
     ov8865_q8v18a
 TARGET_USE_VENDOR_CAMERA_EXT := true
