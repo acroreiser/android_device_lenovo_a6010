@@ -1,3 +1,6 @@
+# Sensors
+vendor/lib64/libcalmodule_akm.so
+
 # Signed Venus (media) firmware
 etc/firmware/venus.b00
 etc/firmware/venus.b01
