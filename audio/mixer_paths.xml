@@ -809,7 +809,7 @@
         <ctl name="DRC1" id="4" value="3" />
         <ctl name="DRC1" id="5" value="16" />
         <ctl name="DRC1" id="6" value="5" />
-        <ctl name="DRC1" id="7" value="14" />
+        <ctl name="DRC1" id="7" value="16" />
         <ctl name="DRC1" id="8" value="3" />
         <ctl name="DRC1" id="9" value="26" />
 
@@ -935,10 +935,10 @@
         <ctl name="EQ2 B4 Volume" value="12" />
         <ctl name="EQ2 B5 Volume" value="12" />
 
-        <ctl name="HPOUTL Input 1" value="EQ1" />
-        <ctl name="HPOUTR Input 1" value="EQ2"/>
+        <ctl name="HPOUTL Input 1" value="AIF1RX1" />
+        <ctl name="HPOUTR Input 1" value="AIF1RX2"/>
         <ctl name="HPOUT Digital Switch" value="1" />
-        <ctl name="HPOUT Digital Volume" value="120" />
+        <ctl name="HPOUT Digital Volume" value="126" />
     </path>
 
     <path name="voice-headphones">
