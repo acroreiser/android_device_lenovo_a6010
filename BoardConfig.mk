@@ -68,7 +68,7 @@ TARGET_KERNEL_CONFIG := cyanogenmod_lettuce-64_defconfig
 else
 TARGET_KERNEL_CONFIG := cyanogenmod_lettuce_defconfig
 endif
-TARGET_KERNEL_SOURCE := kernel/yu/msm8916
+TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8916
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
