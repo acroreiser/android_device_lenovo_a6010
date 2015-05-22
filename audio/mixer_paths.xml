@@ -779,16 +779,16 @@
 
     <path name="voice-speaker">
         <ctl name="DRC1L Input" value="AIF1RX1" />
-        <ctl name="DRC1" id="0" value="1" />
-        <ctl name="DRC1" id="1" value="248" />
+        <ctl name="DRC1" id="0" value="0" />
+        <ctl name="DRC1" id="1" value="251" />
         <ctl name="DRC1" id="2" value="9" />
         <ctl name="DRC1" id="3" value="51" />
         <ctl name="DRC1" id="4" value="3" />
         <ctl name="DRC1" id="5" value="16" />
         <ctl name="DRC1" id="6" value="5" />
-        <ctl name="DRC1" id="7" value="16" />
-        <ctl name="DRC1" id="8" value="2" />
-        <ctl name="DRC1" id="9" value="20" />
+        <ctl name="DRC1" id="7" value="14" />
+        <ctl name="DRC1" id="8" value="3" />
+        <ctl name="DRC1" id="9" value="26" />
         <ctl name="SPKOUTL Input 1" value="DRC1L" />
         <ctl name="Speaker Digital Switch" value="1" />
         <ctl name="Speaker Digital Volume" value="130" />
