@@ -799,9 +799,41 @@
     </path>
 
     <path name="headphones">
+        <ctl name="DRC1L Input" value="AIF1RX1" />
+        <ctl name="DRC1R Input" value="AIF1RX2" />
 
-        <ctl name="EQ1 Input" value="AIF1RX1" />
-        <ctl name="EQ2 Input" value="AIF1RX2" />
+        <ctl name="DRC1" id="0" value="0" />
+        <ctl name="DRC1" id="1" value="251" />
+        <ctl name="DRC1" id="2" value="9" />
+        <ctl name="DRC1" id="3" value="51" />
+        <ctl name="DRC1" id="4" value="3" />
+        <ctl name="DRC1" id="5" value="16" />
+        <ctl name="DRC1" id="6" value="5" />
+        <ctl name="DRC1" id="7" value="16" />
+        <ctl name="DRC1" id="8" value="3" />
+        <ctl name="DRC1" id="9" value="26" />
+
+        <ctl name="LHPF1 Input 1" value="DRC1R" />
+        <ctl name="LHPF2 Input 1" value="DRC1L" />
+        <ctl name="LHPF3 Input 1" value="LHPF2" />
+        <ctl name="LHPF4 Input 1" value="LHPF1" />
+
+        <ctl name="LHPF1 Mode" value="Low-pass" />
+        <ctl name="LHPF2 Mode" value="Low-pass" />
+        <ctl name="LHPF3 Mode" value="High-pass" />
+        <ctl name="LHPF4 Mode" value="High-pass" />
+
+        <ctl name="LHPF1 Coefficients" id="0" value="247" />
+        <ctl name="LHPF1 Coefficients" id="1" value="64" />
+        <ctl name="LHPF2 Coefficients" id="0" value="247" />
+        <ctl name="LHPF2 Coefficients" id="1" value="64" />
+        <ctl name="LHPF3 Coefficients" id="0" value="240" />
+        <ctl name="LHPF3 Coefficients" id="1" value="171" />
+        <ctl name="LHPF4 Coefficients" id="0" value="240" />
+        <ctl name="LHPF4 Coefficients" id="1" value="171" />
+
+        <ctl name="EQ1 Input" value="LHPF3" />
+        <ctl name="EQ2 Input" value="LHPF4" />
 
         <!-- In the first 2 bytes, only the lowest bit is used.
              See "EQx Bx Volume" controls for setting the other bits
@@ -894,17 +926,17 @@
         <ctl name="EQ1 B1 Volume" value="12" />
         <ctl name="EQ1 B2 Volume" value="12" />
         <ctl name="EQ1 B3 Volume" value="12" />
-        <ctl name="EQ1 B4 Volume" value="14" />
+        <ctl name="EQ1 B4 Volume" value="12" />
         <ctl name="EQ1 B5 Volume" value="12" />
 
         <ctl name="EQ2 B1 Volume" value="12" />
         <ctl name="EQ2 B2 Volume" value="12" />
         <ctl name="EQ2 B3 Volume" value="12" />
-        <ctl name="EQ2 B4 Volume" value="14" />
+        <ctl name="EQ2 B4 Volume" value="12" />
         <ctl name="EQ2 B5 Volume" value="12" />
 
-        <ctl name="HPOUTL Input 1" value="EQ1" />
-        <ctl name="HPOUTR Input 1" value="EQ2"/>
+        <ctl name="HPOUTL Input 1" value="AIF1RX1" />
+        <ctl name="HPOUTR Input 1" value="AIF1RX2"/>
         <ctl name="HPOUT Digital Switch" value="1" />
         <ctl name="HPOUT Digital Volume" value="126" />
     </path>
