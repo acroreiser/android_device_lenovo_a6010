@@ -28,7 +28,6 @@
     <acdb_ids>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" acdb_id="11" />
         <device name="SND_DEVICE_IN_VOICE_DMIC" acdb_id="118" />
-        <device name="SND_DEVICE_IN_BT_SCO_MIC_NREC" acdb_id="21" />
     </acdb_ids>
 
     <backend_names>
