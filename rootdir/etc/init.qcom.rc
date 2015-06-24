@@ -27,7 +27,6 @@
 
 import init.qcom.usb.rc
 import init.target.rc
-import init.lettuce.diag.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -304,12 +303,12 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # Touchscreen
-    chown root system /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0040/gesture
-    chmod 0660 /sys/devices/soc.0/78b9000.i2c/i2c-5/5-0040/gesture
-
     # camera sockets
     mkdir /data/misc/camera 0770 camera camera
+
+    # color
+    chown system system /sys/devices/virtual/graphics/fb0/rgb
+    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
 
 on property:service.bootanim.exit=1
     write /sys/module/lpm_levels/system/cpu0/wfi/idle_enabled Y
@@ -391,18 +390,11 @@ service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
-    disabled
-
-on property:ro.boot.emmc=true
-    start rmt_storage
 
 service rfs_access /system/bin/rfs_access
    class core
    user system
    group system net_raw
-
-on property:ro.boot.emmc=true
-    start rfs_access
 
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
     class core
@@ -563,17 +555,6 @@ service ril-daemon1 /system/bin/rild -c 2
     socket rild-debug2 stream 660 radio system
     user root
     group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
-
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
-service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
-    class late_start
-    disabled
 
 service charger /charger
     class charger

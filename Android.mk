@@ -15,7 +15,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),lettuce)
+ifeq ($(TARGET_CYANOGEN_COMMON),msm8916)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 

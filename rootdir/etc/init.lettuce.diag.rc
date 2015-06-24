@@ -1,9 +1,0 @@
-
-on property:ro.bootmode=unknown
-    rm /dev/diag
-
-on property:ro.bootmode=normal
-    rm /dev/diag
-
-on property:ro.bootmode=charger
-    rm /dev/diag
