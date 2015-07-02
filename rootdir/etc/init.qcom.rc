@@ -25,6 +25,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+import init.qcom.power.rc
 import init.qcom.usb.rc
 import init.target.rc
 
@@ -33,8 +34,6 @@ on early-init
     mkdir /firmware 0771 system system
     mkdir /system 0777 root root
     symlink /data/tombstones /tombstones
-    write /sys/block/mmcblk0/queue/scheduler noop
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 512
 
 on init
     # Set permissions for persist partition
@@ -310,65 +309,6 @@ on boot
     chown system system /sys/devices/virtual/graphics/fb0/rgb
     chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
 
-on property:service.bootanim.exit=1
-    write /sys/module/lpm_levels/system/cpu0/wfi/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu1/wfi/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu2/wfi/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu3/wfi/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu0/standalone_pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu1/standalone_pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu2/standalone_pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu3/standalone_pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu0/pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu1/pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu2/pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu3/pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/cpu0/pc/suspend_enabled Y
-    write /sys/module/lpm_levels/system/cpu1/pc/suspend_enabled Y
-    write /sys/module/lpm_levels/system/cpu2/pc/suspend_enabled Y
-    write /sys/module/lpm_levels/system/cpu3/pc/suspend_enabled Y
-    write /sys/module/lpm_levels/system/l2-pc/idle_enabled Y
-    write /sys/module/lpm_levels/system/l2-cache-active/idle_enabled Y
-    write /sys/module/lpm_levels/system/l2-pc/suspend_enabled Y
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
-
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-
-on property:init.svc.bootanim=stopped
-    # Apply HMP task packing
-    write /proc/sys/kernel/sched_small_task 20
-    write /proc/sys/kernel/sched_mostly_idle_load 30
-    write /proc/sys/kernel/sched_mostly_idle_nr_run 3
-
-    # enable governor
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 800000
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1094400:50000"
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 85
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1094400
-    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
-    write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "1 1094400:85 1152000:90 1209600:80"
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
-    write /sys/module/msm_thermal/core_control/enabled 1
-
-    # bring all CPUs online
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-
-    write /proc/sys/kernel/sched_window_stats_policy 2
-    write /proc/sys/kernel/sched_ravg_hist_size 5
-
-    write /sys/module/cpu_boost/parameters/boost_ms 20
-    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1094400 1:1094400 2:1094400 3:1094400"
-    write /sys/module/cpu_boost/parameters/sched_boost_on_input 1
-
-    write /sys/block/mmcblk0/queue/scheduler row
-    start perfd
-
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
@@ -615,28 +555,6 @@ service audiod /system/bin/audiod
    class late_start
    user system
    group system
-
-on charger
-   write /sys/module/lpm_levels/system/cpu0/wfi/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu1/wfi/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu2/wfi/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu3/wfi/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu0/standalone_pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu1/standalone_pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu2/standalone_pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu3/standalone_pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu0/pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu1/pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu2/pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu3/pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/cpu0/pc/suspend_enabled N
-   write /sys/module/lpm_levels/system/cpu1/pc/suspend_enabled Y
-   write /sys/module/lpm_levels/system/cpu2/pc/suspend_enabled Y
-   write /sys/module/lpm_levels/system/cpu3/pc/suspend_enabled Y
-   write /sys/module/lpm_levels/system/l2-pc/idle_enabled Y
-   write /sys/module/lpm_levels/system/l2-cache-active/idle_enabled Y
-   write /sys/module/lpm_levels/system/l2-pc/suspend_enabled Y
-   write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
