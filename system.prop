@@ -10,11 +10,6 @@ audio.offload.pcm.24bit.enable=false
 use.voice.path.for.pcm.voip=true
 vidc.enc.narrow.searchrange=1
 
-# Audio voice concurrency related flags
-voice.playback.conc.disabled=true
-voice.record.conc.disabled=true
-voice.voip.conc.disabled=true
-
 # Media
 mm.enable.qcom_parser=3179041
 mm.enable.smoothstreaming=true
