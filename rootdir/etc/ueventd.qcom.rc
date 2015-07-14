@@ -182,6 +182,7 @@
 # wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
+
 #nfc permissions
 /dev/nfc-nci              0660    nfc         nfc
 /dev/assd                 0660    nfc         nfc
@@ -193,3 +194,61 @@
 
 # ESOC devices
 /dev/subsys_esoc*         0640   system     radio
+
+#BST
+/sys/devices/virtual/input/input* range                       0660    input      system
+/sys/devices/virtual/input/input* bandwidth                   0660    input      system
+/sys/devices/virtual/input/input* op_mode                     0660    input      system
+/sys/devices/virtual/input/input* delay                       0660    input      system
+/sys/devices/virtual/input/input* SleepDur                    0660    input      system
+/sys/devices/virtual/input/input* fast_calibration_x          0660    input      system
+/sys/devices/virtual/input/input* fast_calibration_y          0660    input      system
+/sys/devices/virtual/input/input* fast_calibration_z          0660    input      system
+/sys/devices/virtual/input/input* fifo_overrun                0660    input      system
+/sys/devices/virtual/input/input* fifo_data_frame             0660    input      system
+/sys/devices/virtual/input/input* fifo_mode                   0660    input      system
+/sys/devices/virtual/input/input* fifo_trig                   0660    input      system
+/sys/devices/virtual/input/input* fifo_framecount             0660    input      system
+/sys/devices/virtual/input/input* fifo_data_sel               0660    input      system
+/sys/devices/virtual/input/input* reg                         0660    input      system
+/sys/devices/virtual/input/input* offset_x                    0660    input      system
+/sys/devices/virtual/input/input* offset_y                    0660    input      system
+/sys/devices/virtual/input/input* offset_z                    0660    input      system
+/sys/devices/virtual/input/input* enable_int                  0660    input      system
+/sys/devices/virtual/input/input* int_mode                    0660    input      system
+/sys/devices/virtual/input/input* slope_duration              0660    input      system
+/sys/devices/virtual/input/input* slope_threshold             0660    input      system
+/sys/devices/virtual/input/input* slope_no_mot_duration       0660    input      system
+/sys/devices/virtual/input/input* slope_no_mot_threshold      0660    input      system
+/sys/devices/virtual/input/input* high_g_duration             0660    input      system
+/sys/devices/virtual/input/input* high_g_threshold            0660    input      system
+/sys/devices/virtual/input/input* low_g_duration              0660    input      system
+/sys/devices/virtual/input/input* low_g_threshold             0660    input      system
+/sys/devices/virtual/input/input* tap_duration                0660    input      system
+/sys/devices/virtual/input/input* tap_threshold               0660    input      system
+/sys/devices/virtual/input/input* tap_quiet                   0660    input      system
+/sys/devices/virtual/input/input* tap_shock                   0660    input      system
+/sys/devices/virtual/input/input* tap_samp                    0660    input      system
+/sys/devices/virtual/input/input* orient_mode                 0660    input      system
+/sys/devices/virtual/input/input* orient_blocking             0660    input      system
+/sys/devices/virtual/input/input* orient_hyst                 0660    input      system
+/sys/devices/virtual/input/input* orient_theta                0660    input      system
+/sys/devices/virtual/input/input* flat_theta                  0660    input      system
+/sys/devices/virtual/input/input* flat_hold_time              0660    input      system
+/sys/devices/virtual/input/input* selftest                    0660    input      system
+/sys/devices/virtual/input/input* softreset                   0660    input      system
+/sys/devices/virtual/input/input* en_sig_motion               0660    input      system
+/sys/devices/virtual/input/input* tap_time_period             0660    input      system
+/sys/devices/virtual/input/input* en_double_tap               0660    input      system
+
+/sys/devices/virtual/input/input* fastoffset_en               0660    input      system
+/sys/devices/virtual/input/input* slowoffset_en               0660    input      system
+/sys/devices/virtual/input/input* sleepdur                    0660    input      system
+/sys/devices/virtual/input/input* autosleepdur                0660    input      system
+/sys/devices/virtual/input/input* fifo_tag                    0660    input      system
+/sys/devices/virtual/input/input* odr                         0660    input      system
+/sys/devices/virtual/input/input* rept_xy                     0660    input      system
+/sys/devices/virtual/input/input* rept_z                      0660    input      system
+/sys/devices/virtual/input/input* test                        0660    input      system
+
+/dev/block/bootdevice/by-name/frp                             0600    system     system
