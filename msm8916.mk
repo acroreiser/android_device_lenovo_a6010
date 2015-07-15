@@ -120,10 +120,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml
 
-# Sensor HAL
-PRODUCT_PACKAGES += \
-    sensors.msm8916
-
 PRODUCT_PACKAGES += \
     libdashplayer \
     libOmxAacEnc \
