@@ -1,12 +1,11 @@
 # Audio
 tunnel.audio.encode=false
-audio.offload.disable=1
-av.offload.enable=false
-av.streaming.offload.enable=false
+av.offload.enable=true
+av.streaming.offload.enable=true
 audio.offload.buffer.size.kb=240
-audio.offload.gapless.enabled=false
-audio.offload.pcm.16bit.enable=false
-audio.offload.pcm.24bit.enable=false
+audio.offload.gapless.enabled=true
+audio.offload.pcm.16bit.enable=true
+audio.offload.pcm.24bit.enable=true
 use.voice.path.for.pcm.voip=true
 vidc.enc.narrow.searchrange=1
 
