@@ -1116,7 +1116,7 @@ QCameraStream * QCameraReprocessChannel::getStreamBySrouceHandle(uint32_t srcHan
 /*===========================================================================
  * FUNCTION   : stop
  *
- * DESCRIPTION: Unmap offline buffers and stop channel
+ * DESCRIPTION: stop channel and unmap offline buffers
  *
  * PARAMETERS : none
  *
@@ -1126,6 +1126,8 @@ QCameraStream * QCameraReprocessChannel::getStreamBySrouceHandle(uint32_t srcHan
  *==========================================================================*/
 int32_t QCameraReprocessChannel::stop()
 {
+    int32_t rc = QCameraChannel::stop();
+
     if (!mOfflineBuffers.empty()) {
         QCameraStream *stream = NULL;
         List<OfflineBuffer>::iterator it = mOfflineBuffers.begin();
@@ -1145,7 +1147,7 @@ int32_t QCameraReprocessChannel::stop()
         mOfflineBuffers.clear();
     }
 
-    return QCameraChannel::stop();
+    return rc;
 }
 
 /*===========================================================================
