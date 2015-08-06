@@ -180,7 +180,6 @@ on post-fs-data
     mkdir /data/data/media 0770 media media
 
     mkdir /data/diag_logs 0777 system system 5
-    chmod 666 /dev/diag
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
