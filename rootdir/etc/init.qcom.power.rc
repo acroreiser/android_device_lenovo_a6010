@@ -1,12 +1,7 @@
 on early-init
 
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 512
 
 on boot
-
-    write /proc/sys/vm/dirty_ratio 5
-    write /proc/sys/vm/dirty_background_ratio 1
-    write /proc/sys/kernel/sched_boost 1
 
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
@@ -44,7 +39,7 @@ on charger
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
 
 on property:sys.boot_completed=1
-    write /sys/block/mmcblk0/queue/scheduler row
+    write /sys/block/mmcblk0/queue/scheduler cfq
 
     # bring all CPUs online
     write /sys/devices/system/cpu/cpu1/online 1
