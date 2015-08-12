@@ -28,7 +28,6 @@ debug.mdpcomp.idletime=600
 persist.hwc.mdpcomp.enable=true
 persist.hwc.ptor.enable=true
 ro.opengles.version=196608
-ro.qualcomm.cabl=0
 debug.enable.sglscale=1
 
 # GPS
