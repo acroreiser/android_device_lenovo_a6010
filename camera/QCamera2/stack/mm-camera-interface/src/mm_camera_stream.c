@@ -1086,7 +1086,7 @@ int32_t mm_stream_read_msm_frame(mm_stream_t * my_obj,
             (vb.reserved == V4L2_PIX_FMT_NV14 || vb.reserved == V4L2_PIX_FMT_NV41);
 #endif
 
-        CDBG_HIGH("%s: VIDIOC_DQBUF buf_index %d, frame_idx %d, stream type %d, queued cnt %d\n",
+        CDBG("%s: VIDIOC_DQBUF buf_index %d, frame_idx %d, stream type %d, queued cnt %d\n",
                    __func__, vb.index, buf_info->buf->frame_idx,
                    my_obj->stream_info->stream_type,my_obj->queued_buffer_count);
         pthread_mutex_unlock(&my_obj->buf_lock);
