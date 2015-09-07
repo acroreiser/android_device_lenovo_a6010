@@ -1,7 +1,10 @@
 on early-init
 
+on enable-low-power
 
-on boot
+    # Adaptive LMK
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
 
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
@@ -20,6 +23,9 @@ on boot
     write /sys/devices/system/cpu/cpu0/online 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 800000
+    # enable thermal core_control now
+    write /sys/module/msm_thermal/core_control/enabled 1
+
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "25000 1094400:50000"
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
@@ -28,19 +34,7 @@ on boot
     write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads "1 800000:85 998400:90 1094400:80"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
-
-    # enable thermal core_control now
-    write /sys/module/msm_thermal/core_control/enabled 1
-
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
-
-on charger
-   write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
-
-on property:sys.boot_completed=1
-    write /sys/block/mmcblk0/queue/scheduler cfq
+    write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
 
     # bring all CPUs online
     write /sys/devices/system/cpu/cpu1/online 1
@@ -48,3 +42,14 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu3/online 1
 
     start perfd
+
+on charger
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+
+on class_start:late_start
+    trigger enable-low-power
+
+on property:init.svc.recovery=running
+    trigger enable-low-power
+
