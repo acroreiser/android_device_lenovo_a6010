@@ -34,13 +34,21 @@
 #define ALPHABET_LEN 256
 #define KB 1024
 
+#ifdef USES_BOOTDEVICE_PATH
+#define BASEBAND_PART_PATH "/dev/block/bootdevice/by-name/modem"
+#else
 #define BASEBAND_PART_PATH "/dev/block/platform/7824900.sdhci/by-name/modem"
+#endif
 #define BASEBAND_VER_STR_START "QC_IMAGE_VERSION_STRING=MPSS.DPM."
 #define BASEBAND_VER_STR_START_LEN 33
 #define BASEBAND_VER_BUF_LEN 255
 #define BASEBAND_SZ 64000 * KB    /* MMAP 64M of BASEBAND, BASEBAND partition is 64M */
 
+#ifdef USES_BOOTDEVICE_PATH
+#define TZ_PART_PATH "/dev/block/bootdevice/by-name/tz"
+#else
 #define TZ_PART_PATH "/dev/block/platform/7824900.sdhci/by-name/tz"
+#endif
 #define TZ_VER_STR "QC_IMAGE_VERSION_STRING="
 #define TZ_VER_STR_LEN 24
 #define TZ_VER_BUF_LEN 255
