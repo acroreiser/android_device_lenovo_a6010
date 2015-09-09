@@ -62,8 +62,6 @@ on init
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
 
-    write /sys/block/mmcblk0/queue/scheduler "row"
-
 on fs
     mount_all fstab.qcom
     mkdir /persist/data 0700 system system
