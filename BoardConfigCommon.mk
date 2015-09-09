@@ -89,7 +89,8 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
 
 # CMHW
-BOARD_HARDWARE_CLASS += $(VENDOR_PATH)/cmhw/src
+BOARD_USES_CYANOGEN_HARDWARE := true
+BOARD_HARDWARE_CLASS += hardware/cyanogen/cmhw
 
 # malloc implementation
 MALLOC_IMPL := dlmalloc
