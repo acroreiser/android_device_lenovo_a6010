@@ -35,6 +35,9 @@ on early-init
     mkdir /system 0777 root root
     symlink /data/tombstones /tombstones
 
+    # Turn off backlight on blank
+    write /sys/class/leds/lcd-backlight/trigger "backlight"
+
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
