@@ -156,7 +156,8 @@
 
     <!-- Configuration to restart radio upon PDP_DEACTIVATE with
          error cause as Regular deactivation(36). -->
-    <bool name="config_radio_reset_on_regular_deactivation">false</bool>
+    <bool name="config_restart_radio_on_pdp_fail_regular_deactivation">false</bool>
+
 
     <!-- Base "touch slop" value used by ViewConfiguration as a
          movement threshold where scrolling should begin. -->
