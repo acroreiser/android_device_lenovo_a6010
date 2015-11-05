@@ -150,10 +150,6 @@
     <!-- Make things go fast -->
     <bool name="config_ui_enableFadingMarquee">false</bool>
 
-    <!-- Performance profiles -->
-    <string name="config_perf_profile_prop">powerhal</string>
-    <string name="config_perf_profile_default_entry">1</string>
-
     <!-- Configuration to restart radio upon PDP_DEACTIVATE with
          error cause as Regular deactivation(36). -->
     <bool name="config_restart_radio_on_pdp_fail_regular_deactivation">false</bool>
