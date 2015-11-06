@@ -313,5 +313,5 @@ ___________________________________________________
         </MediaCodec>
     </Decoders>
     <Include href="media_codecs_google_video_le.xml" />
-    <!-- <Include href="media_codecs_ffmpeg.xml" /> -->
+    <Include href="media_codecs_ffmpeg.xml" />
 </MediaCodecs>
