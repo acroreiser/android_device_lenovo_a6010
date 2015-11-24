@@ -285,6 +285,7 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
+    group wakelock
 
 service rfs_access /system/bin/rfs_access
    class core
@@ -327,7 +328,7 @@ on property:hw.fm.init=1
 service qmuxd /system/bin/qmuxd
     class main
     user root
-    group radio audio bluetooth gps qcom_diag
+    group radio audio bluetooth gps qcom_diag wakelock
 
 service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core
@@ -337,7 +338,7 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
 
 service netmgrd /system/bin/netmgrd
     class main
-    group system
+    group system wakelock
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
