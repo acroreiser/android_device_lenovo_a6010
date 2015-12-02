@@ -271,7 +271,7 @@ int32_t mm_camera_open(mm_camera_obj_t *my_obj)
         n_try--;
         my_obj->ctrl_fd = open(dev_name, O_RDWR | O_NONBLOCK);
         CDBG("%s:  ctrl_fd = %d, errno == %d", __func__, my_obj->ctrl_fd, errno);
-        if((my_obj->ctrl_fd > 0) || (errno != EIO) || (n_try <= 0 )) {
+        if((my_obj->ctrl_fd > 0) || ((errno != EIO) && (errno != EINVAL)) || (n_try <= 0 )) {
             CDBG_ERROR("%s:  opened, break out while loop", __func__);
             break;
         }
