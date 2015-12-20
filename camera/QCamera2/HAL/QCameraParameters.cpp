@@ -1894,6 +1894,14 @@ int32_t QCameraParameters::setPreviewFrameRate(const QCameraParameters& params)
 {
     const char *str = params.get(KEY_PREVIEW_FRAME_RATE);
     const char *prev_str = get(KEY_PREVIEW_FRAME_RATE);
+    int width, height;
+
+    // Force better preview size for WeChat
+    if (!strcmp(str, "15")) {
+        params.getPreviewSize(&width, &height);
+        if (width == 320 && height == 240)
+            CameraParameters::setPreviewSize(640, 480);
+    }
 
     if ( str ) {
         if ( prev_str &&
