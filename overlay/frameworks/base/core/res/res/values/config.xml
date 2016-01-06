@@ -164,4 +164,6 @@
     <!--  Whether Multiuser UI should be shown -->
     <bool name="config_enableMultiUserUI">true</bool>
 
+    <integer name="config_bluetooth_operating_voltage_mv">3300</integer>
+
 </resources>
