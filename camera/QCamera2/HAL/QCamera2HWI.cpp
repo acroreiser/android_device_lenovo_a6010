@@ -4077,6 +4077,8 @@ int32_t QCamera2HardwareInterface::processAutoFocusEvent(cam_auto_focus_data_t &
     CDBG_HIGH("[AF_DBG] %s: focusMode=%d, m_currentFocusState=%d, m_bAFRunning=%d",
          __func__, focusMode, m_currentFocusState, isAFRunning());
 
+    m_currentFocusState = CAM_AF_INACTIVE;
+
     switch (focusMode) {
     case CAM_FOCUS_MODE_AUTO:
     case CAM_FOCUS_MODE_MACRO:
