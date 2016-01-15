@@ -47,9 +47,6 @@ on fs
     mkdir /persist/data 0700 system system
     restorecon_recursive /persist
 
-on post-fs
-    export_rc /system/etc/init.cne.rc
-
 # msm specific files that need to be created on /data
 on post-fs-data
 
