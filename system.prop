@@ -39,6 +39,9 @@ ro.gps.agps_provider=1
 ro.qc.sdk.izat.premium.enabled=0
 ro.qc.sdk.izat.service_mask=0x0
 
+# IO Scheduler
+sys.io.scheduler=bfq
+
 # NITZ
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
