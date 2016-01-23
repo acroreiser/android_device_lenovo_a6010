@@ -1,9 +1,5 @@
 on enable-low-power
 
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
-
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
     # HMP scheduler load tracking settings
