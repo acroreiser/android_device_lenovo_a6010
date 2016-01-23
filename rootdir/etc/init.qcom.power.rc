@@ -1,5 +1,3 @@
-on early-init
-
 on enable-low-power
 
     # Adaptive LMK
@@ -9,6 +7,7 @@ on enable-low-power
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
     # HMP scheduler load tracking settings
+    write /proc/sys/kernel/sched_window_stats_policy 3
     write /proc/sys/kernel/sched_ravg_hist_size 3
 
     # HMP Task packing settings for 8916
@@ -31,7 +30,6 @@ on enable-low-power
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 998400
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads "1 800000:85 998400:90 1094400:80"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
     write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
