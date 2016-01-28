@@ -66,3 +66,6 @@ ro.use_data_netmgrd=true
 
 # Time
 persist.timed.enable=true
+
+# WiFi
+ro.disableWifiApFirmwareReload=true
