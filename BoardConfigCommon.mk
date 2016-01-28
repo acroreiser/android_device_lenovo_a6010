@@ -23,10 +23,6 @@ TARGET_CYANOGEN_COMMON := msm8916
 TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno306
 
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := MSM8916
-TARGET_NO_BOOTLOADER := true
-
 # Architecture
 ifneq ($(FORCE_32_BIT),true)
 TARGET_BOARD_SUFFIX := _64
@@ -55,30 +51,32 @@ endif
 # Properties (reset them here, include more in device if needed)
 TARGET_SYSTEM_PROP := $(VENDOR_PATH)/system.prop
 
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := MSM8916
+TARGET_NO_BOOTLOADER := true
+
 # Kernel
+BOARD_DTBTOOL_ARGS := -2
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
-BOARD_DTBTOOL_ARGS := -2
+TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8916
 ifneq ($(FORCE_32_BIT),true)
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 else
 TARGET_KERNEL_ARCH := arm
 endif
-TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8916
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Audio
-AUDIO_FEATURE_DEEP_BUFFER_RINGTONE := true
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
 AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
@@ -93,9 +91,6 @@ BLUETOOTH_HCI_USE_MCT := true
 # CMHW
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += hardware/cyanogen/cmhw
-
-# malloc implementation
-MALLOC_IMPL := dlmalloc
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
@@ -123,17 +118,22 @@ USE_OPENGL_RENDERER := true
 AUDIO_FEATURE_ENABLED_FM := true
 TARGET_QCOM_NO_FM_FIRMWARE := true
 
-# Fonts
-EXTENDED_FONT_FOOTPRINT := true
-
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
+
+# Malloc
+MALLOC_IMPL := dlmalloc
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 
 # Qualcomm support
+BOARD_USES_QC_TIME_SERVICES := true
+ifneq ($(QCPATH),)
+BOARD_USES_QCNE := true
+TARGET_LDPRELOAD := libNimsWrap.so
+endif
 BOARD_USES_QCOM_HARDWARE := true
 
 # Recovery
@@ -150,15 +150,6 @@ include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
     $(VENDOR_PATH)/sepolicy
-
-# Time services
-BOARD_USES_QC_TIME_SERVICES := true
-
-# QC PROPRIETARY
-ifneq ($(QCPATH),)
-BOARD_USES_QCNE := true
-TARGET_LDPRELOAD := libNimsWrap.so
-endif
 
 # Video
 TARGET_HAVE_SIGNED_VENUS_FW := true

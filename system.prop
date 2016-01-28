@@ -1,8 +1,13 @@
 # Art
 dalvik.vm.dex2oat-flags=--no-watch-dog
+ro.config.max_starting_bg=8
+
+# ActivityManager
+ro.config.max_starting_bg=8
+ro.sys.fw.bservice_enable=true
+ro.sys.fw.use_trim_settings=true
 
 # Audio
-tunnel.audio.encode=false
 av.offload.enable=true
 av.streaming.offload.enable=true
 audio.offload.buffer.size.kb=64
@@ -12,14 +17,6 @@ audio.offload.pcm.16bit.enable=false
 audio.offload.pcm.24bit.enable=true
 use.voice.path.for.pcm.voip=true
 vidc.enc.narrow.searchrange=1
-
-# Media
-mm.enable.smoothstreaming=true
-mm.disable.sec_smoothstreaming=true
-media.aac_51_output_enabled=true
-
-# set max starting background services
-ro.config.max_starting_bg=8
 
 # Bluetooth
 ro.qualcomm.bt.hci_transport=smd
@@ -39,6 +36,12 @@ ro.gps.agps_provider=1
 ro.qc.sdk.izat.premium.enabled=0
 ro.qc.sdk.izat.service_mask=0x0
 
+# Media
+mm.enable.smoothstreaming=true
+mm.disable.sec_smoothstreaming=true
+media.aac_51_output_enabled=true
+drm.service.enabled=1
+
 # NITZ
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
@@ -50,29 +53,16 @@ persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 
-# Radio
-persist.radio.apm_sim_not_pwdn=1
-rild.libargs=-d /dev/smd0
-
-ro.use_data_netmgrd=true
-
-# Time
-persist.timed.enable=true
-
 # perf
 ro.core_ctl_min_cpu=2
 ro.core_ctl_max_cpu=4
 ro.min_freq_0=800000
 ro.vendor.extension_library=libqti-perfd-client.so
 
-#Trim properties
-ro.sys.fw.use_trim_settings=true
-ro.sys.fw.empty_app_percent=50
-ro.sys.fw.trim_empty_percent=100
-ro.sys.fw.trim_cache_percent=100
-ro.sys.fw.trim_enable_memory=1073741824
+# Radio
+persist.radio.apm_sim_not_pwdn=1
+rild.libargs=-d /dev/smd0
+ro.use_data_netmgrd=true
 
-#Enable B service adj transition by default
-ro.sys.fw.bservice_enable=true
-ro.sys.fw.bservice_limit=5
-ro.sys.fw.bservice_age=5000
+# Time
+persist.timed.enable=true
