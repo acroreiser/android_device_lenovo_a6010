@@ -314,7 +314,7 @@ service cnd /system/bin/cnd
     socket cnd stream 660 root inet
 
 service dpmd /system/bin/dpmd
-    class late_start
+    class main
     socket dpmd stream 660 root system
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
