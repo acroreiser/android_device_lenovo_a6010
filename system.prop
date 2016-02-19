@@ -4,7 +4,6 @@ ro.config.max_starting_bg=8
 
 # ActivityManager
 ro.config.max_starting_bg=8
-ro.sys.fw.bservice_enable=true
 ro.sys.fw.use_trim_settings=true
 
 # Audio
