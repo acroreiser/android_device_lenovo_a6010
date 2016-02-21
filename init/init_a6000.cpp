@@ -36,6 +36,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/_system_properties.h>
 #include <unistd.h>
 #include "init_msm8916.h"
 #include "property_service.h"
@@ -43,6 +45,17 @@
 #include "vendor_init.h"
 #include "log.h"
 #include "util.h"
+
+void property_override(char const prop[], char const value[])
+{
+    prop_info *pi;
+
+    pi = (prop_info*) __system_property_find(prop);
+    if (pi)
+        __system_property_update(pi, value, strlen(value));
+    else
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+}
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
@@ -108,10 +121,10 @@ static char * bm_search(const char *str, size_t str_len, const char *pat, size_t
     int delta1[ALPHABET_LEN];
     int delta2[pat_len];
     int i;
- 
+
     bm_make_delta1(delta1, pat, pat_len);
     bm_make_delta2(delta2, pat, pat_len);
- 
+
     if (pat_len == 0) {
         return (char *) str;
     }
@@ -128,10 +141,10 @@ static char * bm_search(const char *str, size_t str_len, const char *pat, size_t
         }
         i += MAX(delta1[(uint8_t) str[i]], delta2[j]);
     }
- 
+
     return NULL;
 }
- 
+
 static int get_img_version(char *ver_str, size_t len) {
     int ret = 0;
     int fd;
@@ -185,7 +198,7 @@ void init_target_properties()
         property_set("gsm.version.baseband", modem_version);
         ERROR("Detected modem version=%s\n", modem_version);
 }
-   
+
     property_set("ro.build.product", "Kraft-A6000");
     property_set("ro.product.device", "Kraft-A6000");
     property_set("ro.product.model", "Lenovo A6000");
