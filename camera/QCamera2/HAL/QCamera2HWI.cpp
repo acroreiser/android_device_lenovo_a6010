@@ -1278,6 +1278,11 @@ int QCamera2HardwareInterface::openCamera()
         gCamCapability[mCameraId]->padding_info.plane_padding = padding_info.plane_padding;
     }
 
+    // Hard-code padding for OnePlus X
+    gCamCapability[mCameraId]->padding_info.width_padding = CAM_PAD_TO_64;
+    gCamCapability[mCameraId]->padding_info.height_padding = CAM_PAD_TO_64;
+    gCamCapability[mCameraId]->padding_info.plane_padding = CAM_PAD_TO_64;
+
     mParameters.init(gCamCapability[mCameraId], mCameraHandle, this, this);
 
     mCameraOpened = true;
