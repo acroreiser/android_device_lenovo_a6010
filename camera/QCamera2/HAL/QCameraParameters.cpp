@@ -8153,7 +8153,7 @@ int32_t QCameraParameters::getStreamFormat(cam_stream_type_t streamType,
         break;
     case CAM_STREAM_TYPE_RAW:
         if (mPictureFormat >= CAM_FORMAT_YUV_RAW_8BIT_YUYV) {
-            format = (cam_format_t)mPictureFormat;
+            format = CAM_FORMAT_BAYER_QCOM_RAW_10BPP_RGGB;
         } else {
             char raw_format[PROPERTY_VALUE_MAX];
             int rawFormat;
