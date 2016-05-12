@@ -261,10 +261,6 @@ on boot
     # camera sockets
     mkdir /data/misc/camera 0770 camera camera
 
-    # color
-    chown system system /sys/devices/virtual/graphics/fb0/rgb
-    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
-
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
     mkdir /persist/display 0770 system graphics
