@@ -1643,7 +1643,13 @@ uint8_t get_num_of_cameras()
 
 struct camera_info *get_cam_info(uint32_t camera_id)
 {
-    return &g_cam_ctrl.info[camera_id];
+    struct camera_info *cam_info;
+
+    pthread_mutex_lock(&g_intf_lock);
+    cam_info = &g_cam_ctrl.info[camera_id];
+    pthread_mutex_unlock(&g_intf_lock);
+
+    return cam_info;
 }
 
 /*===========================================================================
