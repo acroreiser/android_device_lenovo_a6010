@@ -53,6 +53,7 @@ on fs
 # msm specific files that need to be created on /data
 on post-fs-data
 
+    mkdir /data/fdAlbum 0770 camera camera
     mkdir /data/misc/camera 0770 camera camera
 
     #Create PERFD deamon related dirs
@@ -341,6 +342,11 @@ service qmuxd /system/bin/qmuxd
     user root
     group radio audio bluetooth gps qcom_diag
 
+service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+    class core
+    user root
+    group root
+
 service netmgrd /system/bin/netmgrd
     class main
 
@@ -430,6 +436,16 @@ service dhcpcd_bnep3 /system/bin/dhcpcd -BKLG
     oneshot
 
 service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_eth0 /system/bin/dhcpcd -aABDKL
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class late_start
     disabled
     oneshot
 

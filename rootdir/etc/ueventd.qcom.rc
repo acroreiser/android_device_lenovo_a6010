@@ -157,6 +157,7 @@
 /dev/ttyGS0               0660   system     system
 /dev/i2c-5                0660   media       media
 /dev/voice_svc            0660   system     audio
+/dev/avtimer              0660   system     audio
 
 # DVB devices
 /dev/dvb/adapter0/demux*  0440   media       media
@@ -168,6 +169,25 @@
 /dev/tsc_ci0              0660   media       media
 
 # sensors
+/dev/yl_alsprox_sensor                                             0660    system   system
+/dev/yl_params1                                                    0660    system   system
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-*            enable         0660    input    system
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-*            poll_delay     0660    input    system
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-*            enable_wakeup  0660    input    system
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-*            max_latency    0660    input    system
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-*            flush          0660    input    system
+/sys/devices/soc.0/78b5000.i2c/i2c-1/1-*            calibrate      0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            accel_enable   0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            accel_delay    0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            calibration    0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            debug          0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            device_delay   0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            enable_als_sensor 0660 input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            enable_ps_sensor  0660 input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            gyro_enable    0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            gyro_delay     0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            ps_calibration 0660    input    system
+/sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            reg            0660    input    system
 /sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            enable         0660    input    system
 /sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            poll_delay     0660    input    system
 /sys/devices/soc.0/78b6000.i2c/i2c-0/0-*            enable_wakeup  0660    input    system

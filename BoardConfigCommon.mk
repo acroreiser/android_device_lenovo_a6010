@@ -17,12 +17,6 @@ VENDOR_PATH := device/cyanogen/msm8916-common
 
 TARGET_SPECIFIC_HEADER_PATH := $(VENDOR_PATH)/include
 
-TARGET_CYANOGEN_COMMON := msm8916
-
-# Platform
-TARGET_BOARD_PLATFORM := msm8916
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno306
-
 # Architecture
 ifneq ($(FORCE_32_BIT),true)
 TARGET_BOARD_SUFFIX := _64
@@ -30,7 +24,7 @@ TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT := cortex-a53
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
@@ -48,8 +42,11 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
 endif
 
+TARGET_BOARD_PLATFORM := msm8916
+
 # Properties (reset them here, include more in device if needed)
 TARGET_SYSTEM_PROP := $(VENDOR_PATH)/system.prop
+TARGET_SYSTEM_PROP += $(VENDOR_PATH)/$(TARGET_BOARD_PLATFORM_VARIANT).prop
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8916
@@ -66,8 +63,8 @@ BOARD_RAMDISK_OFFSET     := 0x02000000
 TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8916
 ifneq ($(FORCE_32_BIT),true)
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 else
 TARGET_KERNEL_ARCH := arm
@@ -93,15 +90,6 @@ BOARD_HARDWARE_CLASS += hardware/cyanogen/cmhw
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-
-# Dex
-ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),user)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-    endif
-  endif
-endif
 
 # Display
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
@@ -142,6 +130,7 @@ BOARD_USES_QCOM_HARDWARE := true
 
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_cm
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(VENDOR_PATH)
