@@ -44,6 +44,9 @@
 #define LOG_TAG "QCOM PowerHAL"
 #include <log/log.h>
 
+#define USINSEC 1000000L
+#define NSINUS 1000L
+
 char scaling_gov_path[4][80] ={
     "sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
     "sys/devices/system/cpu/cpu1/cpufreq/scaling_governor",
@@ -363,4 +366,12 @@ void undo_initial_hint_action()
             perf_lock_rel(1);
         }
     }
+}
+
+long long calc_timespan_us(struct timespec start, struct timespec end)
+{
+    long long diff_in_us = 0;
+    diff_in_us += (end.tv_sec - start.tv_sec) * USINSEC;
+    diff_in_us += (end.tv_nsec - start.tv_nsec) / NSINUS;
+    return diff_in_us;
 }
