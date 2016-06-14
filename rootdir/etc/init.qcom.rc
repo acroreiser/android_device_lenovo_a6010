@@ -266,10 +266,6 @@ on boot
     chown system graphics /sys/class/graphics/fb0/mode
     chown system graphics /sys/class/graphics/fb0/modes
 
-    # Vibrator intensity control
-    chown system system /sys/class/timed_output/vibrator/vtg_level
-    chmod 0664 /sys/class/timed_output/vibrator/vtg_level
-
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
