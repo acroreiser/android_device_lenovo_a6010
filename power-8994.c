@@ -47,8 +47,6 @@
 #include "performance.h"
 #include "power-common.h"
 
-static int display_hint_sent;
-
 static int process_video_encode_hint(void *metadata)
 {
     char governor[80];
@@ -125,18 +123,14 @@ int set_interactive_override(int on)
         /* Display off */
         if (is_interactive_governor(governor)) {
             int resource_values[] = {0x777}; /* 4+0 core config in display off */
-            if (!display_hint_sent) {
-                perform_hint_action(DISPLAY_STATE_HINT_ID,
-                resource_values, ARRAY_SIZE(resource_values));
-                display_hint_sent = 1;
-                return HINT_HANDLED;
-            }
+            perform_hint_action(DISPLAY_STATE_HINT_ID,
+                    resource_values, ARRAY_SIZE(resource_values));
+            return HINT_HANDLED;
         }
     } else {
         /* Display on */
         if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
-            display_hint_sent = 0;
             return HINT_HANDLED;
         }
     }

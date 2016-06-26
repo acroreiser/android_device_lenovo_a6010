@@ -48,8 +48,6 @@
 #include "performance.h"
 #include "power-common.h"
 
-static int saved_interactive_mode = -1;
-static int display_hint_sent;
 static int video_encode_hint_sent;
 
 static int current_power_profile = PROFILE_BALANCED;
@@ -234,21 +232,16 @@ int set_interactive_override(int on)
                 INT_OP_NOTIFY_ON_MIGRATE, 0x00
             };
 
-            if (!display_hint_sent) {
-                perform_hint_action(
-                        DISPLAY_STATE_HINT_ID,
-                        resource_values,
-                        ARRAY_SIZE(resource_values));
-                display_hint_sent = 1;
-            }
+            perform_hint_action(
+                    DISPLAY_STATE_HINT_ID,
+                    resource_values,
+                    ARRAY_SIZE(resource_values));
         } /* Perf time rate set for CORE0,CORE4 8952 target*/
     } else {
         /* Display on. */
         if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
-            display_hint_sent = 0;
         }
     }
-    saved_interactive_mode = !!on;
     return HINT_HANDLED;
 }

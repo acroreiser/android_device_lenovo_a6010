@@ -48,7 +48,6 @@
 #include "performance.h"
 #include "power-common.h"
 
-static int display_hint_sent;
 static int camera_hint_ref_count;
 
 static int current_power_profile = PROFILE_BALANCED;
@@ -305,19 +304,15 @@ int set_interactive_override(int on)
         /* Display off */
         if (is_interactive_governor(governor)) {
             int resource_values[] = {}; /* dummy node */
-            if (!display_hint_sent) {
-                perform_hint_action(DISPLAY_STATE_HINT_ID,
-                resource_values, ARRAY_SIZE(resource_values));
-                display_hint_sent = 1;
-                ALOGI("Display Off hint start");
-                return HINT_HANDLED;
-            }
+            perform_hint_action(DISPLAY_STATE_HINT_ID,
+            resource_values, ARRAY_SIZE(resource_values));
+            ALOGI("Display Off hint start");
+            return HINT_HANDLED;
         }
     } else {
         /* Display on */
         if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
-            display_hint_sent = 0;
             ALOGI("Display Off hint stop");
             return HINT_HANDLED;
         }
