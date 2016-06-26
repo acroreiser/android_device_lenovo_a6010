@@ -62,7 +62,7 @@ int power_hint_override(power_hint_t hint, void *data)
         {
             int resources[] = {0x40800100, 0x553};
             int duration = 100;
-            interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
+            interaction(duration, ARRAY_SIZE(resources), resources);
             ret_val = HINT_HANDLED;
         }
         break;

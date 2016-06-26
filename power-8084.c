@@ -86,7 +86,7 @@ int set_interactive_override(int on)
 
             if (!display_hint_sent) {
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
-                        resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
+                        resource_values, ARRAY_SIZE(resource_values));
                 display_hint_sent = 1;
             }
 
@@ -97,7 +97,7 @@ int set_interactive_override(int on)
         if (display_boost && display_hint2_sent) {
             int resource_values2[] = {CPUS_ONLINE_MIN_2};
             perform_hint_action(DISPLAY_STATE_HINT_ID_2,
-                    resource_values2, sizeof(resource_values2)/sizeof(resource_values2[0]));
+                    resource_values2, ARRAY_SIZE(resource_values2));
             display_hint2_sent = 0;
         }
 

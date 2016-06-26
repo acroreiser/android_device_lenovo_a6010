@@ -100,7 +100,7 @@ int  set_interactive_override(int on)
                                      };
                if (!display_hint_sent) {
                    perform_hint_action(DISPLAY_STATE_HINT_ID,
-                   resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
+                   resource_values, ARRAY_SIZE(resource_values));
                   display_hint_sent = 1;
                 }
         } /* Perf time rate set for CORE0,CORE4 8952 target*/
@@ -167,7 +167,7 @@ static void process_video_encode_hint(void *metadata)
                 if (!video_encode_hint_sent) {
                     perform_hint_action(video_encode_metadata.hint_id,
                     resource_values,
-                    sizeof(resource_values)/sizeof(resource_values[0]));
+                    ARRAY_SIZE(resource_values));
                     video_encode_hint_sent = 1;
                 }
            }

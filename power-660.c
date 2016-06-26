@@ -134,7 +134,7 @@ int  set_interactive_override(int on)
                               0x41400000, 0x4,
                               0x41820000, 0xA };
                 memcpy(resource_values, res, MIN_VAL(sizeof(resource_values), sizeof(res)));
-                num_resources = sizeof(res)/sizeof(res[0]);
+                num_resources = ARRAY_SIZE(res);
             }
              /*
                  1. CPUfreq params
@@ -152,7 +152,7 @@ int  set_interactive_override(int on)
                                0x41820000, 0xA,
                                0x40C54000, 0x1F4};
                 memcpy(resource_values, res, MIN_VAL(sizeof(resource_values), sizeof(res)));
-                num_resources = sizeof(res)/sizeof(res[0]);
+                num_resources = ARRAY_SIZE(res);
 
             }
                if (!display_hint_sent) {
@@ -233,7 +233,7 @@ static void process_video_encode_hint(void *metadata)
                               0x40C2C000, 0X5,
                               0x41820000, 0xA};
                 memcpy(resource_values, res, MIN_VAL(sizeof(resource_values), sizeof(res)));
-                num_resources = sizeof(res)/sizeof(res[0]);
+                num_resources = ARRAY_SIZE(res);
 
             }
             /*
@@ -250,7 +250,7 @@ static void process_video_encode_hint(void *metadata)
                               0x41400100, 0x4,
                               0x41820000, 0xA};
                 memcpy(resource_values, res, MIN_VAL(sizeof(resource_values), sizeof(res)));
-                num_resources = sizeof(res)/sizeof(res[0]);
+                num_resources = ARRAY_SIZE(res);
             }
             camera_hint_ref_count++;
             if (camera_hint_ref_count == 1) {

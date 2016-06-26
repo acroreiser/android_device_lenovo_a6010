@@ -307,7 +307,7 @@ int set_interactive_override(int on)
             int resource_values[] = {}; /* dummy node */
             if (!display_hint_sent) {
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
-                resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
+                resource_values, ARRAY_SIZE(resource_values));
                 display_hint_sent = 1;
                 ALOGI("Display Off hint start");
                 return HINT_HANDLED;
