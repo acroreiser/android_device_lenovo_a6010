@@ -439,4 +439,7 @@
 
     <!-- Whether to use in-built Screen Record service -->
     <bool name="config_showScreenRecord">false</bool>
+
+    <!-- Should the pinner service pin the Camera application? -->
+    <bool name="config_pinnerCameraApp">true</bool>
 </resources>
