@@ -59,25 +59,22 @@ static int camera_hint_ref_count;
 static void process_video_encode_hint(void *metadata);
 //static void process_cam_preview_hint(void *metadata);
 
-static bool is_target_SDM630() /* Returns value=630 if target is SDM630 else value 0 */
+/**
+ * If target is SDM630:
+ *     return true
+ * else:
+ *     return false
+ */
+static bool is_target_SDM630(void)
 {
-    int fd;
-    bool is_target_SDM630=false;
-    char buf[10] = {0};
-    fd = open("/sys/devices/soc0/soc_id", O_RDONLY);
-    if (fd >= 0) {
-        if (read(fd, buf, sizeof(buf) - 1) == -1) {
-            ALOGW("Unable to read soc_id");
-            is_target_SDM630 = false;
-        } else {
-            int soc_id = atoi(buf);
-            if (soc_id == 318 || soc_id== 327) {
-            is_target_SDM630 = true; /* Above SOCID for SDM630 */
-            }
-        }
-    }
-    close(fd);
-    return is_target_SDM630;
+    static bool is_SDM630 = false;
+    int soc_id;
+
+    soc_id = get_soc_id();
+    if (soc_id == 318 || soc_id == 327)
+        is_SDM630 = true;
+
+    return is_SDM630;
 }
 
 int  power_hint_override(power_hint_t hint, void *data)
