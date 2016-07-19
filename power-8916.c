@@ -63,7 +63,6 @@ static int saved_dcvs_cpu0_slack_min = -1;
 static int saved_mpdecision_slack_max = -1;
 static int saved_mpdecision_slack_min = -1;
 static int slack_node_rw_failed = 0;
-int display_boost;
 
 /**
  * If target is 8916:
