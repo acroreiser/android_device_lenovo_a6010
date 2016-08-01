@@ -210,6 +210,7 @@ static void process_video_decode_hint(void *metadata)
     } else if (video_decode_metadata.state == 0) {
         if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+            undo_hint_action(video_decode_metadata.hint_id);
         } else if (is_interactive_governor(governor)) {
             undo_hint_action(video_decode_metadata.hint_id);
         }
