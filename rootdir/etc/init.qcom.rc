@@ -287,11 +287,6 @@ service rmt_storage /system/bin/rmt_storage
     user root
     group wakelock
 
-service rfs_access /system/bin/rfs_access
-   class core
-   user system
-   group system net_raw
-
 service config_bt_addr /system/bin/btnvtool -O
     class core
     user bluetooth
