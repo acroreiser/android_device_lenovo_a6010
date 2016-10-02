@@ -49,6 +49,13 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu0/core_ctl/is_big_cluster 0
     write /sys/devices/system/cpu/cpu0/core_ctl/task_thres 4
 
+    # add a cpuset for the camera daemon
+    # we want all the cores for camera
+    mkdir /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon/tasks
+    chmod 0664 /dev/cpuset/camera-daemon/tasks
+
     # Update foreground and background cpusets
     # Reserve CPU 3 for the top app
     write /dev/cpuset/foreground/cpus 0-2
@@ -56,6 +63,7 @@ on enable-low-power
     write /dev/cpuset/background/cpus 0
     write /dev/cpuset/system-background/cpus 0-1
     write /dev/cpuset/top-app/cpus 0-3
+    write /dev/cpuset/camera-daemon/cpus 0-3
 
     rm /data/system/perfd/default_values
     start perfd
