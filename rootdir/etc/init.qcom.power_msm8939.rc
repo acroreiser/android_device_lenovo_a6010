@@ -69,10 +69,12 @@ on enable-low-power
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
     # Update foreground and background cpusets
-    write /dev/cpuset/foreground/cpus 0-7
+    # Reserve CPU 7 for the top app
+    write /dev/cpuset/foreground/cpus 0-6
     write /dev/cpuset/foreground/boost/cpus 0-3
     write /dev/cpuset/background/cpus 4
-    write /dev/cpuset/system-background/cpus 4-7
+    write /dev/cpuset/system-background/cpus 4-6
+    write /dev/cpuset/top-app/cpus 0-7
 
     # Per-process reclaim
     write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
