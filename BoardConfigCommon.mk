@@ -13,5 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+VENDOR_PATH := device/cyanogen/msm8916-common
+
 # Include board config fragments
-include device/cyanogen/msm8916-common/board/*.mk
+include $(VENDOR_PATH)/board/*.mk
