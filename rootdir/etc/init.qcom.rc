@@ -265,6 +265,9 @@ on boot
     # Permissions required for power HAL
     chown system system /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
 
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
 
