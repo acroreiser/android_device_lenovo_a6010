@@ -48,10 +48,12 @@ def GetRadioFiles(z):
   return out
 
 def FullOTA_Assertions(info):
+  AddBasebandAssertion(info)
   AddTrustZoneAssertion(info)
   return
 
 def IncrementalOTA_Assertions(info):
+  AddBasebandAssertion(info)
   AddTrustZoneAssertion(info)
   return
 
@@ -107,6 +109,20 @@ def FullOTA_InstallEnd(info):
 
 def IncrementalOTA_InstallEnd(info):
   InstallRadioFiles(info)
+
+def AddBasebandAssertion(info):
+  # Presence of filesmap indicates packaged firmware
+  filesmap = LoadFilesMap(info.input_zip)
+  if filesmap != {}:
+    return
+  android_info = info.input_zip.read("OTA/android-info.txt")
+  m = re.search(r'require\s+version-baseband\s*=\s*(\S+)', android_info)
+  if m:
+    versions = m.group(1).split('|')
+    if len(versions) and '*' not in versions:
+      cmd = 'assert(cm.verify_baseband(' + ','.join(['"%s"' % baseband for baseband in versions]) + ') == "1");'
+      info.script.AppendExtra(cmd)
+  return
 
 def AddTrustZoneAssertion(info):
   # Presence of filesmap indicates packaged firmware
