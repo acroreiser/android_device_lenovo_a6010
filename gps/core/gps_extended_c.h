@@ -250,6 +250,18 @@ typedef uint16_t GpsLocationExtendedFlags;
 #define GPS_LOCATION_EXTENDED_HAS_HOR_ELIP_UNC_AZIMUTH 0x0800
 /** GpsLocationExtended has valid gnss sv used in position data */
 #define GPS_LOCATION_EXTENDED_HAS_GNSS_SV_USED_DATA 0x1000
+/** GpsLocationExtended has valid navSolutionMask */
+#define GPS_LOCATION_EXTENDED_HAS_NAV_SOLUTION_MASK 0x2000
+
+typedef uint32_t LocNavSolutionMask;
+/* Bitmask to specify whether SBAS ionospheric correction is used  */
+#define LOC_NAV_MASK_SBAS_CORRECTION_IONO ((LocNavSolutionMask)0x0001)
+/* Bitmask to specify whether SBAS fast correction is used  */
+#define LOC_NAV_MASK_SBAS_CORRECTION_FAST ((LocNavSolutionMask)0x0002)
+/**<  Bitmask to specify whether SBAS long-tem correction is used  */
+#define LOC_NAV_MASK_SBAS_CORRECTION_LONG ((LocNavSolutionMask)0x0004)
+/**<  Bitmask to specify whether SBAS integrity information is used  */
+#define LOC_NAV_MASK_SBAS_INTEGRITY ((LocNavSolutionMask)0x0008)
 
 /** GPS PRN Range */
 #define GPS_SV_PRN_MIN      1
@@ -310,6 +322,10 @@ typedef struct {
     float           horUncEllipseOrientAzimuth;
     /** Gnss sv used in position data */
     GnssSvUsedInPosition gnss_sv_used_ids;
+    /** Nav solution mask to indicate sbas corrections */
+    LocNavSolutionMask  navSolutionMask;
+    /** Position technology used in computing this fix */
+    LocPosTechMask tech_mask;
 } GpsLocationExtended;
 
 enum loc_sess_status {
