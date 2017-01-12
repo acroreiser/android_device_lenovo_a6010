@@ -120,6 +120,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.deep_buffer.media=true \
     audio.offload.min.duration.secs=30 \
     audio.offload.video=true \
+    ro.audio.flinger_standbytime_ms=300 \
     vendor.voice.path.for.pcm.voip=true \
     vendor.audio.av.streaming.offload.enable=true \
     vendor.audio.offload.buffer.size.kb=64 \
