@@ -297,6 +297,16 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
     group radio cache inet misc audio log readproc wakelock
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
+service set_baseband /system/vendor/bin/set_baseband.sh
+    class late_start
+    disabled
+    user system
+    group shell
+    oneshot
+
+on property:gsm.version.baseband=""
+    start set_baseband
+
 service charger /charger
     class charger
     user root
@@ -328,6 +338,7 @@ service qseecomd /system/vendor/bin/qseecomd
    writepid /dev/cpuset/system-background/tasks
 
 service time_daemon /system/vendor/bin/time_daemon
+   capabilities SYS_TIME
    class late_start
    user root
    group root
@@ -351,3 +362,7 @@ service wcnss-service /system/vendor/bin/wcnss_service
     user system
     group system wifi radio
     oneshot
+
+# Start it again on boot, just being double sure.
+on property:sys.boot_completed=1
+    start set_baseband

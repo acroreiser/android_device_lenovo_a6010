@@ -313,6 +313,10 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2
 
+# Baseband Fix
+PRODUCT_PACKAGES += \
+    set_baseband.sh
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.a6000
