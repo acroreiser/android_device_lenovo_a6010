@@ -10,7 +10,9 @@ PRODUCT_PACKAGES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=libqti-perfd-client.so
+    ro.vendor.extension_library=libqti-perfd-client.so \
+    ro.core_ctl_min_cpu=0 \
+    ro.core_ctl_max_cpu=4
 
 ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8916)
 PRODUCT_PROPERTY_OVERRIDES += \
