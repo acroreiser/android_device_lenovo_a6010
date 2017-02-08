@@ -262,6 +262,11 @@ PRODUCT_PACKAGES += \
     init.recovery.qcom.rc \
     ueventd.qcom.rc
 
+ifeq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_PACKAGES += \
+    init.qcom.ssr.rc
+endif
+
 # RIL
 ifeq ($(QCPATH),)
 PRODUCT_COPY_FILES += \
