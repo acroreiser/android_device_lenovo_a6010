@@ -230,6 +230,15 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2
 
+# Init scripts
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    init.target.rc \
+    init.qcom.rc \
+    init.qcom.power.rc \
+    init.recovery.qcom.rc \
+    ueventd.qcom.rc
+
 # RIL
 ifeq ($(QCPATH),)
 PRODUCT_COPY_FILES += \
