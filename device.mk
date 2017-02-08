@@ -121,6 +121,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=true
 
+# Camera
+PRODUCT_PACKAGES += \
+    Snap
+
+
 # Bluetooth
 PRODUCT_PACKAGES += \
     init.qcom.bt.sh
