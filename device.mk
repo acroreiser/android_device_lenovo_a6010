@@ -298,6 +298,10 @@ PRODUCT_PACKAGES += \
     libcalmodule_common \
     sensors.msm8916
 
+# Lights
+PRODUCT_PACKAGES += \
+    lights.msm8916
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
