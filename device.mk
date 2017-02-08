@@ -129,6 +129,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Gello
 
+# On boot audio lineout config
+PRODUCT_PACKAGES += \
+    init.lineout.sh
+
 # Bluetooth
 PRODUCT_PACKAGES += \
     init.qcom.bt.sh
