@@ -282,6 +282,7 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.bluetooth.disableabsvol=true \
     vendor.qcom.bluetooth.soc=pronto \
     ro.bluetooth.dun=true \
     ro.bluetooth.hfp.ver=1.7 \
