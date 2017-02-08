@@ -125,6 +125,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     Snap
 
+# Gello
+PRODUCT_PACKAGES += \
+    Gello
 
 # Bluetooth
 PRODUCT_PACKAGES += \
