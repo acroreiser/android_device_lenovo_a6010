@@ -138,6 +138,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
+# Trim Properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.am.reschedule_service=true \
+    ro.config.max_starting_bg=8
+
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=smd \
