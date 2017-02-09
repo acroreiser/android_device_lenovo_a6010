@@ -21,6 +21,7 @@ $(call inherit-product, vendor/lenovo/a6000/a6000-vendor.mk)
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
+TARGET_BOOTANIMATION_HALF_RES := true
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
