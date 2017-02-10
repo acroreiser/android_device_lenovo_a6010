@@ -56,9 +56,6 @@
  #define IMG_SZ 32000 * KB    /* MMAP 32000K of modem, modem partition is 64000K */
 
 __attribute__ ((weak))
-void init_target_properties()
-{
-}
 
 static int read_file2(const char *fname, char *data, int max_size)
 {
