@@ -129,6 +129,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Camera
 PRODUCT_PACKAGES += \
     Snap
+# Properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.cpp.duplication=false \
+    persist.camera.hal.debug.mask=0 \
+    camera2.portability.force_api=1 \
+    persist.camera.pip.support=0
+
+# Force legacy HAL1 HAX
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true
 
 # Gello
 PRODUCT_PACKAGES += \
