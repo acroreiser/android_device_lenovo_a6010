@@ -224,10 +224,6 @@ void init_target_properties()
     std::string product = property_get("ro.product.name");
     if ((strstr(product.c_str(), "a6000") == NULL))
      return;
-    import_kernel_cmdline(0, import_kernel_nv);
-    property_set("ro.product.board", board_id);
-    ERROR("Detected board ID=%s\n", board_id);
-    ERROR("Setup %s properties done!\n", board_id);
     rc = get_img_version(modem_version, IMG_VER_BUF_LEN);
     if (!rc) {
         property_set("gsm.version.baseband", modem_version);
