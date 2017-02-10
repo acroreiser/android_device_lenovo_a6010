@@ -7,6 +7,7 @@ LOCAL_C_INCLUDES := \
     system/core/base/include \
     system/core/init
 LOCAL_CFLAGS := -Wall
+LOCAL_CPP_STD := c++17
 LOCAL_SRC_FILES := setbaseband.cpp
 LOCAL_MODULE := libinit_msm8916
 LOCAL_STATIC_LIBRARIES := libbase libselinux
