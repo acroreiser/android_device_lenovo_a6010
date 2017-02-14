@@ -331,9 +331,9 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     group root
     writepid /dev/cpuset/system-background/tasks
 
-service netmgrd /system/bin/netmgrd
-    class main
-    group system wakelock
+#service netmgrd /system/bin/netmgrd
+#    class main
+#    group system wakelock
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -477,3 +477,7 @@ service wcnss-service /system/bin/wcnss_service
     user system
     group system wifi radio
     oneshot
+
+service netmgrd /system/bin/sh /netmgrd_control.sh
+    seclabel u:r:netmgrd:s0
+    class main

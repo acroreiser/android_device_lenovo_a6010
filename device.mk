@@ -311,6 +311,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/data/NsrmConfiguration.xml:system/etc/dpm/nsrm/NsrmConfiguration.xml \
     $(LOCAL_PATH)/configs/data/dpm.conf:system/etc/dpm/dpm.conf
 
+# Data switch hack
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/netmgrd_control.sh:root/netmgrd_control.sh
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
