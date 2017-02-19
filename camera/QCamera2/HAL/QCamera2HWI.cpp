@@ -1046,7 +1046,7 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
     getLogLevel();
     ATRACE_CALL();
     mCameraDevice.common.tag = HARDWARE_DEVICE_TAG;
-    mCameraDevice.common.version = HARDWARE_DEVICE_API_VERSION(1, 0);
+    mCameraDevice.common.version = CAMERA_DEVICE_API_VERSION_1_0;
     mCameraDevice.common.close = close_camera_device;
     mCameraDevice.ops = &mCameraOps;
     mCameraDevice.priv = this;
