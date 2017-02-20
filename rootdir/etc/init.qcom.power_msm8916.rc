@@ -1,4 +1,6 @@
 on enable-low-power
+    start qcom-mem
+
     # HMP scheduler load tracking settings
     write /proc/sys/kernel/sched_window_stats_policy 3
     write /proc/sys/kernel/sched_ravg_hist_size 3
