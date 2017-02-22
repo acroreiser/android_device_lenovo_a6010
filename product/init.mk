@@ -2,10 +2,6 @@
 PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.power.rc \
+    init.qcom.ssr.rc \
     init.recovery.qcom.rc \
     ueventd.qcom.rc
-
-ifeq ($(TARGET_BUILD_VARIANT),user)
-PRODUCT_PACKAGES += \
-    init.qcom.ssr.rc
-endif
