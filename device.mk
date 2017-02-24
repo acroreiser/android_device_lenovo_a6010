@@ -258,7 +258,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sdcardfs.enable=true
+    ro.sys.sdcardfs=true
 
 # IRSC
 PRODUCT_COPY_FILES += \
