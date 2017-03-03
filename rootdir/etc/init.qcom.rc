@@ -481,3 +481,7 @@ service wcnss-service /system/bin/wcnss_service
 service netmgrd /system/bin/sh /netmgrd_control.sh
     seclabel u:r:netmgrd:s0
     class main
+
+service qcom-mem /system/bin/sh /system/etc/init.qcom.mem.sh
+    disabled
+    oneshot

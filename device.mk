@@ -288,6 +288,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fstab.qcom \
     init.target.rc \
+    init.qcom.mem.sh \
     init.qcom.rc \
     init.qcom.power.rc \
     init.recovery.qcom.rc \
