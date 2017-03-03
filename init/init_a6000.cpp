@@ -217,6 +217,13 @@ static void init_alarm_boot_properties()
      return ret;
  }
 
+int is2GB()
+{
+    struct sysinfo sys;
+    sysinfo(&sys);
+    return sys.totalram > 1024ull * 1024 * 1024;
+}
+
 void init_target_properties()
  {
      char modem_version[IMG_VER_BUF_LEN];
@@ -229,6 +236,13 @@ void init_target_properties()
         property_set("gsm.version.baseband", modem_version);
         ERROR("Detected modem version=%s\n", modem_version);
 }
+
+    property_set("dalvik.vm.heapstartsize", "8m");
+    property_set("dalvik.vm.heapgrowthlimit", is2GB() ? "192m" : "96m");
+    property_set("dalvik.vm.heapsize", is2GB() ? "512m" : "256m");
+    property_set("dalvik.vm.heaptargetutilization", "0.75");
+    property_set("dalvik.vm.heapminfree", is2GB() ? "512k" : "2m");
+    property_set("dalvik.vm.heapmaxfree", "8m");
 
 }
 void vendor_load_properties()

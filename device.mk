@@ -30,13 +30,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapstartsize=8m \
-    dalvik.vm.heapsize=256m \
-    dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapminfree=512k \
-    dalvik.vm.heapmaxfree=8m
-
-PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=72 \
     ro.hwui.layer_cache_size=48 \
     ro.hwui.r_buffer_cache_size=8 \
