@@ -292,12 +292,8 @@ PRODUCT_PACKAGES += \
     init.qcom.power.rc \
     init.recovery.qcom.rc \
     ueventd.qcom.rc \
-    netmgrd_control.sh
-
-ifeq ($(TARGET_BUILD_VARIANT),user)
-PRODUCT_PACKAGES += \
+    netmgrd_control.sh \
     init.qcom.ssr.rc
-endif
 
 # RIL
 PRODUCT_COPY_FILES += \
