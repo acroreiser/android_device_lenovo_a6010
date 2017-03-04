@@ -49,6 +49,16 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 # CPUSETS
 ENABLE_CPUSETS := true
 
+#DEXPOT
+ifeq ($(HOST_OS),linux)
+    ifeq ($(TARGET_BUILD_VARIANT),user)
+        ifeq ($(WITH_DEXPREOPT),)
+            WITH_DEXPREOPT := true
+            WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
+        endif
+    endif
+endif
+
 # Camera
 BOARD_CAMERA_SENSORS := imx219_q8n13a gc2355_8916
 TARGET_USE_VENDOR_CAMERA_EXT := true
