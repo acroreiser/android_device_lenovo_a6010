@@ -52,6 +52,9 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 # CPUSETS
 ENABLE_CPUSETS := true
 
+# Bionic
+MALLOC_SVELTE := true
+
 #DEXPOT
 ifeq ($(HOST_OS),linux)
     ifeq ($(TARGET_BUILD_VARIANT),user)
