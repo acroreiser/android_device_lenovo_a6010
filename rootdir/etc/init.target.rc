@@ -64,16 +64,5 @@ service calibacc /system/bin/accelcal
     oneshot
     disabled
 
-on property:sys.boot_completed=1
-    start config_lineout
-    restart media
-
-service config_lineout /system/bin/sh /system/etc/init.lineout.sh
-    user root
-    group root
-    class late_start
-    oneshot
-    disabled
-
 on property:sys.sensors.acc=*
     start calibacc
