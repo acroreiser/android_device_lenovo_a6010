@@ -1,0 +1,4 @@
+allow kernel self:capability chown;
+allow kernel untrusted_app_tmpfs:file { write };
+allow tee vfat:file { read getattr open };
+allow ueventd vfat:file { read open getattr };
