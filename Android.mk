@@ -85,7 +85,6 @@ endif
 
 LOCAL_MODULE := power.qcom
 LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS += -Wno-unused-parameter -Wno-unused-variable
 LOCAL_VENDOR_MODULE := true
 LOCAL_HEADER_LIBRARIES := libhardware_headers
 include $(BUILD_SHARED_LIBRARY)

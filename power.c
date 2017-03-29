@@ -66,7 +66,7 @@ static struct hw_module_methods_t power_module_methods = {
     .open = power_device_open,
 };
 
-static void power_init(struct power_module *module)
+static void power_init(struct power_module *UNUSED(module))
 {
     ALOGI("QCOM power HAL initing.");
 
@@ -193,8 +193,9 @@ static void process_video_encode_hint(void *metadata)
     }
 }
 
-int __attribute__ ((weak)) power_hint_override(struct power_module *module, power_hint_t hint,
-        void *data)
+int __attribute__ ((weak)) power_hint_override(struct power_module *UNUSED(module),
+                                               power_hint_t UNUSED(hint),
+                                               void *UNUSED(data))
 {
     return HINT_NONE;
 }
@@ -237,7 +238,8 @@ static void power_hint(struct power_module *module, power_hint_t hint,
     }
 }
 
-int __attribute__ ((weak)) set_interactive_override(struct power_module *module, int on)
+int __attribute__ ((weak)) set_interactive_override(struct power_module *UNUSED(module),
+                                                    int UNUSED(on))
 {
     return HINT_NONE;
 }
