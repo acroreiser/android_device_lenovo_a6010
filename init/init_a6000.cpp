@@ -224,6 +224,21 @@ int is2GB()
     return sys.totalram > 1024ull * 1024 * 1024;
 }
 
+    /*A6000 Plus*/
+    if (is2GB()) {
+	property_set("ro.build.product", "Kraft-A6000-s");
+        property_set("ro.product.device", "Kraft-A6000-s");
+        property_set("ro.product.model", "Lenovo A6000 Plus");
+        property_set("ro.product.name", "Kraft-A6000-s");
+    }
+    /*A6000*/
+    else {
+	property_set("ro.build.product", "Kraft-A6000");
+        property_set("ro.product.device", "Kraft-A6000");
+        property_set("ro.product.model", "Lenovo A6000");
+        property_set("ro.product.name", "Kraft-A6000");
+    }
+
 void init_target_properties()
  {
      char modem_version[IMG_VER_BUF_LEN];
