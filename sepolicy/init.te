@@ -1,0 +1,5 @@
+#============= init ==============
+
+allow init debugfs:file write;
+
+allow init vfat:dir search;

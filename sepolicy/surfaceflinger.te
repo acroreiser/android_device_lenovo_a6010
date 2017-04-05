@@ -1,0 +1,3 @@
+#============= surfaceflinger ==============
+
+allow surfaceflinger vfat:dir search;

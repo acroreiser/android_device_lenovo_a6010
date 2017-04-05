@@ -1,0 +1,3 @@
+#============= ueventd ==============
+
+allow ueventd vfat:dir search;
