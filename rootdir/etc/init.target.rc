@@ -66,3 +66,7 @@ service calibacc /system/bin/accelcal
 
 on property:sys.sensors.acc=*
     start calibacc
+
+on property:sys.boot_completed=1
+    restart ril-daemon
+    restart netmgrd
