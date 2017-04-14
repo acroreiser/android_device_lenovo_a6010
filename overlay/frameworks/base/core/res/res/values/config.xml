@@ -37,32 +37,32 @@
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 control points as follows:
          (1-based arrays)
-
          Point 1:            (0, value[1]):             lux <= 0
          Point 2:     (level[1], value[2]):  0        < lux <= level[1]
          Point 3:     (level[2], value[3]):  level[2] < lux <= level[3]
          ...
          Point N+1: (level[N], value[N+1]):  level[N] < lux
-
          The control points must be strictly increasing.  Each control point
          corresponds to an entry in the brightness backlight values arrays.
          For example, if LUX == level[1] (first element of the levels array)
          then the brightness will be determined by value[2] (second element
          of the brightness values array).
-
          Spline interpolation is used to determine the auto-brightness
          backlight values for LUX levels between these control points.
-
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>9</item>
-        <item>30</item>
+        <item>5</item>
+        <item>25</item>
+        <item>50</item>
         <item>100</item>
-        <item>325</item>
-        <item>1250</item>
-        <item>3500</item>
+        <item>200</item>
+        <item>300</item>
+        <item>500</item>
+        <item>750</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
         <item>10000</item>
-        <item>20000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -71,16 +71,21 @@
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>18</item>
-        <item>30</item>
-        <item>59</item>
-        <item>74</item>
-        <item>92</item>
-        <item>118</item>
-        <item>155</item>
-        <item>222</item>
+        <item>7</item>
+        <item>10</item>
+        <item>16</item>
+        <item>29</item>
+        <item>48</item>
+        <item>80</item>
+        <item>126</item>
+        <item>181</item>
+        <item>211</item>
+        <item>232</item>
+        <item>255</item>
+        <item>255</item>
         <item>255</item>
     </integer-array>
+
 
     <bool name="config_hotswapCapable">false</bool>
 
@@ -178,7 +183,7 @@
     <!-- Screen brightness used to dim the screen while dozing in a very low power state.
           May be less than the minimum allowed brightness setting
           that can be set by the user. -->
-    <integer name="config_screenBrightnessDoze">5</integer>
+    <integer name="config_screenBrightnessDoze">3</integer>
 
     <!-- ComponentName of a dream to show whenever the system would otherwise have
          gone to sleep.  When the PowerManager is asked to go to sleep, it will instead
