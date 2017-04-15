@@ -1,3 +1,4 @@
+r_dir_file(kernel, firmware_file)
 allow kernel self:capability chown;
 allow kernel untrusted_app_tmpfs:file { write };
 allow kernel vfat:dir search;

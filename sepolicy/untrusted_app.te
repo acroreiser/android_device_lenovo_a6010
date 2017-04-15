@@ -19,3 +19,4 @@ allow untrusted_app servicemanager:dir search;
 allow untrusted_app servicemanager:file { read open getattr };
 allow untrusted_app surfaceflinger:dir search;
 allow untrusted_app surfaceflinger:file { read open };
+allow untrusted_app sysfs:file r_file_perms;
