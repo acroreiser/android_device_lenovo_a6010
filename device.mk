@@ -53,6 +53,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
     debug.sf.disable_hwc=0 \
     debug.sf.recomputecrop=0 \
+    debug.sf.disable_backpressure=1 \
     persist.hwc.mdpcomp.enable=true \
     persist.hwc.ptor.enable=true \
     debug.sf.gpu_comp_tiling=1 \
