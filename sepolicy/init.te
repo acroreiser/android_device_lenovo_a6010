@@ -9,3 +9,7 @@ allow init vfat:dir search;
 allow init vfat:file { read getattr open };
 allow init firmware_file:dir search;
 allow init firmware_file:file r_file_perms;
+allow init firmware_file:dir read;
+allow init firmware_file:file read;
+allow init firmware_file:file open;
+allow init firmware_file:dir open;

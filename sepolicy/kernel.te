@@ -1,8 +1,15 @@
 r_dir_file(kernel, firmware_file)
 allow kernel self:capability chown;
 allow kernel untrusted_app_tmpfs:file { write };
-allow kernel vfat:dir search;
+allow kernel vfat:dir { open search read };
 allow tee vfat:file { read getattr open };
 allow ueventd vfat:file { read open getattr };
 allow kernel untrusted_app:fd use;
 allow kernel untrusted_app_tmpfs:file write;
+allow kernel audioserver:process setsched;
+allow kernel dataservice_app:process setsched;
+allow kernel drmserver:process setsched;
+allow kernel mediadrmserver:process setsched;
+allow kernel mediaextractor:process setsched;
+allow kernel mediaserver:process setsched;
+allow kernel system_app:process setsched;
