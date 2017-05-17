@@ -135,6 +135,7 @@ vendor/lib/librs_adreno.so|49ac9a51b1d7248ec48a91cea79e7f865a231d77
 vendor/lib/librs_adreno_sha1.so|44e571a9f87b10ceddcffd411536f7ee95587014
 vendor/lib/libsc-a3xx.so|54238c5b1f085335a3675678017aa2be45d94252
 vendor/lib/libscale.so|277641b50da05c6e3a67bf5199c9873e2d5429e8
+vendor/lib/libuiblur.so|0251c237d4974ba7d96a97defe5b563dcc78bdd3
 
 # Graphics firmware
 etc/firmware/a300_pfp.fw
