@@ -22,5 +22,5 @@
     <integer name="def_screen_off_timeout">60000</integer>
     <bool name="def_screen_brightness_automatic_mode">true</bool>
     <bool name="def_bluetooth_on">false</bool>
-
+    <bool name="def_wifi_on">true</bool>
 </resources>
