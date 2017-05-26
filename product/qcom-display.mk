@@ -26,6 +26,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 else
 ifeq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8939)
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196609
+    ro.opengles.version=196610
 endif
 endif
