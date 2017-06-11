@@ -64,7 +64,7 @@ echo $set_almk_ppr_adj > /sys/module/process_reclaim/parameters/min_score_adj
 echo 1 > /sys/module/process_reclaim/parameters/enable_process_reclaim
 echo 70 > /sys/module/process_reclaim/parameters/pressure_max
 echo 30 > /sys/module/process_reclaim/parameters/swap_opt_eff
-echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+echo 0 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
 
 if [ "$arch_type" == "aarch64" ] && [ $MemTotal -gt 1048576 ]; then
     echo 10 > /sys/module/process_reclaim/parameters/pressure_min
