@@ -70,6 +70,7 @@ ifeq ($(HOST_OS),linux)
       WITH_DEXPREOPT_DEBUG_INFO := false
   endif
 endif
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_msm8916
