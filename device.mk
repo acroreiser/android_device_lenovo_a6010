@@ -133,6 +133,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.av.streaming.offload.enable=true \
     vendor.audio.offload.buffer.size.kb=64 \
     ro.config.vc_call_vol_steps=7 \
+    ro.config.media_vol_steps=25 \
     vendor.audio.offload.gapless.enabled=true
 
 PRODUCT_COPY_FILES += \
