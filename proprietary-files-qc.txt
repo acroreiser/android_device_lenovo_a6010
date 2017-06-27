@@ -18,9 +18,9 @@ vendor/lib/soundfx/libqcvirt.so|1abe205b82134768f805fff7592edf0c9ee70fcf
 bin/vm_bms
 
 # Bluetooth
-bin/btnvtool
-bin/hci_qcomm_init
-vendor/lib/libbtnv.so
+bin/btnvtool|8fcd1b68edea3a18782abb34e8b5d0859159daed
+bin/hci_qcomm_init|a63659317360cfc294dfe9d1c8aebdcc5046b356
+vendor/lib/libbtnv.so|af26d6b2132701e69912d11aecd32403eb893955
 
 # Camera
 bin/mm-qcamera-daemon
