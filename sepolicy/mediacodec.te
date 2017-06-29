@@ -1,2 +1,2 @@
-allow mediacodec firmware_file:dir search;
-
+allow mediadrmserver proc:file read;
+allow mediacodec firmware_file:dir { search open read getattr };
