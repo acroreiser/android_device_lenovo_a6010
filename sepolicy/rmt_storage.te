@@ -1,1 +1,6 @@
+allow rmt_storage firmware_file:dir r_dir_perms;
+allow rmt_storage firmware_file:file r_file_perms;
+allow rmt_storage init:unix_stream_socket connectto;
+allow rmt_storage property_socket:sock_file write;
 allow rmt_storage self:capability { dac_override net_raw };
+allow rmt_storage unlabeled:file { open read };
