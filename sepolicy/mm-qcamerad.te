@@ -1,3 +1,5 @@
+allow mm-qcamerad system_data_file:dir { add_name remove_name write };
+allow mm-qcamerad system_data_file:sock_file unlink;
 allow mm-qcamerad camera_data_file:dir r_dir_perms;
 allow mm-qcamerad mpctl_socket:dir search;
 unix_socket_connect(mm-qcamerad, mpctl, perfd)

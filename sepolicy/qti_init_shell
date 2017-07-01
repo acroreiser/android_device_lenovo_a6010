@@ -1,0 +1,10 @@
+allow qti_init_shell bluetooth_data_file:file r_file_perms;
+allow qti_init_shell bluetooth_loader_exec:file { open read };
+allow qti_init_shell btnvtool_exec:file { getattr execute };
+allow qti_init_shell hci_attach_dev:chr_file { ioctl open read write };
+allow qti_init_shell qmuxd:unix_stream_socket connectto;
+allow qti_init_shell qmuxd_socket:dir { write add_name search };
+allow qti_init_shell qmuxd_socket:sock_file { write create setattr };
+allow qti_init_shell self:socket { create ioctl };
+allow qti_init_shell sysfs:dir setattr;
+allow qti_init_shell touchpanel_sysfs:file { getattr setattr };
