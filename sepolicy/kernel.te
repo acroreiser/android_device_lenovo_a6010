@@ -1,6 +1,8 @@
 # Used for attaching external SD card block device as mass storage
 allow kernel block_device:blk_file { read write };
 
+allow kernel block_device:dir search;
+
 allow kernel untrusted_app:fd use;
 allow kernel untrusted_app_25:fd use;
 allow kernel untrusted_app_27:fd use;
