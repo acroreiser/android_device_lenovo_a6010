@@ -62,3 +62,7 @@ PRODUCT_MANUFACTURER := Lenovo
 # Explicitly
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.keystore=msm8916
+
+# The kernel does not support aio with ffs.
+PRODUCT_PROPERTY_OVERRIDES += \
+	sys.usb.ffs.aio_compat=1
