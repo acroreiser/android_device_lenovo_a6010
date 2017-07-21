@@ -175,6 +175,7 @@ service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
     group wakelock
+    ioprio rt 0
     writepid /dev/cpuset/system-background/tasks
 
 # FM
