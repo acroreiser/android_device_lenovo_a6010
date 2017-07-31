@@ -10,11 +10,6 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
-ifneq ($(QCPATH),)
-PRODUCT_PACKAGES += \
-    libOmxVdecHevc
-endif
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs_$(TARGET_BOARD_PLATFORM_VARIANT).xml:system/etc/media_codecs.xml
 
