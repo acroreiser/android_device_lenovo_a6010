@@ -160,7 +160,8 @@ void LocApiBase::addAdapter(LocAdapterBase* adapter)
     for (int i = 0; i < MAX_ADAPTERS && mLocAdapters[i] != adapter; i++) {
         if (mLocAdapters[i] == NULL) {
             mLocAdapters[i] = adapter;
-            mMsgTask->sendMsg(new LocOpenMsg(this));
+            mMsgTask->sendMsg(new LocOpenMsg(this,
+                    mMask | adapter->getEvtMask()));
             break;
         }
     }
