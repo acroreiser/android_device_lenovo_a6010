@@ -9,7 +9,7 @@ BOARD_RAMDISK_OFFSET     := 0x02000000
 
 ENABLE_CPUSETS := true
 
-TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8916
+TARGET_KERNEL_SOURCE := kernel/lenovo/msm8916
 ifneq ($(FORCE_32_BIT),true)
 TARGET_USES_UNCOMPRESSED_KERNEL := true
 endif
