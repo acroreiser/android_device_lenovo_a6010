@@ -58,14 +58,6 @@ on post-fs-data
     mkdir /data/fdAlbum 0770 camera camera
     mkdir /data/misc/camera 0770 camera camera
 
-    #Create PERFD deamon related dirs
-    mkdir /data/misc/perfd 0770 root system
-    chmod 2770 /data/misc/perfd
-    mkdir /data/misc/perfd 0755 root system
-    chmod 2755 /data/misc/perfd
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
-
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
@@ -444,13 +436,6 @@ service qseecomd /system/bin/qseecomd
    group root
    writepid /dev/cpuset/system-background/tasks
 
-service perfd /vendor/bin/perfd
-   class main
-   user root
-   group root readproc
-   disabled
-   writepid /dev/cpuset/system-background/tasks
-
 service thermal-engine /vendor/bin/thermal-engine
    class main
    user root
@@ -485,8 +470,4 @@ service wcnss-service /system/bin/wcnss_service
     class main
     user system
     group system wifi radio
-    oneshot
-
-service qcom-mem /system/bin/sh /system/etc/init.qcom.mem.sh
-    disabled
     oneshot
