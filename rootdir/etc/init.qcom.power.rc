@@ -39,6 +39,8 @@ on enable-low-power
     write /sys/module/process_reclaim/parameters/per_swap_size 512
     write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
     write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,36864,46080"
+    write /proc/sys/vm/min_free_kbytes 2919
+    write /proc/sys/vm/extra_free_kbytes 6075
 
     # enable thermal core_control now
     write /sys/module/msm_thermal/core_control/enabled 1
