@@ -1,1 +1,1 @@
-allow netmgrd self:capability { dac_override sys_admin };
+allow netmgrd self:capability sys_admin;
