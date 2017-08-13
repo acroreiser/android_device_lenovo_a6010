@@ -82,3 +82,6 @@ on property:sys.boot_completed=1
     write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,36864,46080"
     write /proc/sys/vm/min_free_kbytes 2919
     write /proc/sys/vm/extra_free_kbytes 6075
+    write /sys/kernel/mm/ksm/pages_to_scan 100
+    write /sys/kernel/mm/ksm/sleep_millisecs 500
+    write /sys/kernel/mm/ksm/run 1
