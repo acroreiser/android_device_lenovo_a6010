@@ -1,1 +1,0 @@
-allow time_daemon persist_file:dir search;
