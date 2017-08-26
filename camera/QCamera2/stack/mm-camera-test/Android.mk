@@ -1,4 +1,3 @@
-ifeq ($(call is-vendor-board-platform,QCOM),true)
 OLD_LOCAL_PATH := $(LOCAL_PATH)
 LOCAL_PATH:=$(call my-dir)
 
@@ -105,9 +104,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE:= mm-qcamera-app
 LOCAL_32_BIT_ONLY := true
 include $(BUILD_EXECUTABLE)
-endif
 
-ifeq ($(call is-vendor-board-platform,QCOM),true)
 # Build tuning library
 include $(CLEAR_VARS)
 
@@ -211,4 +208,3 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE:= libmm-qcamera
 LOCAL_32_BIT_ONLY := true
 include $(BUILD_SHARED_LIBRARY)
-endif
