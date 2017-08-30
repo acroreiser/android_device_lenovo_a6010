@@ -9,7 +9,7 @@ on init
     chmod 0664 /sys/class/leds/red/max_brightness
     chmod 0664 /sys/class/leds/red/trigger
 
-service light-hal-2-0 /vendor/bin/hw/android.hardware.light@2.0-service.msm8916
+service vendor.light-hal-2-0 /vendor/bin/hw/android.hardware.light@2.0-service.msm8916
     class hal
     user system
     group system
