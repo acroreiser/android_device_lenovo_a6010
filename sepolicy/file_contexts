@@ -14,3 +14,6 @@
 
 # DT2W
 /sys/android_touch/doubletap2wake           u:object_r:proc_touchpanel:s0
+
+# HALs
+/system/vendor/bin/hw/android\.hardware\.usb@1\.0-service\.cyanogen_8916       u:object_r:hal_usb_default_exec:s0
