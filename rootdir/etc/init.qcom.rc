@@ -306,16 +306,20 @@ service dpmd /system/bin/dpmd
     class main
     socket dpmd stream 660 root system
 
-service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
+service hciattach /vendor/bin/hci_qcomm_init -e
     class late_start
     user bluetooth
-    group bluetooth net_bt_admin
+    group bluetooth net_bt_admin oem_2950 diag radio
     disabled
     #seclabel u:r:bluetooth_loader:s0
     oneshot
 
 on property:bluetooth.hciattach=true
     start hciattach
+    setprop bluetooth.status on
+
+on property:bluetooth.hciattach=false
+    setprop bluetooth.status off
 
 # FM
 on property:hw.fm.init=0
