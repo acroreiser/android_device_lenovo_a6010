@@ -1730,8 +1730,9 @@ QCameraMemory *QCamera2HardwareInterface::allocateStreamBuf(
     case CAM_STREAM_TYPE_PREVIEW:
         {
             if (isNoDisplayMode()) {
-		mCallbackCookie,
+		//mCallbackCookie,
                 mem = new QCameraStreamMemory(mGetMemory,
+			mCallbackCookie,
                         bCachedMem,
                         (bPoolMem) ? &m_memoryPool : NULL,
                         stream_type);

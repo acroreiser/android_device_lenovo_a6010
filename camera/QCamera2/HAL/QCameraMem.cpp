@@ -1312,8 +1312,9 @@ QCameraGrallocMemory::QCameraGrallocMemory(camera_request_memory getMemory, void
     mWindow = NULL;
     mWidth = mHeight = mStride = mScanline = 0;
     mFormat = HAL_PIXEL_FORMAT_YCrCb_420_SP;
+    mGetMemory = getMemory;
     mCallbackCookie = cbCookie;
-    for (int i = 0; i < MM_CAMERA_MAX_NUM_FRAMES; i ++) {
+      for (int i = 0; i < MM_CAMERA_MAX_NUM_FRAMES; i ++) {
         mBufferHandle[i] = NULL;
         mLocalFlag[i] = BUFFER_NOT_OWNED;
         mPrivateHandle[i] = NULL;
