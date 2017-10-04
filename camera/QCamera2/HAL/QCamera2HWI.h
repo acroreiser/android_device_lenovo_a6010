@@ -653,6 +653,8 @@ private:
     bool mPreviewFrameSkipValid;
     cam_frame_idx_range_t mPreviewFrameSkipIdxRange;
     int32_t mNumPreviewFaces;
+    nsecs_t mLastAFScanTime;
+    nsecs_t mLastCaptureTime;
     bool mAdvancedCaptureConfigured;
     bool mFPSReconfigure;
    //ts add for makeup
