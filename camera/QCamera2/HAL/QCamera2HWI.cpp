@@ -1135,9 +1135,11 @@ int QCamera2HardwareInterface::openCamera(struct hw_device_t **hw_device)
         pthread_mutex_lock(&g_camlock);
         mCameraSessionActive = 1;
         pthread_mutex_unlock(&g_camlock);
+/*
         if (m_thermalAdapter.init(this) != 0) {
           ALOGE("Init thermal adapter failed");
         }
+*/
     }
     else
         *hw_device = NULL;
@@ -1317,7 +1319,7 @@ int QCamera2HardwareInterface::closeCamera()
     m_postprocessor.stop();
     m_postprocessor.deinit();
 
-    m_thermalAdapter.deinit();
+    //m_thermalAdapter.deinit();
 
     // delete all channels if not already deleted
     for (i = 0; i < QCAMERA_CH_TYPE_MAX; i++) {
