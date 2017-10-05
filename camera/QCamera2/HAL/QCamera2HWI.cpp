@@ -1020,10 +1020,10 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
       mRawdataJob(-1),
       mPreviewFrameSkipValid(0),
       mNumPreviewFaces(-1),
-      mAdvancedCaptureConfigured(false),
-      mFPSReconfigure(false),
       mLastAFScanTime(0),
-      mLastCaptureTime(0)
+      mLastCaptureTime(0),
+      mAdvancedCaptureConfigured(false),
+      mFPSReconfigure(false)
 {
 #ifdef TARGET_TS_MAKEUP
     mMakeUpBuf = NULL;
