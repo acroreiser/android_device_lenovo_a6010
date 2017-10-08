@@ -19,6 +19,7 @@ PRODUCT_PACKAGES += \
     libwpa_client
 
 PRODUCT_PACKAGES += \
+    hostapd \
     wificond \
     wifilogd \
     wpa_supplicant \
