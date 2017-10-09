@@ -888,8 +888,8 @@ int NativeSensorManager::getSensorListInner()
 		/* initialize data path */
 		strlcpy(nodename, "device", SYSFS_MAXLEN);
 
-		if (getEventPath(devname, list->data_path) == -ENODEV) {
-			getEventPathOld(list, list->data_path);
+		if (getEventPathOld(list, list->data_path)) {
+                        getEventPath(devname, list->data_path);
 		}
 
 		number++;
