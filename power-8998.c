@@ -52,6 +52,70 @@
 #define CHECK_HANDLE(x) ((x)>0)
 #define NUM_PERF_MODES  3
 
+static int current_power_profile = PROFILE_BALANCED;
+
+int get_number_of_profiles() {
+    return 5;
+}
+
+static int profile_high_performance[] = {
+    SCHED_BOOST_ON_V3, 0x1,
+    MIN_FREQ_BIG_CORE_0, 0xFFF,
+    MIN_FREQ_LITTLE_CORE_0, 0xFFF,
+    ALL_CPUS_PWR_CLPS_DIS_V3, 0x1,
+};
+
+static int profile_power_save[] = {
+    MAX_FREQ_BIG_CORE_0, 0x3E8,
+    MAX_FREQ_LITTLE_CORE_0, 0x3E8,
+};
+
+static int profile_bias_power[] = {
+    MAX_FREQ_BIG_CORE_0, 0x514,
+    MAX_FREQ_LITTLE_CORE_0, 0x3E8,
+};
+
+static int profile_bias_performance[] = {
+    MIN_FREQ_BIG_CORE_0, 0x578,
+};
+
+static void set_power_profile(int profile) {
+
+    if (profile == current_power_profile)
+        return;
+
+    ALOGV("%s: Profile=%d", __func__, profile);
+
+    if (current_power_profile != PROFILE_BALANCED) {
+        undo_hint_action(DEFAULT_PROFILE_HINT_ID);
+        ALOGV("%s: Hint undone", __func__);
+    }
+
+    if (profile == PROFILE_POWER_SAVE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_power_save,
+            ARRAY_SIZE(profile_power_save));
+        ALOGD("%s: Set powersave mode", __func__);
+
+    } else if (profile == PROFILE_HIGH_PERFORMANCE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_high_performance,
+                ARRAY_SIZE(profile_high_performance));
+        ALOGD("%s: Set performance mode", __func__);
+
+    } else if (profile == PROFILE_BIAS_POWER) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_power,
+            ARRAY_SIZE(profile_bias_power));
+        ALOGD("%s: Set bias power mode", __func__);
+
+    } else if (profile == PROFILE_BIAS_PERFORMANCE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_performance,
+                ARRAY_SIZE(profile_bias_performance));
+        ALOGD("%s: Set bias perf mode", __func__);
+
+    }
+
+    current_power_profile = profile;
+}
+
 typedef enum {
     NORMAL_MODE       = 0,
     SUSTAINED_MODE    = 1,
@@ -188,6 +252,16 @@ static int process_video_encode_hint(void *metadata)
 int power_hint_override(power_hint_t hint, void *data)
 {
     int ret_val = HINT_NONE;
+
+    if (hint == POWER_HINT_SET_PROFILE) {
+        set_power_profile(*(int32_t *)data);
+        return HINT_HANDLED;
+    }
+
+    /* Skip other hints in power save mode */
+    if (current_power_profile == PROFILE_POWER_SAVE)
+        return HINT_HANDLED;
+
     switch(hint) {
         case POWER_HINT_VIDEO_ENCODE:
             ret_val = process_video_encode_hint(data);
