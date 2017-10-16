@@ -1,0 +1,4 @@
+subdirs = [
+    "device/1.0-a6000",
+    "provider/2.4-a6000",
+]
