@@ -21,6 +21,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include <utils/Log.h>
 
@@ -197,10 +198,6 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
     }
 }
 
-static struct hw_module_methods_t power_module_methods = {
-    .open = NULL,
-};
-
 static int get_feature(__attribute__((unused)) struct power_module *module,
                        feature_t feature)
 {
@@ -210,6 +207,43 @@ static int get_feature(__attribute__((unused)) struct power_module *module,
     return -1;
 }
 
+static int power_open(const hw_module_t* module, const char* name,
+                    hw_device_t** device)
+{
+    ALOGD("%s: enter; name=%s", __FUNCTION__, name);
+
+    if (strcmp(name, POWER_HARDWARE_MODULE_ID)) {
+        return -EINVAL;
+    }
+
+    power_module_t *dev = (power_module_t *)calloc(1,
+            sizeof(power_module_t));
+
+    if (!dev) {
+        ALOGD("%s: failed to allocate memory", __FUNCTION__);
+        return -ENOMEM;
+    }
+
+    dev->common.tag = HARDWARE_MODULE_TAG;
+    dev->common.module_api_version = POWER_MODULE_API_VERSION_0_2;
+    dev->common.hal_api_version = HARDWARE_HAL_API_VERSION;
+
+    dev->init = power_init;
+    dev->powerHint = power_hint; // This is handled by framework
+    dev->setInteractive = power_set_interactive;
+    dev->getFeature = get_feature;
+
+    *device = (hw_device_t*)dev;
+
+    ALOGD("%s: exit", __FUNCTION__);
+
+    return 0;
+}
+
+static struct hw_module_methods_t power_module_methods = {
+    .open = power_open,
+};
+
 struct power_module HAL_MODULE_INFO_SYM = {
     .common = {
         .tag = HARDWARE_MODULE_TAG,
@@ -217,7 +251,7 @@ struct power_module HAL_MODULE_INFO_SYM = {
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
         .name = "msm8916 Power HAL",
-        .author = "The CyanogenMod Project",
+        .author = "The LineageOS Project",
         .methods = &power_module_methods,
     },
 
