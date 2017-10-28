@@ -264,7 +264,8 @@ PRODUCT_PACKAGES += charger_res_images
 
 # GPS
 PRODUCT_PACKAGES += \
-	libcurl
+    libandroid_net \
+    libcurl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/apdr.conf:system/vendor/etc/apdr.conf \
