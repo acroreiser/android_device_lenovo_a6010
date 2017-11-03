@@ -40,7 +40,6 @@
 
 #define LOG_TAG "QCOM PowerHAL"
 #include <log/log.h>
-#include <hardware/hardware.h>
 #include <hardware/power.h>
 
 #include "utils.h"
@@ -49,6 +48,25 @@
 #include "performance.h"
 #include "power-common.h"
 #include "power-feature.h"
+#include "power-helper.h"
+
+#ifndef WLAN_POWER_STAT
+#define WLAN_POWER_STAT "/d/wlan0/power_stats"
+#endif
+
+#define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
+#define LINE_SIZE 128
+
+const char *wlan_power_stat_params[] = {
+    "cumulative_sleep_time_ms",
+    "cumulative_total_on_time_ms",
+    "deep_sleep_enter_counter",
+    "last_deep_sleep_enter_tstamp_ms"
+};
+
+struct stat_pair wlan_stat_map[] = {
+    { WLAN_POWER_DEBUG_STATS, "POWER DEBUG STATS", wlan_power_stat_params, ARRAY_SIZE(wlan_power_stat_params) },
+};
 
 static int saved_dcvs_cpu0_slack_max = -1;
 static int saved_dcvs_cpu0_slack_min = -1;
@@ -59,14 +77,7 @@ static int slack_node_rw_failed = 0;
 static int display_hint_sent;
 int display_boost;
 
-static int power_device_open(const hw_module_t* module, const char* name,
-        hw_device_t** device);
-
-static struct hw_module_methods_t power_module_methods = {
-    .open = power_device_open,
-};
-
-static void power_init(struct power_module *UNUSED(module))
+void power_init(void)
 {
     ALOGI("QCOM power HAL initing.");
 
@@ -193,8 +204,7 @@ static void process_video_encode_hint(void *metadata)
     }
 }
 
-int __attribute__ ((weak)) power_hint_override(struct power_module *UNUSED(module),
-                                               power_hint_t UNUSED(hint),
+int __attribute__ ((weak)) power_hint_override(power_hint_t UNUSED(hint),
                                                void *UNUSED(data))
 {
     return HINT_NONE;
@@ -203,11 +213,10 @@ int __attribute__ ((weak)) power_hint_override(struct power_module *UNUSED(modul
 /* Declare function before use */
 void interaction(int duration, int num_args, int opt_list[]);
 
-static void power_hint(struct power_module *module, power_hint_t hint,
-        void *data)
+void power_hint(power_hint_t hint, void *data)
 {
     /* Check if this hint has been overridden. */
-    if (power_hint_override(module, hint, data) == HINT_HANDLED) {
+    if (power_hint_override(hint, data) == HINT_HANDLED) {
         /* The power_hint has been handled. We can skip the rest. */
         return;
     }
@@ -238,13 +247,12 @@ static void power_hint(struct power_module *module, power_hint_t hint,
     }
 }
 
-int __attribute__ ((weak)) set_interactive_override(struct power_module *UNUSED(module),
-                                                    int UNUSED(on))
+int __attribute__ ((weak)) set_interactive_override(int UNUSED(on))
 {
     return HINT_NONE;
 }
 
-void set_interactive(struct power_module *module, int on)
+void power_set_interactive(int on)
 {
     char governor[80];
     char tmp_str[NODE_MAX];
@@ -259,7 +267,7 @@ void set_interactive(struct power_module *module, int on)
         perf_hint_enable(VENDOR_HINT_DISPLAY_ON, 0);
     }
 
-    if (set_interactive_override(module, on) == HINT_HANDLED) {
+    if (set_interactive_override(on) == HINT_HANDLED) {
         return;
     }
 
@@ -457,12 +465,11 @@ void set_interactive(struct power_module *module, int on)
     saved_interactive_mode = !!on;
 }
 
-void __attribute__((weak)) set_device_specific_feature(struct power_module *module __unused,
-                                            feature_t feature __unused, int state __unused)
+void __attribute__((weak)) set_device_specific_feature(feature_t UNUSED(feature), int UNUSED(state))
 {
 }
 
-static void set_feature(struct power_module *module, feature_t feature, int state)
+void set_feature(feature_t feature, int state)
 {
     switch (feature) {
 #ifdef TAP_TO_WAKE_NODE
@@ -473,60 +480,79 @@ static void set_feature(struct power_module *module, feature_t feature, int stat
         default:
             break;
     }
-    set_device_specific_feature(module, feature, state);
+    set_device_specific_feature(feature, state);
 }
 
-static int power_device_open(const hw_module_t* module, const char* name,
-        hw_device_t** device)
-{
-    int status = -EINVAL;
-    if (module && name && device) {
-        if (!strcmp(name, POWER_HARDWARE_MODULE_ID)) {
-            power_module_t *dev = (power_module_t *)malloc(sizeof(*dev));
-
-            if(dev) {
-                memset(dev, 0, sizeof(*dev));
-
-                if(dev) {
-                    /* initialize the fields */
-                    dev->common.module_api_version = POWER_MODULE_API_VERSION_0_3;
-                    dev->common.tag = HARDWARE_DEVICE_TAG;
-                    dev->init = power_init;
-                    dev->powerHint = power_hint;
-                    dev->setInteractive = set_interactive;
-                    /* At the moment we support 0.3 APIs */
-                    dev->setFeature = set_feature,
-                        dev->get_number_of_platform_modes = NULL,
-                        dev->get_platform_low_power_stats = NULL,
-                        dev->get_voter_list = NULL,
-                        *device = (hw_device_t*)dev;
-                    status = 0;
-                } else {
-                    status = -ENOMEM;
-                }
-            }
-            else {
-                status = -ENOMEM;
+static int parse_stats(const char **params, size_t params_size,
+                       uint64_t *list, FILE *fp) {
+    ssize_t nread;
+    size_t len = LINE_SIZE;
+    char *line;
+    size_t params_read = 0;
+    size_t i;
+    line = malloc(len);
+    if (!line) {
+        ALOGE("%s: no memory to hold line", __func__);
+        return -ENOMEM;
+    }
+    while ((params_read < params_size) &&
+        (nread = getline(&line, &len, fp) > 0)) {
+        char *key = line + strspn(line, " \t");
+        char *value = strchr(key, ':');
+        if (!value || (value > (line + len)))
+            continue;
+        *value++ = '\0';
+        for (i = 0; i < params_size; i++) {
+            if (!strcmp(key, params[i])) {
+                list[i] = strtoull(value, NULL, 0);
+                params_read++;
+                break;
             }
         }
     }
-
-    return status;
+    free(line);
+    return 0;
 }
 
-struct power_module HAL_MODULE_INFO_SYM = {
-    .common = {
-        .tag = HARDWARE_MODULE_TAG,
-        .module_api_version = POWER_MODULE_API_VERSION_0_3,
-        .hal_api_version = HARDWARE_HAL_API_VERSION,
-        .id = POWER_HARDWARE_MODULE_ID,
-        .name = "QCOM Power HAL",
-        .author = "Qualcomm",
-        .methods = &power_module_methods,
-    },
+static int extract_stats(uint64_t *list, char *file,
+                         struct stat_pair *map, size_t map_size) {
+    FILE *fp;
+    ssize_t read;
+    size_t len = LINE_SIZE;
+    char *line;
+    size_t i, stats_read = 0;
+    int ret = 0;
+    fp = fopen(file, "re");
+    if (fp == NULL) {
+        ALOGE("%s: failed to open: %s Error = %s", __func__, file, strerror(errno));
+        return -errno;
+    }
+    line = malloc(len);
+    if (!line) {
+        ALOGE("%s: no memory to hold line", __func__);
+        fclose(fp);
+        return -ENOMEM;
+    }
+    while ((stats_read < map_size) && (read = getline(&line, &len, fp) != -1)) {
+        size_t begin = strspn(line, " \t");
+        for (i = 0; i < map_size; i++) {
+            if (!strncmp(line + begin, map[i].label, strlen(map[i].label))) {
+                stats_read++;
+                break;
+            }
+        }
+        if (i == map_size)
+            continue;
+        ret = parse_stats(map[i].parameters, map[i].num_parameters,
+                          &list[map[i].stat * MAX_RPM_PARAMS], fp);
+        if (ret < 0)
+            break;
+    }
+    free(line);
+    fclose(fp);
+    return ret;
+}
 
-    .init = power_init,
-    .powerHint = power_hint,
-    .setInteractive = set_interactive,
-    .setFeature = set_feature,
-};
+int extract_wlan_stats(uint64_t *list) {
+    return extract_stats(list, WLAN_POWER_STAT, wlan_stat_map, ARRAY_SIZE(wlan_stat_map));
+}
