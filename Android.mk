@@ -1,3 +1,5 @@
+ifeq ($(call my-dir),$(call project-path-for,qcom-power))
+
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(call is-vendor-board-platform,QCOM),true)
@@ -87,5 +89,7 @@ LOCAL_CFLAGS += -Wno-unused-parameter -Wno-unused-variable
 LOCAL_VENDOR_MODULE := true
 LOCAL_HEADER_LIBRARIES := libhardware_headers
 include $(BUILD_SHARED_LIBRARY)
+
+endif
 
 endif
