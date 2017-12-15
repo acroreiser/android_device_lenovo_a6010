@@ -529,9 +529,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-threads=4 \
     dalvik.vm.madvise-random=true \
     ro.vendor.qti.am.reschedule_service=true \
-    persist.sys.scrollingcache=0 \
     dalvik.vm.isa.arm.features=div \
     persist.sys.dalvik.vm.lib.2=libart.so
+
+# Improve scrolling
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.scrollingcache=0 \
+    ro.min.fling_velocity=160 \
+    ro.max.fling_velocity=20000
 
 # Low Memory Killer
 PRODUCT_PROPERTY_OVERRIDES += \
