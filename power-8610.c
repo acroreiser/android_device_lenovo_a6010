@@ -49,7 +49,7 @@
 
 static int display_hint_sent;
 
-int power_hint_override(struct power_module *module, power_hint_t hint, void *data)
+int power_hint_override(power_hint_t hint, void *data)
 {
     switch(hint) {
         case POWER_HINT_INTERACTION:

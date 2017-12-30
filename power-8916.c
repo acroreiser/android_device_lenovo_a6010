@@ -89,8 +89,7 @@ static int is_target_8916() /* Returns value=8916 if target is 8916 else value 0
     return is_target_8916;
 }
 
-int  power_hint_override(struct power_module *module, power_hint_t hint,
-        void *data)
+int  power_hint_override(power_hint_t hint, void *data)
 {
 
     switch(hint) {
@@ -114,7 +113,7 @@ int  power_hint_override(struct power_module *module, power_hint_t hint,
 return HINT_NONE;
 }
 
-int  set_interactive_override(struct power_module *module, int on)
+int  set_interactive_override(int on)
 {
     char governor[80];
     char tmp_str[NODE_MAX];

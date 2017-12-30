@@ -54,8 +54,7 @@ static int video_encode_hint_sent;
 
 static void process_video_encode_hint(void *metadata);
 
-int  power_hint_override(struct power_module *module, power_hint_t hint,
-        void *data)
+int  power_hint_override(power_hint_t hint, void *data)
 {
 
     switch(hint) {
@@ -70,7 +69,7 @@ int  power_hint_override(struct power_module *module, power_hint_t hint,
     return HINT_NONE;
 }
 
-int  set_interactive_override(struct power_module *module, int on)
+int  set_interactive_override(int on)
 {
     char governor[80];
     char tmp_str[NODE_MAX];
