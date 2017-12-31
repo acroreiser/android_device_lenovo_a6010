@@ -42,6 +42,7 @@ void unvote_ondemand_sdf_low();
 void perform_hint_action(int hint_id, int resource_values[],
     int num_resources);
 void undo_hint_action(int hint_id);
+void undo_initial_hint_action();
 void release_request(int lock_handle);
 int interaction_with_handle(int lock_handle, int duration, int num_args, int opt_list[]);
 int perf_hint_enable(int hint_id, int duration);

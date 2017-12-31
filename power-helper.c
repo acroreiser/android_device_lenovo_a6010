@@ -292,14 +292,12 @@ void power_hint(power_hint_t hint, void *data)
     }
 
     switch(hint) {
-        case POWER_HINT_VSYNC:
-        break;
         case POWER_HINT_SUSTAINED_PERFORMANCE:
             ALOGI("Sustained perf power hint not handled in power_hint_override");
-            break;
+        break;
         case POWER_HINT_VR_MODE:
             ALOGI("VR mode power hint not handled in power_hint_override");
-            break;
+        break;
         case POWER_HINT_INTERACTION:
         {
             int resources[] = {0x702, 0x20F, 0x30F};
@@ -313,6 +311,8 @@ void power_hint(power_hint_t hint, void *data)
         break;
         case POWER_HINT_VIDEO_DECODE:
             process_video_decode_hint(data);
+        break;
+        default:
         break;
     }
 }
