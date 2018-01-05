@@ -10,6 +10,7 @@ on init
     chmod 0664 /sys/class/leds/red/trigger
 
 service vendor.light-hal-2-0 /vendor/bin/hw/android.hardware.light@2.0-service.msm8916
+    interface android.hardware.light@2.0::ILight default
     class hal
     user system
     group system
