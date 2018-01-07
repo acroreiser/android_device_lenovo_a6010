@@ -1,4 +1,4 @@
-on enable-low-power
+on init
 
     # HMP scheduler settings
     write /proc/sys/kernel/sched_ravg_hist_size 3
