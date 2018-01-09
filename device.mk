@@ -52,6 +52,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.renderer=opengl \
     debug.egl.hw=1 \
     debug.sf.disable_hwc=0 \
+    debug.sf.recomputecrop=0 \
     persist.hwc.mdpcomp.enable=true \
     persist.hwc.ptor.enable=true \
     debug.sf.gpu_comp_tiling=1 \
@@ -347,7 +348,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep
-
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
