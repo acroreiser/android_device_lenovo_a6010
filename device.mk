@@ -54,6 +54,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     debug.sf.disable_backpressure=1 \
     debug.cpurend.vsync=false \
+    debug.sf.recomputecrop=0 \
     persist.debug.wfdenable=1 \
     persist.sys.wfd.virtual=1
 
