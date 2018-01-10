@@ -103,8 +103,15 @@ static const char *rpm_master_param_names[] = {
     "xo_accumulated_duration",
     "xo_count"
 };
+
+static const char *wlan_param_names[] = {
+    "cumulative_sleep_time_ms",
+    "cumulative_total_on_time_ms",
+    "deep_sleep_enter_counter",
+    "last_deep_sleep_enter_tstamp_ms"
+};
 #else
-/* Use these stats on nougat and forward */
+/* Use these stats on nougat kernels and forward */
 const char *rpm_stat_params[MAX_RPM_PARAMS] = {
     "count",
     "actual last sleep(msec)",
@@ -660,9 +667,9 @@ int extract_platform_stats(uint64_t *list) {
 #ifndef V1_0_HAL
 int extract_wlan_stats(uint64_t *list) {
     int ret;
-    ret = extract_stats(list, WLAN_POWER_STAT, wlan_param_names, WLAN_PARAM_COUNT, false);
+    ret = extract_stats(list, WLAN_POWER_STAT, wlan_param_names, WLAN_POWER_PARAMS_COUNT, false);
     if (ret) {
-        for (size_t i=0; i < WLAN_PARAM_COUNT; i++)
+        for (size_t i=0; i < WLAN_POWER_PARAMS_COUNT; i++)
             list[i] = 0;
     }
     return 0;
