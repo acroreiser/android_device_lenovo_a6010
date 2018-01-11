@@ -1,7 +1,7 @@
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl.a6000 \
-    camera.device@1.0-impl.a6000 \
+    android.hardware.camera.provider@2.4-impl \
+    camera.device@3.2-impl \
     camera.msm8916 \
     libmm-qcamera \
     libshim_atomic \
