@@ -35,4 +35,13 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="hidl">
+        <name>android.hardware.camera</name>
+        <transport arch="32">passthrough</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>legacy/1</instance>
+        </interface>
+    </hal>
 </manifest>
