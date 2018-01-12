@@ -168,6 +168,9 @@
         <item>"/data/dalvik-cache/arm64/system@framework@services.jar@classes.vdex"</item>
     </string-array>
 
+    <!-- Should the pinner service pin the Camera application? -->
+    <bool name="config_pinnerCameraApp">true</bool>
+
     <!-- Flag indicating which package name can access the persistent data partition -->
     <string name="config_persistentDataPackageName" translatable="false">com.google.android.gms</string>
 
