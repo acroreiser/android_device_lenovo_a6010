@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2017-2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -132,6 +133,7 @@ int extract_platform_stats(uint64_t *list);
 #ifndef V1_0_HAL
 int extract_wlan_stats(uint64_t *list);
 #endif
+int __attribute__ ((weak)) get_number_of_profiles();
 
 #ifdef __cplusplus
 }

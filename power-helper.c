@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
  * Copyright (C) 2017 The Android Open Source Project
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2017-2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -81,7 +81,6 @@
 #endif
 #endif
 
-#define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
 #define LINE_SIZE 128
 
 #ifdef LEGACY_STATS
@@ -319,9 +318,17 @@ void power_hint(power_hint_t hint, void *data)
         case POWER_HINT_VIDEO_DECODE:
             process_video_decode_hint(data);
         break;
+        case POWER_HINT_SET_PROFILE:
+            ALOGI("set profile power hint not handled in power_hint_override");
+        break;
         default:
         break;
     }
+}
+
+int get_number_of_profiles()
+{
+    return 0;
 }
 
 int __attribute__ ((weak)) set_interactive_override(int UNUSED(on))

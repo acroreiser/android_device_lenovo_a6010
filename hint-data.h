@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2012, 2013, 2015, 2017, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -51,6 +52,7 @@
 
 #define VR_MODE_SUSTAINED_PERF_HINT    (0x1301)
 
+#define DEFAULT_PROFILE_HINT_ID         (0xFF00)
 
 struct hint_data {
     unsigned long hint_id; /* This is our key. */

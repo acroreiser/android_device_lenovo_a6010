@@ -1,5 +1,5 @@
 # Copyright (C) 2017 The Android Open Source Project
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2017-2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -137,6 +137,7 @@ LOCAL_MODULE := android.hardware.power@1.1-service-qti
 LOCAL_INIT_RC := android.hardware.power@1.1-service-qti.rc
 LOCAL_SHARED_LIBRARIES += android.hardware.power@1.1
 endif
+LOCAL_SHARED_LIBRARIES += vendor.lineage.power@1.0
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := qcom
 LOCAL_VENDOR_MODULE := true
