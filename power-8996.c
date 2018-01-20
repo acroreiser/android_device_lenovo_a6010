@@ -120,6 +120,103 @@ static void set_power_profile(int profile) {
     current_power_profile = profile;
 }
 
+#define CHECK_HANDLE(x) ((x)>0)
+#define NUM_PERF_MODES  3
+
+typedef enum {
+    NORMAL_MODE       = 0,
+    SUSTAINED_MODE    = 1,
+    VR_MODE           = 2,
+    VR_SUSTAINED_MODE = (SUSTAINED_MODE|VR_MODE),
+    INVALID_MODE      = 0xFF
+} perf_mode_type_t;
+
+typedef struct perf_mode {
+    perf_mode_type_t type;
+    int perf_hint_id;
+} perf_mode_t;
+
+perf_mode_t perf_modes[NUM_PERF_MODES] = {
+    { SUSTAINED_MODE, SUSTAINED_PERF_HINT },
+    { VR_MODE, VR_MODE_HINT },
+    { VR_SUSTAINED_MODE, VR_MODE_SUSTAINED_PERF_HINT }
+};
+
+static int current_mode = NORMAL_MODE;
+
+static inline  int get_perfd_hint_id(perf_mode_type_t type) {
+    int i;
+    for (i = 0; i < NUM_PERF_MODES; i++) {
+        if (perf_modes[i].type == type) {
+            ALOGD("Hint id is 0x%x for mode 0x%x", perf_modes[i].perf_hint_id, type);
+            return perf_modes[i].perf_hint_id;
+        }
+    }
+    ALOGD("Couldn't find the hint for mode 0x%x", type);
+    return 0;
+}
+
+static int switch_mode(perf_mode_type_t mode) {
+
+    int hint_id = 0;
+    static int perfd_mode_handle = -1;
+
+    // release existing mode if any
+    if (CHECK_HANDLE(perfd_mode_handle)) {
+        ALOGD("Releasing handle 0x%x", perfd_mode_handle);
+        release_request(perfd_mode_handle);
+        perfd_mode_handle = -1;
+    }
+    // switch to a perf mode
+    hint_id = get_perfd_hint_id(mode);
+    if (hint_id != 0) {
+        perfd_mode_handle = perf_hint_enable(hint_id, 0);
+        if (!CHECK_HANDLE(perfd_mode_handle)) {
+            ALOGE("Failed perf_hint_interaction for mode: 0x%x", mode);
+            return -1;
+        }
+        ALOGD("Acquired handle 0x%x", perfd_mode_handle);
+    }
+    return 0;
+}
+
+static int process_perf_hint(void *data, perf_mode_type_t mode) {
+
+    // enable
+    if (*(int32_t *)data){
+        ALOGI("Enable request for mode: 0x%x", mode);
+        // check if mode is current mode
+        if ( current_mode & mode ) {
+            ALOGD("Mode 0x%x already enabled", mode);
+            return HINT_HANDLED;
+        }
+        // enable requested mode
+        if ( 0 != switch_mode(current_mode | mode)) {
+            ALOGE("Couldn't enable mode 0x%x", mode);
+            return HINT_NONE;
+        }
+        current_mode |= mode;
+        ALOGI("Current mode is 0x%x", current_mode);
+    // disable
+    } else {
+        ALOGI("Disable request for mode: 0x%x", mode);
+        // check if mode is enabled
+        if ( !(current_mode & mode) ) {
+            ALOGD("Mode 0x%x already disabled", mode);
+            return HINT_HANDLED;
+        }
+        //disable requested mode
+        if ( 0 != switch_mode(current_mode & ~mode)) {
+            ALOGE("Couldn't disable mode 0x%x", mode);
+            return HINT_NONE;
+        }
+        current_mode &= ~mode;
+        ALOGI("Current mode is 0x%x", current_mode);
+    }
+
+    return HINT_HANDLED;
+}
+
 static int process_video_encode_hint(void *metadata)
 {
     char governor[80];
@@ -178,6 +275,12 @@ int power_hint_override(power_hint_t hint, void *data)
     switch(hint) {
         case POWER_HINT_VIDEO_ENCODE:
             ret_val = process_video_encode_hint(data);
+            break;
+        case POWER_HINT_SUSTAINED_PERFORMANCE:
+            ret_val = process_perf_hint(data, SUSTAINED_MODE);
+            break;
+        case POWER_HINT_VR_MODE:
+            ret_val = process_perf_hint(data, VR_MODE);
             break;
         default:
             break;
