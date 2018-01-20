@@ -49,8 +49,6 @@
 #include "performance.h"
 #include "power-common.h"
 
-static int video_encode_hint_sent;
-
 static int current_power_profile = PROFILE_BALANCED;
 
 static int profile_high_performance[] = {
@@ -125,60 +123,55 @@ static void set_power_profile(int profile)
     current_power_profile = profile;
 }
 
-static void process_video_encode_hint(void *metadata)
+static int process_video_encode_hint(void *metadata)
 {
     char governor[80];
     struct video_encode_metadata_t video_encode_metadata;
+    static int video_encode_handle = 0;
+
+    if (!metadata) {
+        return HINT_NONE;
+    }
 
     if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
         if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
             if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
                 if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU3) == -1) {
                     ALOGE("Can't obtain scaling governor.");
-                    return;
+                    return HINT_NONE;
                 }
             }
         }
     }
 
-    if (!metadata) {
-        return;
-    }
-
-    /* Initialize encode metadata struct fields. */
+    /* Initialize encode metadata struct fields */
     memset(&video_encode_metadata, 0, sizeof(struct video_encode_metadata_t));
     video_encode_metadata.state = -1;
-    video_encode_metadata.hint_id = DEFAULT_VIDEO_ENCODE_HINT_ID;
 
-    if (parse_video_encode_metadata((char *)metadata,
-            &video_encode_metadata) == -1) {
+    if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) == -1) {
         ALOGE("Error occurred while parsing metadata.");
-        return;
+        return HINT_NONE;
     }
 
     if (video_encode_metadata.state == 1) {
         if (is_interactive_governor(governor)) {
-            int resource_values[] = {
-                INT_OP_CLUSTER0_USE_SCHED_LOAD, 0x1,
-                INT_OP_CLUSTER0_USE_MIGRATION_NOTIF, 0x1,
-                INT_OP_CLUSTER0_TIMER_RATE, BIG_LITTLE_TR_MS_40,
-            };
-            if (!video_encode_hint_sent) {
-                perform_hint_action(video_encode_metadata.hint_id,
-                        resource_values, ARRAY_SIZE(resource_values));
-                video_encode_hint_sent = 1;
-            }
+            video_encode_handle = perf_hint_enable(
+                    VIDEO_ENCODE_HINT, 0);
+            return HINT_HANDLED;
         }
     } else if (video_encode_metadata.state == 0) {
         if (is_interactive_governor(governor)) {
-            undo_hint_action(video_encode_metadata.hint_id);
-            video_encode_hint_sent = 0;
+            release_request(video_encode_handle);
+            return HINT_HANDLED;
         }
     }
+    return HINT_NONE;
 }
 
 int power_hint_override(power_hint_t hint, void *data)
 {
+    int ret_val = HINT_NONE;
+
     if (hint == POWER_HINT_SET_PROFILE) {
         set_power_profile(*(int32_t *)data);
         return HINT_HANDLED;
@@ -194,12 +187,12 @@ int power_hint_override(power_hint_t hint, void *data)
         case POWER_HINT_VSYNC:
             break;
         case POWER_HINT_VIDEO_ENCODE:
-            process_video_encode_hint(data);
-            return HINT_HANDLED;
+            ret_val = process_video_encode_hint(data);
+            break;
         default:
             break;
     }
-    return HINT_NONE;
+    return ret_val;
 }
 
 int set_interactive_override(int on)
