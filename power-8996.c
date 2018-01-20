@@ -124,6 +124,11 @@ static int process_video_encode_hint(void *metadata)
 {
     char governor[80];
     struct video_encode_metadata_t video_encode_metadata;
+    static int video_encode_handle = 0;
+
+    if (!metadata) {
+        return HINT_NONE;
+    }
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
@@ -134,58 +139,21 @@ static int process_video_encode_hint(void *metadata)
     /* Initialize encode metadata struct fields */
     memset(&video_encode_metadata, 0, sizeof(struct video_encode_metadata_t));
     video_encode_metadata.state = -1;
-    video_encode_metadata.hint_id = DEFAULT_VIDEO_ENCODE_HINT_ID;
 
-    if (metadata) {
-        if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) ==
-            -1) {
-            ALOGE("Error occurred while parsing metadata.");
-            return HINT_NONE;
-        }
-    } else {
+    if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) == -1) {
+        ALOGE("Error occurred while parsing metadata.");
         return HINT_NONE;
     }
 
     if (video_encode_metadata.state == 1) {
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
-            /* 1. cpufreq params
-             *    -above_hispeed_delay for LVT - 40ms
-             *    -go hispeed load for LVT - 95
-             *    -hispeed freq for LVT - 556 MHz
-             *    -target load for LVT - 90
-             *    -above hispeed delay for sLVT - 40ms
-             *    -go hispeed load for sLVT - 95
-             *    -hispeed freq for sLVT - 806 MHz
-             *    -target load for sLVT - 90
-             * 2. bus DCVS set to V2 config:
-             *    -low power ceil mpbs - 2500
-             *    -low power io percent - 50
-             * 3. hysteresis optimization
-             *    -bus dcvs hysteresis tuning
-             *    -sample_ms of 10 ms
-             *    -sLVT hispeed freq to 806MHz
-             */
-            int resource_values[] = {0x41400000, 0x4, 0x41410000, 0x5F, 0x41414000, 0x326,
-                0x41420000, 0x5A, 0x41400100, 0x4, 0x41410100, 0x5F, 0x41414100, 0x22C, 0x41420100, 0x5A,
-                0x41810000, 0x9C4, 0x41814000, 0x32, 0x4180C000, 0x0, 0x41820000, 0xA};
-
-            camera_hint_ref_count++;
-            if (camera_hint_ref_count == 1) {
-                perform_hint_action(video_encode_metadata.hint_id,
-                        resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
-            }
-            ALOGI("Video Encode hint start");
+        if (is_interactive_governor(governor)) {
+            video_encode_handle = perf_hint_enable(
+                    VIDEO_ENCODE_HINT, 0);
             return HINT_HANDLED;
         }
     } else if (video_encode_metadata.state == 0) {
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
-            camera_hint_ref_count--;
-            if (!camera_hint_ref_count) {
-                undo_hint_action(video_encode_metadata.hint_id);
-            }
-
+        if (is_interactive_governor(governor)) {
+            release_request(video_encode_handle);
             ALOGI("Video Encode hint stop");
             return HINT_HANDLED;
         }
@@ -230,8 +198,7 @@ int set_interactive_override(int on)
 
     if (!on) {
         /* Display off */
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-            (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
             int resource_values[] = {}; /* dummy node */
             if (!display_hint_sent) {
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
@@ -243,8 +210,7 @@ int set_interactive_override(int on)
         }
     } else {
         /* Display on */
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-            (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
             display_hint_sent = 0;
             ALOGI("Display Off hint stop");
