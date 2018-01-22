@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -51,6 +52,144 @@ static int display_hint_sent;
 static int display_hint2_sent;
 static int first_display_off_hint;
 extern int display_boost;
+
+static int current_power_profile = PROFILE_BALANCED;
+
+static int profile_high_performance[] = {
+    CPUS_ONLINE_MIN_4,
+    0x0901,
+    CPU0_MIN_FREQ_TURBO_MAX,
+    CPU1_MIN_FREQ_TURBO_MAX,
+    CPU2_MIN_FREQ_TURBO_MAX,
+    CPU3_MIN_FREQ_TURBO_MAX
+};
+
+static int profile_power_save[] = {
+    0x0A03,
+    CPUS_ONLINE_MAX_LIMIT_2,
+    CPU0_MAX_FREQ_NONTURBO_MAX,
+    CPU1_MAX_FREQ_NONTURBO_MAX,
+    CPU2_MAX_FREQ_NONTURBO_MAX,
+    CPU3_MAX_FREQ_NONTURBO_MAX
+};
+
+static int profile_bias_power[] = {
+    0x0A03,
+    CPU0_MAX_FREQ_NONTURBO_MAX,
+    CPU1_MAX_FREQ_NONTURBO_MAX,
+    CPU1_MAX_FREQ_NONTURBO_MAX,
+    CPU2_MAX_FREQ_NONTURBO_MAX
+};
+
+static int profile_bias_performance[] = {
+    CPU0_MIN_FREQ_NONTURBO_MAX + 1,
+    CPU1_MIN_FREQ_NONTURBO_MAX + 1,
+    CPU2_MIN_FREQ_NONTURBO_MAX + 1,
+    CPU2_MIN_FREQ_NONTURBO_MAX + 1
+};
+
+int get_number_of_profiles() {
+    return 5;
+}
+
+static void set_power_profile(int profile) {
+
+    if (profile == current_power_profile)
+        return;
+
+    ALOGV("%s: Profile=%d", __func__, profile);
+
+    if (current_power_profile != PROFILE_BALANCED) {
+        undo_hint_action(DEFAULT_PROFILE_HINT_ID);
+        ALOGV("%s: Hint undone", __func__);
+    }
+
+    if (profile == PROFILE_POWER_SAVE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_power_save,
+                ARRAY_SIZE(profile_power_save));
+        ALOGD("%s: Set powersave mode", __func__);
+
+    } else if (profile == PROFILE_HIGH_PERFORMANCE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_high_performance,
+                ARRAY_SIZE(profile_high_performance));
+        ALOGD("%s: Set performance mode", __func__);
+
+    } else if (profile == PROFILE_BIAS_POWER) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_power,
+                ARRAY_SIZE(profile_bias_power));
+        ALOGD("%s: Set bias power mode", __func__);
+
+    } else if (profile == PROFILE_BIAS_PERFORMANCE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_performance,
+                ARRAY_SIZE(profile_bias_performance));
+        ALOGD("%s: Set bias perf mode", __func__);
+
+    }
+
+    current_power_profile = profile;
+}
+
+void interaction(int duration, int num_args, int opt_list[]);
+
+int power_hint_override(power_hint_t hint, void *data)
+{
+    if (hint == POWER_HINT_SET_PROFILE) {
+        set_power_profile(*(int32_t *)data);
+        return HINT_HANDLED;
+    }
+
+    // Skip other hints in high/low power modes
+    if (current_power_profile == PROFILE_POWER_SAVE ||
+            current_power_profile == PROFILE_HIGH_PERFORMANCE) {
+        return HINT_HANDLED;
+    }
+
+    if (hint == POWER_HINT_LAUNCH) {
+        int duration = 2000;
+        int resources[] = { CPUS_ONLINE_MIN_3,
+            CPU0_MIN_FREQ_TURBO_MAX, CPU1_MIN_FREQ_TURBO_MAX,
+            CPU2_MIN_FREQ_TURBO_MAX, CPU3_MIN_FREQ_TURBO_MAX };
+
+        interaction(duration, ARRAY_SIZE(resources), resources);
+
+        return HINT_HANDLED;
+    }
+
+    if (hint == POWER_HINT_INTERACTION) {
+        int duration = 500, duration_hint = 0;
+        static struct timespec s_previous_boost_timespec;
+        struct timespec cur_boost_timespec;
+        long long elapsed_time;
+
+        if (data) {
+            duration_hint = *((int *)data);
+        }
+
+        duration = duration_hint > 0 ? duration_hint : 500;
+
+        clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
+        elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
+        if (elapsed_time > 750000)
+            elapsed_time = 750000;
+        // don't hint if it's been less than 250ms since last boost
+        // also detect if we're doing anything resembling a fling
+        // support additional boosting in case of flings
+        else if (elapsed_time < 250000 && duration <= 750)
+            return HINT_HANDLED;
+
+        s_previous_boost_timespec = cur_boost_timespec;
+
+        int resources[] = { (duration >= 2000 ? CPUS_ONLINE_MIN_3 : CPUS_ONLINE_MIN_2),
+            0x20F, 0x30F, 0x40F, 0x50F };
+
+        if (duration)
+            interaction(duration, ARRAY_SIZE(resources), resources);
+
+        return HINT_HANDLED;
+    }
+
+    return HINT_NONE;
+}
 
 int set_interactive_override(int on)
 {
