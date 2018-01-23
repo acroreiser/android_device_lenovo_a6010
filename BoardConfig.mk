@@ -14,6 +14,7 @@
 # limitations under the License.
 
 DEVICE_PATH := device/lenovo/a6000
+FORCE_32_BIT := true
 
 include device/lenovo/msm8916-common/BoardConfigCommon.mk
 
