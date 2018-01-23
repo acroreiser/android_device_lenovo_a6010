@@ -1,5 +1,3 @@
-ifeq ($(TARGET_DEVICE),wt88047)
-
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -68,5 +66,3 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)
 LOCAL_SRC_FILES := calmodule.cfg
 
 include $(BUILD_PREBUILT)
-
-endif
