@@ -1,3 +1,5 @@
+ifeq ($(TARGET_DEVICE),wt88047)
+
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -53,7 +55,7 @@ LOCAL_SRC_FILES := \
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_MODULE_RELATIVE_PATH := $(TARGET_OUT_VENDOR)/lib
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -66,3 +68,5 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)
 LOCAL_SRC_FILES := calmodule.cfg
 
 include $(BUILD_PREBUILT)
+
+endif
