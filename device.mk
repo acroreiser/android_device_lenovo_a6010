@@ -690,4 +690,7 @@ PRODUCT_COPY_FILES += \
 # Inherit common Android Go defaults.
 $(call inherit-product, build/make/target/product/go_defaults.mk)
 
+# Device was launched with L
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
+
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
