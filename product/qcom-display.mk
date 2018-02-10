@@ -13,10 +13,6 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     memtrack.msm8916
 
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
-
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=c2d \
