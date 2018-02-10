@@ -75,9 +75,6 @@ on property:sys.sensors.acc=*
     start calibacc
 
 on property:sys.boot_completed=1
-    restart ril-daemon
-    restart ril-daemon1
-    restart netmgrd
     swapon_all fstab.qcom
     write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
     write /sys/module/process_reclaim/parameters/pressure_max 70
