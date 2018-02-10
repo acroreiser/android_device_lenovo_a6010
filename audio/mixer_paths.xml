@@ -49,8 +49,8 @@
     <ctl name="Voip Evrc Min Max Rate Config" id="1" value="4" />
     <ctl name="Voip Dtx Mode" value="0" />
     <ctl name="TTY Mode" value="Off" />
-    <ctl name="HPHL Volume" value="12" />
-    <ctl name="HPHR Volume" value="12" />
+    <ctl name="HPHL Volume" value="9" />
+    <ctl name="HPHR Volume" value="9" />
     <ctl name="RX1 Digital Volume" value="91" />
     <ctl name="RX2 Digital Volume" value="91" />
     <ctl name="RX3 Digital Volume" value="91" />
@@ -568,8 +568,6 @@
     <path name="speaker-mic">
         <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
-        <ctl name="ADC1 Volume" value="18" />
-        <ctl name="DEC1 Volume" value="92" />
     </path>
 
     <path name="handset">
@@ -583,8 +581,6 @@
     <path name="handset-mic">
         <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
-        <ctl name="ADC1 Volume" value="18" />
-        <ctl name="DEC1 Volume" value="92" />
     </path>
 
     <path name="headphones">
@@ -594,7 +590,6 @@
         <ctl name="RDAC2 MUX" value="RX2" />
         <ctl name="HPHL" value="Switch" />
         <ctl name="HPHR" value="Switch" />
-	<ctl name="Lineout_1 amp" value="DISABLE" />
     </path>
 
     <path name="headset-mic">
@@ -602,8 +597,6 @@
         <ctl name="ADC2 MUX" value="INP2" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
         <ctl name="MICBIAS CAPLESS Switch" value="1" />
-        <ctl name="ADC1 Volume" value="18" />
-        <ctl name="DEC1 Volume" value="92" />
     </path>
 
     <path name="sidetone-iir">
@@ -797,14 +790,6 @@
 
     <path name="listen-handset-mic">
         <path name="adc1" />
-    </path>
-
-    <path name="unprocessed-handset-mic">
-        <path name="handset-mic" />
-    </path>
-
-    <path name="unprocessed-mic">
-        <path name="unprocessed-handset-mic" />
     </path>
 
     <path name="ADSP testfwk">
