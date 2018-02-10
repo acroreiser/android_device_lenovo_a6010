@@ -40,6 +40,10 @@ on boot
     chown root system /sys/class/power_supply/bms/voltage_ocv
     chmod 0664 /sys/class/power_supply/bms/current_now
     chmod 0664 /sys/class/power_supply/bms/voltage_ocv
+    chown system system /sys/class/sensors/proximity/enable
+    chmod 0660 /sys/class/sensors/proximity/enable
+    chown system system /sys/class/sensors/light/enable
+    chmod 0660 /sys/class/sensors/light/enable
 
 service vm_bms /system/bin/vm_bms
     class core
