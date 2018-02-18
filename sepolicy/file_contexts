@@ -1,0 +1,2 @@
+# Shell files
+/system/vendor/bin/init\.qcom\.mem\.sh               u:object_r:qti_init_shell_exec:s0
