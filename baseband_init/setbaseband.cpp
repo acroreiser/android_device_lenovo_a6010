@@ -178,6 +178,14 @@ err_ret:
     return ret;
 }
 
+
+int is2GB()
+{
+    struct sysinfo sys;
+    sysinfo(&sys);
+    return sys.totalram > 1024ull * 1024 * 1024;
+}
+
 void init_target_properties()
 {
     char modem_version[IMG_VER_BUF_LEN];
@@ -185,7 +193,22 @@ void init_target_properties()
     rc = get_img_version(modem_version, IMG_VER_BUF_LEN);
     if (!rc) {
         property_override("gsm.version.baseband", modem_version);
-       // printf("Detected modem version=%s\n", modem_version);
 }
 
+    if (is2GB()) {
+	property_override("dalvik.vm.heapgrowthlimit", "192m");
+}
+    else {
+	/*
+	 * Set Go Properties for 1GB ram devices
+	 * Properties taken from build/target/product/go_defaults_common.mk
+	 */
+	property_override("dalvik.vm.heapgrowthlimit", "128m");
+	property_override("ro.config.low_ram", "true");
+	property_override("ro.lmk.critical_upgrade", "true");
+        property_override("ro.lmk.upgrade_pressure", "40");
+	property_override("pm.dexopt.downgrade_after_inactive_days", "10");
+	property_override("pm.dexopt.shared", "quicken");
+}
 } //Final
+
