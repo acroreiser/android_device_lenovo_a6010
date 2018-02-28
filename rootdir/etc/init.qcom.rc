@@ -57,6 +57,7 @@ on fs
 # msm specific files that need to be created on /data
 on post-fs-data
 
+    mount none /system/vendor/lib/libfacenet-32.so /system/lib/libfacenet.so bind
     mkdir /data/fdAlbum 0770 camera camera
     mkdir /data/misc/camera 0770 camera camera
 
