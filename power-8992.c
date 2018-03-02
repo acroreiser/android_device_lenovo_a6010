@@ -76,8 +76,7 @@ static int process_video_encode_hint(void *metadata)
     }
 
     if (video_encode_metadata.state == 1) {
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
             /* sched and cpufreq params
              * hispeed freq - 768 MHz
              * target load - 90
@@ -91,8 +90,7 @@ static int process_video_encode_hint(void *metadata)
             return HINT_HANDLED;
         }
     } else if (video_encode_metadata.state == 0) {
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
             undo_hint_action(video_encode_metadata.hint_id);
             return HINT_HANDLED;
         }
@@ -125,8 +123,7 @@ int set_interactive_override(int on)
 
     if (!on) {
         /* Display off */
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-            (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
             int resource_values[] = {0x777}; /* 4+0 core config in display off */
             if (!display_hint_sent) {
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
@@ -137,8 +134,7 @@ int set_interactive_override(int on)
         }
     } else {
         /* Display on */
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-            (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
             display_hint_sent = 0;
             return HINT_HANDLED;

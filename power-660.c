@@ -119,8 +119,7 @@ int  set_interactive_override(int on)
 
     if (!on) {
         /* Display off. */
-             if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
              /*
                  1. CPUfreq params
                         - hispeed freq for big - 1113Mhz
@@ -161,17 +160,14 @@ int  set_interactive_override(int on)
                    resource_values, num_resources);
                   display_hint_sent = 1;
                 }
-             }
-
+        }
     } else {
         /* Display on. */
-          if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
-
+        if (is_interactive_governor(governor)) {
              undo_hint_action(DISPLAY_STATE_HINT_ID);
              display_hint_sent = 0;
-          }
-   }
+        }
+    }
     saved_interactive_mode = !!on;
     return HINT_HANDLED;
 }
@@ -218,9 +214,7 @@ static void process_video_encode_hint(void *metadata)
     }
 
     if (video_encode_metadata.state == 1) {
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR,
-            strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-            (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
              /*
                  1. CPUfreq params
                         - hispeed freq for big - 1113Mhz
@@ -268,9 +262,7 @@ static void process_video_encode_hint(void *metadata)
            }
         }
     } else if (video_encode_metadata.state == 0) {
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR,
-            strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-            (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
             camera_hint_ref_count--;
             if (!camera_hint_ref_count) {
                 undo_hint_action(video_encode_metadata.hint_id);

@@ -76,15 +76,13 @@ static void process_video_encode_hint(void *metadata)
     }
 
     if (video_encode_metadata.state == 1) {
-        if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
             int resource_values[] = {HS_FREQ_800, THREAD_MIGRATION_SYNC_OFF};
             perform_hint_action(video_encode_metadata.hint_id,
                     resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
         }
     } else if (video_encode_metadata.state == 0) {
-         if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        if (is_interactive_governor(governor)) {
            undo_hint_action(video_encode_metadata.hint_id);
         }
     }

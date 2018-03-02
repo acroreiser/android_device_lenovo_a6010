@@ -211,8 +211,7 @@ static void process_video_decode_hint(void *metadata)
 
             perform_hint_action(video_decode_metadata.hint_id,
                     resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
-        } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        } else if (is_interactive_governor(governor)) {
             int resource_values[] = {TR_MS_30, HISPEED_LOAD_90, HS_FREQ_1026, THREAD_MIGRATION_SYNC_OFF};
 
             perform_hint_action(video_decode_metadata.hint_id,
@@ -221,8 +220,7 @@ static void process_video_decode_hint(void *metadata)
     } else if (video_decode_metadata.state == 0) {
         if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
-        } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        } else if (is_interactive_governor(governor)) {
             undo_hint_action(video_decode_metadata.hint_id);
         }
     }
@@ -261,8 +259,7 @@ static void process_video_encode_hint(void *metadata)
 
             perform_hint_action(video_encode_metadata.hint_id,
                 resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
-        } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        } else if (is_interactive_governor(governor)) {
             int resource_values[] = {TR_MS_30, HISPEED_LOAD_90, HS_FREQ_1026, THREAD_MIGRATION_SYNC_OFF,
                 INTERACTIVE_IO_BUSY_OFF};
 
@@ -273,8 +270,7 @@ static void process_video_encode_hint(void *metadata)
         if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
                 (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
             undo_hint_action(video_encode_metadata.hint_id);
-        } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        } else if (is_interactive_governor(governor)) {
             undo_hint_action(video_encode_metadata.hint_id);
         }
     }
@@ -382,8 +378,7 @@ void power_set_interactive(int on)
                         resource_values, sizeof(resource_values)/sizeof(resource_values[0]));
                 display_hint_sent = 1;
             }
-        } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        } else if (is_interactive_governor(governor)) {
             int resource_values[] = {TR_MS_50, THREAD_MIGRATION_SYNC_OFF};
 
             if (!display_hint_sent) {
@@ -493,8 +488,7 @@ void power_set_interactive(int on)
                 (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
             display_hint_sent = 0;
-        } else if ((strncmp(governor, INTERACTIVE_GOVERNOR, strlen(INTERACTIVE_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(INTERACTIVE_GOVERNOR))) {
+        } else if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
             display_hint_sent = 0;
         } else if ((strncmp(governor, MSMDCVS_GOVERNOR, strlen(MSMDCVS_GOVERNOR)) == 0) &&
