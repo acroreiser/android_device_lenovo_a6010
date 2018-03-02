@@ -27,7 +27,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <utils/Log.h>
+#include <log/log.h>
 
 #include "hint-data.h"
 
