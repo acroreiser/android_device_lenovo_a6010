@@ -79,9 +79,11 @@ static int profile_bias_performance[] = {
     MIN_FREQ_BIG_CORE_0, 0x578,
 };
 
+#ifdef INTERACTION_BOOST
 int get_number_of_profiles() {
     return 5;
 }
+#endif
 
 static void set_power_profile(int profile) {
 

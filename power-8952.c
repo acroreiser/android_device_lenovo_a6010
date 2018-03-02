@@ -77,10 +77,12 @@ static int profile_bias_performance[] = {
     CPU4_MIN_FREQ_NONTURBO_MAX + 1,
 };
 
+#ifdef INTERACTION_BOOST
 int get_number_of_profiles()
 {
     return 5;
 }
+#endif
 
 static void set_power_profile(int profile)
 {
