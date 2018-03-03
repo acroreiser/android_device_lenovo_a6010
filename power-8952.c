@@ -98,7 +98,7 @@ int set_interactive_override(int on)
 
             if (!display_hint_sent) {
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
-                        resource_values, ARRAY_SIZE(resource_value));
+                        resource_values, ARRAY_SIZE(resource_values));
                 display_hint_sent = 1;
             }
         } /* Perf time rate set for CORE0,CORE4 8952 target*/
