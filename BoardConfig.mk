@@ -172,7 +172,6 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 
 # Camera
 BOARD_CAMERA_SENSORS := imx219_q8n13a gc2355_8916
-TARGET_USE_VENDOR_CAMERA_EXT := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
     /system/bin/mediaserver=22 \
     /system/bin/cameraserver=22 \
