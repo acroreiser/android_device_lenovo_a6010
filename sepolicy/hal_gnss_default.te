@@ -1,0 +1,7 @@
+# /data/misc/location/xtra/useragent.txt
+allow hal_gnss_default location_data_file:file { r_file_perms setattr };
+
+# QMUXD
+allow hal_gnss_default qmuxd:unix_stream_socket connectto;
+allow hal_gnss_default qmuxd_socket:dir add_name;
+allow hal_gnss_default qmuxd_socket:sock_file { create write };
