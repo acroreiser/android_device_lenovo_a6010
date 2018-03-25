@@ -51,18 +51,12 @@
 #define MIN_FREQ_CPU0_DISP_OFF 400000
 #define MIN_FREQ_CPU0_DISP_ON  960000
 
-char scaling_min_freq[4][80] ={
+char scaling_min_freq[4][80] = {
     "sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
     "sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq",
     "sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq",
     "sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq"
 };
-
-static int saved_dcvs_cpu0_slack_max = -1;
-static int saved_dcvs_cpu0_slack_min = -1;
-static int saved_mpdecision_slack_max = -1;
-static int saved_mpdecision_slack_min = -1;
-static int slack_node_rw_failed = 0;
 
 /**
  * If target is 8916:
@@ -82,42 +76,39 @@ static bool is_target_8916(void)
     return is_8916;
 }
 
-int  power_hint_override(power_hint_t hint, void *data)
+int power_hint_override(power_hint_t hint, void *data)
 {
-
-    switch(hint) {
+    switch (hint) {
         case POWER_HINT_VSYNC:
-        break;
+            break;
         case POWER_HINT_INTERACTION:
         {
             int resources[] = {0x702, 0x20F, 0x30F};
             int duration = 3000;
 
             interaction(duration, ARRAY_SIZE(resources), resources);
+            return HINT_HANDLED;
         }
+        case POWER_HINT_VIDEO_ENCODE: /* Do nothing for encode case */
             return HINT_HANDLED;
-        case POWER_HINT_VIDEO_ENCODE: /* Do nothing for encode case  */
-            return HINT_HANDLED;
-        case POWER_HINT_VIDEO_DECODE: /*Do nothing for encode case  */
+        case POWER_HINT_VIDEO_DECODE: /* Do nothing for decode case */
             return HINT_HANDLED;
         default:
             return HINT_HANDLED;
     }
-return HINT_NONE;
+    return HINT_NONE;
 }
 
-int  set_interactive_override(int on)
+int set_interactive_override(int on)
 {
     char governor[80];
     char tmp_str[NODE_MAX];
-    struct video_encode_metadata_t video_encode_metadata;
-    int rc;
 
     ALOGI("Got set_interactive hint");
-    if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU0) == -1) {
-        if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU1) == -1) {
-            if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU2) == -1) {
-                if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU3) == -1) {
+    if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
+        if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
+            if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
+                if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU3) == -1) {
                     ALOGE("Can't obtain scaling governor.");
                     return HINT_HANDLED;
                 }
@@ -132,30 +123,27 @@ int  set_interactive_override(int on)
                 int resource_values[] = {TR_MS_50, THREAD_MIGRATION_SYNC_OFF};
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
                         resource_values, ARRAY_SIZE(resource_values));
-            } /* Perf time rate set for 8916 target*/
+            } /* Perf time rate set for 8916 target */
         /* End of display hint for 8916 */
         } else {
-             if (is_interactive_governor(governor)) {
-               int resource_values[] = {TR_MS_CPU0_50,TR_MS_CPU4_50, THREAD_MIGRATION_SYNC_OFF};
+            if (is_interactive_governor(governor)) {
+                int resource_values[] = {TR_MS_CPU0_50,TR_MS_CPU4_50, THREAD_MIGRATION_SYNC_OFF};
 
-               /* Set CPU0 MIN FREQ to 400Mhz avoid extra peak power
-                  impact in volume key press  */
-               snprintf(tmp_str, NODE_MAX, "%d", MIN_FREQ_CPU0_DISP_OFF);
-               if (sysfs_write(scaling_min_freq[0], tmp_str) != 0) {
-                   if (sysfs_write(scaling_min_freq[1], tmp_str) != 0) {
-                       if (sysfs_write(scaling_min_freq[2], tmp_str) != 0) {
-                           if (sysfs_write(scaling_min_freq[3], tmp_str) != 0) {
-                               if(!slack_node_rw_failed) {
-                                  ALOGE("Failed to write to %s",SCALING_MIN_FREQ );
-                               }
-                                rc = 1;
-                           }
-                       }
-                   }
+                /* Set CPU0 MIN FREQ to 400Mhz avoid extra peak power
+                   impact in volume key press */
+                snprintf(tmp_str, NODE_MAX, "%d", MIN_FREQ_CPU0_DISP_OFF);
+                if (sysfs_write(scaling_min_freq[0], tmp_str) != 0) {
+                    if (sysfs_write(scaling_min_freq[1], tmp_str) != 0) {
+                        if (sysfs_write(scaling_min_freq[2], tmp_str) != 0) {
+                            if (sysfs_write(scaling_min_freq[3], tmp_str) != 0) {
+                                ALOGE("Failed to write to %s", SCALING_MIN_FREQ);
+                            }
+                        }
+                    }
                 }
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
                         resource_values, ARRAY_SIZE(resource_values));
-            } /* Perf time rate set for CORE0,CORE4 8939 target*/
+            } /* Perf time rate set for CORE0,CORE4 8939 target */
         } /* End of display hint for 8939 */
     } else {
         /* Display on. */
@@ -165,19 +153,16 @@ int  set_interactive_override(int on)
             }
         } else {
             if (is_interactive_governor(governor)) {
-              /* Recovering MIN_FREQ in display ON case */
-               snprintf(tmp_str, NODE_MAX, "%d", MIN_FREQ_CPU0_DISP_ON);
-               if (sysfs_write(scaling_min_freq[0], tmp_str) != 0) {
-                   if (sysfs_write(scaling_min_freq[1], tmp_str) != 0) {
-                       if (sysfs_write(scaling_min_freq[2], tmp_str) != 0) {
-                           if (sysfs_write(scaling_min_freq[3], tmp_str) != 0) {
-                               if(!slack_node_rw_failed) {
-                                  ALOGE("Failed to write to %s",SCALING_MIN_FREQ );
-                               }
-                                rc = 1;
-                           }
-                       }
-                   }
+                /* Recovering MIN_FREQ in display ON case */
+                snprintf(tmp_str, NODE_MAX, "%d", MIN_FREQ_CPU0_DISP_ON);
+                if (sysfs_write(scaling_min_freq[0], tmp_str) != 0) {
+                    if (sysfs_write(scaling_min_freq[1], tmp_str) != 0) {
+                        if (sysfs_write(scaling_min_freq[2], tmp_str) != 0) {
+                            if (sysfs_write(scaling_min_freq[3], tmp_str) != 0) {
+                                ALOGE("Failed to write to %s", SCALING_MIN_FREQ);
+                            }
+                        }
+                    }
                 }
                 undo_hint_action(DISPLAY_STATE_HINT_ID);
             }
@@ -185,4 +170,3 @@ int  set_interactive_override(int on)
     }
     return HINT_HANDLED;
 }
-
