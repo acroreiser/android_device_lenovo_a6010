@@ -233,8 +233,7 @@ int set_interactive_override(int on)
             undo_hint_action(DISPLAY_STATE_HINT_ID_2);
         }
 
-        if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+        if (is_ondemand_governor(governor)) {
             int resource_values[] = {MS_500, SYNC_FREQ_600, OPTIMAL_FREQ_600, THREAD_MIGRATION_SYNC_OFF};
 
             perform_hint_action(DISPLAY_STATE_HINT_ID,
@@ -250,8 +249,7 @@ int set_interactive_override(int on)
                     resource_values2, ARRAY_SIZE(resource_values2));
         }
 
-        if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+        if (is_ondemand_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
 
             return HINT_HANDLED;

@@ -187,8 +187,7 @@ static void process_video_decode_hint(void *metadata)
     }
 
     if (video_decode_metadata.state == 1) {
-        if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+        if (is_ondemand_governor(governor)) {
             int resource_values[] = {THREAD_MIGRATION_SYNC_OFF};
 
             perform_hint_action(video_decode_metadata.hint_id,
@@ -200,8 +199,7 @@ static void process_video_decode_hint(void *metadata)
                     resource_values, ARRAY_SIZE(resource_values));
         }
     } else if (video_decode_metadata.state == 0) {
-        if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+        if (is_ondemand_governor(governor)) {
             undo_hint_action(video_decode_metadata.hint_id);
         } else if (is_interactive_governor(governor)) {
             undo_hint_action(video_decode_metadata.hint_id);
@@ -236,8 +234,7 @@ static void process_video_encode_hint(void *metadata)
     }
 
     if (video_encode_metadata.state == 1) {
-        if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+        if (is_ondemand_governor(governor)) {
             int resource_values[] = {IO_BUSY_OFF, SAMPLING_DOWN_FACTOR_1, THREAD_MIGRATION_SYNC_OFF};
 
             perform_hint_action(video_encode_metadata.hint_id,
@@ -250,8 +247,7 @@ static void process_video_encode_hint(void *metadata)
                     resource_values, ARRAY_SIZE(resource_values));
         }
     } else if (video_encode_metadata.state == 0) {
-        if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+        if (is_ondemand_governor(governor)) {
             undo_hint_action(video_encode_metadata.hint_id);
         } else if (is_interactive_governor(governor)) {
             undo_hint_action(video_encode_metadata.hint_id);
@@ -361,8 +357,7 @@ void power_set_interactive(int on)
 
     if (!on) {
         /* Display off. */
-        if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+        if (is_ondemand_governor(governor)) {
             int resource_values[] = { MS_500, THREAD_MIGRATION_SYNC_OFF };
 
             perform_hint_action(DISPLAY_STATE_HINT_ID,
@@ -372,8 +367,7 @@ void power_set_interactive(int on)
 
             perform_hint_action(DISPLAY_STATE_HINT_ID,
                     resource_values, ARRAY_SIZE(resource_values));
-        } else if ((strncmp(governor, MSMDCVS_GOVERNOR, strlen(MSMDCVS_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(MSMDCVS_GOVERNOR))) {
+        } else if (is_msmdcvs_governor(governor)) {
             /* Display turned off. */
             if (sysfs_read(DCVS_CPU0_SLACK_MAX_NODE, tmp_str, NODE_MAX - 1)) {
                 if (!slack_node_rw_failed) {
@@ -468,13 +462,11 @@ void power_set_interactive(int on)
         }
     } else {
         /* Display on. */
-        if ((strncmp(governor, ONDEMAND_GOVERNOR, strlen(ONDEMAND_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(ONDEMAND_GOVERNOR))) {
+        if (is_ondemand_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
         } else if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
-        } else if ((strncmp(governor, MSMDCVS_GOVERNOR, strlen(MSMDCVS_GOVERNOR)) == 0) &&
-                (strlen(governor) == strlen(MSMDCVS_GOVERNOR))) {
+        } else if (is_msmdcvs_governor(governor)) {
             /* Display turned on. Restore if possible. */
             if (saved_dcvs_cpu0_slack_max != -1) {
                 snprintf(tmp_str, NODE_MAX, "%d", saved_dcvs_cpu0_slack_max);
