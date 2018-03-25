@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -47,17 +48,109 @@
 #include "performance.h"
 #include "power-common.h"
 
+static int current_power_profile = PROFILE_BALANCED;
+
+static int profile_high_performance[] = {
+    CPUS_ONLINE_MIN_4,
+    CPU0_MIN_FREQ_TURBO_MAX,
+    CPU1_MIN_FREQ_TURBO_MAX,
+    CPU2_MIN_FREQ_TURBO_MAX,
+    CPU3_MIN_FREQ_TURBO_MAX
+};
+
+static int profile_power_save[] = {
+    CPUS_ONLINE_MAX_LIMIT_2,
+    CPU0_MAX_FREQ_NONTURBO_MAX,
+    CPU1_MAX_FREQ_NONTURBO_MAX,
+    CPU2_MAX_FREQ_NONTURBO_MAX,
+    CPU3_MAX_FREQ_NONTURBO_MAX
+};
+
+#ifdef INTERACTION_BOOST
+int get_number_of_profiles() {
+    return 3;
+}
+#endif
+
+static void set_power_profile(int profile) {
+
+    if (profile == current_power_profile)
+        return;
+
+    ALOGV("%s: Profile=%d", __func__, profile);
+
+    if (current_power_profile != PROFILE_BALANCED) {
+        undo_hint_action(DEFAULT_PROFILE_HINT_ID);
+        ALOGV("%s: Hint undone", __func__);
+    }
+
+    if (profile == PROFILE_POWER_SAVE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_power_save,
+                ARRAY_SIZE(profile_power_save));
+        ALOGD("%s: Set powersave mode", __func__);
+
+    } else if (profile == PROFILE_HIGH_PERFORMANCE) {
+        perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_high_performance,
+                ARRAY_SIZE(profile_high_performance));
+        ALOGD("%s: Set performance mode", __func__);
+
+    }
+
+    current_power_profile = profile;
+}
+
+static int resources_interaction_boost[] = {
+    CPUS_ONLINE_MIN_2,
+    0x20B,
+    0x30B
+};
+
 int power_hint_override(power_hint_t hint, void *data)
 {
-    switch(hint) {
+    static struct timespec s_previous_boost_timespec;
+    struct timespec cur_boost_timespec;
+    long long elapsed_time;
+    static int s_previous_duration = 0;
+    int duration;
+
+    if (hint == POWER_HINT_SET_PROFILE) {
+        set_power_profile(*(int32_t *)data);
+        return HINT_HANDLED;
+    }
+
+    // Skip other hints in high/low power modes
+    if (current_power_profile == PROFILE_POWER_SAVE ||
+            current_power_profile == PROFILE_HIGH_PERFORMANCE) {
+        return HINT_HANDLED;
+    }
+
+    switch (hint) {
         case POWER_HINT_INTERACTION:
         {
-            int resources[] = {0x702, 0x20B, 0x30B};
-            int duration = 3000;
+            duration = 500; // 500ms by default
+            if (data) {
+                int input_duration = *((int*)data);
+                if (input_duration > duration) {
+                    duration = (input_duration > 5000) ? 5000 : input_duration;
+                }
+            }
 
-            interaction(duration, ARRAY_SIZE(resources), resources);
+            clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
+
+            elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
+            // don't hint if previous hint's duration covers this hint's duration
+            if ((s_previous_duration * 1000) > (elapsed_time + duration * 1000)) {
+                return HINT_HANDLED;
+            }
+            s_previous_boost_timespec = cur_boost_timespec;
+            s_previous_duration = duration;
+
+            interaction(duration, ARRAY_SIZE(resources_interaction_boost),
+                    resources_interaction_boost);
             return HINT_HANDLED;
         }
+        default:
+            break;
     }
     return HINT_NONE;
 }
