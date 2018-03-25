@@ -52,7 +52,6 @@ static void process_video_encode_hint(void *metadata)
 {
     char governor[80];
     struct video_encode_metadata_t video_encode_metadata;
-    char tmp_str[NODE_MAX];
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
