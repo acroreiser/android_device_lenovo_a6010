@@ -146,8 +146,6 @@ static void set_power_profile(int profile) {
     current_power_profile = profile;
 }
 
-void interaction(int duration, int num_args, int opt_list[]);
-
 int power_hint_override(power_hint_t hint, void *data)
 {
     if (hint == POWER_HINT_SET_PROFILE) {

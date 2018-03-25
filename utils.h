@@ -46,6 +46,7 @@ void perform_hint_action(int hint_id, int resource_values[],
 void undo_hint_action(int hint_id);
 void undo_initial_hint_action();
 void release_request(int lock_handle);
+void interaction(int duration, int num_args, int opt_list[]);
 int interaction_with_handle(int lock_handle, int duration, int num_args, int opt_list[]);
 int perf_hint_enable(int hint_id, int duration);
 

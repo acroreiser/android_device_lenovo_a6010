@@ -261,9 +261,6 @@ int __attribute__ ((weak)) power_hint_override(power_hint_t UNUSED(hint),
     return HINT_NONE;
 }
 
-/* Declare function before use */
-void interaction(int duration, int num_args, int opt_list[]);
-
 void power_hint(power_hint_t hint, void *data)
 {
     /* Check if this hint has been overridden. */

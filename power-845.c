@@ -51,9 +51,6 @@
 static int display_fd;
 #define SYS_DISPLAY_PWR "/sys/kernel/hbtp/display_pwr"
 
-/* Declare function before use */
-void interaction(int duration, int num_args, int opt_list[]);
-
 int power_hint_override(power_hint_t hint, void *data)
 {
     int ret_val = HINT_NONE;
