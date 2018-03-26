@@ -146,8 +146,38 @@ static void set_power_profile(int profile) {
     current_power_profile = profile;
 }
 
+static int resources_interaction_fling_boost[] = {
+    CPUS_ONLINE_MIN_3,
+    0x20F,
+    0x30F,
+    0x40F,
+    0x50F
+};
+
+static int resources_interaction_boost[] = {
+    CPUS_ONLINE_MIN_2,
+    0x20F,
+    0x30F,
+    0x40F,
+    0x50F
+};
+
+static int resources_launch[] = {
+    CPUS_ONLINE_MIN_3,
+    CPU0_MIN_FREQ_TURBO_MAX,
+    CPU1_MIN_FREQ_TURBO_MAX,
+    CPU2_MIN_FREQ_TURBO_MAX,
+    CPU3_MIN_FREQ_TURBO_MAX
+};
+
 int power_hint_override(power_hint_t hint, void *data)
 {
+    static struct timespec s_previous_boost_timespec;
+    struct timespec cur_boost_timespec;
+    long long elapsed_time;
+    static int s_previous_duration = 0;
+    int duration;
+
     if (hint == POWER_HINT_SET_PROFILE) {
         set_power_profile(*(int32_t *)data);
         return HINT_HANDLED;
@@ -159,50 +189,47 @@ int power_hint_override(power_hint_t hint, void *data)
         return HINT_HANDLED;
     }
 
-    if (hint == POWER_HINT_LAUNCH) {
-        int duration = 2000;
-        int resources[] = { CPUS_ONLINE_MIN_3,
-            CPU0_MIN_FREQ_TURBO_MAX, CPU1_MIN_FREQ_TURBO_MAX,
-            CPU2_MIN_FREQ_TURBO_MAX, CPU3_MIN_FREQ_TURBO_MAX };
+    switch (hint) {
+        case POWER_HINT_INTERACTION:
+        {
+            duration = 500; // 500ms by default
+            if (data) {
+                int input_duration = *((int*)data);
+                if (input_duration > duration) {
+                    duration = (input_duration > 5000) ? 5000 : input_duration;
+                }
+            }
 
-        interaction(duration, ARRAY_SIZE(resources), resources);
+            clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
 
-        return HINT_HANDLED;
-    }
+            elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
+            // don't hint if previous hint's duration covers this hint's duration
+            if ((s_previous_duration * 1000) > (elapsed_time + duration * 1000)) {
+                return HINT_HANDLED;
+            }
+            s_previous_boost_timespec = cur_boost_timespec;
+            s_previous_duration = duration;
 
-    if (hint == POWER_HINT_INTERACTION) {
-        int duration = 500, duration_hint = 0;
-        static struct timespec s_previous_boost_timespec;
-        struct timespec cur_boost_timespec;
-        long long elapsed_time;
-
-        if (data) {
-            duration_hint = *((int *)data);
-        }
-
-        duration = duration_hint > 0 ? duration_hint : 500;
-
-        clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
-        elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
-        if (elapsed_time > 750000)
-            elapsed_time = 750000;
-        // don't hint if it's been less than 250ms since last boost
-        // also detect if we're doing anything resembling a fling
-        // support additional boosting in case of flings
-        else if (elapsed_time < 250000 && duration <= 750)
+            if (duration >= 1500) {
+                interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
+                        resources_interaction_fling_boost);
+            } else {
+                interaction(duration, ARRAY_SIZE(resources_interaction_boost),
+                        resources_interaction_boost);
+            }
             return HINT_HANDLED;
+        }
+        case POWER_HINT_LAUNCH:
+        {
+            duration = 2000;
 
-        s_previous_boost_timespec = cur_boost_timespec;
-
-        int resources[] = { (duration >= 2000 ? CPUS_ONLINE_MIN_3 : CPUS_ONLINE_MIN_2),
-            0x20F, 0x30F, 0x40F, 0x50F };
-
-        if (duration)
-            interaction(duration, ARRAY_SIZE(resources), resources);
-
-        return HINT_HANDLED;
+            interaction(duration, ARRAY_SIZE(resources_launch),
+                    resources_launch);
+            return HINT_HANDLED;
+        }
+        default:
+            break;
     }
-
     return HINT_NONE;
 }
 
