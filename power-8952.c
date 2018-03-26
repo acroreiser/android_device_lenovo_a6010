@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2015, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -125,14 +126,10 @@ static void process_video_encode_hint(void *metadata)
 
     ALOGI("Got process_video_encode_hint");
 
-    if (get_scaling_governor_check_cores(governor,
-                sizeof(governor),CPU0) == -1) {
-        if (get_scaling_governor_check_cores(governor,
-                    sizeof(governor),CPU1) == -1) {
-            if (get_scaling_governor_check_cores(governor,
-                        sizeof(governor),CPU2) == -1) {
-                if (get_scaling_governor_check_cores(governor,
-                            sizeof(governor),CPU3) == -1) {
+    if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
+        if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
+            if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
+                if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU3) == -1) {
                     ALOGE("Can't obtain scaling governor.");
                     return;
                 }
@@ -157,7 +154,7 @@ static void process_video_encode_hint(void *metadata)
 
     if (video_encode_metadata.state == 1) {
         if (is_interactive_governor(governor)) {
-            /* Sched_load and migration_notif*/
+            /* Sched_load and migration_notif */
             int resource_values[] = {
                 INT_OP_CLUSTER0_USE_SCHED_LOAD, 0x1,
                 INT_OP_CLUSTER1_USE_SCHED_LOAD, 0x1,
@@ -206,16 +203,13 @@ int power_hint_override(power_hint_t hint, void *data)
 int set_interactive_override(int on)
 {
     char governor[80];
-    char tmp_str[NODE_MAX];
-    struct video_encode_metadata_t video_encode_metadata;
-    int rc;
 
     ALOGI("Got set_interactive hint");
 
-    if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU0) == -1) {
-        if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU1) == -1) {
-            if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU2) == -1) {
-                if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU3) == -1) {
+    if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
+        if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
+            if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
+                if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU3) == -1) {
                     ALOGE("Can't obtain scaling governor.");
                     return HINT_NONE;
                 }
@@ -236,7 +230,7 @@ int set_interactive_override(int on)
                     DISPLAY_STATE_HINT_ID,
                     resource_values,
                     ARRAY_SIZE(resource_values));
-        } /* Perf time rate set for CORE0,CORE4 8952 target*/
+        } /* Perf time rate set for CORE0,CORE4 8952 target */
     } else {
         /* Display on. */
         if (is_interactive_governor(governor)) {
