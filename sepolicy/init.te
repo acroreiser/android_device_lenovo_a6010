@@ -1,0 +1,15 @@
+#============= init ==============
+
+allow init debugfs:file write;
+allow init mpctl_socket:sock_file write;
+allow init init:socket read;
+allow init mpctl_data_file:file append;
+allow init thermal_device:chr_file ioctl;
+allow init vfat:dir search;
+allow init vfat:file { read getattr open };
+allow init firmware_file:dir search;
+allow init firmware_file:file r_file_perms;
+allow init firmware_file:dir read;
+allow init firmware_file:file read;
+allow init firmware_file:file open;
+allow init firmware_file:dir open;

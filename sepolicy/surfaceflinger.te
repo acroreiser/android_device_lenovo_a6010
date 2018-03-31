@@ -1,0 +1,4 @@
+#============= surfaceflinger ==============
+
+allow surfaceflinger vfat:dir search;
+allow surfaceflinger sysfs:file r_file_perms;

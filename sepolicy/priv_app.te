@@ -1,0 +1,2 @@
+allow priv_app sysfs:file r_file_perms;
+allow priv_app device:dir { read open };

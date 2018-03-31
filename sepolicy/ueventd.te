@@ -1,0 +1,4 @@
+#============= ueventd ==============
+allow ueventd vfat:file { read open getattr };
+
+allow ueventd vfat:dir search;

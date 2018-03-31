@@ -1,0 +1,7 @@
+allow sysinit proc:file write;
+allow sysinit storage_file:dir getattr;
+allow sysinit system_data_file:dir write;
+allow sysinit system_data_file:file { open };
+allow sysinit resourcecache_data_file:dir search;
+allow sysinit zygote_exec:file { getattr execute read open execute_no_trans };
+allow sysinit servicemanager:binder call;
