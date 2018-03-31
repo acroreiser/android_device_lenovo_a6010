@@ -21,3 +21,5 @@ allow untrusted_app surfaceflinger:dir search;
 allow untrusted_app surfaceflinger:file { read open };
 allow untrusted_app sysfs:file r_file_perms;
 allow untrusted_app tombstone_data_file:dir search;
+#allow untrusted_app proc:file { read open getattr };
+allow untrusted_app sysfs:file getattr;

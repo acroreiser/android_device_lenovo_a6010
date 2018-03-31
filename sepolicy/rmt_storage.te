@@ -1,0 +1,3 @@
+allow rmt_storage self:capability net_raw;
+allow rmt_storage debugfs_rmt:dir search;
+allow rmt_storage debugfs_rmt:file rw_file_perms;

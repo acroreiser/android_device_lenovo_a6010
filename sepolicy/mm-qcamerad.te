@@ -3,3 +3,4 @@ allow mm-qcamerad persist_file:file r_file_perms;
 allow mm-qcamerad system_data_file:sock_file unlink;
 allow mm-qcamerad sensors_socket:sock_file read;
 allow mm-qcamerad system_data_file:dir { add_name remove_name write };
+allow mm-qcamerad vendor_file:file execmod;

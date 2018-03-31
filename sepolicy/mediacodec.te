@@ -1,2 +1,4 @@
 allow mediacodec proc:file read;
 allow mediacodec firmware_file:dir search;
+allow mediacodec mpctl_socket:dir search;
+allow mediacodec perfd:unix_stream_socket connectto;

@@ -1,1 +1,4 @@
+#============= thermal-engine ==============
+allow thermal-engine sysfs_spmi_dev:dir { read search }; 
 allow thermal-engine self:capability sys_nice;
+allow thermal-engine sysfs_spmi_dev:dir open;

@@ -1,2 +1,0 @@
-r_dir_file(wpa, sysfs_type)
-allow wpa wifi_data_file:sock_file { create setattr unlink write };

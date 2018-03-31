@@ -13,3 +13,17 @@ allow init firmware_file:dir read;
 allow init firmware_file:file read;
 allow init firmware_file:file open;
 allow init firmware_file:dir open;
+allow init smd_device:chr_file read;
+allow init battery_data_device:chr_file ioctl;
+allow init servicemanager:binder { transfer call };
+allow init system_server:binder { transfer call };
+allow init firmware_file:dir mounton;
+allow init system_file:system module_load;
+allow init tee_device:chr_file { write ioctl };
+allow init input_device:chr_file ioctl;
+allow init audio_device:chr_file { write ioctl };
+allow init fm_radio_device:chr_file write;
+allow init proc_dirty_ratio:file write;
+allow init firmware_file:blk_file read;
+allow init self:netlink_route_socket { create nlmsg_read read write };
+
