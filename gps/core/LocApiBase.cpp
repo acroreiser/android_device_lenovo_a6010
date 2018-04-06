@@ -30,6 +30,7 @@
 #define LOG_TAG "LocSvc_LocApiBase"
 
 #include <dlfcn.h>
+#include <inttypes.h>
 #include <LocApiBase.h>
 #include <LocAdapterBase.h>
 #include <log_util.h>
@@ -106,19 +107,16 @@ struct LocSsrMsg : public LocMsg {
 
 struct LocOpenMsg : public LocMsg {
     LocApiBase* mLocApi;
-    LOC_API_ADAPTER_EVENT_MASK_T mMask;
-    inline LocOpenMsg(LocApiBase* locApi,
-                      LOC_API_ADAPTER_EVENT_MASK_T mask) :
-        LocMsg(), mLocApi(locApi), mMask(mask)
+    inline LocOpenMsg(LocApiBase* locApi) :
+            LocMsg(), mLocApi(locApi)
     {
         locallog();
     }
     inline virtual void proc() const {
-        mLocApi->open(mMask);
+        mLocApi->open(mLocApi->getEvtMask());
     }
     inline void locallog() {
-        LOC_LOGV("%s:%d]: LocOpen Mask: %x\n",
-                 __func__, __LINE__, mMask);
+        LOC_LOGV("LocOpen Mask: %" PRIx32 "\n", mLocApi->getEvtMask());
     }
     inline virtual void log() {
         locallog();
@@ -161,8 +159,7 @@ void LocApiBase::addAdapter(LocAdapterBase* adapter)
     for (int i = 0; i < MAX_ADAPTERS && mLocAdapters[i] != adapter; i++) {
         if (mLocAdapters[i] == NULL) {
             mLocAdapters[i] = adapter;
-            mMsgTask->sendMsg(new LocOpenMsg(this,
-                    mMask | adapter->getEvtMask()));
+            mMsgTask->sendMsg(new LocOpenMsg(this));
             break;
         }
     }
@@ -198,7 +195,7 @@ void LocApiBase::removeAdapter(LocAdapterBase* adapter)
                 close();
             } else {
                 // else we need to remove the bit
-                mMsgTask->sendMsg(new LocOpenMsg(this, getEvtMask()));
+                mMsgTask->sendMsg(new LocOpenMsg(this));
             }
         }
     }
@@ -206,7 +203,7 @@ void LocApiBase::removeAdapter(LocAdapterBase* adapter)
 
 void LocApiBase::updateEvtMask()
 {
-    mMsgTask->sendMsg(new LocOpenMsg(this, getEvtMask()));
+    mMsgTask->sendMsg(new LocOpenMsg(this));
 }
 
 void LocApiBase::handleEngineUpEvent()
