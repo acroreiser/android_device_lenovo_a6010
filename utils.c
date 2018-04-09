@@ -67,14 +67,25 @@ static struct list_node active_hint_list_head;
 
 static void *get_qcopt_handle()
 {
+    char qcopt_lib_path[PATH_MAX] = {0};
     void *handle = NULL;
 
     dlerror();
 
-    handle = dlopen(PERF_HAL_PATH, RTLD_NOW);
+    if (property_get("ro.vendor.extension_library", qcopt_lib_path,
+                NULL)) {
+        handle = dlopen(qcopt_lib_path, RTLD_NOW);
+        if (!handle) {
+            ALOGE("Unable to open %s: %s\n", qcopt_lib_path,
+                    dlerror());
+        }
+    }
     if (!handle) {
-        ALOGE("Unable to open %s: %s\n", PERF_HAL_PATH,
-                dlerror());
+        handle = dlopen(PERF_HAL_PATH, RTLD_NOW);
+        if (!handle) {
+            ALOGE("Unable to open %s: %s\n", PERF_HAL_PATH,
+                    dlerror());
+        }
     }
 
     return handle;
