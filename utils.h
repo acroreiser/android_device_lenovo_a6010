@@ -29,8 +29,8 @@
 
 #include <cutils/properties.h>
 
-int sysfs_read(char *path, char *s, int num_bytes);
-int sysfs_write(char *path, char *s);
+int sysfs_read(const char *path, char *s, int num_bytes);
+int sysfs_write(const char *path, char *s);
 int get_scaling_governor(char governor[], int size);
 int get_scaling_governor_check_cores(char governor[], int size,int core_num);
 int is_interactive_governor(char*);

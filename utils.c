@@ -50,11 +50,11 @@
 #define SOC_ID_0 "/sys/devices/soc0/soc_id"
 #define SOC_ID_1 "/sys/devices/system/soc/soc0/id"
 
-char scaling_gov_path[4][80] ={
-    "sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
-    "sys/devices/system/cpu/cpu1/cpufreq/scaling_governor",
-    "sys/devices/system/cpu/cpu2/cpufreq/scaling_governor",
-    "sys/devices/system/cpu/cpu3/cpufreq/scaling_governor"
+const char *scaling_gov_path[4] = {
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
+    "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor",
+    "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor",
+    "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor"
 };
 
 #define PERF_HAL_PATH "libqti-perfd-client.so"
@@ -130,7 +130,7 @@ static void __attribute__ ((destructor)) cleanup(void)
     }
 }
 
-int sysfs_read(char *path, char *s, int num_bytes)
+int sysfs_read(const char *path, char *s, int num_bytes)
 {
     char buf[80];
     int count;
@@ -158,7 +158,7 @@ int sysfs_read(char *path, char *s, int num_bytes)
     return ret;
 }
 
-int sysfs_write(char *path, char *s)
+int sysfs_write(const char *path, char *s)
 {
     char buf[80];
     int len;
