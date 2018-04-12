@@ -5,7 +5,6 @@ PRODUCT_COPY_FILES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.disableWifiApFirmwareReload=true \
     wifi.interface=wlan0
 
 # WiFi HAL
