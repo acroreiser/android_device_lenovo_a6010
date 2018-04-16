@@ -1,0 +1,7 @@
+allow cameraserver init:unix_dgram_socket sendto;
+allow cameraserver sensorservice_service:service_manager { find };
+allow cameraserver socket_device:sock_file { rw_file_perms };
+allow cameraserver cameraserver:process { execmem };
+allow cameraserver surfaceflinger:unix_stream_socket { read write };
+allow cameraserver sysfs:file rw_file_perms;
+binder_use(cameraserver);

@@ -3,4 +3,11 @@ allow mm-qcamerad persist_file:file r_file_perms;
 allow mm-qcamerad system_data_file:sock_file unlink;
 allow mm-qcamerad sensors_socket:sock_file read;
 allow mm-qcamerad system_data_file:dir { add_name remove_name write };
-allow mm-qcamerad vendor_file:file execmod;
+allow mm-qcamerad self:tcp_socket { bind setopt create };
+allow mm-qcamerad system_server:unix_stream_socket rw_socket_perms;
+allow mm-qcamerad camera_data_file:sock_file { create unlink write };
+allow mm-qcamerad { untrusted_app priv_app }:fd use;
+allow mm-qcamerad untrusted_app:fd use;
+allow mm-qcamerad untrusted_app_25:fd use;
+binder_call(mm-qcamerad, servicemanager)
+binder_use(mm-qcamerad)

@@ -1,0 +1,1 @@
+allow mediaprovider sysfs:file read;

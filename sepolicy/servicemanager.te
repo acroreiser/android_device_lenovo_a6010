@@ -1,0 +1,6 @@
+allow servicemanager init:dir search;
+allow servicemanager init:file { open read };
+allow servicemanager init:process getattr;
+allow servicemanager mm-qcamerad:dir search;
+allow servicemanager mm-qcamerad:file { read open };
+allow servicemanager mm-qcamerad:process getattr;

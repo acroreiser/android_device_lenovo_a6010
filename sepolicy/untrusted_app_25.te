@@ -1,0 +1,6 @@
+allow untrusted_app_25 camera_prop:file { getattr open read };
+allow untrusted_app_25 camera_data_file:dir { getattr open read };
+allow untrusted_app_25 persist_file:dir { getattr open read };
+allow untrusted_app_25 adb_data_file:dir { getattr open read };
+allow untrusted_app_25 rootfs:dir { getattr open read };
+allow untrusted_app_25 sysfs:file { getattr open read };

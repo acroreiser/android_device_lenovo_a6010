@@ -1,3 +1,5 @@
 allow priv_app vendor_file:file rx_file_perms;
 allow priv_app sysfs:file r_file_perms;
 allow priv_app device:dir { read open };
+allow priv_app proc_stat:file { read open };
+allow priv_app qemu_hw_mainkeys_prop:file read;
