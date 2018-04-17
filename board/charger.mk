@@ -1,1 +1,0 @@
-WITH_LINEAGE_CHARGER := false
