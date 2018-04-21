@@ -274,7 +274,7 @@ service qmuxd /system/vendor/bin/qmuxd
 
 service netmgrd /system/vendor/bin/netmgrd
     class main
-    group system wakelock inet
+    group system wakelock inet oem_2950
     writepid /dev/cpuset/system-background/tasks
 
 on property:ro.data.large_tcp_window_size=true
