@@ -575,13 +575,14 @@ int QCameraMemoryPool::findBufferLocked(
 {
     int rc = NAME_NOT_FOUND;
 
+    size_t alignsize = (size + 4095U) & (~4095U);
     if (mPools[streamType].empty()) {
         return NAME_NOT_FOUND;
     }
 
     List<struct QCameraMemory::QCameraMemInfo>::iterator it = mPools[streamType].begin();
     for( ; it != mPools[streamType].end() ; it++) {
-        if( ((*it).size >= size) &&
+        if( ((*it).size >= alignsize) &&
             ((*it).heap_id == heap_id) &&
             ((*it).cached == cached) ) {
             memInfo = *it;
