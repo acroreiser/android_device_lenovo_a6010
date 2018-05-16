@@ -1645,17 +1645,9 @@ int QCameraGrallocMemory::allocate(uint8_t count, size_t /*size*/)
          goto end;
     }
 
-    err = mWindow->set_buffers_geometry(mWindow, mStride, mScanline, mFormat);
+    err = mWindow->set_buffers_geometry(mWindow, mWidth, mHeight, mFormat);
     if (err != 0) {
          ALOGE("%s: set_buffers_geometry failed: %s (%d)",
-               __func__, strerror(-err), -err);
-         ret = UNKNOWN_ERROR;
-         goto end;
-    }
-
-    err = mWindow->set_crop(mWindow, 0, 0, mWidth, mHeight);
-    if (err != 0) {
-         ALOGE("%s: set_crop failed: %s (%d)",
                __func__, strerror(-err), -err);
          ret = UNKNOWN_ERROR;
          goto end;
