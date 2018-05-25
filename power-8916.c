@@ -102,13 +102,14 @@ static int profile_power_save_8939[5] = {
 };
 
 #ifdef INTERACTION_BOOST
-int get_number_of_profiles() {
+int get_number_of_profiles()
+{
     return 3;
 }
 #endif
 
-static void set_power_profile(int profile) {
-
+static void set_power_profile(int profile)
+{
     if (profile == current_power_profile)
         return;
 
@@ -128,6 +129,7 @@ static void set_power_profile(int profile) {
                     ARRAY_SIZE(profile_power_save_8939));
         }
         ALOGD("%s: Set powersave mode", __func__);
+
     } else if (profile == PROFILE_HIGH_PERFORMANCE) {
         if (is_target_8916()) {
             perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_high_performance_8916,
@@ -137,7 +139,6 @@ static void set_power_profile(int profile) {
                     ARRAY_SIZE(profile_power_save_8939));
         }
         ALOGD("%s: Set performance mode", __func__);
-
     }
 
     current_power_profile = profile;
@@ -188,7 +189,6 @@ int power_hint_override(power_hint_t hint, void *data)
 
     switch (hint) {
         case POWER_HINT_INTERACTION:
-        {
             duration = 500; // 500ms by default
             if (data) {
                 int input_duration = *((int*)data);
@@ -215,15 +215,11 @@ int power_hint_override(power_hint_t hint, void *data)
                         resources_interaction_boost);
             }
             return HINT_HANDLED;
-        }
         case POWER_HINT_LAUNCH:
-        {
             duration = 2000;
-
             interaction(duration, ARRAY_SIZE(resources_launch),
                     resources_launch);
             return HINT_HANDLED;
-        }
         case POWER_HINT_VIDEO_ENCODE: /* Do nothing for encode case */
             return HINT_HANDLED;
         case POWER_HINT_VIDEO_DECODE: /* Do nothing for decode case */
@@ -239,13 +235,12 @@ int set_interactive_override(int on)
     char governor[80];
     char tmp_str[NODE_MAX];
 
-    ALOGI("Got set_interactive hint");
     if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
         if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
             if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
                 if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU3) == -1) {
                     ALOGE("Can't obtain scaling governor.");
-                    return HINT_HANDLED;
+                    return HINT_NONE;
                 }
             }
         }
@@ -255,14 +250,17 @@ int set_interactive_override(int on)
         /* Display off. */
         if (is_target_8916()) {
             if (is_interactive_governor(governor)) {
-                int resource_values[] = {TR_MS_50, THREAD_MIGRATION_SYNC_OFF};
+                int resource_values[] = {
+                    TR_MS_50, THREAD_MIGRATION_SYNC_OFF
+                };
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
                         resource_values, ARRAY_SIZE(resource_values));
-            } /* Perf time rate set for 8916 target */
-        /* End of display hint for 8916 */
+            }
         } else {
             if (is_interactive_governor(governor)) {
-                int resource_values[] = {TR_MS_CPU0_50,TR_MS_CPU4_50, THREAD_MIGRATION_SYNC_OFF};
+                int resource_values[] = {
+                    TR_MS_CPU0_50, TR_MS_CPU4_50, THREAD_MIGRATION_SYNC_OFF
+                };
 
                 /* Set CPU0 MIN FREQ to 400Mhz avoid extra peak power
                    impact in volume key press */
@@ -278,8 +276,8 @@ int set_interactive_override(int on)
                 }
                 perform_hint_action(DISPLAY_STATE_HINT_ID,
                         resource_values, ARRAY_SIZE(resource_values));
-            } /* Perf time rate set for CORE0,CORE4 8939 target */
-        } /* End of display hint for 8939 */
+            }
+        }
     } else {
         /* Display on. */
         if (is_target_8916()) {
@@ -301,7 +299,7 @@ int set_interactive_override(int on)
                 }
                 undo_hint_action(DISPLAY_STATE_HINT_ID);
             }
-        } /* End of check condition during the DISPLAY ON case */
+        }
     }
     return HINT_HANDLED;
 }

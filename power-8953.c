@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2016, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -50,82 +51,24 @@
 
 static int video_encode_hint_sent;
 
-static void process_video_encode_hint(void *metadata);
-
-int  power_hint_override(power_hint_t hint, void *data)
-{
-
-    switch(hint) {
-        case POWER_HINT_VSYNC:
-            break;
-        case POWER_HINT_VIDEO_ENCODE:
-        {
-            process_video_encode_hint(data);
-            return HINT_HANDLED;
-        }
-        default:
-            break;
-    }
-    return HINT_NONE;
-}
-
-int  set_interactive_override(int on)
-{
-    char governor[80];
-
-    ALOGI("Got set_interactive hint");
-
-    if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU0) == -1) {
-        if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU1) == -1) {
-            if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU2) == -1) {
-                if (get_scaling_governor_check_cores(governor, sizeof(governor),CPU3) == -1) {
-                    ALOGE("Can't obtain scaling governor.");
-                    return HINT_HANDLED;
-                }
-            }
-        }
-    }
-
-    if (!on) {
-        /* Display off. */
-        if (is_interactive_governor(governor)) {
-            /* timer rate - 40mS*/
-            int resource_values[] = {0x41424000, 0x28,
-                                     };
-            perform_hint_action(DISPLAY_STATE_HINT_ID,
-                    resource_values, ARRAY_SIZE(resource_values));
-        } /* Perf time rate set for CORE0,CORE4 8952 target*/
-    } else {
-        /* Display on. */
-        if (is_interactive_governor(governor)) {
-             undo_hint_action(DISPLAY_STATE_HINT_ID);
-        }
-    }
-    return HINT_HANDLED;
-}
-
-
-/* Video Encode Hint */
 static void process_video_encode_hint(void *metadata)
 {
     char governor[80];
     struct video_encode_metadata_t video_encode_metadata;
 
-    ALOGI("Got process_video_encode_hint");
-
-    if (get_scaling_governor_check_cores(governor,
-        sizeof(governor),CPU0) == -1) {
-            if (get_scaling_governor_check_cores(governor,
-                sizeof(governor),CPU1) == -1) {
-                    if (get_scaling_governor_check_cores(governor,
-                        sizeof(governor),CPU2) == -1) {
-                            if (get_scaling_governor_check_cores(governor,
-                                sizeof(governor),CPU3) == -1) {
-                                    ALOGE("Can't obtain scaling governor.");
-                                    // return HINT_HANDLED;
-                            }
-                    }
+    if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
+        if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
+            if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
+                if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU3) == -1) {
+                    ALOGE("Can't obtain scaling governor.");
+                    return;
+                }
             }
+        }
+    }
+
+    if (!metadata) {
+        return;
     }
 
     /* Initialize encode metadata struct fields. */
@@ -133,24 +76,19 @@ static void process_video_encode_hint(void *metadata)
     video_encode_metadata.state = -1;
     video_encode_metadata.hint_id = DEFAULT_VIDEO_ENCODE_HINT_ID;
 
-    if (metadata) {
-        if (parse_video_encode_metadata((char *)metadata,
+    if (parse_video_encode_metadata((char *)metadata,
             &video_encode_metadata) == -1) {
-            ALOGE("Error occurred while parsing metadata.");
-            return;
-        }
-    } else {
+        ALOGE("Error occurred while parsing metadata.");
         return;
     }
 
     if (video_encode_metadata.state == 1) {
         if (is_interactive_governor(governor)) {
-            /* Sched_load and migration_notification disable
-             * timer rate - 40mS*/
-            int resource_values[] = {0x41430000, 0x1,
-                                     0x41434000, 0x1,
-                                     0x41424000, 0x28,
-                                     };
+            int resource_values[] = {
+                INT_OP_CLUSTER0_USE_SCHED_LOAD, 0x1,
+                INT_OP_CLUSTER0_USE_MIGRATION_NOTIF, 0x1,
+                INT_OP_CLUSTER0_TIMER_RATE, BIG_LITTLE_TR_MS_40,
+            };
             if (!video_encode_hint_sent) {
                 perform_hint_action(video_encode_metadata.hint_id,
                         resource_values, ARRAY_SIZE(resource_values));
@@ -163,5 +101,51 @@ static void process_video_encode_hint(void *metadata)
             video_encode_hint_sent = 0;
         }
     }
-    return;
+}
+
+int power_hint_override(power_hint_t hint, void *data)
+{
+    switch (hint) {
+        case POWER_HINT_VSYNC:
+            break;
+        case POWER_HINT_VIDEO_ENCODE:
+            process_video_encode_hint(data);
+            return HINT_HANDLED;
+        default:
+            break;
+    }
+    return HINT_NONE;
+}
+
+int set_interactive_override(int on)
+{
+    char governor[80];
+
+    if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
+        if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
+            if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
+                if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU3) == -1) {
+                    ALOGE("Can't obtain scaling governor.");
+                    return HINT_NONE;
+                }
+            }
+        }
+    }
+
+    if (!on) {
+        /* Display off. */
+        if (is_interactive_governor(governor)) {
+            int resource_values[] = {
+                INT_OP_CLUSTER0_TIMER_RATE, BIG_LITTLE_TR_MS_40
+            };
+            perform_hint_action(DISPLAY_STATE_HINT_ID,
+                    resource_values, ARRAY_SIZE(resource_values));
+        }
+    } else {
+        /* Display on. */
+        if (is_interactive_governor(governor)) {
+            undo_hint_action(DISPLAY_STATE_HINT_ID);
+        }
+    }
+    return HINT_HANDLED;
 }

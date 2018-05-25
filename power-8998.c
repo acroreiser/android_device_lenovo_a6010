@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2016-2017, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -26,6 +27,7 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 #define LOG_NIDEBUG 0
 
 #include <errno.h>
@@ -47,18 +49,11 @@
 #include "hint-data.h"
 #include "performance.h"
 #include "power-common.h"
-#include "powerhintparser.h"
 
 #define CHECK_HANDLE(x) ((x)>0)
 #define NUM_PERF_MODES  3
 
 static int current_power_profile = PROFILE_BALANCED;
-
-#ifdef INTERACTION_BOOST
-int get_number_of_profiles() {
-    return 5;
-}
-#endif
 
 static int profile_high_performance[] = {
     SCHED_BOOST_ON_V3, 0x1,
@@ -81,8 +76,15 @@ static int profile_bias_performance[] = {
     MIN_FREQ_BIG_CORE_0, 0x578,
 };
 
-static void set_power_profile(int profile) {
+#ifdef INTERACTION_BOOST
+int get_number_of_profiles()
+{
+    return 5;
+}
+#endif
 
+static void set_power_profile(int profile)
+{
     if (profile == current_power_profile)
         return;
 
@@ -95,7 +97,7 @@ static void set_power_profile(int profile) {
 
     if (profile == PROFILE_POWER_SAVE) {
         perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_power_save,
-            ARRAY_SIZE(profile_power_save));
+                ARRAY_SIZE(profile_power_save));
         ALOGD("%s: Set powersave mode", __func__);
 
     } else if (profile == PROFILE_HIGH_PERFORMANCE) {
@@ -105,14 +107,13 @@ static void set_power_profile(int profile) {
 
     } else if (profile == PROFILE_BIAS_POWER) {
         perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_power,
-            ARRAY_SIZE(profile_bias_power));
+                ARRAY_SIZE(profile_bias_power));
         ALOGD("%s: Set bias power mode", __func__);
 
     } else if (profile == PROFILE_BIAS_PERFORMANCE) {
         perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_performance,
                 ARRAY_SIZE(profile_bias_performance));
         ALOGD("%s: Set bias perf mode", __func__);
-
     }
 
     current_power_profile = profile;
@@ -124,22 +125,24 @@ typedef enum {
     VR_MODE           = 2,
     VR_SUSTAINED_MODE = (SUSTAINED_MODE|VR_MODE),
     INVALID_MODE      = 0xFF
-}perf_mode_type_t;
+} perf_mode_type_t;
 
 typedef struct perf_mode {
     perf_mode_type_t type;
     int perf_hint_id;
-}perf_mode_t;
+} perf_mode_t;
 
-perf_mode_t perf_modes[NUM_PERF_MODES] = { { SUSTAINED_MODE, SUSTAINED_PERF_HINT },
-                                           { VR_MODE, VR_MODE_HINT },
-                                           { VR_SUSTAINED_MODE, VR_MODE_SUSTAINED_PERF_HINT } };
+perf_mode_t perf_modes[NUM_PERF_MODES] = {
+    { SUSTAINED_MODE, SUSTAINED_PERF_HINT },
+    { VR_MODE, VR_MODE_HINT },
+    { VR_SUSTAINED_MODE, VR_MODE_SUSTAINED_PERF_HINT }
+};
 
 static int current_mode = NORMAL_MODE;
 
-static inline  int get_perfd_hint_id(perf_mode_type_t type) {
+static inline int get_perfd_hint_id(perf_mode_type_t type) {
     int i;
-    for(i=0; i<NUM_PERF_MODES; i++) {
+    for (i = 0; i < NUM_PERF_MODES; i++) {
         if (perf_modes[i].type == type) {
             ALOGD("Hint id is 0x%x for mode 0x%x", perf_modes[i].perf_hint_id, type);
             return perf_modes[i].perf_hint_id;
@@ -150,7 +153,6 @@ static inline  int get_perfd_hint_id(perf_mode_type_t type) {
 }
 
 static int switch_mode(perf_mode_type_t mode) {
-
     int hint_id = 0;
     static int perfd_mode_handle = -1;
 
@@ -162,7 +164,7 @@ static int switch_mode(perf_mode_type_t mode) {
     }
     // switch to a perf mode
     hint_id = get_perfd_hint_id(mode);
-    if(hint_id != 0) {
+    if (hint_id != 0) {
         perfd_mode_handle = perf_hint_enable(hint_id, 0);
         if (!CHECK_HANDLE(perfd_mode_handle)) {
             ALOGE("Failed perf_hint_interaction for mode: 0x%x", mode);
@@ -174,17 +176,16 @@ static int switch_mode(perf_mode_type_t mode) {
 }
 
 static int process_perf_hint(void *data, perf_mode_type_t mode) {
-
     // enable
-    if (*(int32_t *)data){
+    if (*(int32_t *)data) {
         ALOGI("Enable request for mode: 0x%x", mode);
         // check if mode is current mode
-        if ( current_mode & mode ) {
+        if (current_mode & mode) {
             ALOGD("Mode 0x%x already enabled", mode);
             return HINT_HANDLED;
         }
         // enable requested mode
-        if ( 0 != switch_mode(current_mode | mode)) {
+        if (0 != switch_mode(current_mode | mode)) {
             ALOGE("Couldn't enable mode 0x%x", mode);
             return HINT_NONE;
         }
@@ -194,12 +195,12 @@ static int process_perf_hint(void *data, perf_mode_type_t mode) {
     } else {
         ALOGI("Disable request for mode: 0x%x", mode);
         // check if mode is enabled
-        if ( !(current_mode & mode) ) {
+        if (!(current_mode & mode)) {
             ALOGD("Mode 0x%x already disabled", mode);
             return HINT_HANDLED;
         }
-        //disable requested mode
-        if ( 0 != switch_mode(current_mode & ~mode)) {
+        // disable requested mode
+        if (0 != switch_mode(current_mode & ~mode)) {
             ALOGE("Couldn't disable mode 0x%x", mode);
             return HINT_NONE;
         }
@@ -216,12 +217,12 @@ static int process_video_encode_hint(void *metadata)
     struct video_encode_metadata_t video_encode_metadata;
     static int video_encode_handle = 0;
 
-    if(!metadata)
-       return HINT_NONE;
+    if (!metadata) {
+        return HINT_NONE;
+    }
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
-
         return HINT_NONE;
     }
 
@@ -229,22 +230,20 @@ static int process_video_encode_hint(void *metadata)
     memset(&video_encode_metadata, 0, sizeof(struct video_encode_metadata_t));
     video_encode_metadata.state = -1;
 
-    if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) ==
-            -1) {
-       ALOGE("Error occurred while parsing metadata.");
-       return HINT_NONE;
+    if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) == -1) {
+        ALOGE("Error occurred while parsing metadata.");
+        return HINT_NONE;
     }
 
     if (video_encode_metadata.state == 1) {
-          if (is_interactive_governor(governor)) {
-              video_encode_handle = perf_hint_enable(
-                       VIDEO_ENCODE_HINT, 0);
-              return HINT_HANDLED;
+        if (is_interactive_governor(governor)) {
+            video_encode_handle = perf_hint_enable(
+                    VIDEO_ENCODE_HINT, 0);
+            return HINT_HANDLED;
         }
     } else if (video_encode_metadata.state == 0) {
-          if (is_interactive_governor(governor)) {
+        if (is_interactive_governor(governor)) {
             release_request(video_encode_handle);
-            ALOGI("Video Encode hint stop");
             return HINT_HANDLED;
         }
     }

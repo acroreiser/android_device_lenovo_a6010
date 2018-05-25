@@ -27,6 +27,7 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 #define LOG_NIDEBUG 0
 
 #include <errno.h>
@@ -86,13 +87,14 @@ static int profile_bias_performance[] = {
 };
 
 #ifdef INTERACTION_BOOST
-int get_number_of_profiles() {
+int get_number_of_profiles()
+{
     return 5;
 }
 #endif
 
-static void set_power_profile(int profile) {
-
+static void set_power_profile(int profile)
+{
     if (profile == current_power_profile)
         return;
 
@@ -122,7 +124,6 @@ static void set_power_profile(int profile) {
         perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_performance,
                 ARRAY_SIZE(profile_bias_performance));
         ALOGD("%s: Set bias perf mode", __func__);
-
     }
 
     current_power_profile = profile;
@@ -173,7 +174,6 @@ int power_hint_override(power_hint_t hint, void *data)
 
     switch (hint) {
         case POWER_HINT_INTERACTION:
-        {
             duration = 500; // 500ms by default
             if (data) {
                 int input_duration = *((int*)data);
@@ -200,15 +200,11 @@ int power_hint_override(power_hint_t hint, void *data)
                         resources_interaction_boost);
             }
             return HINT_HANDLED;
-        }
         case POWER_HINT_LAUNCH:
-        {
             duration = 2000;
-
             interaction(duration, ARRAY_SIZE(resources_launch),
                     resources_launch);
             return HINT_HANDLED;
-        }
         default:
             break;
     }
@@ -221,7 +217,6 @@ int set_interactive_override(int on)
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
-
         return HINT_NONE;
     }
 
@@ -239,25 +234,23 @@ int set_interactive_override(int on)
         undo_hint_action(DISPLAY_STATE_HINT_ID_2);
 
         if (is_ondemand_governor(governor)) {
-            int resource_values[] = {MS_500, SYNC_FREQ_600, OPTIMAL_FREQ_600, THREAD_MIGRATION_SYNC_OFF};
-
+            int resource_values[] = {
+                MS_500, SYNC_FREQ_600, OPTIMAL_FREQ_600, THREAD_MIGRATION_SYNC_OFF
+            };
             perform_hint_action(DISPLAY_STATE_HINT_ID,
                     resource_values, ARRAY_SIZE(resource_values));
-
-            return HINT_HANDLED;
         }
     } else {
         /* Display on */
-        int resource_values2[] = { CPUS_ONLINE_MIN_2 };
+        int resource_values2[] = {
+            CPUS_ONLINE_MIN_2
+        };
         perform_hint_action(DISPLAY_STATE_HINT_ID_2,
                 resource_values2, ARRAY_SIZE(resource_values2));
 
         if (is_ondemand_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
-
-            return HINT_HANDLED;
         }
     }
-
-    return HINT_NONE;
+    return HINT_HANDLED;
 }

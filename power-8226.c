@@ -27,6 +27,7 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 #define LOG_NIDEBUG 0
 
 #include <errno.h>
@@ -67,13 +68,14 @@ static int profile_power_save[] = {
 };
 
 #ifdef INTERACTION_BOOST
-int get_number_of_profiles() {
+int get_number_of_profiles()
+{
     return 3;
 }
 #endif
 
-static void set_power_profile(int profile) {
-
+static void set_power_profile(int profile)
+{
     if (profile == current_power_profile)
         return;
 
@@ -93,7 +95,6 @@ static void set_power_profile(int profile) {
         perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_high_performance,
                 ARRAY_SIZE(profile_high_performance));
         ALOGD("%s: Set performance mode", __func__);
-
     }
 
     current_power_profile = profile;
@@ -126,7 +127,6 @@ int power_hint_override(power_hint_t hint, void *data)
 
     switch (hint) {
         case POWER_HINT_INTERACTION:
-        {
             duration = 500; // 500ms by default
             if (data) {
                 int input_duration = *((int*)data);
@@ -148,7 +148,6 @@ int power_hint_override(power_hint_t hint, void *data)
             interaction(duration, ARRAY_SIZE(resources_interaction_boost),
                     resources_interaction_boost);
             return HINT_HANDLED;
-        }
         default:
             break;
     }

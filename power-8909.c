@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2015, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -26,6 +27,7 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 #define LOG_NIDEBUG 0
 
 #include <errno.h>
@@ -47,7 +49,6 @@
 #include "performance.h"
 #include "power-common.h"
 
-
 static void process_video_encode_hint(void *metadata)
 {
     char governor[80];
@@ -55,7 +56,10 @@ static void process_video_encode_hint(void *metadata)
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
+        return;
+    }
 
+    if (!metadata) {
         return;
     }
 
@@ -64,41 +68,35 @@ static void process_video_encode_hint(void *metadata)
     video_encode_metadata.state = -1;
     video_encode_metadata.hint_id = DEFAULT_VIDEO_ENCODE_HINT_ID;
 
-    if (metadata) {
-        if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) ==
-            -1) {
-            ALOGE("Error occurred while parsing metadata.");
-            return;
-        }
-    } else {
+    if (parse_video_encode_metadata((char *)metadata,
+            &video_encode_metadata) == -1) {
+        ALOGE("Error occurred while parsing metadata.");
         return;
     }
 
     if (video_encode_metadata.state == 1) {
         if (is_interactive_governor(governor)) {
-            int resource_values[] = {HS_FREQ_800, THREAD_MIGRATION_SYNC_OFF};
+            int resource_values[] = {
+                HS_FREQ_800, THREAD_MIGRATION_SYNC_OFF
+            };
             perform_hint_action(video_encode_metadata.hint_id,
                     resource_values, ARRAY_SIZE(resource_values));
         }
     } else if (video_encode_metadata.state == 0) {
         if (is_interactive_governor(governor)) {
-           undo_hint_action(video_encode_metadata.hint_id);
+            undo_hint_action(video_encode_metadata.hint_id);
         }
     }
 }
 
 int power_hint_override(power_hint_t hint, void *data)
 {
-    switch(hint) {
+    switch (hint) {
         case POWER_HINT_VIDEO_ENCODE:
-        {
-          process_video_encode_hint(data);
-          return HINT_HANDLED;
-        }
+            process_video_encode_hint(data);
+            return HINT_HANDLED;
         default:
-        {
             break;
-        }
     }
     return HINT_NONE;
 }

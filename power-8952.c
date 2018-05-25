@@ -124,8 +124,6 @@ static void process_video_encode_hint(void *metadata)
     char governor[80];
     struct video_encode_metadata_t video_encode_metadata;
 
-    ALOGI("Got process_video_encode_hint");
-
     if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
         if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
             if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
@@ -147,14 +145,13 @@ static void process_video_encode_hint(void *metadata)
     video_encode_metadata.hint_id = DEFAULT_VIDEO_ENCODE_HINT_ID;
 
     if (parse_video_encode_metadata((char *)metadata,
-                &video_encode_metadata) == -1) {
+            &video_encode_metadata) == -1) {
         ALOGE("Error occurred while parsing metadata.");
         return;
     }
 
     if (video_encode_metadata.state == 1) {
         if (is_interactive_governor(governor)) {
-            /* Sched_load and migration_notif */
             int resource_values[] = {
                 INT_OP_CLUSTER0_USE_SCHED_LOAD, 0x1,
                 INT_OP_CLUSTER1_USE_SCHED_LOAD, 0x1,
@@ -204,8 +201,6 @@ int set_interactive_override(int on)
 {
     char governor[80];
 
-    ALOGI("Got set_interactive hint");
-
     if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU0) == -1) {
         if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU1) == -1) {
             if (get_scaling_governor_check_cores(governor, sizeof(governor), CPU2) == -1) {
@@ -225,12 +220,9 @@ int set_interactive_override(int on)
                 INT_OP_CLUSTER1_TIMER_RATE, BIG_LITTLE_TR_MS_50,
                 INT_OP_NOTIFY_ON_MIGRATE, 0x00
             };
-
-            perform_hint_action(
-                    DISPLAY_STATE_HINT_ID,
-                    resource_values,
-                    ARRAY_SIZE(resource_values));
-        } /* Perf time rate set for CORE0,CORE4 8952 target */
+            perform_hint_action(DISPLAY_STATE_HINT_ID,
+                    resource_values, ARRAY_SIZE(resource_values));
+        }
     } else {
         /* Display on. */
         if (is_interactive_governor(governor)) {

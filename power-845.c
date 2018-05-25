@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2017, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,7 +28,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
+#define LOG_NIDEBUG 0
 
 #include <errno.h>
 #include <string.h>
@@ -48,21 +49,22 @@
 #include "performance.h"
 #include "power-common.h"
 
-static int display_fd;
 #define SYS_DISPLAY_PWR "/sys/kernel/hbtp/display_pwr"
+
+static int display_fd;
 
 int power_hint_override(power_hint_t hint, void *UNUSED(data))
 {
     int ret_val = HINT_NONE;
-    switch(hint) {
+    switch (hint) {
         case POWER_HINT_INTERACTION:
-        {
-            int resources[] = {0x40800100, 0x553};
+            int resources[] = {
+                MIN_FREQ_LITTLE_CORE_0, 0x553
+            };
             int duration = 100;
             interaction(duration, ARRAY_SIZE(resources), resources);
             ret_val = HINT_HANDLED;
-        }
-        break;
+            break;
         default:
             break;
     }
@@ -75,40 +77,33 @@ int set_interactive_override(int on)
     static const char *display_off = "0";
     char err_buf[80];
     static int init_interactive_hint = 0;
-    static int set_i_count = 0;
     int rc = 0;
 
-    set_i_count ++;
-    ALOGI("Got set_interactive hint on= %d, count= %d\n", on, set_i_count);
-
-    if (init_interactive_hint == 0)
-    {
-        //First time the display is turned off
+    if (init_interactive_hint == 0) {
+        // First time the display is turned off
         display_fd = TEMP_FAILURE_RETRY(open(SYS_DISPLAY_PWR, O_RDWR));
         if (display_fd < 0) {
-            strerror_r(errno,err_buf,sizeof(err_buf));
+            strerror_r(errno, err_buf, sizeof(err_buf));
             ALOGE("Error opening %s: %s\n", SYS_DISPLAY_PWR, err_buf);
-        }
-        else
+        } else {
             init_interactive_hint = 1;
-    }
-    else
-        if (!on ) {
+        }
+    } else {
+        if (!on) {
             /* Display off. */
             rc = TEMP_FAILURE_RETRY(write(display_fd, display_off, strlen(display_off)));
             if (rc < 0) {
-                strerror_r(errno,err_buf,sizeof(err_buf));
+                strerror_r(errno, err_buf, sizeof(err_buf));
                 ALOGE("Error writing %s to  %s: %s\n", display_off, SYS_DISPLAY_PWR, err_buf);
             }
-        }
-        else {
+        } else {
             /* Display on */
             rc = TEMP_FAILURE_RETRY(write(display_fd, display_on, strlen(display_on)));
             if (rc < 0) {
-                strerror_r(errno,err_buf,sizeof(err_buf));
+                strerror_r(errno, err_buf, sizeof(err_buf));
                 ALOGE("Error writing %s to  %s: %s\n", display_on, SYS_DISPLAY_PWR, err_buf);
             }
         }
-
-    return HINT_HANDLED; /* Don't excecute this code path, not in use */
+    }
+    return HINT_HANDLED;
 }
