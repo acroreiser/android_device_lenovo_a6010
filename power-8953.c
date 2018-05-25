@@ -50,7 +50,6 @@
 
 static int video_encode_hint_sent;
 
-static int camera_hint_ref_count;
 static void process_video_encode_hint(void *metadata);
 
 int  power_hint_override(power_hint_t hint, void *data)
@@ -152,24 +151,16 @@ static void process_video_encode_hint(void *metadata)
                                      0x41434000, 0x1,
                                      0x41424000, 0x28,
                                      };
-            camera_hint_ref_count++;
-            if (camera_hint_ref_count == 1) {
-                if (!video_encode_hint_sent) {
-                    perform_hint_action(video_encode_metadata.hint_id,
-                    resource_values,
-                    ARRAY_SIZE(resource_values));
-                    video_encode_hint_sent = 1;
-                }
-           }
+            if (!video_encode_hint_sent) {
+                perform_hint_action(video_encode_metadata.hint_id,
+                        resource_values, ARRAY_SIZE(resource_values));
+                video_encode_hint_sent = 1;
+            }
         }
     } else if (video_encode_metadata.state == 0) {
         if (is_interactive_governor(governor)) {
-            camera_hint_ref_count--;
-            if (!camera_hint_ref_count) {
-                undo_hint_action(video_encode_metadata.hint_id);
-                video_encode_hint_sent = 0;
-            }
-            return ;
+            undo_hint_action(video_encode_metadata.hint_id);
+            video_encode_hint_sent = 0;
         }
     }
     return;
