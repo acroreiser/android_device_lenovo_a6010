@@ -11,7 +11,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.ecc_hard_count=1 \
     rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
-    ro.telephony.default_network=9,1
+    ro.telephony.default_network=9,1 \
+    persist.data.netmgrd.qos.enable=false
 
 # RIL
 ifeq ($(QCPATH),)
