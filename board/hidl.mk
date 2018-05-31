@@ -1,3 +1,3 @@
 # HIDL
-DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
-DEVICE_MATRIX_FILE   := $(LOCAL_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := device/lenovo/a6000/manifest.xml
+DEVICE_MATRIX_FILE   := device/lenovo/a6000/compatibility_matrix.xml
