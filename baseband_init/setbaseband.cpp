@@ -28,15 +28,11 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <errno.h>
+#include <cstdlib>
+#include <fstream>
+#include <string>
 #include <fcntl.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <sys/mman.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 #include <unistd.h>
@@ -46,16 +42,7 @@
 #include "vendor_init.h"
 #include <android-base/properties.h>
 
-void property_override(char const prop[], char const value[])
-{
-    prop_info *pi;
-
-    pi = (prop_info*) __system_property_find(prop);
-    if (pi)
-        __system_property_update(pi, value, strlen(value));
-    else
-        __system_property_add(prop, strlen(prop), value, strlen(value));
-}
+using android::init::property_set;
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
@@ -192,23 +179,22 @@ void init_target_properties()
     int rc;
     rc = get_img_version(modem_version, IMG_VER_BUF_LEN);
     if (!rc) {
-        property_override("gsm.version.baseband", modem_version);
+    property_set("gsm.version.baseband", modem_version);
 }
 
     if (is2GB()) {
-	property_override("dalvik.vm.heapgrowthlimit", "192m");
+	property_set("dalvik.vm.heapgrowthlimit", "192m");
 }
     else {
 	/*
 	 * Set Go Properties for 1GB ram devices
 	 * Properties taken from build/target/product/go_defaults_common.mk
 	 */
-	property_override("dalvik.vm.heapgrowthlimit", "128m");
-	property_override("ro.config.low_ram", "true");
-	property_override("ro.lmk.critical_upgrade", "true");
-        property_override("ro.lmk.upgrade_pressure", "40");
-	property_override("pm.dexopt.downgrade_after_inactive_days", "10");
-	property_override("pm.dexopt.shared", "quicken");
+	property_set("dalvik.vm.heapgrowthlimit", "128m");
+	property_set("ro.config.low_ram", "true");
+	property_set("ro.lmk.critical_upgrade", "true");
+    property_set("ro.lmk.upgrade_pressure", "40");
+	property_set("pm.dexopt.downgrade_after_inactive_days", "10");
+	property_set("pm.dexopt.shared", "quicken");
 }
 } //Final
-

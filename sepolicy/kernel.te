@@ -11,3 +11,5 @@ allow kernel mediaextractor:process setsched;
 allow kernel mediaserver:process setsched;
 allow kernel system_app:process setsched;
 allow kernel vfat:file { open getattr };
+#Why?
+allow kernel self:capability net_admin;

@@ -116,7 +116,7 @@
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
     <integer-array name="config_keyboardTapVibePattern">
-        <item>35</item>
+        <item>29</item>
     </integer-array>
 
     <!-- Our modem doesn't support this query yet -->
@@ -144,11 +144,13 @@
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
         <item>"/system/framework/arm/boot-framework.oat"</item>
+        <item>"/system/framework/arm/boot-framework.vdex"</item>
         <item>"/system/framework/oat/arm/services.odex"</item>
+        <item>"/system/framework/oat/arm/services.vdex"</item>
         <item>"/system/framework/arm/boot.oat"</item>
+        <item>"/system/framework/arm/boot.vdex"</item>
         <item>"/system/framework/arm/boot-core-libart.oat"</item>
-        <item>"/data/dalvik-cache/arm/system@framework@boot.oat"</item>
-        <item>"/data/dalvik-cache/arm/system@framework@services.jar@classes.dex"</item>
+        <item>"/system/framework/arm/boot-core-libart.vdex"</item>
    </string-array>
 
     <!-- Should the pinner service pin the Camera application? -->

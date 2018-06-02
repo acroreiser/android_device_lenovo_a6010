@@ -47,6 +47,11 @@ service vm_bms /system/vendor/bin/vm_bms
     user root system
     group root wakelock
 
+ on post-fs
+    swapon_all /fstab.qcom
+    write /proc/sys/vm/page-cluster 0
+    write /proc/sys/vm/swappiness 30
+
 on charger
    wait /dev/block/bootdevice/by-name/system
    mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
@@ -56,23 +61,7 @@ on charger
    chmod 0664 /sys/class/power_supply/bms/voltage_ocv
    start vm_bms
 
-service sensord /system/bin/sensord
-    class main
-    user root
-
-on property:init.svc.zygote=restarting
-    restart sensord
-
-service calibacc /system/bin/accelcal
-    class main
-    oneshot
-    disabled
-
-on property:sys.sensors.acc=*
-    start calibacc
-
 on property:sys.boot_completed=1
-    swapon_all fstab.qcom
     write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
     write /sys/module/process_reclaim/parameters/pressure_max 70
     write /sys/module/process_reclaim/parameters/swap_opt_eff 30
@@ -86,4 +75,6 @@ on property:sys.boot_completed=1
     write /sys/kernel/mm/ksm/pages_to_scan 100
     write /sys/kernel/mm/ksm/sleep_millisecs 500
     write /sys/kernel/mm/ksm/run 1
+    write /sys/block/mmcblk0/queue/add_random 0
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 64
     setprop sys.perf.profile 1

@@ -1,2 +1,5 @@
 #============= rild ==============
+binder_use(rild)
+binder_service(rild)
 allow rild media_rw_data_file:file read;
+allow rild self:socket ioctl;

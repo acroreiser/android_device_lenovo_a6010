@@ -1460,7 +1460,6 @@ void sort_camera_info(int num_cam)
 uint8_t get_num_of_cameras()
 {
     int rc = 0;
-    int i = 0;
     int dev_fd = 0;
     struct media_device_info mdev_info;
     int num_media_devices = 0;
@@ -1557,8 +1556,7 @@ uint8_t get_num_of_cameras()
     cfg.cfg.setting = NULL;
     if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
         CDBG_ERROR("failed");
-        CDBG_ERROR("failed...Camera Daemon may not up so try again");
-        for(i = 0; i < MM_CAMERA_EVT_ENTRY_MAX; i++) {
+        for(int i = 0; i < MM_CAMERA_EVT_ENTRY_MAX; i++) {
             if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
                 CDBG_ERROR("failed...Camera Daemon may not up so try again");
                 continue;
