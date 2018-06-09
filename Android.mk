@@ -39,8 +39,7 @@ LOCAL_SRC_FILES := \
     metadata-parser.c \
     utils.c \
     list.c \
-    hint-data.c \
-    powerhintparser.c
+    hint-data.c
 
 LOCAL_C_INCLUDES := external/libxml2/include \
                     external/icu/icu4c/source/common
