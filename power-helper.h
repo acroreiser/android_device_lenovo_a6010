@@ -69,6 +69,10 @@ enum stats_type {
     VOTER_MPSS,
     VOTER_ADSP,
     VOTER_SLPI,
+    VOTER_PRONTO,
+    VOTER_TZ,
+    VOTER_LPASS,
+    VOTER_SPSS,
     MAX_PLATFORM_STATS,
 
 #ifndef V1_0_HAL
