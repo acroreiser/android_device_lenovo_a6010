@@ -254,22 +254,7 @@ void interaction(int duration, int num_args, int opt_list[])
 #endif
 }
 
-int interaction_with_handle(int lock_handle, int duration, int num_args, int opt_list[])
-{
-    if (duration < 0 || num_args < 1 || opt_list[0] == 0)
-        return 0;
-
-    if (qcopt_handle) {
-        if (perf_lock_acq) {
-            lock_handle = perf_lock_acq(lock_handle, duration, opt_list, num_args);
-            if (lock_handle == -1)
-                ALOGE("Failed to acquire lock.");
-        }
-    }
-    return lock_handle;
-}
-
-//this is interaction_with_handle using perf_hint instead of
+//this is interaction using perf_hint instead of
 //perf_lock_acq
 int perf_hint_enable(int hint_id , int duration)
 {
