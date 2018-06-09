@@ -146,11 +146,6 @@ struct stat_pair wlan_stat_map[] = {
 };
 #endif
 
-static int saved_dcvs_cpu0_slack_max = -1;
-static int saved_dcvs_cpu0_slack_min = -1;
-static int saved_mpdecision_slack_max = -1;
-static int saved_mpdecision_slack_min = -1;
-static int slack_node_rw_failed = 0;
 static int display_hint_sent;
 
 void power_init(void)
@@ -317,8 +312,6 @@ extern void power_set_interactive_ext(int on);
 void power_set_interactive(int on)
 {
     char governor[80];
-    char tmp_str[NODE_MAX];
-    int rc = 0;
 
     if (!on) {
         /* Send Display OFF hint to perf HAL */
@@ -365,98 +358,6 @@ void power_set_interactive(int on)
 
             perform_hint_action(DISPLAY_STATE_HINT_ID,
                     resource_values, ARRAY_SIZE(resource_values));
-        } else if (is_msmdcvs_governor(governor)) {
-            /* Display turned off. */
-            if (sysfs_read(DCVS_CPU0_SLACK_MAX_NODE, tmp_str, NODE_MAX - 1)) {
-                if (!slack_node_rw_failed) {
-                    ALOGE("Failed to read from %s", DCVS_CPU0_SLACK_MAX_NODE);
-                }
-
-                rc = 1;
-            } else {
-                saved_dcvs_cpu0_slack_max = atoi(tmp_str);
-            }
-
-            if (sysfs_read(DCVS_CPU0_SLACK_MIN_NODE, tmp_str, NODE_MAX - 1)) {
-                if (!slack_node_rw_failed) {
-                    ALOGE("Failed to read from %s", DCVS_CPU0_SLACK_MIN_NODE);
-                }
-
-                rc = 1;
-            } else {
-                saved_dcvs_cpu0_slack_min = atoi(tmp_str);
-            }
-
-            if (sysfs_read(MPDECISION_SLACK_MAX_NODE, tmp_str, NODE_MAX - 1)) {
-                if (!slack_node_rw_failed) {
-                    ALOGE("Failed to read from %s", MPDECISION_SLACK_MAX_NODE);
-                }
-
-                rc = 1;
-            } else {
-                saved_mpdecision_slack_max = atoi(tmp_str);
-            }
-
-            if (sysfs_read(MPDECISION_SLACK_MIN_NODE, tmp_str, NODE_MAX - 1)) {
-                if(!slack_node_rw_failed) {
-                    ALOGE("Failed to read from %s", MPDECISION_SLACK_MIN_NODE);
-                }
-
-                rc = 1;
-            } else {
-                saved_mpdecision_slack_min = atoi(tmp_str);
-            }
-
-            /* Write new values. */
-            if (saved_dcvs_cpu0_slack_max != -1) {
-                snprintf(tmp_str, NODE_MAX, "%d", 10 * saved_dcvs_cpu0_slack_max);
-
-                if (sysfs_write(DCVS_CPU0_SLACK_MAX_NODE, tmp_str) != 0) {
-                    if (!slack_node_rw_failed) {
-                        ALOGE("Failed to write to %s", DCVS_CPU0_SLACK_MAX_NODE);
-                    }
-
-                    rc = 1;
-                }
-            }
-
-            if (saved_dcvs_cpu0_slack_min != -1) {
-                snprintf(tmp_str, NODE_MAX, "%d", 10 * saved_dcvs_cpu0_slack_min);
-
-                if (sysfs_write(DCVS_CPU0_SLACK_MIN_NODE, tmp_str) != 0) {
-                    if(!slack_node_rw_failed) {
-                        ALOGE("Failed to write to %s", DCVS_CPU0_SLACK_MIN_NODE);
-                    }
-
-                    rc = 1;
-                }
-            }
-
-            if (saved_mpdecision_slack_max != -1) {
-                snprintf(tmp_str, NODE_MAX, "%d", 10 * saved_mpdecision_slack_max);
-
-                if (sysfs_write(MPDECISION_SLACK_MAX_NODE, tmp_str) != 0) {
-                    if(!slack_node_rw_failed) {
-                        ALOGE("Failed to write to %s", MPDECISION_SLACK_MAX_NODE);
-                    }
-
-                    rc = 1;
-                }
-            }
-
-            if (saved_mpdecision_slack_min != -1) {
-                snprintf(tmp_str, NODE_MAX, "%d", 10 * saved_mpdecision_slack_min);
-
-                if (sysfs_write(MPDECISION_SLACK_MIN_NODE, tmp_str) != 0) {
-                    if(!slack_node_rw_failed) {
-                        ALOGE("Failed to write to %s", MPDECISION_SLACK_MIN_NODE);
-                    }
-
-                    rc = 1;
-                }
-            }
-
-            slack_node_rw_failed = rc;
         }
     } else {
         /* Display on. */
@@ -464,57 +365,6 @@ void power_set_interactive(int on)
             undo_hint_action(DISPLAY_STATE_HINT_ID);
         } else if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
-        } else if (is_msmdcvs_governor(governor)) {
-            /* Display turned on. Restore if possible. */
-            if (saved_dcvs_cpu0_slack_max != -1) {
-                snprintf(tmp_str, NODE_MAX, "%d", saved_dcvs_cpu0_slack_max);
-
-                if (sysfs_write(DCVS_CPU0_SLACK_MAX_NODE, tmp_str) != 0) {
-                    if (!slack_node_rw_failed) {
-                        ALOGE("Failed to write to %s", DCVS_CPU0_SLACK_MAX_NODE);
-                    }
-
-                    rc = 1;
-                }
-            }
-
-            if (saved_dcvs_cpu0_slack_min != -1) {
-                snprintf(tmp_str, NODE_MAX, "%d", saved_dcvs_cpu0_slack_min);
-
-                if (sysfs_write(DCVS_CPU0_SLACK_MIN_NODE, tmp_str) != 0) {
-                    if (!slack_node_rw_failed) {
-                        ALOGE("Failed to write to %s", DCVS_CPU0_SLACK_MIN_NODE);
-                    }
-
-                    rc = 1;
-                }
-            }
-
-            if (saved_mpdecision_slack_max != -1) {
-                snprintf(tmp_str, NODE_MAX, "%d", saved_mpdecision_slack_max);
-
-                if (sysfs_write(MPDECISION_SLACK_MAX_NODE, tmp_str) != 0) {
-                    if (!slack_node_rw_failed) {
-                        ALOGE("Failed to write to %s", MPDECISION_SLACK_MAX_NODE);
-                    }
-
-                    rc = 1;
-                }
-            }
-
-            if (saved_mpdecision_slack_min != -1) {
-                snprintf(tmp_str, NODE_MAX, "%d", saved_mpdecision_slack_min);
-
-                if (sysfs_write(MPDECISION_SLACK_MIN_NODE, tmp_str) != 0) {
-                    if (!slack_node_rw_failed) {
-                        ALOGE("Failed to write to %s", MPDECISION_SLACK_MIN_NODE);
-                    }
-
-                    rc = 1;
-                }
-            }
-
-            slack_node_rw_failed = rc;
         }
     }
 }
