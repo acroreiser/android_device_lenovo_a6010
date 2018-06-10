@@ -176,7 +176,7 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    qcom.bluetooth.soc=smd \
+    vendor.qcom.bluetooth.soc=smd \
     ro.bluetooth.dun=true \
     ro.bluetooth.hfp.ver=1.7 \
     ro.bluetooth.sap=true \
@@ -258,8 +258,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=libqti-perfd-client.so \
-    
+    ro.vendor.extension_library=libqti-perfd-client.so
 
 # IRSC
 PRODUCT_COPY_FILES += \
