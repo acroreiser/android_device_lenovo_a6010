@@ -22,6 +22,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Temp build fix
 BUILD_BROKEN_PHONY_TARGETS := true
+BUILD_BROKEN_DUP_RULES := true
 
 # Architecture
 TARGET_BOARD_SUFFIX := _32
