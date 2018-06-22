@@ -163,6 +163,7 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
 
     switch (hint) {
     case POWER_HINT_INTERACTION:
+         case POWER_HINT_LAUNCH:
         if (!is_profile_valid(current_power_profile)) {
             ALOGD("%s: no power profile selected yet", __func__);
             return;
