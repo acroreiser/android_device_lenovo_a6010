@@ -11,7 +11,7 @@ ROM     | 8GB / 16GB
 RAM     | 1GB / 2GB
 Shipped Android Version | 4.4.4
 Latest Stock Update version | 5.0.2
-Storage | 16GB
+Ext-Storage | Expandable upto 64GB
 Battery | 2300 mAh
 Display | 720 x 1280 pixels, 5.0"  (~320 ppi pixel density)
 Rear Camera  | 8 MP, 3264 x 2448 pixels, autofocus, Sony IMX219
