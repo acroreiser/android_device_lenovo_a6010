@@ -21,3 +21,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/data/qmi_config.xml:system/vendor/etc/data/qmi_config.xml \
     $(LOCAL_PATH)/configs/data/dsi_config.xml:system/vendor/etc/data/dsi_config.xml
 endif
+
+ # Telephony
+ PRODUCT_PACKAGES += \
+     telephony-ext
+ 
+ PRODUCT_BOOT_JARS += \
+     telephony-ext
