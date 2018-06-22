@@ -41,11 +41,12 @@
 #include <media/msm_cam_sensor.h>
 #include <cutils/properties.h>
 #include <stdlib.h>
-
 #include "mm_camera_dbg.h"
 #include "mm_camera_interface.h"
 #include "mm_camera_sock.h"
 #include "mm_camera.h"
+
+#define MOAR_TRIEZ 8
 
 static pthread_mutex_t g_intf_lock = PTHREAD_MUTEX_INITIALIZER;
 
@@ -1556,7 +1557,8 @@ uint8_t get_num_of_cameras()
     cfg.cfg.setting = NULL;
     if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
         CDBG_ERROR("failed");
-        for(int i = 0; i < MM_CAMERA_EVT_ENTRY_MAX; i++) {
+	unsigned int try_max = MM_CAMERA_EVT_ENTRY_MAX + MOAR_TRIEZ;
+        for(int i = 0; i < try_max; i++) {
             if (ioctl(sd_fd, VIDIOC_MSM_SENSOR_INIT_CFG, &cfg) < 0) {
                 CDBG_ERROR("failed...Camera Daemon may not up so try again");
                 continue;
