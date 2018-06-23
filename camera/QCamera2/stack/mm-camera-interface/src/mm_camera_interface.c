@@ -1624,6 +1624,13 @@ uint8_t get_num_of_cameras()
         close(dev_fd);
         dev_fd = 0;
     }
+    /* Hack to permanently set no. of cameras as 2 (front and rear) if detected < 2 */
+    CDBG("The detected no. of cameras was found to be %d\n", (int)num_cameras);
+    if(num_cameras < 2){
+	    num_cameras = 2;
+		CDBG_ERROR("[HACK]dev-harsh1998 Harcode no. of cameras to %d\n", (int)num_cameras);
+    }
+
     g_cam_ctrl.num_cam = num_cameras;
 
     get_sensor_info();
