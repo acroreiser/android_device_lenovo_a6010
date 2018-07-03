@@ -134,6 +134,10 @@ ifeq ($(TARGET_HAS_LEGACY_POWER_STATS),true)
     LOCAL_CFLAGS += -DLEGACY_STATS
 endif
 
+ifeq ($(TARGET_HAS_NO_POWER_STATS),true)
+    LOCAL_CFLAGS += -DNO_STATS
+endif
+
 ifneq ($(TARGET_RPM_STAT),)
     LOCAL_CFLAGS += -DRPM_STAT=\"$(TARGET_RPM_STAT)\"
 endif
