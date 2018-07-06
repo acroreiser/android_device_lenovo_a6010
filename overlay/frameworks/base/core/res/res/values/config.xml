@@ -157,7 +157,7 @@
     <dimen name="config_viewConfigurationTouchSlop">4dp</dimen>
 
     <!--  Maximum number of supported users -->
-    <integer name="config_multiuserMaximumUsers">4</integer>
+    <integer name="config_multiuserMaximumUsers">2</integer>
     <!--  Whether Multiuser UI should be shown -->
     <bool name="config_enableMultiUserUI">true</bool>
 
@@ -184,6 +184,5 @@
     <!-- Configure wifi tcp buffersizes in the form:
          rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max -->
     <string name="config_wifi_tcp_buffers" translatable="false">131072,262144,3145728,4096,221184,3145728</string>
-    <bool name="config_setColorTransformAccelerated">false</bool>
 
 </resources>
