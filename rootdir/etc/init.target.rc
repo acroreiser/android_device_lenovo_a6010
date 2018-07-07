@@ -43,7 +43,7 @@ on boot
     chmod 0660 /sys/class/sensors/light/enable
 
 service vm_bms /system/vendor/bin/vm_bms
-    class core
+    class main
     user root system
     group root wakelock
 
