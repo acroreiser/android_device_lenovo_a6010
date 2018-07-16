@@ -9,5 +9,9 @@ allow mm-qcamerad camera_data_file:sock_file { create unlink write };
 allow mm-qcamerad { untrusted_app priv_app }:fd use;
 allow mm-qcamerad untrusted_app:fd use;
 allow mm-qcamerad untrusted_app_25:fd use;
+allow mm-qcamerad camera_data_file:sock_file { create unlink };
+allow mm-qcamerad camera_data_file:dir r_dir_perms;
+allow mm-qcamerad mpctl_socket:dir search;
+unix_socket_connect(mm-qcamerad, mpctl, perfd)
 binder_call(mm-qcamerad, servicemanager)
 binder_use(mm-qcamerad)

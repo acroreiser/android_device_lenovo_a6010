@@ -1,0 +1,4 @@
+allow perfd self:capability fsetid;
+
+allow perfd sysfs_thermal:dir search;
+allow perfd sysfs_thermal:file w_file_perms;
