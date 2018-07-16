@@ -32,17 +32,27 @@
 #include <fstream>
 #include <string>
 #include <fcntl.h>
+#include <stdio.h>
 #include <sys/mman.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include "init_msm8916.h"
 #include "property_service.h"
 #include <sys/sysinfo.h>
 #include "vendor_init.h"
+#include "util.h"
+#include "log.h"
+#include <android-base/file.h>
 #include <android-base/properties.h>
+#include <android-base/strings.h>
 
+using android::base::GetProperty;
+using android::base::ReadFileToString;
 using android::init::property_set;
+using android::base::Trim;
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
@@ -54,6 +64,39 @@ using android::init::property_set;
 #define IMG_VER_STR_LEN 24
 #define IMG_VER_BUF_LEN 255
 #define IMG_SZ 32000 * KB    /* MMAP 32000K of modem, modem partition is 64000K */
+
+static void init_alarm_boot_properties()
+{
+    char const *boot_reason_file = "/proc/sys/kernel/boot_reason";
+    char const *power_off_alarm_file = "/persist/alarm/powerOffAlarmSet";
+    std::string boot_reason;
+    std::string power_off_alarm;
+    std::string tmp = GetProperty("ro.boot.alarmboot","");
+
+    if (ReadFileToString(boot_reason_file, &boot_reason)
+            && ReadFileToString(power_off_alarm_file, &power_off_alarm)) {
+        /*
+         * Setup ro.alarm_boot value to true when it is RTC triggered boot up
+         * For existing PMIC chips, the following mapping applies
+         * for the value of boot_reason:
+         *
+         * 0 -> unknown
+         * 1 -> hard reset
+         * 2 -> sudden momentary power loss (SMPL)
+         * 3 -> real time clock (RTC)
+         * 4 -> DC charger inserted
+         * 5 -> USB charger insertd
+         * 6 -> PON1 pin toggled (for secondary PMICs)
+         * 7 -> CBLPWR_N pin toggled (for external power supply)
+         * 8 -> KPDPWR_N pin toggled (power key pressed)
+         */
+        if ((Trim(boot_reason) == "3" || tmp == "true")
+                && Trim(power_off_alarm) == "1")
+            property_set("ro.alarm_boot", "true");
+        else
+            property_set("ro.alarm_boot", "false");
+    }
+}
 
 /* Boyer-Moore string search implementation from Wikipedia */
 
@@ -173,7 +216,7 @@ int is2GB()
     return sys.totalram > 1024ull * 1024 * 1024;
 }
 
-void init_target_properties()
+void vendor_load_properties()
 {
     char modem_version[IMG_VER_BUF_LEN];
     int rc;
@@ -196,5 +239,6 @@ void init_target_properties()
     property_set("ro.lmk.upgrade_pressure", "40");
 	property_set("pm.dexopt.downgrade_after_inactive_days", "10");
 	property_set("pm.dexopt.shared", "quicken");
+    init_alarm_boot_properties();
 }
 } //Final
