@@ -123,7 +123,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.gapless.enabled=true
 
 PRODUCT_COPY_FILES += \
-frameworks/native/data/etc/android.software.midi.xml:system/vendor/etc/permissions/android.software.midi.xml
+    frameworks/native/data/etc/android.software.midi.xml:system/vendor/etc/permissions/android.software.midi.xml
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -236,7 +236,7 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libOmxVidcCommon \
     libstagefrighthw
-    
+
 # Media config
 PRODUCT_COPY_FILES += \
     device/lenovo/a6000/configs/media_codecs.xml:system/vendor/etc/media_codecs.xml
