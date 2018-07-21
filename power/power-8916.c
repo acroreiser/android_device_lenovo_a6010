@@ -49,8 +49,8 @@
 #include "performance.h"
 #include "power-common.h"
 
-#define MIN_FREQ_CPU0_DISP_OFF 400000
-#define MIN_FREQ_CPU0_DISP_ON  960000
+#define MIN_FREQ_CPU0_DISP_OFF 200000
+#define MIN_FREQ_CPU0_DISP_ON  400000
 
 const char *scaling_min_freq[4] = {
     "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
@@ -101,12 +101,10 @@ static int profile_power_save_8939[5] = {
     CPU2_MAX_FREQ_NONTURBO_MAX, CPU3_MAX_FREQ_NONTURBO_MAX,
 };
 
-#ifdef INTERACTION_BOOST
 int get_number_of_profiles()
 {
     return 3;
 }
-#endif
 
 static void set_power_profile(int profile)
 {
