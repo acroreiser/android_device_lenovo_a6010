@@ -44,8 +44,8 @@ LOCAL_CFLAGS += -Wall -Wextra -Werror
 
 LOCAL_SRC_FILES += power-8916.c
 
-LOCAL_MODULE := android.hardware.power@1.0-service-a6000
-LOCAL_INIT_RC := android.hardware.power@1.0-service-a6000.rc
+LOCAL_MODULE := android.hardware.power@1.0-service.a6000
+LOCAL_INIT_RC := android.hardware.power@1.0-service.a6000.rc
 LOCAL_SHARED_LIBRARIES += android.hardware.power@1.0
 LOCAL_SHARED_LIBRARIES += vendor.lineage.power@1.0_vendor
 LOCAL_MODULE_TAGS := optional
