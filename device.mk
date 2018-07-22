@@ -252,12 +252,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/vendor/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/vendor/etc/permissions/android.software.sip.voip.xml
 
-# Power HAL
 PRODUCT_PACKAGES += \
-    power.msm8916
-
-PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service-a6000 \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.max_starting_bg=8
