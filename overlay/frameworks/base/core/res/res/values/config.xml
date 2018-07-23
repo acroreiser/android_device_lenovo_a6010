@@ -338,4 +338,6 @@
         <item>GPS_LOCK=0</item>
     </string-array>
 
+    <bool name="config_supportDoubleTapWake">true</bool>
+    
 </resources>

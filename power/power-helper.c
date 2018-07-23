@@ -50,8 +50,8 @@
 #include "hint-data.h"
 #include "performance.h"
 #include "power-common.h"
-#include "power-feature.h"
 #include "power-helper.h"
+#include "power-feature.h"
 
 #define USINSEC 1000000L
 #define NSINUS 1000L
@@ -277,6 +277,7 @@ void __attribute__((weak)) set_device_specific_feature(feature_t UNUSED(feature)
 {
 }
 
+
 void set_feature(feature_t feature, int state)
 {
     switch (feature) {
@@ -286,5 +287,5 @@ void set_feature(feature_t feature, int state)
         default:
             break;
     }
-    set_device_specific_feature(feature, state);
+	set_device_specific_feature(feature, state);
 }

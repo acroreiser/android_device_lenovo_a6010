@@ -131,10 +131,6 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 
-# Lenovo PowerHaL
-TARGET_POWERHAL_VARIANT := lenovo
-TARGET_POWERHAL_HEADER_PATH := device/lenovo/a6000/power
-
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
