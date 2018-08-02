@@ -239,6 +239,7 @@ void vendor_load_properties()
     property_set("ro.lmk.upgrade_pressure", "40");
 	property_set("pm.dexopt.downgrade_after_inactive_days", "10");
 	property_set("pm.dexopt.shared", "quicken");
-    init_alarm_boot_properties();
+
 }
+	init_alarm_boot_properties();
 } //Final
