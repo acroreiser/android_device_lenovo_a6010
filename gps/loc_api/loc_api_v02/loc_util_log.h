@@ -1,4 +1,4 @@
-/* Copyright (c) 2014 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -24,52 +24,62 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  */
+#ifndef LOC_UTIL_LOG_H
+#define LOC_UTIL_LOG_H
 
-#ifndef LOC_ADAPTER_PROXY_BASE_H
-#define LOC_ADAPTER_PROXY_BASE_H
+#if defined(_ANDROID_)
+#include "loc_api_v02_log.h"
+#include <log_util.h>
 
-#include <ContextBase.h>
-#include <gps_extended.h>
+#else // no _ANDROID_
 
-namespace loc_core {
+#if defined(__LOC_API_V02_LOG_SILENT__)
+#define MSG_LOG
+#define LOC_LOGE(...) MSG_LOG(__VA_ARGS__);
+#define LOC_LOGW(...) MSG_LOG(__VA_ARGS__);
+#define LOC_LOGD(...) MSG_LOG(__VA_ARGS__);
+#define LOC_LOGI(...) MSG_LOG(__VA_ARGS__);
+#define LOC_LOGV(...) MSG_LOG(__VA_ARGS__);
+#else
 
-class LocAdapterProxyBase {
-private:
-    LocAdapterBase *mLocAdapterBase;
-protected:
-    inline LocAdapterProxyBase(const LOC_API_ADAPTER_EVENT_MASK_T mask,
-                   ContextBase* context):
-                   mLocAdapterBase(new LocAdapterBase(mask, context, this)) {
-    }
-    inline virtual ~LocAdapterProxyBase() {
-        delete mLocAdapterBase;
-    }
-    ContextBase* getContext() const {
-        return mLocAdapterBase->getContext();
-    }
-    inline void updateEvtMask(LOC_API_ADAPTER_EVENT_MASK_T event,
-                              loc_registration_mask_status isEnabled) {
-        mLocAdapterBase->updateEvtMask(event,isEnabled);
-    }
+// common for QNX and Griffon
 
-public:
-    inline virtual void handleEngineUpEvent() {};
-    inline virtual void handleEngineDownEvent() {};
-    inline virtual bool reportPosition(UlpLocation &location,
-                                       GpsLocationExtended &locationExtended,
-                                       enum loc_sess_status status,
-                                       LocPosTechMask loc_technology_mask) {
+//error logs
+#define LOC_LOGE(...) printf(__VA_ARGS__)
+//warning logs
+#define LOC_LOGW(...) printf(__VA_ARGS__)
+// debug logs
+#define LOC_LOGD(...) printf(__VA_ARGS__)
+//info logs
+#define LOC_LOGI(...) printf(__VA_ARGS__)
+//verbose logs
+#define LOC_LOGV(...) printf(__VA_ARGS__)
+#endif //__LOC_API_V02_LOG_SILENT__
 
-        (void)location;
-        (void)locationExtended;
-        (void)status;
-        (void)loc_technology_mask;
-        return false;
-    }
-};
+#define MODEM_LOG_CALLFLOW(SPEC, VAL)
+#define EXIT_LOG_CALLFLOW(SPEC, VAL)
 
-} // namespace loc_core
+#define loc_get_v02_event_name(X) #X
+#define loc_get_v02_client_status_name(X) #X
 
-#endif //LOC_ADAPTER_PROXY_BASE_H
+#define loc_get_v02_qmi_status_name(X)  #X
+
+//specific to OFF TARGET
+#ifdef LOC_UTIL_TARGET_OFF_TARGET
+
+#include <stdio.h>
+# include <asm/errno.h>
+# include <sys/time.h>
+
+// get around strl*: not found in glibc
+// TBD:look for presence of eglibc other libraries
+// with strlcpy supported.
+#define strlcpy(X,Y,Z) strcpy(X,Y)
+#define strlcat(X,Y,Z) strcat(X,Y)
+
+#endif //LOC_UTIL_TARGET_OFF_TARGET
+
+#endif //_ANDROID_
+
+#endif //LOC_UTIL_LOG_H

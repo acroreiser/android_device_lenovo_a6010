@@ -1,4 +1,4 @@
-/* Copyright (c) 2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,17 +27,24 @@
  *
  */
 
-#ifndef LOC_ENG_NMEA_H
-#define LOC_ENG_NMEA_H
+#ifndef LOC_API_V02_LOG_H
+#define LOC_API_V02_LOG_H
 
-#include <hardware/gps.h>
-#include <gps_extended.h>
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
-#define NMEA_SENTENCE_MAX_LENGTH 200
+#include <loc_log.h>
+#include <loc_api_v02_client.h>
 
-void loc_eng_nmea_send(char *pNmea, int length, loc_eng_data_s_type *loc_eng_data_p);
-int loc_eng_nmea_put_checksum(char *pNmea, int maxSize);
-void loc_eng_nmea_generate_sv(loc_eng_data_s_type *loc_eng_data_p, const QcomSvStatus &svStatus, const GpsLocationExtended &locationExtended);
-void loc_eng_nmea_generate_pos(loc_eng_data_s_type *loc_eng_data_p, const UlpLocation &location, const GpsLocationExtended &locationExtended, unsigned char generate_nmea);
+const char* loc_get_v02_event_name(uint32_t event);
+const char* loc_get_v02_client_status_name(locClientStatusEnumType status);
+const char* loc_get_v02_qmi_status_name(qmiLocStatusEnumT_v02 status);
 
-#endif // LOC_ENG_NMEA_H
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* LOC_API_V02_LOG_H */

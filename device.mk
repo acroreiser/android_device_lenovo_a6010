@@ -157,15 +157,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     android.hardware.gnss@1.0-service \
-    gps.msm8916 \
-    libshims_flp \
-    libshims_get_process_name
+    gps.msm8916
 
 PRODUCT_COPY_FILES += \
     device/lenovo/a6000/gps/flp.conf:system/etc/flp.conf \
     device/lenovo/a6000/gps/gps.conf:system/etc/gps.conf \
     device/lenovo/a6000/gps/izat.conf:system/etc/izat.conf \
-    device/lenovo/a6000/gps/sap.conf:system/etc/sap.conf
+    device/lenovo/a6000/gps/sap.conf:system/etc/sap.conf \
+    device/lenovo/a6000/gps/quipc.conf:system/etc/quipc.conf
 
 # Permissions
 PRODUCT_COPY_FILES += \
