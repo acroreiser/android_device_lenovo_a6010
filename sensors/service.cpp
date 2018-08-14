@@ -18,11 +18,17 @@
 
 #include <android/hardware/sensors/1.0/ISensors.h>
 #include <hidl/LegacySupport.h>
+#ifdef ARCH_ARM_32
+#include <hwbinder/ProcessState.h>
+#endif
 
 using android::hardware::sensors::V1_0::ISensors;
 using android::hardware::defaultPassthroughServiceImplementation;
 
 int main() {
+#ifdef ARCH_ARM_32
+    android::hardware::ProcessState::initWithMmapSize((size_t)8192);
+#endif
     /* Sensors framework service needs at least two threads.
      * One thread blocks on a "poll"
      * The second thread is needed for all other HAL methods.
