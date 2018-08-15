@@ -56,6 +56,7 @@ service vm_bms /system/vendor/bin/vm_bms
     group root system wakelock
 
 on post-fs
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
     swapon_all /fstab.qcom
     write /proc/sys/vm/page-cluster 0
     write /proc/sys/vm/swappiness 35

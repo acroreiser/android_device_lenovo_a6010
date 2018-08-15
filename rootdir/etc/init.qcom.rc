@@ -39,9 +39,6 @@ on early-init
     chown system system /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
-    # make trace_marker everyone writable
-    chmod 0222 /sys/kernel/debug/tracing/trace_marker
-
     # Turn off backlight on blank
     write /sys/class/leds/lcd-backlight/trigger "backlight"
 
