@@ -214,7 +214,7 @@ static void set_feature(struct power_module *module __unused,
     char tmp_str[64];
     if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
         snprintf(tmp_str, 64, "%d", state);
-        sysfs_write(TAP_TO_WAKE_NODE, tmp_str);
+        sysfs_write_str(TAP_TO_WAKE_NODE, tmp_str);
     }
 }
 
