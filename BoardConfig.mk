@@ -152,12 +152,12 @@ TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
 
 # SEpolicy
-BOARD_SEPOLICY_DIRS += \
-    $(PLATFORM_PATH)/sepolicy
+# BOARD_SEPOLICY_DIRS += \
+#    $(PLATFORM_PATH)/sepolicy
 
 # Qcom Sepolicy
-include device/qcom/sepolicy/sepolicy.mk
-include device/qcom/sepolicy/legacy-sepolicy.mk
+# include device/qcom/sepolicy/sepolicy.mk
+# include device/qcom/sepolicy/legacy-sepolicy.mk
 
 # WLAN
 BOARD_HAS_QCOM_WLAN := true
