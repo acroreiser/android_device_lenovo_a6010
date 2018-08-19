@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+PLATFORM_PATH := device/lenovo/a6000
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8916
 TARGET_BOARD_PLATFORM := msm8916
@@ -54,7 +56,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 BOARD_SUPPRESS_EMMC_WIPE := true
 TARGET_EXFAT_DRIVER := sdfat
-TARGET_RECOVERY_FSTAB := device/lenovo/a6000/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
 TARGET_USES_MKE2FS := true
 
 # Dexpreopt
@@ -75,8 +77,6 @@ BOARD_LIBCUTILS_NO_STATIC_LIBLOG := true
 
 # SHIMS
 TARGET_LD_SHIM_LIBS := \
-    /system/vendor/lib/libflp.so|libshims_flp.so \
-    /system/vendor/lib/libizat_core.so|libshims_get_process_name.so \
     /system/vendor/bin/mm-qcamera-daemon|libshim_atomic.so \
     /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so \
     /system/vendor/lib/libqomx_jpegenc.so|libshim_atomic.so \
@@ -89,8 +89,8 @@ TARGET_RIL_VARIANT := caf
 MALLOC_SVELTE := true
 
 # HIDL
-DEVICE_MANIFEST_FILE := device/lenovo/a6000/manifest.xml
-DEVICE_MATRIX_FILE := device/lenovo/a6000/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 PRODUCT_VENDOR_MOVE_ENABLED := true
 
 # Display
@@ -116,7 +116,7 @@ BOARD_USES_GENERIC_AUDIO := true
 TARGET_USES_QCOM_MM_AUDIO := true
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lenovo/a6000/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_READ_ADDR_FROM_PROP := true
@@ -153,7 +153,7 @@ USE_DEVICE_SPECIFIC_GPS := true
 
 # SEpolicy
 BOARD_SEPOLICY_DIRS += \
-    device/lenovo/a6000/sepolicy
+    $(PLATFORM_PATH)/sepolicy
 
 # Qcom Sepolicy
 include device/qcom/sepolicy/sepolicy.mk
