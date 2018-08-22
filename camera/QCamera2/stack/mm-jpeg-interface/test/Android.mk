@@ -16,7 +16,7 @@ LOCAL_CFLAGS += -DUSE_ION
 endif
 
 OMX_HEADER_DIR := frameworks/native/include/media/openmax
-OMX_CORE_DIR := $(call project-path-for,qcom-camera)/mm-image-codec
+OMX_CORE_DIR := device/lenovo/a6000/camera/mm-image-codec
 
 LOCAL_C_INCLUDES := $(MM_JPEG_TEST_PATH)
 LOCAL_C_INCLUDES += $(MM_JPEG_TEST_PATH)/../inc
@@ -27,7 +27,7 @@ LOCAL_C_INCLUDES += $(OMX_CORE_DIR)/qomx_core
 
 ifneq ($(strip $(USE_BIONIC_HEADER)),true)
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
-LOCAL_C_INCLUDES += $(call project-path-for,qcom-camera)
+LOCAL_C_INCLUDES += device/lenovo/a6000/camera
 endif
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
@@ -61,7 +61,7 @@ LOCAL_CFLAGS += -DUSE_ION
 endif
 
 OMX_HEADER_DIR := frameworks/native/include/media/openmax
-OMX_CORE_DIR := $(call project-path-for,qcom-camera)/mm-image-codec
+OMX_CORE_DIR := device/lenovo/a6000/camera/mm-image-codec
 
 LOCAL_C_INCLUDES := $(MM_JPEG_TEST_PATH)
 LOCAL_C_INCLUDES += $(MM_JPEG_TEST_PATH)/../inc
@@ -72,7 +72,7 @@ LOCAL_C_INCLUDES += $(OMX_CORE_DIR)/qomx_core
 
 ifneq ($(strip $(USE_BIONIC_HEADER)),true)
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
-LOCAL_C_INCLUDES += $(call project-path-for,qcom-camera)
+LOCAL_C_INCLUDES += device/lenovo/a6000/camera
 endif
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 

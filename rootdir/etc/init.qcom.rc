@@ -389,11 +389,11 @@ service perfd /system/vendor/bin/perfd
    disabled
    writepid /dev/cpuset/system-background/tasks
 
-service thermal-engine /vendor/bin/thermal-engine
-   class main
-   user root
-   group root
-   writepid /dev/cpuset/system-background/tasks
+# service thermal-engine /vendor/bin/thermal-engine
+#   class main
+#   user root
+#   group root
+#   writepid /dev/cpuset/system-background/tasks
 
 service time_daemon /system/vendor/bin/time_daemon
    class late_start
