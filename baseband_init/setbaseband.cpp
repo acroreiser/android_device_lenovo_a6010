@@ -229,17 +229,7 @@ void vendor_load_properties()
 	property_set("dalvik.vm.heapgrowthlimit", "192m");
 }
     else {
-	/*
-	 * Set Go Properties for 1GB ram devices
-	 * Properties taken from build/target/product/go_defaults_common.mk
-	 */
 	property_set("dalvik.vm.heapgrowthlimit", "128m");
-	property_set("ro.config.low_ram", "true");
-	property_set("ro.lmk.critical_upgrade", "true");
-    property_set("ro.lmk.upgrade_pressure", "40");
-	property_set("pm.dexopt.downgrade_after_inactive_days", "10");
-	property_set("pm.dexopt.shared", "quicken");
-
 }
 	init_alarm_boot_properties();
 } //Final
