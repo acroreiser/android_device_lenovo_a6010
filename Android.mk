@@ -110,7 +110,7 @@ ALL_DEFAULT_INSTALLED_MODULES += $(WV_SYMLINKS)
 WCNSS_CFG_SYMLINK := $(TARGET_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini
 $(WCNSS_CFG_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	@mkdir -p $(dir $@)
-	$(hide) ln -sf /data/misc/wifi/$(notdir $@) $@
+	$(hide) ln -sf /data/vendor/wifi/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_CFG_SYMLINK)
 
