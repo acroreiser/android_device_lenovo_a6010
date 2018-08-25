@@ -342,13 +342,10 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     libwcnss_qmi \
-    wcnss_service \
-    libwpa_client
+    wcnss_service
 
 PRODUCT_PACKAGES += \
     hostapd \
-    wificond \
-    wifilogd \
     wpa_supplicant \
     wpa_supplicant.conf
 
@@ -414,12 +411,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/data/dsi_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/data/dsi_config.xml
 
 # Telephony
-PRODUCT_PACKAGES += \
-    telephony-ext \
-    qti-telephony-common
+#PRODUCT_PACKAGES += \
+#    telephony-ext \
+#    qti-telephony-common
 
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+#PRODUCT_BOOT_JARS += \
+#    telephony-ext
 
 # Seccomp
 PRODUCT_COPY_FILES += \
