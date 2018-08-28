@@ -29,7 +29,14 @@ on init
     write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
 
     # enable thermal core_control now
+    write /sys/kernel/msm_thermal/zone0 "1152000 64 61"
+    write /sys/kernel/msm_thermal/zone1 "1094400 68 65"
+    write /sys/kernel/msm_thermal/zone2 "8000000 70 69"
+    write /sys/kernel/msm_thermal/zone3 "533333 73 71"
+    write /sys/kernel/msm_thermal/zone4 "400000 77 74"
     write /sys/module/msm_thermal/core_control/enabled 1
+    write /sys/kernel/msm_thermal/sampling_ms 1000
+    write /sys/kernel/msm_thermal/enabled 1
 
     # Enable CPU-BOOST
     write /sys/module/cpu_boost/parameters/boost_ms 20
