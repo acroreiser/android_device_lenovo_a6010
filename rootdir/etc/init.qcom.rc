@@ -36,6 +36,7 @@ on early-init
     symlink /data/tombstones /tombstones
 
     mount debugfs debugfs /sys/kernel/debug
+    chown system system /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
     # Turn off backlight on blank
@@ -66,11 +67,6 @@ on post-fs-data
     mkdir /data/system/perfd 0770 root system
     chmod 2770 /data/system/perfd
 
-    # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
-
-    mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
     mkdir /tombstones/lpass 0771 system system
     mkdir /tombstones/wcnss 0771 system system
@@ -80,15 +76,6 @@ on post-fs-data
     mkdir /persist/data/tz 0700 system system
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
-
-    # Create the directories used by CnE subsystem
-    mkdir /data/connectivity 0771 system system
-    mkdir /data/connectivity/nsrm 0771 system system
-
-    # Create the directories used by DPM subsystem
-    mkdir /data/dpm 0771 system system
-    mkdir /data/dpm/fdMgr 0771 system system
-    mkdir /data/dpm/nsrm 0771 system system
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -135,11 +122,6 @@ on post-fs-data
     mkdir /data/shared 0755
     chown system system /data/shared
 
-    #Create directory for FOTA
-    mkdir /data/fota 0771
-    chown system system /data/fota
-
-
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
     restorecon_recursive /data/time
@@ -156,11 +138,6 @@ on post-fs-data
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
-    # Allow subsystem (modem etc) debugging
-    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
-    write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
-    write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
-    write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
@@ -231,9 +208,6 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-    # camera sockets
-    mkdir /data/misc/camera 0770 camera camera
-
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
     mkdir /persist/display 0770 system graphics
@@ -250,9 +224,6 @@ on boot
     chown system graphics /sys/class/graphics/fb0/idle_time
     chown system graphics /sys/class/graphics/fb0/mode
     chown system graphics /sys/class/graphics/fb0/modes
-
-    # Permissions required for power HAL
-    chown system system /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
 
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
@@ -277,14 +248,6 @@ service rmt_storage /system/vendor/bin/rmt_storage
     group wakelock
     writepid /dev/cpuset/system-background/tasks
 
-service cnd /system/bin/cnd
-    class late_start
-    socket cnd stream 660 root inet
-
-service dpmd /system/bin/dpmd
-    class main
-    socket dpmd stream 660 root system
-
 # FM
 on property:hw.fm.init=0
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 0
@@ -297,12 +260,6 @@ service qmuxd /system/vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps oem_2950 wakelock
-    writepid /dev/cpuset/system-background/tasks
-
-service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-    class core
-    user root
-    group root
     writepid /dev/cpuset/system-background/tasks
 
 service netmgrd /system/vendor/bin/netmgrd
@@ -346,11 +303,6 @@ service charger /charger
     group root system radio log
     seclabel u:r:charger:s0
 
-service ssr_diag /system/bin/ssr_diag
-    class late_start
-    user system
-    group system
-
 service hvdcp /system/bin/hvdcp
     class core
     user root
@@ -368,13 +320,6 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     user camera
     group camera gps system inet input graphics
     writepid /dev/cpuset/camera-daemon/tasks
-
-# Allow usb charging to be disabled peristently
-on property:persist.usb.chgdisabled=1
-    write /sys/class/power_supply/battery/charging_enabled 0
-
-on property:persist.usb.chgdisabled=0
-    write /sys/class/power_supply/battery/charging_enabled 1
 
 service qseecomd /system/vendor/bin/qseecomd
    class core
@@ -394,11 +339,6 @@ service time_daemon /system/vendor/bin/time_daemon
    user root
    group root
    writepid /dev/cpuset/system-background/tasks
-
-service audiod /system/bin/audiod
-   class late_start
-   user system
-   group system
 
 service ppd /system/vendor/bin/mm-pp-daemon
     class late_start
