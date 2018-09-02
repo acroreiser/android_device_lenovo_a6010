@@ -5,3 +5,7 @@ eventfd2: 1
 sendto: 1
 recvfrom: 1
 _llseek: 1
+geteuid32: 1
+sysinfo: 1
+uname: 1
+mkdirat: 1
