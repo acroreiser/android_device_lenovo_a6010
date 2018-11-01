@@ -249,10 +249,10 @@ service rmt_storage /system/vendor/bin/rmt_storage
     writepid /dev/cpuset/system-background/tasks
 
 # FM
-on property:hw.fm.init=0
+on property:vendor.hw.fm.init=0
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 0
 
-on property:hw.fm.init=1
+on property:vendor.hw.fm.init=1
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 1
 
 # QMUX must be in multiple groups to support external process connections
