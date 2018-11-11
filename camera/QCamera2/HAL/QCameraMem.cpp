@@ -714,6 +714,11 @@ int QCameraHeapMemory::allocate(uint8_t count, size_t size)
                 mPtr[j] = NULL;
                 deallocOneBuffer(mMemInfo[j]);
             }
+		/* deallocate the remaining buffers */
+		for (int j = i; j < count; j++) {
+			deallocOneBuffer(mMemInfo[j]);
+		}
+
             return NO_MEMORY;
         } else
             mPtr[i] = vaddr;
