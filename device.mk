@@ -465,7 +465,8 @@ PRODUCT_COPY_FILES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0
+    wifi.interface=wlan0 \
+    wifi.direct.interface=p2p0
 
 # WiFi HAL
 PRODUCT_PACKAGES += \
