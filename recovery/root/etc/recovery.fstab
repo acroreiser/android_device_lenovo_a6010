@@ -1,0 +1,35 @@
+/aboot			emmc	/dev/block/bootdevice/by-name/aboot		flags=display="Aboot";backup=1
+/abootbak		emmc	/dev/block/bootdevice/by-name/abootbak		flags=subpartitionof=/aboot;backup=1
+/boot			emmc	/dev/block/bootdevice/by-name/boot		flags=display="Boot";backup=1
+/recovery		emmc	/dev/block/bootdevice/by-name/recovery		flags=display="Recovery";backup=1
+/splash			emmc    /dev/block/bootdevice/by-name/splash       	flags=display="Splash";backup=1;flashimg=1
+/system			ext4	/dev/block/bootdevice/by-name/system
+/system_image	        emmc	/dev/block/bootdevice/by-name/system
+/persist		ext4	/dev/block/bootdevice/by-name/persist		flags=display="Persist";backup=1
+/cache			ext4	/dev/block/bootdevice/by-name/cache
+/data			ext4	/dev/block/bootdevice/by-name/userdata		length=-16384,encryptable=footer
+/misc			emmc	/dev/block/bootdevice/by-name/misc		flags=display="Misc";backup=1
+/modem			emmc	/dev/block/bootdevice/by-name/modem		flags=display="Modem";backup=1
+
+/sbl1			emmc	/dev/block/bootdevice/by-name/sbl1		flags=display="Firmware-update";backup=1
+/sbl1bak		emmc	/dev/block/bootdevice/by-name/sbl1bak		flags=subpartitionof=/sbl1;backup=1
+/tz			emmc	/dev/block/bootdevice/by-name/tz		flags=subpartitionof=/sbl1;backup=1
+/tzbak			emmc	/dev/block/bootdevice/by-name/tzbak		flags=subpartitionof=/sbl1;backup=1
+/rpm			emmc	/dev/block/bootdevice/by-name/rpm		flags=subpartitionof=/sbl1;backup=1
+/rpmbak			emmc	/dev/block/bootdevice/by-name/rpmbak		flags=subpartitionof=/sbl1;backup=1
+/hyp			emmc	/dev/block/bootdevice/by-name/hyp		flags=subpartitionof=/sbl1;backup=1
+/hypbak			emmc	/dev/block/bootdevice/by-name/hypbak		flags=subpartitionof=/sbl1;backup=1
+
+/fsg			emmc	/dev/block/bootdevice/by-name/fsg		flags=display="Efs";backup=1
+/modemst1		emmc	/dev/block/bootdevice/by-name/modemst1		flags=subpartitionof=/fsg;backup=1
+/modemst2		emmc	/dev/block/bootdevice/by-name/modemst2		flags=subpartitionof=/fsg;backup=1
+
+/oem			emmc	/dev/block/bootdevice/by-name/oem		flags=display="OEM";backup=1
+/fsc			emmc	/dev/block/bootdevice/by-name/fsc		flags=subpartitionof=/oem;backup=1
+/ssd			emmc	/dev/block/bootdevice/by-name/ssd		flags=subpartitionof=/oem;backup=1
+/DDR			emmc	/dev/block/bootdevice/by-name/DDR		flags=subpartitionof=/oem;backup=1
+/sec			emmc	/dev/block/bootdevice/by-name/sec		flags=subpartitionof=/oem;backup=1
+/keystore		emmc	/dev/block/bootdevice/by-name/keystore		flags=subpartitionof=/oem;backup=1
+/config			emmc	/dev/block/bootdevice/by-name/config		flags=subpartitionof=/oem;backup=1
+/pad			emmc	/dev/block/bootdevice/by-name/pad		flags=subpartitionof=/oem;backup=1
+/external_sd 		auto	/dev/block/mmcblk1p1 /dev/block/mmcblk1 	flags=display="Micro SDCard";storage;wipeingui;removable
