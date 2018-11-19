@@ -2,5 +2,45 @@ on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
 
+on init
+    chmod 0660 /dev/vm_bms
+    chown system system /dev/vm_bms
+    chmod 0660 /dev/battery_data
+    chown system system /dev/battery_data
+
+    # vm_bms
+    chown root system /sys/bus/i2c/drivers/lc709203/batt_capacity
+    chmod 0660 /sys/bus/i2c/drivers/lc709203/batt_capacity
+    chown root system /sys/class/power_supply/bms/current_now
+    chown root system /sys/class/power_supply/bms/voltage_ocv
+    chmod 0664 /sys/class/power_supply/bms/current_now
+    chmod 0664 /sys/class/power_supply/bms/voltage_ocv
+
+    # needed to make qseecomd work in recovery
+    chmod 0660 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+
+on property:ro.crypto.state=encrypted
+    start sbinqseecomd
+
+# separate copy needed to use /sbin/linker instead of /system/bin/linker
+service sbinqseecomd /sbin/qseecomd
+    oneshot
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+service vm_bms /sbin/vm_bms
+    user root
+    group root
+    disabled
+    seclabel u:r:init:s0
+
+on property:ro.crypto.fs_crypto_blkdev=/dev/block/dm-0
+    stop sbinqseecomd
+
 on property:ro.twrp.boot=1
     write /proc/boot_completed_prop 1
