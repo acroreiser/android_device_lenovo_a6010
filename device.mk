@@ -46,7 +46,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.idletime=600 \
     persist.hwc.mdpcomp.enable=true \
     persist.hwc.ptor.enable=true \
-    debug.enable.sglscale=1
+    debug.enable.sglscale=1 \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.sf.disable_hwc=0 \
+    persist.hwc.mdpcomp.enable=true \
+    persist.hwc.ptor.enable=true \
+    debug.sf.gpu_comp_tiling=1 \
+    debug.performance.tuning=1 \
+    video.accelerate.hw=1
 
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
