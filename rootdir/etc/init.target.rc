@@ -45,12 +45,12 @@ on boot
 service vm_bms /system/vendor/bin/vm_bms
     class main
     user root system
-    group root wakelock
+    group root system wakelock
 
- on post-fs
+on post-fs
     swapon_all /fstab.qcom
     write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/swappiness 30
+    write /proc/sys/vm/swappiness 45
 
 on charger
    wait /dev/block/bootdevice/by-name/system

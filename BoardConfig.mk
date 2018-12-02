@@ -63,10 +63,8 @@ TARGET_USES_MKE2FS := true
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
-    ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT := true
       WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
-    endif
   endif
 endif
 
@@ -156,6 +154,7 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
 # GPS
 TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
+SELINUX_IGNORE_NEVERALLOWS := true
 
 # SEpolicy
 # BOARD_SEPOLICY_DIRS += \

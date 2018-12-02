@@ -33,10 +33,7 @@
 #define TAP_TO_WAKE_NODE "/sys/android_touch/doubletap2wake"
 
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-static int boostpulse_fd = -1;
-
-static int current_power_profile = -1;
-static int requested_power_profile = -1;
+static int current_power_profile = 0;
 
 static int sysfs_write_str(char *path, char *s)
 {
@@ -71,65 +68,14 @@ static int sysfs_write_int(char *path, int value)
     return sysfs_write_str(path, buf);
 }
 
-static int is_profile_valid(int profile)
-{
-    return profile >= 0 && profile < PROFILE_MAX;
-}
-
 static void power_init(__attribute__((unused)) struct power_module *module)
 {
     ALOGI("%s", __func__);
 }
 
-static int boostpulse_open()
+static void set_power_profile()
 {
-    pthread_mutex_lock(&lock);
-    if (boostpulse_fd < 0) {
-        boostpulse_fd = open(INTERACTIVE_PATH "boostpulse", O_WRONLY);
-    }
-    pthread_mutex_unlock(&lock);
-
-    return boostpulse_fd;
-}
-
-static void power_set_interactive(__attribute__((unused)) struct power_module *module, int on)
-{
-    if (!is_profile_valid(current_power_profile)) {
-        return;
-    }
-
-    if (on) {
-        sysfs_write_int(INTERACTIVE_PATH "hispeed_freq",
-                        profiles[current_power_profile].hispeed_freq);
-        sysfs_write_int(INTERACTIVE_PATH "go_hispeed_load",
-                        profiles[current_power_profile].go_hispeed_load);
-        sysfs_write_int(INTERACTIVE_PATH "target_loads",
-                        profiles[current_power_profile].target_loads);
-        sysfs_write_int(CPUFREQ_PATH "scaling_min_freq",
-                        profiles[current_power_profile].scaling_min_freq);
-    } else {
-        sysfs_write_int(INTERACTIVE_PATH "hispeed_freq",
-                        profiles[current_power_profile].hispeed_freq_off);
-        sysfs_write_int(INTERACTIVE_PATH "go_hispeed_load",
-                        profiles[current_power_profile].go_hispeed_load_off);
-        sysfs_write_int(INTERACTIVE_PATH "target_loads",
-                        profiles[current_power_profile].target_loads_off);
-        sysfs_write_int(CPUFREQ_PATH "scaling_min_freq",
-                        profiles[current_power_profile].scaling_min_freq_off);
-    }
-}
-
-static void set_power_profile(int profile)
-{
-    if (!is_profile_valid(profile)) {
-        ALOGE("%s: unknown profile: %d", __func__, profile);
-        return;
-    }
-
-    if (profile == current_power_profile)
-        return;
-
-    ALOGD("%s: setting profile %d", __func__, profile);
+    static int profile = 0;
 
     sysfs_write_int(INTERACTIVE_PATH "boost",
                     profiles[profile].boost);
@@ -153,58 +99,6 @@ static void set_power_profile(int profile)
                     profiles[profile].scaling_min_freq);
 
     current_power_profile = profile;
-}
-
-static void power_hint(__attribute__((unused)) struct power_module *module,
-                       power_hint_t hint, void *data)
-{
-    char buf[80];
-    int len;
-
-    switch (hint) {
-    case POWER_HINT_INTERACTION:
-         case POWER_HINT_LAUNCH:
-        if (!is_profile_valid(current_power_profile)) {
-            return;
-        }
-
-        if (!profiles[current_power_profile].boostpulse_duration)
-            return;
-
-        if (boostpulse_open() >= 0) {
-            snprintf(buf, sizeof(buf), "%d", 1);
-            len = write(boostpulse_fd, &buf, sizeof(buf));
-            if (len < 0) {
-                strerror_r(errno, buf, sizeof(buf));
-                ALOGE("Error writing to boostpulse: %s\n", buf);
-
-                pthread_mutex_lock(&lock);
-                close(boostpulse_fd);
-                boostpulse_fd = -1;
-                pthread_mutex_unlock(&lock);
-            }
-        }
-        break;
-    case POWER_HINT_SET_PROFILE:
-        pthread_mutex_lock(&lock);
-        set_power_profile(*(int32_t *)data);
-        pthread_mutex_unlock(&lock);
-        break;
-    case POWER_HINT_LOW_POWER:
-        /* This hint is handled by the framework */
-        break;
-    default:
-        break;
-    }
-}
-
-static int get_feature(__attribute__((unused)) struct power_module *module,
-                       feature_t feature)
-{
-    if (feature == POWER_FEATURE_SUPPORTED_PROFILES) {
-        return PROFILE_MAX;
-    }
-    return -1;
 }
 
 static void set_feature(struct power_module *module __unused,
@@ -239,11 +133,8 @@ static int power_open(const hw_module_t* module, const char* name,
     dev->common.hal_api_version = HARDWARE_HAL_API_VERSION;
 
     dev->init = power_init;
-    dev->powerHint = power_hint; // This is handled by framework
-    dev->setInteractive = power_set_interactive;
+    dev->setInteractive = set_power_profile;
     dev->setFeature = set_feature;
-    dev->getFeature = get_feature;
-
     *device = (hw_device_t*)dev;
 
     ALOGD("%s: exit", __FUNCTION__);
@@ -267,9 +158,7 @@ struct power_module HAL_MODULE_INFO_SYM = {
     },
 
     .init = power_init,
-    .setInteractive = power_set_interactive,
-    .powerHint = power_hint,
-    .setFeature = set_feature,
-    .getFeature = get_feature
+    .setInteractive = set_power_profile,
+    .setFeature = set_feature
 
 };
