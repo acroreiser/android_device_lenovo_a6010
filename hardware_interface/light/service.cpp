@@ -16,6 +16,10 @@
 
 #define LOG_TAG "android.hardware.light@2.0-service.a6000"
 
+/* dev-harsh1998: set page size to 32Kb for our hal */
+#include <hwbinder/ProcessState.h>
+#include <cutils/properties.h>
+
 #include <hidl/HidlTransportSupport.h>
 
 #include "Light.h"
@@ -30,7 +34,17 @@ using android::OK;
 using android::sp;
 using android::status_t;
 
+#define DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB 32
+size_t getHWBinderMmapSize() {
+    size_t value = 0;
+    value = property_get_int32("persist.vendor.a6000.lighthal.hw.binder.size", DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB);
+    if (!value) value = DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB; // deafult to 1 page of 32 Kb
+     return 1024 * value;
+}
+
 int main() {
+    /* default to 32Kb */
+    android::hardware::ProcessState::initWithMmapSize(getHWBinderMmapSize());
     android::sp<ILight> service = new Light();
 
     configureRpcThreadpool(1, true);
