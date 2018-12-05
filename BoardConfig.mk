@@ -81,7 +81,6 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_atomic.so
 
 # Qualcomm support
-DISABLE_RILD_OEM_HOOK := false
 BOARD_USES_QCOM_HARDWARE := true
 MALLOC_SVELTE := true
 
