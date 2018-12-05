@@ -48,6 +48,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.ptor.enable=true \
     debug.enable.sglscale=1 \
     debug.sf.hw=1 \
+    debug.hwui.renderer=opengl \
     debug.egl.hw=1 \
     debug.sf.disable_hwc=0 \
     persist.hwc.mdpcomp.enable=true \
