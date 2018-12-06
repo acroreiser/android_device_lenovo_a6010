@@ -43,10 +43,8 @@ on enable-low-power
     write /sys/kernel/msm_thermal/enabled 1
 
     # Enable CPU-BOOST
-    write /sys/module/cpu_boost/parameters/boost_ms 20
-    write /sys/module/cpu_boost/parameters/sync_threshold 998400
-    write /sys/module/cpu_boost/parameters/input_boost_freq 1094400 
-    write /sys/module/cpu_boost/parameters/input_boost_ms 40
+    write /sys/module/cpu_boost/parameters/boost_ms 70
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:800000 1:998400" 
 
     # Enable low power modes
     write /sys/module/lpm_levels/parameters/sleep_disabled 0

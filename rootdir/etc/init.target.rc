@@ -50,7 +50,7 @@ service vm_bms /system/vendor/bin/vm_bms
 on post-fs
     swapon_all /fstab.qcom
     write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/swappiness 45
+    write /proc/sys/vm/swappiness 60
 
 on charger
    wait /dev/block/bootdevice/by-name/system
@@ -65,11 +65,12 @@ on property:sys.boot_completed=1
     write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
     write /sys/module/process_reclaim/parameters/pressure_max 70
     write /sys/module/process_reclaim/parameters/swap_opt_eff 30
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
     write /sys/module/process_reclaim/parameters/pressure_min 50
     write /sys/module/process_reclaim/parameters/per_swap_size 512
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
-    write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,36864,46080"
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 81250
+    write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,55296,80640"
     write /proc/sys/vm/min_free_kbytes 2919
     write /proc/sys/vm/extra_free_kbytes 6075
     write /sys/kernel/mm/ksm/pages_to_scan 100
