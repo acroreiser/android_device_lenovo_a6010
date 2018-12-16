@@ -42,6 +42,14 @@ on boot
     chown system system /sys/class/sensors/light/enable
     chmod 0660 /sys/class/sensors/light/enable
 
+on init
+    # Configure Zram and Zswap
+    write /sys/block/zram0/comp_algorithm lz4
+    write /sys/module/zswap/parameters/compressor lz4
+    write /sys/module/zswap/parameters/zpool zsmalloc
+    write /sys/module/zswap/parameters/max_pool_percent 35
+    write /sys/module/zswap/parameters/enabled 1
+
 service vm_bms /system/vendor/bin/vm_bms
     class main
     user root system
