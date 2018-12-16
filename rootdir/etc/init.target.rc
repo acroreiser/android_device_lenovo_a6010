@@ -50,7 +50,7 @@ service vm_bms /system/vendor/bin/vm_bms
 on post-fs
     swapon_all /fstab.qcom
     write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/swappiness 42
+    write /proc/sys/vm/swappiness 35
     write /proc/sys/vm/dirty_background_ratio 20
     write /proc/sys/vm/dirty_expire_centisecs 200
     write /proc/sys/vm/dirty_ratio 40
