@@ -94,6 +94,15 @@ on boot
     chown bluetooth bluetooth /dev/ttyHS0
     chmod 0660 /dev/ttyHS0
 
+
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/max_brightness
+    chown system system /sys/class/leds/red/trigger
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/green/max_brightness
+    chown system system /sys/class/leds/green/trigger
+
+
     # Create directory used by display clients
     mkdir /persist/alarm 0770 system system
     mkdir /persist/display 0770 system graphics
