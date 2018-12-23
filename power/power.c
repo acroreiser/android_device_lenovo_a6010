@@ -25,15 +25,9 @@
 
 #include <utils/Log.h>
 
-#include "power.h"
-#include "power_device.h"
-
-#define CPUFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/"
-#define INTERACTIVE_PATH "/sys/devices/system/cpu/cpufreq/interactive/"
 #define TAP_TO_WAKE_NODE "/sys/android_touch/doubletap2wake"
 
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-static int current_power_profile = 0;
 
 static int sysfs_write_str(char *path, char *s)
 {
@@ -73,34 +67,6 @@ static void power_init(__attribute__((unused)) struct power_module *module)
     ALOGI("%s", __func__);
 }
 
-static void set_power_profile()
-{
-    static int profile = 0;
-
-    sysfs_write_int(INTERACTIVE_PATH "boost",
-                    profiles[profile].boost);
-    sysfs_write_int(INTERACTIVE_PATH "boostpulse_duration",
-                    profiles[profile].boostpulse_duration);
-    sysfs_write_int(INTERACTIVE_PATH "go_hispeed_load",
-                    profiles[profile].go_hispeed_load);
-    sysfs_write_int(INTERACTIVE_PATH "hispeed_freq",
-                    profiles[profile].hispeed_freq);
-    sysfs_write_int(INTERACTIVE_PATH "min_sample_time",
-                    profiles[profile].min_sample_time);
-    sysfs_write_int(INTERACTIVE_PATH "timer_rate",
-                    profiles[profile].timer_rate);
-    sysfs_write_int(INTERACTIVE_PATH "above_hispeed_delay",
-                    profiles[profile].above_hispeed_delay);
-    sysfs_write_int(INTERACTIVE_PATH "target_loads",
-                    profiles[profile].target_loads);
-    sysfs_write_int(CPUFREQ_PATH "scaling_max_freq",
-                    profiles[profile].scaling_max_freq);
-    sysfs_write_int(CPUFREQ_PATH "scaling_min_freq",
-                    profiles[profile].scaling_min_freq);
-
-    current_power_profile = profile;
-}
-
 static void set_feature(struct power_module *module __unused,
                 feature_t feature, int state)
 {
@@ -133,7 +99,6 @@ static int power_open(const hw_module_t* module, const char* name,
     dev->common.hal_api_version = HARDWARE_HAL_API_VERSION;
 
     dev->init = power_init;
-    dev->setInteractive = set_power_profile;
     dev->setFeature = set_feature;
     *device = (hw_device_t*)dev;
 
@@ -158,7 +123,6 @@ struct power_module HAL_MODULE_INFO_SYM = {
     },
 
     .init = power_init,
-    .setInteractive = set_power_profile,
     .setFeature = set_feature
 
 };
