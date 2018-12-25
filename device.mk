@@ -34,7 +34,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8916 \
     libgenlock \
     libtinyxml \
-    memtrack.msm8916
+    memtrack.msm8916 \
+    copybit.msm8916
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
