@@ -17,4 +17,7 @@
 <resources>
     <!-- Disable button brightness settings -->
     <integer name="config_buttonBrightnessSettingDefault">0</integer>
+
+    <!-- Whether to allow process with media UID to access CameraServiceProxy -->
+    <bool name="config_allowMediaUidForCameraServiceProxy">true</bool>
 </resources>
