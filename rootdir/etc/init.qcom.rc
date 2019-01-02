@@ -157,6 +157,9 @@ on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
+    mkdir /data/time/ 0770 system system
+    chmod 0770 /data/time/ats_2
+
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
 
@@ -334,14 +337,6 @@ service qseecomd /system/vendor/bin/qseecomd
    group root
    writepid /dev/cpuset/system-background/tasks
 
-service time_daemon /system/vendor/bin/time_daemon
-   capabilities SYS_TIME
-   class late_start
-   user root
-   group root
-   seclabel u:object_r:time_daemon_exec:s0
-   writepid /dev/cpuset/system-background/tasks
-
 service ppd /system/vendor/bin/mm-pp-daemon
     class late_start
     disabled
@@ -360,6 +355,14 @@ service wcnss-service /system/vendor/bin/wcnss_service
     user system
     group system wifi radio
     oneshot
+
+service timekeep /system/vendor/bin/timekeep restore
+    class late_start
+    user root
+    group root system
+    oneshot
+    seclabel u:r:timekeep:s0
+    writepid /dev/cpuset/system-background/tasks
 
 # Start it again on boot, just being double sure.
 on property:sys.boot_completed=1
