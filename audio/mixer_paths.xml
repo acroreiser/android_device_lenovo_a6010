@@ -58,9 +58,9 @@
     <ctl name="IIR1 INP2 Volume" value="84" />
     <ctl name="IIR1 INP3 Volume" value="84" />
     <ctl name="IIR1 INP4 Volume" value="84" />
-    <ctl name="ADC1 Volume" value="8" />
-    <ctl name="ADC2 Volume" value="8" />
-    <ctl name="ADC3 Volume" value="8" />
+    <ctl name="ADC1 Volume" value="10" />
+    <ctl name="ADC2 Volume" value="10" />
+    <ctl name="ADC3 Volume" value="10" />
     <ctl name="DEC1 Volume" value="84" />
     <ctl name="DEC2 Volume" value="84" />
     <ctl name="DEC2 MUX" value="ZERO" />
@@ -568,14 +568,14 @@
     <path name="speaker-mic">
         <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
-        <ctl name="ADC1 Volume" value="18" />
+        <ctl name="ADC1 Volume" value="22" />
         <ctl name="DEC1 Volume" value="92" />
     </path>
 
     <path name="handset">
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="RDAC2 MUX" value="RX1" />
-        <ctl name="RX1 Digital Volume" value="92" />
+        <ctl name="RX1 Digital Volume" value="88" />
         <ctl name="EAR PA Gain" value="POS_6_DB" />
         <ctl name="EAR_S" value="Switch" />
     </path>
@@ -583,7 +583,7 @@
     <path name="handset-mic">
         <path name="adc1" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
-        <ctl name="ADC1 Volume" value="18" />
+        <ctl name="ADC1 Volume" value="22" />
         <ctl name="DEC1 Volume" value="92" />
     </path>
 
@@ -602,7 +602,7 @@
         <ctl name="ADC2 MUX" value="INP2" />
         <ctl name="IIR1 INP1 MUX" value="DEC1" />
         <ctl name="MICBIAS CAPLESS Switch" value="1" />
-        <ctl name="ADC1 Volume" value="18" />
+        <ctl name="ADC1 Volume" value="22" />
         <ctl name="DEC1 Volume" value="92" />
     </path>
 
