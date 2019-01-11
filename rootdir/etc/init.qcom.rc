@@ -112,7 +112,7 @@ on early-boot
     setrlimit 8 67108864 67108864
     write /sys/kernel/boot_adsp/boot 1
 
-    start qseecomd
+    start vendor.qseecomd
 
 on boot
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
@@ -287,7 +287,7 @@ on property:init.svc.bootanim=running
 on property:init.svc.bootanim=stopped
     write /sys/class/leds/green/trigger none
 
-service qseecomd /system/vendor/bin/qseecomd
+service vendor.qseecomd /system/vendor/bin/qseecomd
    class core
    user root
    group root
