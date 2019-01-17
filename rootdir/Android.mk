@@ -25,6 +25,15 @@ LOCAL_SRC_FILES    := etc/init.boot_boost.sh
 LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
 
+include $(CLEAR_VARS)
+LOCAL_MODULE       := init.device.config.sh
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_SRC_FILES    := etc/init.device.config.sh
+LOCAL_VENDOR_MODULE    := true
+include $(BUILD_PREBUILT)
+
+
 # Init scripts
 include $(CLEAR_VARS)
 LOCAL_MODULE       := fstab.qcom

@@ -453,6 +453,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.boot_boost.sh
 
+# Set device-dependement props
+PRODUCT_PACKAGES += \
+    init.device.config.sh
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.msm8916
