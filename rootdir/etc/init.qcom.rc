@@ -62,7 +62,11 @@ on post-fs-data
 
     # Move to o-mr1 perfd dir schema
     mkdir /data/vendor/perfd 0770 root system
+    chmod 2770 /data/vendor/perfd
     rm /data/vendor/perfd/default_values
+
+    #Create IOP  deamon related dirs
+    mkdir /data/vendor/iop 0700 root system
 
     mkdir /tombstones/modem 0771 system system
     mkdir /tombstones/lpass 0771 system system
