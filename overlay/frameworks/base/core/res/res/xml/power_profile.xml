@@ -7,9 +7,10 @@
     <!-- Power consumption when CPU is suspended -->
     <item name="cpu.idle">2</item>
     <!-- Additional power consumption when CPU is in a kernel idle loop -->
-    <item name="cpu.awake">20</item>
+    <item name="cpu.active">20</item>
     <!-- Different CPU speeds as available -->
-    <array name="cpu.speeds">
+    <item name="cpu.clusters.cores">4</item>
+    <array name="cpu.core_speeds.cluster0">
         <value>200000</value>
         <value>400000</value>
         <value>533333</value>
@@ -20,7 +21,7 @@
         <value>1209600</value>
     </array>
     <!-- Additional power used by CPUs when running at different speeds. -->
-    <array name="cpu.active">
+    <array name="cpu.core_power.cluster0">
         <value>50</value>
         <value>64</value>
         <value>75</value>
