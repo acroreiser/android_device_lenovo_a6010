@@ -291,10 +291,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.first_api_level=19
 
-# Vendor security patch level
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.lineage.build.vendor_security_patch=2016-01-01
-
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
