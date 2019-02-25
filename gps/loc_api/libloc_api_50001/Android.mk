@@ -37,9 +37,19 @@ LOCAL_SRC_FILES += \
     loc_eng_dmn_conn_glue_pipe.c
 
 LOCAL_CFLAGS += \
-     -fno-short-enums \
-     -D_ANDROID_ \
-     -O3
+    -fno-short-enums \
+    -D_ANDROID_ \
+    -O3 \
+    -fno-short-enums \
+    -D_ANDROID_ \
+    -Wno-format \
+    -Wno-mismatched-tags \
+    -Wno-null-conversion \
+    -Wno-reorder \
+    -Wno-sign-compare \
+    -Wno-unused-function \
+    -Wno-unused-parameter \
+    -Wno-unused-variable
 
 ifeq ($(QCPATH),)
 LOCAL_CFLAGS += -DOSS_BUILD
@@ -96,7 +106,10 @@ LOCAL_SRC_FILES += \
 LOCAL_CFLAGS += \
     -fno-short-enums \
     -D_ANDROID_ \
-    -O3
+    -O3 \
+    -Wno-format \
+    -Wno-mismatched-tags \
+    -Wno-unused-parameter
 
 ifeq ($(TARGET_USES_QCOM_BSP), true)
 LOCAL_CFLAGS += -DTARGET_USES_QCOM_BSP
