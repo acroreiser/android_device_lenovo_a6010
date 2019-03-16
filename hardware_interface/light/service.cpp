@@ -34,11 +34,11 @@ using android::OK;
 using android::sp;
 using android::status_t;
 
-#define DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB 32
+#define DEFAULT_LGTHAL_HW_BINDER_SIZE_KB 32
 size_t getHWBinderMmapSize() {
     size_t value = 0;
-    value = property_get_int32("persist.vendor.a6000.lighthal.hw.binder.size", DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB);
-    if (!value) value = DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB; // deafult to 1 page of 32 Kb
+    value = property_get_int32("persist.vendor.a6000.lighthal.hw.binder.size", DEFAULT_LGTHAL_HW_BINDER_SIZE_KB);
+    if (!value) value = DEFAULT_LGTHAL_HW_BINDER_SIZE_KB; // deafult to 1 page of 32 Kb
      return 1024 * value;
 }
 
