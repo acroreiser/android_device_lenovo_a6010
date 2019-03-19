@@ -649,6 +649,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.ecclist1=000,08,100,101,102,110,112,118,119,120,122,911,999 \
     persist.radio.ecc_hard_count=1 \
     rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so \
+    vendor.rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
     ro.telephony.default_network=9,1 \
     persist.vendor.radio.add_power_save=1 \
