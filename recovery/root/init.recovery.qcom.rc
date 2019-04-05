@@ -1,7 +1,6 @@
 on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
-    setprop sys.usb.ffs.aio_compat 1
 
 on init
     chmod 0660 /dev/vm_bms
@@ -39,8 +38,8 @@ service vm_bms /sbin/vm_bms
     group root
     seclabel u:r:init:s0
 
-on property:ro.crypto.fs_crypto_blkdev=/dev/block/dm-0
-    stop sbinqseecomd
+on property:ro.crypto.state=encrypted
+    start sbinqseecomd
 
 on property:ro.twrp.boot=1
     write /proc/boot_completed_prop 1

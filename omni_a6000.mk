@@ -58,3 +58,7 @@ PRODUCT_NAME := omni_a6000
 PRODUCT_BRAND := Lenovo
 PRODUCT_MODEL := A6000
 PRODUCT_MANUFACTURER := Lenovo
+
+# Explicitly
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.keystore=msm8916
