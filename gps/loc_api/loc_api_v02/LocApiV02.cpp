@@ -1799,7 +1799,7 @@ void LocApiV02 :: reportPosition (
 {
     UlpLocation location;
     LocPosTechMask tech_Mask = LOC_POS_TECH_MASK_DEFAULT;
-    LOC_LOGD("Reporting postion from V2 Adapter\n");
+    LOC_LOGD("Reporting position from V2 Adapter\n");
     memset(&location, 0, sizeof (UlpLocation));
     location.size = sizeof(location);
     GpsLocationExtended locationExtended;
