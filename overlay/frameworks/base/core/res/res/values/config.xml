@@ -484,4 +484,7 @@
 
     <!-- Allow devices to use a lower screenrecording encoder settings because of old hardware -->
     <bool name="config_device_needs_lower_encoder_settings">true</bool>
+
+    <!-- Remote server that can provide NTP responses. -->
+    <string translatable="false" name="config_ntpServer">1.android.pool.ntp.org</string>
 </resources>
