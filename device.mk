@@ -125,7 +125,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.audio.fluence.voicecall=true \
     persist.vendor.audio.fluence.voicerec=true \
     persist.vendor.audio.fluence.speaker=false \
-    vendor.audio.offload_wakelock=false
+    vendor.audio.offload_wakelock=false \
+    persist.debug.wfd.enable=1 \
+    persist.sys.wfd.virtual=1
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
