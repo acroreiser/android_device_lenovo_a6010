@@ -42,6 +42,9 @@ on early-init
     # Turn off backlight on blank
     write /sys/class/leds/lcd-backlight/trigger "backlight"
 
+    # Start dalvik's script
+    start set_dalvik
+
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -308,6 +311,13 @@ service set_baseband /vendor/bin/sh /system/vendor/bin/set_baseband.sh
     group shell
     oneshot
 
+service set_dalvik /vendor/bin/sh /system/vendor/bin/set_dalvik.sh
+    class core
+    disabled
+    user root
+    group shell
+    oneshot
+
 on property:gsm.version.baseband=""
     start set_baseband
 
@@ -371,4 +381,5 @@ service timekeep /system/vendor/bin/timekeep restore
 # Start it again on boot, just being double sure.
 on property:sys.boot_completed=1
     start set_baseband
+    start set_dalvik
     restart cameraserver
