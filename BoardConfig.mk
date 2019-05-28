@@ -190,9 +190,7 @@ USE_DEVICE_SPECIFIC_GPS := true
 
 # SELinux
 SELINUX_IGNORE_NEVERALLOWS := true
-BOARD_SEPOLICY_DIRS += \
-    $(DEVICE_PATH)/sepolicy
-
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 include device/qcom/sepolicy-legacy/sepolicy.mk
 
 # Wi-Fi
