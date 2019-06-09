@@ -1,1 +1,3 @@
 type proc_touchpanel, fs_type, sysfs_type;
+# Keydisabler
+type sysfs_keypad, fs_type, sysfs_type;
