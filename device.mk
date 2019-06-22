@@ -259,6 +259,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bluetooth.dun=true \
     ro.bluetooth.hfp.ver=1.7 \
     ro.bluetooth.sap=true \
+    vendor.bluetooth.soc=pronto \
     ro.qualcomm.bt.hci_transport=pronto
 
 # Keymaster HAL
