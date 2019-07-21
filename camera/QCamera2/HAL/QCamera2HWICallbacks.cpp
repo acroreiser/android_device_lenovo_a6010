@@ -992,7 +992,11 @@ void QCamera2HardwareInterface::nodisplay_preview_stream_cb_routine(
             return;
         }
     }
-
+    nsecs_t timeStamp;
+    if (pme->mParameters.isAVTimerEnabled() == true)
+        timeStamp = (frame->ts.tv_sec * 1000000LL + frame->ts.tv_nsec) * 1000;
+    else
+        timeStamp = (frame->ts.tv_sec) * 1000000000LL + frame->ts.tv_nsec;
     QCameraMemory *previewMemObj = (QCameraMemory *)frame->mem_info;
     camera_memory_t *preview_mem = NULL;
     if (previewMemObj != NULL) {
@@ -1006,9 +1010,10 @@ void QCamera2HardwareInterface::nodisplay_preview_stream_cb_routine(
             pme->msgTypeEnabledWithLock(CAMERA_MSG_PREVIEW_FRAME) > 0 ) {
             qcamera_callback_argm_t cbArg;
             memset(&cbArg, 0, sizeof(qcamera_callback_argm_t));
-            cbArg.cb_type = QCAMERA_DATA_CALLBACK;
+            cbArg.cb_type = QCAMERA_DATA_TIMESTAMP_CALLBACK;
             cbArg.msg_type = CAMERA_MSG_PREVIEW_FRAME;
             cbArg.data = preview_mem;
+            cbArg.timestamp = timeStamp
             cbArg.user_data = (void *) &frame->buf_idx;
             cbArg.cookie = stream;
             cbArg.release_cb = returnStreamBuffer;
@@ -1023,6 +1028,90 @@ void QCamera2HardwareInterface::nodisplay_preview_stream_cb_routine(
     }
     free(super_frame);
     CDBG_HIGH("[KPI Perf] %s X",__func__);
+}
+
+/*===========================================================================
+ * FUNCTION   : nodisplay_preview_stream_raw_cb_routine
+ *
+ * DESCRIPTION: helper function to handle post frame from preview_raw_stream
+ *
+ * PARAMETERS :
+ *   @super_frame : received super buffer
+ *   @stream      : stream object
+ *   @userdata    : user data ptr
+ *
+ * RETURN    : None
+ *
+ * NOTE      : caller passes the ownership of super_frame, it's our
+ *             responsibility to free super_frame once it's done.
+ *==========================================================================*/
+
+void QCamera2HardwareInterface::nodisplay_preview_raw_stream_cb_routine(
+                                                          mm_camera_super_buf_t *super_frame,
+                                                          QCameraStream *stream,
+                                                          void * userdata)
+{
+    ATRACE_CALL();
+    QCamera2HardwareInterface *pme = (QCamera2HardwareInterface *)userdata;
+    if (pme == NULL ||
+        pme->mCameraHandle == NULL ||
+        pme->mCameraHandle->camera_handle != super_frame->camera_handle){
+        ALOGE("%s: camera obj not valid", __func__);
+        // simply free super frame
+        free(super_frame);
+        return;
+    }
+    mm_camera_buf_def_t *frame = super_frame->bufs[0];
+    if (NULL == frame) {
+        ALOGE("%s: preview frame is NLUL", __func__);
+        free(super_frame);
+        return;
+    }
+
+    if (pme->needDebugFps()) {
+        pme->debugShowPreviewFPS();
+    }
+
+    if(pme->m_bPreviewStarted) {
+        CDBG_HIGH("[KPI Perf] %s : PROFILE_FIRST_PREVIEW_RAW_FRAME", __func__);
+        pme->m_bPreviewStarted = false;
+    }
+    ATRACE_INT("Preview:FrameIdx", frame->frame_idx);
+
+    nsecs_t timeStamp;
+    if(pme->mParameters.isAVTimerEnabled() == true)
+        timeStamp = (nsecs_t)((frame->ts.tv_sec * 1000000LL) + frame->ts.tv_nsec) * 1000;
+     else
+        timeStamp = nsecs_t(frame->ts.tv_sec) * 1000000000LL + frame->ts.tv_nsec;
+
+    QCameraMemory *previewMemObj = (QCameraMemory *)frame->mem_info;
+    camera_memory_t *preview_mem = NULL;
+    if (previewMemObj != NULL) {
+        preview_mem = previewMemObj->getMemory(frame->buf_idx, false);
+    }
+    if (NULL != previewMemObj && NULL != preview_mem) {
+        pme->dumpFrameToFile(stream, frame, QCAMERA_DUMP_FRM_PREVIEW);
+        if ( pme->mDataCb != NULL ) {
+            qcamera_callback_argm_t cbArg;
+            memset(&cbArg, 0, sizeof(qcamera_callback_argm_t));
+            cbArg.cb_type = QCAMERA_DATA_TIMESTAMP_CALLBACK;
+            cbArg.msg_type = CAMERA_MSG_PREVIEW_FRAME;
+            cbArg.data = preview_mem;
+            cbArg.timestamp = timeStamp;
+            cbArg.user_data = (void *) &frame->buf_idx;
+            cbArg.cookie = stream;
+            cbArg.release_cb = returnStreamBuffer;
+            int32_t rc = pme->m_cbNotifier.notifyCallback(cbArg);
+            if (rc != NO_ERROR) {
+                ALOGE("%s: fail sending data notify", __func__);
+                stream->bufDone(frame->buf_idx);
+            }
+        } else {
+           stream->bufDone(frame->buf_idx);
+        }
+    }
+    free(super_frame);
+    return;
 }
 
 /*===========================================================================
@@ -2354,7 +2443,9 @@ void * QCameraCbNotifier::cbNotifyRoutine(void * data)
                         cbStatus = INVALID_OPERATION;
                     }
                     if ( cb->release_cb ) {
-                        cb->release_cb(cb->user_data, cb->cookie, cbStatus);
+                        if ( !(cb->msg_type == CAMERA_MSG_PREVIEW_FRAME &&
+                            !pme->mParent->m_stateMachine.isPreviewRunning()) )
+                            cb->release_cb(cb->user_data, cb->cookie, cbStatus);
                     }
                     delete cb;
                 } else {

@@ -1290,6 +1290,21 @@ int QCameraVideoMemory::allocate(uint8_t count, size_t size)
         packet->eType = kMetadataBufferTypeNativeHandleSource;
         packet->pHandle = mNativeHandle[i];
 #else
+        if (!mNativeHandle[i]) {
+            mNativeHandle[i] = native_handle_create(1, VIDEO_METADATA_NUM_INTS+
+                                   VIDEO_METADATA_NUM_COMMON_INTS);
+            if (mNativeHandle[i] == NULL) {
+                ALOGE("Error in creating video native handle");
+                for (int j = (i - 1); j >= 0; j--) {
+                    mMetadata[i]->release(mMetadata[i]);
+                    if (NULL != mNativeHandle[j]) {
+                        native_handle_delete(mNativeHandle[j]);
+                    }
+                    mMetadata[j]->release(mMetadata[j]);
+                }
+               return NO_MEMORY;
+            }
+        }
         packet->meta_handle = mNativeHandle[i];
         packet->buffer_type = kMetadataBufferTypeCameraSource;
 #endif

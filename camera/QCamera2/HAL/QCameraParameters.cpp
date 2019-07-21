@@ -71,6 +71,7 @@ const char QCameraParameters::KEY_QC_LENSSHADE[] = "lensshade";
 const char QCameraParameters::KEY_QC_SUPPORTED_LENSSHADE_MODES[] = "lensshade-values";
 const char QCameraParameters::KEY_QC_AUTO_EXPOSURE[] = "auto-exposure";
 const char QCameraParameters::KEY_QC_SUPPORTED_AUTO_EXPOSURE[] = "auto-exposure-values";
+const char QCameraParameters::KEY_QC_EXPOSURE_CTRL_INFO[] = "exposure-ctrl-info";
 const char QCameraParameters::KEY_QC_DENOISE[] = "denoise";
 const char QCameraParameters::KEY_QC_SUPPORTED_DENOISE[] = "denoise-values";
 const char QCameraParameters::KEY_QC_FOCUS_ALGO[] = "selectable-zone-af";
@@ -178,6 +179,10 @@ const char QCameraParameters::KEY_QC_AUTO_HDR_SUPPORTED[] = "auto-hdr-supported"
 const char QCameraParameters::WHITE_BALANCE_MANUAL[] = "manual";
 const char QCameraParameters::FOCUS_MODE_MANUAL_POSITION[] = "manual";
 const char QCameraParameters::KEY_QC_CACHE_VIDEO_BUFFERS[] = "cache-video-buffers";
+
+// Add in for Manual exposure control port
+const char QCameraParameters::KEY_QC_EXPOSURE_MANUAL[] = "qc-exposure-manual";
+const char QCameraParameters::KEY_QC_GAIN_MANUAL[] = "qc-gain-manual";
 
 // Values for effect settings.
 const char QCameraParameters::EFFECT_EMBOSS[] = "emboss";
@@ -440,7 +445,20 @@ const QCameraParameters::QCameraMap<cam_format_t>
     {PIXEL_FORMAT_YUV420SP_ADRENO, CAM_FORMAT_YUV_420_NV21_ADRENO},
     {PIXEL_FORMAT_YV12,            CAM_FORMAT_YUV_420_YV12},
     {PIXEL_FORMAT_NV12,            CAM_FORMAT_YUV_420_NV12},
-    {QC_PIXEL_FORMAT_NV12_VENUS,   CAM_FORMAT_YUV_420_NV12_VENUS}
+    {QC_PIXEL_FORMAT_NV12_VENUS,   CAM_FORMAT_YUV_420_NV12_VENUS},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_8GBRG,       CAM_FORMAT_BAYER_MIPI_RAW_8BPP_GBRG},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_8GRBG,       CAM_FORMAT_BAYER_MIPI_RAW_8BPP_GRBG},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_8RGGB,       CAM_FORMAT_BAYER_MIPI_RAW_8BPP_RGGB},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_8BGGR,       CAM_FORMAT_BAYER_MIPI_RAW_8BPP_BGGR},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_10GBRG,      CAM_FORMAT_BAYER_MIPI_RAW_10BPP_GBRG},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_10GRBG,      CAM_FORMAT_BAYER_MIPI_RAW_10BPP_GRBG},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_10RGGB,      CAM_FORMAT_BAYER_MIPI_RAW_10BPP_RGGB},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_10BGGR,      CAM_FORMAT_BAYER_MIPI_RAW_10BPP_BGGR},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_12GBRG,      CAM_FORMAT_BAYER_MIPI_RAW_12BPP_GBRG},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_12GRBG,      CAM_FORMAT_BAYER_MIPI_RAW_12BPP_GRBG},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_12RGGB,      CAM_FORMAT_BAYER_MIPI_RAW_12BPP_RGGB},
+    {QC_PIXEL_FORMAT_BAYER_MIPI_RAW_12BGGR,      CAM_FORMAT_BAYER_MIPI_RAW_12BPP_BGGR},
+    {PIXEL_FORMAT_BAYER_RGGB,      CAM_FORMAT_BAYER_MIPI_RAW_10BPP_GBRG},
 };
 
 const QCameraParameters::QCameraMap<cam_format_t>
@@ -726,7 +744,9 @@ const QCameraParameters::QCameraMap<cam_cds_mode_type_t>
 #define MIN_PP_BUF_CNT 1
 #define TOTAL_RAM_SIZE_512MB 536870912
 #define PARAM_MAP_SIZE(MAP) (sizeof(MAP)/sizeof(MAP[0]))
-
+//Values taken from msm8996
+#define DEFAULT_INIT_MANUAL_EXPOSURE_LINECNT 500
+#define DEFAULT_INIT_MANUAL_EXPOSURE_GAIN 256
 
 /*===========================================================================
  * FUNCTION   : QCameraParameters
@@ -1187,6 +1207,59 @@ String8 QCameraParameters::createFpsRangeString(const cam_fps_range_t* fps,
     return str;
 }
 
+ /*===========================================================================
+ * FUNCTION   : createExposureCtrlInfoString
+ *
+ * DESCRIPTION: create string obj contain miscellaneous expo ctrl info
+ *
+ * PARAMETERS :
+ *   @values  : array of expo ctrl info
+ *
+ * RETURN     : string obj
+ *==========================================================================*/
+String8 QCameraParameters::createExposureCtrlInfoString(
+                const cam_exposure_ctrl_info_t &values)
+{
+    String8 str;
+    char buffer[256];
+    int max_gain = int(values.max_gain * 256);
+    int min_gain = int(values.min_gain * 256);
+    int max_fps = 3000;
+
+    if (values.res_num > 0) {
+        max_fps = int(values.res_info[0].max_fps * 1000);
+        snprintf(buffer, sizeof(buffer),
+            "%dx%d,frame_length_lines:%d,max_fps:%d,",
+            values.res_info[0].dim.width,
+            values.res_info[0].dim.height,
+            values.res_info[0].frame_length_lines,
+            max_fps);
+        str.append(buffer);
+
+        for (size_t i = 1; i < values.res_num; i++) {
+            max_fps = int(values.res_info[i].max_fps * 1000);
+            snprintf(buffer, sizeof(buffer),
+                "%dx%d,frame_length_lines:%d,max_fps:%d,",
+                values.res_info[i].dim.width,
+                values.res_info[i].dim.height,
+                values.res_info[i].frame_length_lines,
+                max_fps);
+            str.append(buffer);
+        }
+
+        snprintf(buffer, sizeof(buffer),
+            "frame_length_lines_offset:%d,max_frame_length_lines:%d,"
+            "min_gain:%d,max_gain:%d",
+            values.frame_length_lines_offset,
+            values.max_frame_length_lines,
+            min_gain, max_gain);
+        str.append(buffer);
+    }
+
+    CDBG_HIGH("%s, exposure control info: %s", __func__, str.string());
+    return str;
+}
+
 /*===========================================================================
  * FUNCTION   : lookupAttr
  *
@@ -1538,6 +1611,11 @@ int32_t QCameraParameters::setPreviewFormat(const QCameraParameters& params)
 
         CameraParameters::setPreviewFormat(str);
         CDBG("%s: format %d\n", __func__, mPreviewFormat);
+        if (mPreviewFormat >= CAM_FORMAT_BAYER_MIPI_RAW_8BPP_GBRG &&
+            mPreviewFormat <= CAM_FORMAT_BAYER_MIPI_RAW_12BPP_BGGR) {
+            m_bNoDisplayMode = true;
+            set(KEY_QC_NO_DISPLAY_MODE, "1");
+        }
         return NO_ERROR;
     }
     ALOGE("Invalid preview format value: %s", (str == NULL) ? "NULL" : str);
@@ -2660,6 +2738,46 @@ int32_t  QCameraParameters::setExposureTime(const QCameraParameters& params)
         if (prev_str == NULL ||
             strcmp(str, prev_str) != 0) {
             return setExposureTime(str);
+        }
+    }
+
+    return NO_ERROR;
+}
+
+/*===========================================================================
+ * FUNCTION   : setManualExposure
+ *
+ * DESCRIPTION: set manual exposure time and gain from user setting
+ *
+ * PARAMETERS :
+ *   @params  : user setting parameters
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *==========================================================================*/
+int32_t  QCameraParameters::setManualExposure(const QCameraParameters& params)
+{
+    const char *exp_str = params.get(KEY_QC_EXPOSURE_MANUAL);
+    const char *prev_exp_str = get(KEY_QC_EXPOSURE_MANUAL);
+    const char *gain_str = params.get(KEY_QC_GAIN_MANUAL);
+    const char *prev_gain_str = get(KEY_QC_GAIN_MANUAL);
+
+    //we have give init vaule for KEY_QC_EXPOSURE_MANUAL and KEY_QC_GAIN_MANUAL,
+    //so no need to check again here.
+    if (exp_str != NULL && gain_str != NULL) {
+        if ((strcmp(exp_str, prev_exp_str) != 0) || (strcmp(gain_str, prev_gain_str) != 0)) {
+            return setManualExposure(exp_str, gain_str);
+        }
+    } else if (exp_str != NULL) {
+        // gain_str is NULL, use previous gain
+        if (strcmp(exp_str, prev_exp_str) != 0){
+            return setManualExposure(exp_str, prev_gain_str);
+        }
+    } else if (gain_str != NULL) {
+        // exp_str is NULL, use previous exposure line
+        if (strcmp(gain_str, prev_gain_str) != 0){
+            return setManualExposure(prev_exp_str, gain_str);
         }
     }
 
@@ -3808,8 +3926,9 @@ int32_t QCameraParameters::setNoDisplayMode(const QCameraParameters& params)
         }
     } else {
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.no-display", prop, "0");
+        property_get("persist.camera.no-display", prop, "1");
         m_bNoDisplayMode = atoi(prop);
+        set(KEY_QC_NO_DISPLAY_MODE, prop);
     }
     CDBG_HIGH("Param m_bNoDisplayMode = %d", m_bNoDisplayMode);
     return NO_ERROR;
@@ -4208,6 +4327,7 @@ int32_t QCameraParameters::updateParameters(QCameraParameters& params,
     if ((rc = setISOValue(params)))                     final_rc = rc;
     if ((rc = setContinuousISO(params)))                final_rc = rc;
     if ((rc = setExposureTime(params)))                 final_rc = rc;
+    if ((rc = setManualExposure(params)))               final_rc = rc;
     if ((rc = setSkinToneEnhancement(params)))          final_rc = rc;
     if ((rc = setFlash(params)))                        final_rc = rc;
     if ((rc = setAecLock(params)))                      final_rc = rc;
@@ -4729,7 +4849,7 @@ int32_t QCameraParameters::initDefaultParameters()
     }
     CDBG_HIGH("%s, Exposure time min %lf ms, max %lf ms", __func__,
         min_exp_time, max_exp_time);
-    //setExposureTime("0");
+    setExposureTime("0");
 
     // Set iso
     set(KEY_QC_MIN_ISO, m_pCapability->min_iso);
@@ -4763,7 +4883,9 @@ int32_t QCameraParameters::initDefaultParameters()
             m_pCapability->hfr_tbl_cnt);
     set(KEY_QC_SUPPORTED_HFR_SIZES, hfrSizeValues.string());
     setHighFrameRate(CAM_HFR_MODE_OFF);
-
+    String8 exposureCtrlInfoValues = createExposureCtrlInfoString(
+            m_pCapability->exposure_ctrl_info);
+    set(KEY_QC_EXPOSURE_CTRL_INFO, exposureCtrlInfoValues.string());
     // Set Focus algorithms
     String8 focusAlgoValues = createValuesString(
             m_pCapability->supported_focus_algos,
@@ -5051,7 +5173,13 @@ int32_t QCameraParameters::initDefaultParameters()
         set(KEY_QC_LOW_POWER_MODE_SUPPORTED, VALUE_FALSE);
     }
     setLowPowerMode(VALUE_DISABLE);
-
+    char exp_linecnt[20];
+    char exp_gain[20];
+    snprintf(exp_linecnt, sizeof(exp_linecnt), "%d", DEFAULT_INIT_MANUAL_EXPOSURE_LINECNT);
+    snprintf(exp_gain, sizeof(exp_gain), "%d", DEFAULT_INIT_MANUAL_EXPOSURE_GAIN);
+    setManualExposure(exp_linecnt, exp_gain);
+    set(KEY_QC_NO_DISPLAY_MODE, "1");
+    m_bNoDisplayMode = true;
     int32_t rc = commitParameters();
     if (rc == NO_ERROR) {
         rc = setNumOfSnapshot();
@@ -6014,6 +6142,35 @@ int32_t  QCameraParameters::setExposureTime(const char *expTimeStr)
     ALOGE("Invalid exposure time, value: %s",
           (expTimeStr == NULL) ? "NULL" : expTimeStr);
     return BAD_VALUE;
+}
+
+/*===========================================================================
+ * FUNCTION   : setManualExposure
+ *
+ * DESCRIPTION: set RAW Manual Exposure linecnt and gain
+ *
+ * PARAMETERS :
+ *   @exp_line : Exposure line count
+ *   @gain     : Exposure gain
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *==========================================================================*/
+int32_t  QCameraParameters::setManualExposure(const char * exp_line, const char * gain)
+{
+    cam_manual_exposure_t manual_exp;
+
+    manual_exp.linecnt = (int32_t)(atoi(exp_line));
+    manual_exp.gain = (uint32_t)(atoi(gain)) / 256.0;
+
+    updateParamEntry(KEY_QC_EXPOSURE_MANUAL, exp_line);
+    updateParamEntry(KEY_QC_GAIN_MANUAL, gain);
+    CDBG_HIGH("%s: linecnt %d, gain %f", __func__, manual_exp.linecnt, manual_exp.gain);
+    return AddSetParmEntryToBatch(m_pParamBuf,
+                                      CAM_INTF_PARM_RAW_MANUAL_EXPOSURE,
+                                      sizeof(cam_manual_exposure_t),
+                                      &manual_exp);
 }
 
 /*===========================================================================

@@ -48,7 +48,8 @@
 #define CAMERA_MIN_JPEG_ENCODING_BUFFERS 2
 #define CAMERA_MIN_VIDEO_BUFFERS         9
 #define CAMERA_ISP_PING_PONG_BUFFERS     2
-
+#define EXTRA_PREVIEW_STREAM_BUF         5
+#define EXTRA_RAW_PREVIEW_STREAM_BUF     5
 #define HDR_CONFIDENCE_THRESHOLD 0.4
 
 namespace qcamera {
@@ -1005,6 +1006,7 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
       m_bShutterSoundPlayed(false),
       m_bPreviewStarted(false),
       m_bRecordStarted(false),
+      mRawPreviewEnabled(false),
       m_currentFocusState(CAM_AF_SCANNING),
       m_pPowerModule(NULL),
       mDumpFrmCnt(0U),
@@ -1560,6 +1562,9 @@ uint8_t QCamera2HardwareInterface::getBufNumRequired(cam_stream_type_t stream_ty
                 != 0) {
                 ALOGE("get_min_undequeued_buffer_count  failed");
             }
+        } else if (mRawPreviewEnabled) {
+            bufferCnt = CAMERA_MIN_STREAMING_BUFFERS
+                        + EXTRA_RAW_PREVIEW_STREAM_BUF;
         } else {
             //preview window might not be set at this point. So, query directly
             //from BufferQueue implementation of gralloc buffers.
@@ -1590,7 +1595,8 @@ uint8_t QCamera2HardwareInterface::getBufNumRequired(cam_stream_type_t stream_ty
             } else {
                 bufferCnt = CAMERA_MIN_STREAMING_BUFFERS +
                         mParameters.getMaxUnmatchedFramesInQueue() +
-                        mParameters.getNumOfExtraBuffersForPreview();
+                        mParameters.getNumOfExtraBuffersForPreview() +
+                        EXTRA_PREVIEW_STREAM_BUF;
             }
             bufferCnt += minUndequeCount;
         }
@@ -1907,7 +1913,7 @@ QCameraHeapMemory *QCamera2HardwareInterface::allocateStreamInfoBuf(
     case CAM_STREAM_TYPE_SNAPSHOT:
     case CAM_STREAM_TYPE_RAW:
         if ((mParameters.isZSLMode() && mParameters.getRecordingHintValue() != true) ||
-                 mLongshotEnabled) {
+                 mLongshotEnabled || mRawPreviewEnabled) {
             streamInfo->streaming_mode = CAM_STREAMING_MODE_CONTINUOUS;
         } else {
             streamInfo->streaming_mode = CAM_STREAMING_MODE_BURST;
@@ -4633,6 +4639,7 @@ int32_t QCamera2HardwareInterface::addStreamToChannel(QCameraChannel *pChannel,
             streamType == CAM_STREAM_TYPE_METADATA ||
             streamType == CAM_STREAM_TYPE_RAW) &&
             !isZSLMode() &&
+            !mRawPreviewEnabled &&
             !isLongshotEnabled() &&
             !mParameters.getRecordingHintValue()) {
         rc = pChannel->addStream(*this,
@@ -4752,8 +4759,17 @@ int32_t QCamera2HardwareInterface::addPreviewChannel()
     }
 
     if (isNoDisplayMode()) {
+        cam_format_t format;
+        mParameters.getStreamFormat(CAM_STREAM_TYPE_PREVIEW, format);
+        if( (format >= CAM_FORMAT_BAYER_MIPI_RAW_8BPP_GBRG) &&
+             (format <= CAM_FORMAT_BAYER_MIPI_RAW_12BPP_BGGR)) {
+            mRawPreviewEnabled = true;
+            rc = addStreamToChannel(pChannel, CAM_STREAM_TYPE_RAW,
+                    nodisplay_preview_raw_stream_cb_routine, this);
+        } else {
         rc = addStreamToChannel(pChannel, CAM_STREAM_TYPE_PREVIEW,
                                 nodisplay_preview_stream_cb_routine, this);
+        }
     } else {
         rc = addStreamToChannel(pChannel, CAM_STREAM_TYPE_PREVIEW,
                                 preview_stream_cb_routine, this);
@@ -6393,7 +6409,7 @@ bool QCamera2HardwareInterface::isPreviewRestartEnabled()
 {
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.feature.restart", prop, "0");
+    property_get("persist.camera.feature.restart", prop, "1");
     int earlyRestart = atoi(prop);
     return earlyRestart == 1;
 }
