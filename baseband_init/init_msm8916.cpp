@@ -33,7 +33,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-
+#include <sys/sysinfo.h>
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/properties.h>
@@ -80,7 +80,33 @@ static void init_alarm_boot_properties()
     }
 }
 
+int is2GB()
+{
+    struct sysinfo sys;
+    sysinfo(&sys);
+    return sys.totalram > 1024ull * 1024 * 1024;
+}
+
 void vendor_load_properties()
 {
+
+if (is2GB()) {
+	property_set("dalvik.vm.heapstartsize", "128m");
+	property_set("dalvik.vm.heapgrowthlimit", "256m");
+	property_set("dalvik.vm.heapsize", "512m");
+	property_set("dalvik.vm.heaptargetutilization", "0.75");
+	property_set("dalvik.vm.heapminfree", "2m");
+	property_set("dalvik.vm.heapmaxfree", "8m");
+}
+    else {
+	property_set("dalvik.vm.heapstartsize", "8m");
+	property_set("dalvik.vm.heapgrowthlimit", "210m");
+	property_set("dalvik.vm.heapsize", "174m");
+	property_set("dalvik.vm.heaptargetutilization", "0.75");
+	property_set("dalvik.vm.heapminfree", "512k");
+	property_set("dalvik.vm.heapmaxfree", "8m");
+}
     init_alarm_boot_properties();
 }
+
+
