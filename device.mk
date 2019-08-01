@@ -357,11 +357,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml
 
-# Time
-PRODUCT_PACKAGES += \
-    timekeep \
-    TimeKeep
-
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
