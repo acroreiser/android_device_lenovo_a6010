@@ -333,10 +333,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     set_baseband.sh
 
-# Dalvik's hack
-PRODUCT_PACKAGES += \
-    set_dalvik.sh
-
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.a6000
