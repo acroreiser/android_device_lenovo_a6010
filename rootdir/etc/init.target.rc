@@ -121,6 +121,10 @@ on property:sys.boot_completed=1
     write /sys/block/mmcblk1/queue/read_ahead_kb 1024
     start vendor.msm_irqbalance
 
+    # Restrict permissions to socket file
+    # to hide Magisk & co.
+    chmod 440 /proc/net/unix
+
  on property:dolby.ds.volumeleveler.state=on && property:dolby.ds.state=on
     write /sys/kernel/sound_control/headphone_gain "-12 -12"
 
