@@ -1,2 +1,5 @@
-# lenovo_a6010_device_tree_android_pie
- Sync and replace device tree files for A6000 to make A6010 device tree.
+# Device tree for the Lenovo A6010/Lenovo A6010 Pro
+ 
+ Use this device tree to build custom ROMs for Lenovo A6010.
+ 
+ Thanks to Nitrogradient and all A6000 guys for base.
