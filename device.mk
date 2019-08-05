@@ -49,22 +49,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.ptor.enable=true \
     debug.enable.sglscale=1 \
     debug.sf.hw=1 \
-    debug.hwui.renderer=opengl \
-    debug.egl.hw=1 \
-    debug.sf.disable_hwc=0 \
-    debug.sf.recomputecrop=0 \
-    debug.sf.disable_backpressure=1 \
-    debug.sf.latch_unsignaled=1 \
-    debug.cpurend.vsync=false \
-    persist.hwc.mdpcomp.enable=true \
-    persist.hwc.ptor.enable=true \
-    debug.sf.gpu_comp_tiling=1 \
-    debug.performance.tuning=1 \
-    video.accelerate.hw=1
+    persist.debug.wfdenable=1
+    persist.sys.wfd.virtual=1
 
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=280 \
+    ro.sf.lcd_density=320 \
     persist.graphics.vulkan.disable=true
 
 # Disable buffer age
@@ -107,7 +97,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/acdb/QRD_Headset_cal.acdb:system/etc/acdbdata/QRD/QRD_Headset_cal.acdb \
     $(LOCAL_PATH)/audio/acdb/QRD_Speaker_cal.acdb:system/etc/acdbdata/QRD/QRD_Speaker_cal.acdb \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_qrd_skui.xml \
+    $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_qrd_skuh.xml \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
@@ -161,7 +151,12 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.msm8916 \
     libmm-qcamera \
-    SnapdragonCamera2
+    libshim_atomic \
+    persist.camera.HAL3.enabled=1 \
+    persist.camera.stats.test=5 \
+    persist.vendor.camera.HAL3.enabled=1 \
+    persist.vendor.camera.stats.test=5 \
+    Snap
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -404,10 +399,10 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapstartsize=8m \
-	dalvik.vm.heapgrowthlimit=210m \
-	dalvik.vm.heapsize=174m\
-	dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapgrowthlimit=210m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapsize=174m\
+    dalvik.vm.heaptargetutilization=0.75 \
 	dalvik.vm.heapminfree=512k \
 	dalvik.vm.heapmaxfree=8m\
     dalvik.vm.zygotemaxfailedboots=5 \
@@ -425,13 +420,13 @@ PRODUCT_PACKAGES += \
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
-    persist.data.target=dpm1 \
     persist.radio.apm_sim_not_pwdn=1 \
     ro.telephony.call_ring.multiple=false \
     ro.use_data_netmgrd=true \
     persist.radio.multisim.config=dsds \
     persist.radio.custom_ecc=1 \
-    persist.radio.ecc_hard_1=112,911,110,122,119,120,000,118 \
+    ril.ecclist=000,08,100,101,102,110,112,118,119,120,122,911,999 \
+    ril.ecclist1=000,08,100,101,102,110,112,118,119,120,122,911,999 \
     persist.radio.ecc_hard_count=1 \
     rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
@@ -458,6 +453,9 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
+    calmodule.cfg \
+    libcalmodule_common \
+    libcalmodule_akm \
     android.hardware.sensors@1.0-impl \
     accelcal \
     AccCalibration \

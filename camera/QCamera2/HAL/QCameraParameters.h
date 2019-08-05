@@ -167,7 +167,6 @@ public:
     static const char KEY_QC_SUPPORTED_LENSSHADE_MODES[] ;
     static const char KEY_QC_AUTO_EXPOSURE[];
     static const char KEY_QC_SUPPORTED_AUTO_EXPOSURE[];
-    static const char KEY_QC_EXPOSURE_CTRL_INFO[];
 
     static const char KEY_QC_GPS_LATITUDE_REF[];
     static const char KEY_QC_GPS_LONGITUDE_REF[];
@@ -475,10 +474,6 @@ public:
     static const char KEY_QC_SENSOR_HDR[];
     static const char KEY_QC_SUPPORTED_SENSOR_HDR_MODES[];
 
-    // Bluntly Copy Pasting & adapting from 8996 hal
-    static const char KEY_QC_EXPOSURE_MANUAL[];
-    static const char KEY_QC_GAIN_MANUAL[];
-
     // Values for SKIN TONE ENHANCEMENT
     static const char SKIN_TONE_ENHANCEMENT_ENABLE[] ;
     static const char SKIN_TONE_ENHANCEMENT_DISABLE[] ;
@@ -771,7 +766,6 @@ private:
     int32_t setVtEnable(const QCameraParameters& );
     int32_t setZoom(const QCameraParameters& );
     int32_t setISOValue(const QCameraParameters& );
-    int32_t setManualExposure(const QCameraParameters& );
     int32_t setContinuousISO(const QCameraParameters& );
     int32_t setExposureTime(const QCameraParameters& );
     int32_t setRotation(const QCameraParameters& );
@@ -842,7 +836,6 @@ private:
     int32_t setVtEnable(const char *vtEnable);
     int32_t setZoom(int zoom_level);
     int32_t setISOValue(const char *isoValue);
-    int32_t setManualExposure(const char * exp_line, const char * gain);
     int32_t setContinuousISO(const char *isoValue);
     int32_t setExposureTime(const char *expTimeStr);
     int32_t setFlash(const char *flashStr);
@@ -897,7 +890,6 @@ private:
     String8 createFpsRangeString(const cam_fps_range_t *fps,
             size_t len, int &default_fps_index);
     String8 createFpsString(cam_fps_range_t &fps);
-    String8 createExposureCtrlInfoString(const cam_exposure_ctrl_info_t &values);
     String8 createZoomRatioValuesString(uint32_t *zoomRatios, size_t length);
 
     // ops for batch set/get params with server

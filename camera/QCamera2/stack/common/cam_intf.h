@@ -101,7 +101,6 @@ typedef struct{
 
     size_t fps_ranges_tbl_cnt;                              /* fps ranges table size */
     cam_fps_range_t fps_ranges_tbl[MAX_SIZES_CNT];          /* fps ranges table */
-    cam_exposure_ctrl_info_t exposure_ctrl_info;
 
     /* supported antibanding modes */
     size_t supported_antibandings_cnt;
@@ -484,8 +483,7 @@ typedef union {
     INCLUDE(CAM_INTF_PARM_SATURATION,               int32_t,                     1);
     INCLUDE(CAM_INTF_PARM_BRIGHTNESS,               int32_t,                     1);
     INCLUDE(CAM_INTF_PARM_ISO,                      int32_t,                     1);
-    INCLUDE(CAM_INTF_PARM_EXPOSURE_TIME,            uint64_t,                    1);
-    INCLUDE(CAM_INTF_PARM_RAW_MANUAL_EXPOSURE,      cam_manual_exposure_t,       1);
+    INCLUDE(CAM_INTF_PARM_EXPOSURE_TIME,            uint64_t,                     1);
     INCLUDE(CAM_INTF_PARM_ZOOM,                     int32_t,                     1);
     INCLUDE(CAM_INTF_PARM_ROLLOFF,                  int32_t,                     1);
     INCLUDE(CAM_INTF_PARM_MODE,                     int32_t,                     1);

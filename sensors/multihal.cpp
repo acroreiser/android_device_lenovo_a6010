@@ -476,7 +476,7 @@ static int device__close(struct hw_device_t *dev) {
     if (ctx != NULL) {
         int retval = ctx->close();
         delete ctx;
-        return retval;
+	return retval;
     }
     return 0;
 }
@@ -506,7 +506,7 @@ static int device__batch(struct sensors_poll_device_1 *dev, int handle,
 }
 
 static int device__flush(__unused struct sensors_poll_device_1 *dev, __unused int handle) {
-    return -EINVAL;
+    return -EINVAL;;
 }
 
 static int device__inject_sensor_data(struct sensors_poll_device_1 *dev,
@@ -517,6 +517,7 @@ static int device__inject_sensor_data(struct sensors_poll_device_1 *dev,
 
 static int open_sensors(const struct hw_module_t* module, const char* name,
         struct hw_device_t** device);
+
 
 /*
  * Adds valid paths from the config file to the vector passed in.

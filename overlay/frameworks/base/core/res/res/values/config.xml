@@ -172,14 +172,20 @@
          backlight values for LUX levels between these control points.
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
+        <item>5</item>
         <item>15</item>
-        <item>30</item>
+        <item>50</item>
         <item>100</item>
         <item>200</item>
         <item>400</item>
+        <item>700</item>
         <item>1000</item>
         <item>2000</item>
         <item>3000</item>
+        <item>5000</item>
+        <item>6500</item>
+        <item>7000</item>
+        <item>8700</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -188,15 +194,21 @@
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>15</item>   <!-- 0-10 -->
-        <item>46</item>   <!-- 10-30 -->
-        <item>126</item>   <!-- 30-100 -->
-        <item>148</item>   <!-- 100-200 -->
-        <item>148</item>   <!-- 200-400 -->
-        <item>168</item>   <!-- 400-1000 -->
-        <item>200</item>  <!-- 1000-2000 -->
-        <item>226</item>  <!-- 2000-3000 -->
-        <item>255</item>  <!-- 3000+ -->
+        <item>10</item>
+        <item>18</item>
+        <item>27</item>
+        <item>38</item>
+        <item>48</item>
+        <item>55</item>
+        <item>64</item>
+        <item>74</item>
+        <item>120</item>
+        <item>164</item>
+        <item>170</item>
+        <item>180</item>
+        <item>225</item>
+        <item>255</item>
+        <item>255</item>
     </integer-array>
 
     <!-- Control the behavior when the user long presses the home button.

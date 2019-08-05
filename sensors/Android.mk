@@ -39,4 +39,15 @@ LOCAL_STRIP_MODULE := false
 
 include $(BUILD_SHARED_LIBRARY)
 
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := calmodule.cfg
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_ETC)
+LOCAL_SRC_FILES := calmodule.cfg
+
+include $(BUILD_PREBUILT)
+
+
 include $(call all-makefiles-under, $(LOCAL_PATH))

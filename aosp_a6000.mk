@@ -54,3 +54,6 @@ PRODUCT_COPY_FILES += device/lenovo/a6000/bootanimation.zip:system/media/bootani
 
 # APN(s)
 PRODUCT_COPY_FILES += device/lenovo/a6000/apns-conf.xml:system/etc/apns-conf.xml
+
+# Inherit some common CM stuff.
+$(call inherit-product, vendor/aosp/common.mk)
