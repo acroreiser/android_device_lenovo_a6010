@@ -399,12 +399,11 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapgrowthlimit=210m \
+    dalvik.vm.heapgrowthlimit=256m \
     dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapsize=174m\
-    dalvik.vm.heaptargetutilization=0.75 \
-	dalvik.vm.heapminfree=512k \
-	dalvik.vm.heapmaxfree=8m\
+    dalvik.vm.heapsize=512m\
+    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapstartsize=16m\
     dalvik.vm.zygotemaxfailedboots=5 \
     dalvik.vm.foreground-heap-growth-multiplier=2.0 \
     dalvik.vm.dex2oat-flags=--no-watch-dog \
