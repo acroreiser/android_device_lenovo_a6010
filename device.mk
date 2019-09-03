@@ -136,6 +136,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.offload.buffer.size.kb=64 \
     ro.config.vc_call_vol_steps=7 \
     ro.config.media_vol_steps=25 \
+    persist.bluetooth.bluetooth_audio_hal.disabled=true \
     vendor.audio.offload.gapless.enabled=true
 
 PRODUCT_COPY_FILES += \
