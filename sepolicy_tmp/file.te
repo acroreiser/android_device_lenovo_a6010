@@ -1,0 +1,2 @@
+type firmware_file, file_type;
+type persist_file, file_type;
