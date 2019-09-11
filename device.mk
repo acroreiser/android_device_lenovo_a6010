@@ -168,6 +168,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
     persist.camera.hal.debug.mask=0
 
+# vendor_init
+PRODUCT_PACKAGES += \
+    libinit_msm8916
+
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
