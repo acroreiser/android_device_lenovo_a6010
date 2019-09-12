@@ -50,6 +50,15 @@ on init
     write /sys/module/zswap/parameters/max_pool_percent 35
     write /sys/module/zswap/parameters/enabled 1
 
+    # add a cpuset for the camera daemon
+    # we want all the cores for camera
+    mkdir /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon/tasks
+    chmod 0664 /dev/cpuset/camera-daemon/tasks
+    write /dev/cpuset/camera-daemon/cpus 0-3
+    write /dev/cpuset/camera-daemon/mems 0
+
 service vm_bms /system/vendor/bin/vm_bms
     class main
     user root system
