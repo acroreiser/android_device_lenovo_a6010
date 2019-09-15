@@ -149,6 +149,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libbt-vendor \
 
+PRODUCT_COPY_FILES += \
+    prebuilts/vndk/v28/arm/arch-arm-armv7-a-neon/shared/vndk-sp/libbase.so:$(TARGET_COPY_OUT_VENDOR)/lib/libbase-v28.so
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
