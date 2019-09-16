@@ -310,10 +310,12 @@ PRODUCT_PACKAGES += \
 
 # Telephony
 PRODUCT_BOOT_JARS += \
-    telephony-ext
+    telephony-ext \
+    ims-ext-common_system
 
 PRODUCT_PACKAGES += \
-    telephony-ext
+    telephony-ext \
+    ims-ext-common_system
 
 # Enable FaceUnlock
 TARGET_DISABLE_ALTERNATIVE_FACE_UNLOCK := false
