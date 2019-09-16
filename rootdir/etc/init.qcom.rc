@@ -288,3 +288,6 @@ on property:init.svc.surfaceflinger=restarting
 on property:sys.boot_completed=1
     start set_baseband
     restart cameraserver
+
+on property:apexd.status=ready
+    mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind 
