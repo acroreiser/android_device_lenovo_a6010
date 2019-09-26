@@ -152,10 +152,6 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     libmm-qcamera \
     libshim_atomic \
-    persist.camera.HAL3.enabled=1 \
-    persist.camera.stats.test=5 \
-    persist.vendor.camera.HAL3.enabled=1 \
-    persist.vendor.camera.stats.test=5 \
     Snap
 
 # Permissions
@@ -195,8 +191,7 @@ PRODUCT_COPY_FILES += \
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay
 
 # Enforced RRO targets
 # PRODUCT_ENFORCE_RRO_TARGETS := \
