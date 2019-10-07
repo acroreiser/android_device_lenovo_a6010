@@ -1,6 +1,6 @@
 service vendor.sensors-hal-1-0 /vendor/bin/hw/android.hardware.sensors@1.0-service.msm8916
     class hal
     user system
-    group system input wakelock
+    group system input wakelock uhid
     capabilities BLOCK_SUSPEND
     rlimit rtprio 10 10
