@@ -377,6 +377,9 @@
          toward power states (eg. tv/soundbar). -->
     <bool name="config_autoPowerModeUseMotionSensor">false</bool>
 
+    <!-- Whether the display blanks itself when transitioning from a doze to a non-doze state -->
+    <bool name="config_displayBlanksAfterDoze">true</bool>
+
     <!-- Flag indicating whether the surface flinger has limited
          alpha compositing functionality in hardware.  If set, the window
          manager will disable alpha trasformation in animations where not
