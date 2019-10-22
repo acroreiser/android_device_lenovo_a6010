@@ -561,6 +561,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
     ro.telephony.default_network=9,1 \
+    persist.sys.fflag.override.settings_network_and_internet_v2=true \
     persist.data.netmgrd.qos.enable=false
 
 # RIL
