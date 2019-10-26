@@ -344,6 +344,7 @@ PRODUCT_PACKAGES += \
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=1 \
+    debug.stagefright.ccodec=0 \
     vidc.enc.narrow.searchrange=1
 
 # Keylayout
