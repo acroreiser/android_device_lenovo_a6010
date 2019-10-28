@@ -50,7 +50,7 @@ namespace.platform.asan.search.paths +=           /system/${LIB}
 namespace.platform.asan.search.paths += /apex/com.android.runtime/${LIB}
 
 # /system/lib/libc.so, etc are symlinks to /apex/com.android.lib/lib/bionic/libc.so, etc.
-# Add /apex/... pat to the permitted paths because linker uses realpath(3)
+# Add /apex/... path to the permitted paths because linker uses realpath(3)
 # to check the accessibility of the lib. We could add this to search.paths
 # instead but that makes the resolution of bionic libs be dependent on
 # the order of /system/lib and /apex/... in search.paths. If /apex/...
@@ -141,3 +141,9 @@ namespace.sphal.link.platform.shared_libs = libEGL.so:libGLESv1_CM.so:libGLESv2.
 
 # Add a link for libz.so which is llndk on devices where VNDK is not enforced.
 namespace.sphal.link.platform.shared_libs += libz.so
+
+# With VNDK APEX, /system/${LIB}/vndk-sp${VNDK_VER} is a symlink to the following.
+# Add /apex/... path to the permitted paths because linker uses realpath(3)
+# to check the accessibility of the lib.
+namespace.sphal.permitted.paths += /apex/com.android.vndk.${VNDK_APEX_VER}/${LIB}
+namespace.sphal.asan.permitted.paths += /apex/com.android.vndk.${VNDK_APEX_VER}/${LIB}
