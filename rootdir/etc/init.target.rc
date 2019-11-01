@@ -61,8 +61,8 @@ on init
 
 service vm_bms /system/vendor/bin/vm_bms
     class main
-    user root system
-    group root system wakelock
+    user root
+    group root wakelock
 
 on post-fs
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
@@ -85,11 +85,12 @@ on post-fs-data
 
 on charger
    wait /dev/block/bootdevice/by-name/system
-   mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=0
+   mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
    chown root system /sys/class/power_supply/bms/current_now
    chown root system /sys/class/power_supply/bms/voltage_ocv
    chmod 0664 /sys/class/power_supply/bms/current_now
    chmod 0664 /sys/class/power_supply/bms/voltage_ocv
+   load_system_props
    start vm_bms
 
 on property:sys.boot_completed=1
