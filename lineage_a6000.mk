@@ -53,5 +53,9 @@ PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 # Animation
 PRODUCT_COPY_FILES += device/lenovo/a6000/bootanimation.zip:system/media/bootanimation.zip
 
+# Trust
+PRODUCT_PACKAGES += \
+    vendor.lineage.trust@1.0-service
+
 # APN(s)
 PRODUCT_COPY_FILES += device/lenovo/a6000/apns-conf.xml:system/etc/apns-conf.xml
