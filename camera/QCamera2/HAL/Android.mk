@@ -7,6 +7,7 @@ LOCAL_CLANG_CFLAGS += \
         -Wno-error=gnu-designator \
         -Wno-error=unused-variable \
         -Wno-error=format \
+        -Wno-error=implicit-fallthrough \
         -Wno-error=unused-parameter
 
 LOCAL_SRC_FILES := \
