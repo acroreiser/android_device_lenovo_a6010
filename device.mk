@@ -52,7 +52,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.ptor.enable=true \
     debug.enable.sglscale=1 \
     debug.sf.hw=1 \
-    persist.debug.wfdenable=1
+    persist.debug.wfdenable=1 \
     persist.sys.wfd.virtual=1
 
 # Screen density
