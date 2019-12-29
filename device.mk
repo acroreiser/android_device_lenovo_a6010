@@ -53,6 +53,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.enable.sglscale=1 \
     debug.sf.hw=1 \
     debug.sf.disable_backpressure=1 \
+    debug.cpurend.vsync=false \
     persist.debug.wfdenable=1 \
     persist.sys.wfd.virtual=1
 
