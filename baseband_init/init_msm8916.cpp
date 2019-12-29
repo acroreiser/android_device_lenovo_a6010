@@ -96,6 +96,9 @@ if (is2GB()) {
 	property_set("dalvik.vm.heapsize", "512m");
 	property_set("dalvik.vm.heaptargetutilization", "0.75");
 	property_set("dalvik.vm.heapminfree", "2m");
+
+// Cached apps limit
+  property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
 }
     else {
 	property_set("dalvik.vm.heapstartsize", "8m");
@@ -103,6 +106,9 @@ if (is2GB()) {
 	property_set("dalvik.vm.heapsize", "256m");
 	property_set("dalvik.vm.heaptargetutilization", "0.75");
 	property_set("dalvik.vm.heapminfree", "512k");
+
+// Cached apps limit
+  property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "9");
 }
     init_alarm_boot_properties();
 }
