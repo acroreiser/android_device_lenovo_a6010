@@ -360,6 +360,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.a6000
 
+# LiveDisplay
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay@2.0-service-legacymm \
+    vendor.lineage.livedisplay@2.0-service-sysfs
+
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=1 \
