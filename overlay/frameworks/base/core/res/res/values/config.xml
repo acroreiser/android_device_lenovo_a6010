@@ -271,7 +271,9 @@
         <item>"/system/framework/arm/boot.oat"</item>
         <item>"/system/framework/arm/boot-core-libart.oat"</item>
         <item>"/system/lib/libsurfaceflinger.so"</item>
-        <item>"/system/priv-app/SystemUI/SystemUI.apk"</item>
+        <item>"/system/product/priv-app/SystemUI/SystemUI.apk"</item>
+        <item>"/data/dalvik-cache/arm/system@product@priv-app@SystemUI@SystemUI.apk@classes.dex"</item>
+        <item>"/data/dalvik-cache/arm/system@product@priv-app@SystemUI@SystemUI.apk@classes.vdex"</item>
     </string-array>
 
     <!-- Should the pinner service pin the Home application? -->
