@@ -36,7 +36,6 @@ TARGET_CPU_VARIANT := cortex-a53
 TARGET_USES_64_BIT_BINDER := true
 
 # Kernel
-#TARGET_PREBUILT_KERNEL := device/lenovo/a6000/kernel
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
@@ -45,8 +44,7 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 TARGET_KERNEL_SOURCE := kernel/lenovo/a6000
-#CROSS_COMPILE := /home/bohdan_zakh/sources/toolchain/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin
-KERNEL_TOOLCHAIN := /media/system2/root3/Infernal/toolchain/arm-eabi-4.9/bin
+KERNEL_TOOLCHAIN := /media/system2/root3/lineage-17.0/prebuilts/gcc/linux-x86/arm/arm-eabi-4.9/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 TARGET_KERNEL_CONFIG := lineageos_a6000_defconfig
 
