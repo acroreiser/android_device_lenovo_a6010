@@ -120,6 +120,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml
 
+# Ethernet
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.ethernet.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ethernet.xml
+
 # APEX
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ld.config.txt:system/etc/swcodec/ld.config.txt
@@ -217,8 +221,8 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
 
 # Enforced RRO targets
-# PRODUCT_ENFORCE_RRO_TARGETS := \
-#    framework-res
+ PRODUCT_ENFORCE_RRO_TARGETS := \
+    framework-res
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -459,7 +463,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false \
     dalvik.vm.dex2oat-threads=2 \
     ro.vendor.qti.am.reschedule_service=true \
-    sys.use_fifo_ui=1
+    persist.sys.scrollingcache=0
 
 # TextClassifier
 PRODUCT_PACKAGES += \
