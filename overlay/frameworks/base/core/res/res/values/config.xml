@@ -411,4 +411,14 @@
     <string name="config_smartChargingSysfsNode" translatable="false">/sys/class/power_supply/battery/charging_enabled</string>
     <string name="config_smartChargingSuspendValue" translatable="false">0</string>
     <string name="config_smartChargingResumeValue" translatable="false">1</string>
+
+    <!-- Screen brightness used to dim the screen when the user activity 
+         timeout expires.  May be less than the minimum allowed brightness 
+         setting that can be set by the user. -->
+    <integer name="config_screenBrightnessDim">3</integer>
+
+    <!-- Minimum screen brightness setting allowed by the power manager. The 
+         user is forbidden from setting the brightness below this level. 
+         -->
+    <integer name="config_screenBrightnessSettingMinimum">5</integer>
 </resources>
