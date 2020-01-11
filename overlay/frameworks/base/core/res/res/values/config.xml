@@ -363,4 +363,12 @@
          that have a HWC implementation that can apply the matrix passed to setColorTransform
          without impacting power, performance, and app compatibility (e.g. protected content). -->
     <bool name="config_nightDisplayAvailable">false</bool>
+
+    <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
+         in hardware. -->
+    <bool name="config_setColorTransformAccelerated">true</bool>
+
+    <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
+         in hardware for individual layers. -->
+    <bool name="config_setColorTransformAcceleratedPerLayer">true</bool>
 </resources>
