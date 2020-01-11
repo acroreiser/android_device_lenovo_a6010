@@ -388,4 +388,10 @@
          or (if false) something for which movement is either not measurable or should not count
          toward power states (eg. tv/soundbar). -->
     <bool name="config_autoPowerModeUseMotionSensor">false</bool>
+
+    <!-- Flag indicating whether the surface flinger has limited
+         alpha compositing functionality in hardware.  If set, the window
+         manager will disable alpha trasformation in animations where not
+         strictly needed. -->
+    <bool name="config_sf_limitedAlpha">true</bool>
 </resources>
