@@ -90,29 +90,32 @@ int is2GB()
 void vendor_load_properties()
 {
 
-if (is2GB()) {
-	property_set("dalvik.vm.heapstartsize", "8m");
-	property_set("dalvik.vm.heapgrowthlimit", "128m");
-	property_set("dalvik.vm.heapsize", "256m");
-	property_set("dalvik.vm.heaptargetutilization", "0.75");
-	property_set("dalvik.vm.heapminfree", "2m");
-	property_set("dalvik.vm.heapmaxfree", "8m");
+  if (is2GB())
+  {
+	   property_set("dalvik.vm.heapstartsize", "8m");
+	   property_set("dalvik.vm.heapgrowthlimit", "128m");
+	   property_set("dalvik.vm.heapsize", "256m");
+	   property_set("dalvik.vm.heaptargetutilization", "0.75");
+	   property_set("dalvik.vm.heapminfree", "2m");
+	   property_set("dalvik.vm.heapmaxfree", "8m");
 
-// Cached apps limit
-  property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
-}
-    else {
-	property_set("dalvik.vm.heapstartsize", "8m");
-	property_set("dalvik.vm.heapgrowthlimit", "64m");
-	property_set("dalvik.vm.heapsize", "128m");
-	property_set("dalvik.vm.heaptargetutilization", "0.75");
-	property_set("dalvik.vm.heapminfree", "2m");
-	property_set("dalvik.vm.heapmaxfree", "8m");
+     // Cached apps limit
+     property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
+  }
+  else
+  {
+	   property_set("dalvik.vm.heapstartsize", "8m");
+	   property_set("dalvik.vm.heapgrowthlimit", "64m");
+	   property_set("dalvik.vm.heapsize", "128m");
+	   property_set("dalvik.vm.heaptargetutilization", "0.75");
+	   property_set("dalvik.vm.heapminfree", "2m");
+	   property_set("dalvik.vm.heapmaxfree", "8m");
 
-// Cached apps limit
-  property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "9");
-}
-    init_alarm_boot_properties();
+     // Cached apps limit
+     property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "9");
+  }
+
+  init_alarm_boot_properties();
 }
 
 
