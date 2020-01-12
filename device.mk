@@ -312,9 +312,6 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl \
     android.hardware.power@1.0-service
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_bg=8
-
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so
