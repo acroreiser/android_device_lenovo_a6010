@@ -373,7 +373,7 @@
     <bool name="config_setColorTransformAcceleratedPerLayer">true</bool>
 
     <!-- Flag indicating whether we should enable the adaptive sleep.-->
-    <bool name="config_adaptive_sleep_available">true</bool>
+    <bool name="config_adaptive_sleep_available">false</bool>
 
     <!-- Set this to true to enable the platform's auto-power-save modes like doze and
          app standby.  These are not enabled by default because they require a standard
