@@ -51,7 +51,7 @@ BUILD_FINGERPRINT := Lenovo/Kraft-A6000/Kraft-A6000:5.0.2/LRX22G/Kraft-A6000_S06
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 
 # Animation
-PRODUCT_COPY_FILES += device/lenovo/a6000/bootanimation.zip:system/media/bootanimation.zip
+# PRODUCT_COPY_FILES += device/lenovo/a6000/bootanimation.zip:system/media/bootanimation.zip
 
 # Trust
 PRODUCT_PACKAGES += \
