@@ -50,10 +50,10 @@ Return<bool> KeyDisabler::isEnabled() {
 Return<bool> KeyDisabler::setEnabled(bool enabled) {
     if (!mHasKeyDisabler) return false;
 
-    if (!android::base::WriteStringToFile((enabled ? "0" : "1"), kControlPath)) {
-        LOG(ERROR) << "Failed to write " << kControlPath;
-        return false;
-    }
+    if(enabled == true)
+        android::base::WriteStringToFile("1", kControlPath);
+    else
+        android::base::WriteStringToFile("0", kControlPath);
 
     return true;
 }
