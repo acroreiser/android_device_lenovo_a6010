@@ -33,6 +33,7 @@ using android::hardware::light::V2_0::implementation::Light;
 const static std::string kLcdBacklightPath = "/sys/class/leds/lcd-backlight/brightness";
 const static std::string kLcdMaxBacklightPath = "/sys/class/leds/lcd-backlight/max_brightness";
 const static std::string kChargingLedPath = "/sys/class/leds/red/brightness";
+const static std::string kNotificationLedPath = "/sys/class/leds/green/brightness";
 
 int main() {
     uint32_t lcdMaxBrightness = 255;
@@ -60,9 +61,16 @@ int main() {
         return -errno;
     }
 
+    std::ofstream notificationLed(kNotificationLedPath);
+    if (!notificationLed) {
+        LOG(ERROR) << "Failed to open " << kNotificationLedPath << ", error=" << errno
+                   << " (" << strerror(errno) << ")";
+        return -errno;
+    }
+
     android::sp<ILight> service = new Light(
             {std::move(lcdBacklight), lcdMaxBrightness},
-            std::move(chargingLed));
+            std::move(chargingLed), std::move(notificationLed));
 
     configureRpcThreadpool(1, true);
 

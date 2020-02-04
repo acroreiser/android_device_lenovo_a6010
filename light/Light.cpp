@@ -24,7 +24,6 @@ namespace {
 using android::hardware::light::V2_0::LightState;
 
 static constexpr int RAMP_SIZE = 8;
-static constexpr int RAMP_STEP_DURATION = 50;
 
 static constexpr int BRIGHTNESS_RAMP[RAMP_SIZE] = {0, 12, 25, 37, 50, 72, 85, 100};
 static constexpr int DEFAULT_MAX_BRIGHTNESS = 255;
@@ -38,18 +37,6 @@ static uint32_t rgbToBrightness(const LightState& state) {
 static bool isLit(const LightState& state) {
     return (state.color & 0x00ffffff);
 }
-
-static std::string getScaledDutyPcts(int brightness) {
-    std::string buf, pad;
-
-    for (auto i : BRIGHTNESS_RAMP) {
-        buf += pad;
-        buf += std::to_string(i * brightness / 255);
-        pad = ",";
-    }
-
-    return buf;
-}
 }  // anonymous namespace
 
 namespace android {
@@ -59,13 +46,17 @@ namespace V2_0 {
 namespace implementation {
 
 Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
-             std::ofstream&& charging_led)
+             std::ofstream&& charging_led,
+             std::ofstream&& notification_led)
     : mLcdBacklight(std::move(lcd_backlight)),
-      mChargingLed(std::move(charging_led)) {
+      mChargingLed(std::move(charging_led)),
+      mNotificationLed(std::move(notification_led)) {
     auto backlightFn(std::bind(&Light::setLcdBacklight, this, std::placeholders::_1));
     auto batteryFn(std::bind(&Light::setBatteryLight, this, std::placeholders::_1));
+    auto notificationFn(std::bind(&Light::setNotificationLight, this, std::placeholders::_1));
     mLights.emplace(std::make_pair(Type::BACKLIGHT, backlightFn));
     mLights.emplace(std::make_pair(Type::BATTERY, batteryFn));
+    mLights.emplace(std::make_pair(Type::NOTIFICATIONS, notificationFn));
 }
 
 // Methods from ::android::hardware::light::V2_0::ILight follow.
@@ -83,7 +74,6 @@ Return<Status> Light::setLight(Type type, const LightState& state) {
 
 Return<void> Light::getSupportedTypes(getSupportedTypes_cb _hidl_cb) {
     std::vector<Type> types;
-
     for (auto const& light : mLights) {
         types.push_back(light.first);
     }
@@ -125,6 +115,28 @@ void Light::setSpeakerLightLocked(const LightState& state) {
     } else {
         // Lights off
         mChargingLed << 0 << std::endl;
+    }
+}
+
+void Light::setNotificationLight(const LightState& state) {
+    std::lock_guard<std::mutex> lock(mLock);
+    mNotificationState = state;
+    setSpeakerNotificationLightLocked();
+}
+
+void Light::setSpeakerNotificationLightLocked() {
+    setSpeakerNLightLocked(mNotificationState);
+}
+
+void Light::setSpeakerNLightLocked(const LightState& state) {
+    if (isLit(state)) {
+        mNotificationLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
+        mChargingLed << 0 << std::endl;
+    } else {
+        // Lights off
+        mNotificationLed << 0 << std::endl;
+        if (isLit(mBatteryState))
+            mChargingLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
     }
 }
 

@@ -32,7 +32,7 @@ namespace implementation {
 
 struct Light : public ILight {
     Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
-          std::ofstream&& charging_led);
+          std::ofstream&& charging_led, std::ofstream&& notification_led);
 
     // Methods from ::android::hardware::light::V2_0::ILight follow.
     Return<Status> setLight(Type type, const LightState& state) override;
@@ -40,14 +40,19 @@ struct Light : public ILight {
 
   private:
     void setBatteryLight(const LightState& state);
+    void setNotificationLight(const LightState& state);
     void setLcdBacklight(const LightState& state);
     void setSpeakerBatteryLightLocked();
     void setSpeakerLightLocked(const LightState& state);
+    void setSpeakerNotificationLightLocked();
+    void setSpeakerNLightLocked(const LightState& state);
 
     std::pair<std::ofstream, uint32_t> mLcdBacklight;
     std::ofstream mChargingLed;
+    std::ofstream mNotificationLed;
 
     LightState mBatteryState;
+    LightState mNotificationState;
 
     std::unordered_map<Type, std::function<void(const LightState&)>> mLights;
     std::mutex mLock;
