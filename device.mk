@@ -335,7 +335,7 @@ PRODUCT_COPY_FILES += \
 
 # First api level, device has been commercially launched
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.first_api_level=19
+    ro.product.first_api_level=21
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -541,4 +541,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
 
-$(call inherit-product, vendor/lenovo/a6000/a6000-vendor.mk)
+$(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)

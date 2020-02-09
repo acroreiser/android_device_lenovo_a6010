@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PLATFORM_PATH := device/lenovo/a6000
+PLATFORM_PATH := device/lenovo/a6010
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8916
@@ -43,11 +43,11 @@ BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 an
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
-TARGET_KERNEL_SOURCE := kernel/lenovo/a6000
+TARGET_KERNEL_SOURCE := kernel/lenovo/a6010
 TOP_PATH := $(realpath $(TOP))
 KERNEL_TOOLCHAIN := $(TOP_PATH)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
-TARGET_KERNEL_CONFIG := lineageos_a6000_defconfig
+TARGET_KERNEL_CONFIG := lineageos_a6010_defconfig
 
 # File System
 TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
@@ -84,7 +84,7 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8916
 
 # Security Patch Level
-VENDOR_SECURITY_PATCH := 2016-01-01
+VENDOR_SECURITY_PATCH := 2016-03-01
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
@@ -180,4 +180,4 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 
 DISABLE_APEX_TEST_MODULE := true
 # Proprietary Prebuilt
--include vendor/lenovo/a6000/BoardConfigVendor.mk
+-include vendor/lenovo/a6010/BoardConfigVendor.mk
