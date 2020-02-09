@@ -335,7 +335,7 @@ PRODUCT_COPY_FILES += \
 
 # First api level, device has been commercially launched
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.first_api_level=19
+    ro.product.first_api_level=21
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -451,6 +451,16 @@ PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
 PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
+PRODUCT_DEXPREOPT_SPEED_APPS += Settings
+PRODUCT_DEXPREOPT_SPEED_APPS += Gallery2
+PRODUCT_DEXPREOPT_SPEED_APPS += SettingsIntelligence
+PRODUCT_DEXPREOPT_SPEED_APPS += LatinIME
+PRODUCT_DEXPREOPT_SPEED_APPS += Contacts
+PRODUCT_DEXPREOPT_SPEED_APPS += messaging
+PRODUCT_DEXPREOPT_SPEED_APPS += DeskClock
+PRODUCT_DEXPREOPT_SPEED_APPS += Dialer
+PRODUCT_DEXPREOPT_SPEED_APPS += DocumentsUI
+PRODUCT_DEXPREOPT_SPEED_APPS += Bluetooth
 
 # Boot Animtion
 TARGET_BOOTANIMATION_HALF_RES := true
@@ -466,7 +476,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false \
     dalvik.vm.dex2oat-threads=2 \
     ro.vendor.qti.am.reschedule_service=true \
-    persist.sys.scrollingcache=0
+    persist.sys.scrollingcache=0 \
+    dalvik.vm.isa.arm.features=div \
+    persist.sys.dalvik.vm.lib.2=libart.so
 
 # TextClassifier
 PRODUCT_PACKAGES += \
@@ -541,4 +553,4 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
 
-$(call inherit-product, vendor/lenovo/a6000/a6000-vendor.mk)
+$(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
