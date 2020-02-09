@@ -178,5 +178,6 @@ WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 
+DISABLE_APEX_TEST_MODULE := true
 # Proprietary Prebuilt
 -include vendor/lenovo/a6000/BoardConfigVendor.mk
