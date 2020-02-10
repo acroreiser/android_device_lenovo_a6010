@@ -229,6 +229,13 @@ service set_zram /vendor/bin/sh /system/vendor/bin/set_zram.sh
     group system
     oneshot
 
+service boot_boost /vendor/bin/sh /system/vendor/bin/init.boot_boost.sh
+    class late_start
+    disabled
+    user root
+    group system
+    oneshot
+
 service set_baseband /vendor/bin/sh /system/vendor/bin/set_baseband.sh
     class late_start
     disabled
@@ -312,6 +319,7 @@ on property:init.svc.surfaceflinger=restarting
 on property:sys.boot_completed=1
     start set_baseband
     start set_zram
+    start boot_boost
     restart cameraserver
 
 on property:apexd.status=ready
