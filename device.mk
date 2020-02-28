@@ -45,10 +45,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
-# APEX
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/ld.config.txt:system/etc/swcodec/ld.config.txt
-
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=c2d \
