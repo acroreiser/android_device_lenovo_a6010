@@ -100,8 +100,8 @@ void vendor_load_properties()
 	   property_set("dalvik.vm.heapminfree", "2m");
 	   property_set("dalvik.vm.heapmaxfree", "8m");
 
-       // Cached apps limit
-       property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
+	   // Cached apps limit
+	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
   }
   else
   {
@@ -113,8 +113,8 @@ void vendor_load_properties()
 	   property_set("dalvik.vm.heapminfree", "2m");
 	   property_set("dalvik.vm.heapmaxfree", "8m");
 
-       // Cached apps limit
-       property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "9");
+	   // Cached apps limit
+	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "9");
   }
 
   init_alarm_boot_properties();
