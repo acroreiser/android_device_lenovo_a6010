@@ -105,8 +105,6 @@ void vendor_load_properties()
   }
   else
   {
-	   property_set("ro.config.low_ram", "true");
-	   property_set("persist.sys.force_highendgfx", "true");
 	   property_set("ro.config.max_starting_bg", "6");
 	   property_set("dalvik.vm.heapstartsize", "5m");
 	   property_set("dalvik.vm.heapgrowthlimit", "64m");
