@@ -456,6 +456,9 @@ TARGET_BOOTANIMATION_HALF_RES := true
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 
+# Disable Scudo outside of eng builds to save RAM.
+PRODUCT_DISABLE_SCUDO := true
+
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.zygotemaxfailedboots=5 \
     dalvik.vm.foreground-heap-growth-multiplier=2.0 \
