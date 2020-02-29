@@ -61,6 +61,9 @@ on init
     write /dev/cpuset/camera-daemon/cpus 0-3
     write /dev/cpuset/camera-daemon/mems 0
 
+    chown system system /sys/class/power_supply/battery/charging_enabled
+    chmod 0664 /sys/class/power_supply/battery/charging_enabled
+
 service vm_bms /system/vendor/bin/vm_bms
     class main
     user root
