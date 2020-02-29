@@ -61,6 +61,14 @@ on init
     write /dev/cpuset/camera-daemon/cpus 0-3
     write /dev/cpuset/camera-daemon/mems 0
 
+    # add a cpuset for the audio
+    mkdir /dev/cpuset/audio-app
+    chown system system /dev/cpuset/audio-app
+    chown system system /dev/cpuset/audio-app/tasks
+    chmod 0664 /dev/cpuset/audio-app/tasks
+    write /dev/cpuset/audio-app/cpus 0-3
+    write /dev/cpuset/audio-app/mems 0
+
     chown system system /sys/class/power_supply/battery/charging_enabled
     chmod 0664 /sys/class/power_supply/battery/charging_enabled
 
