@@ -94,6 +94,7 @@ void vendor_load_properties()
   {
 	   // pm dexopt settings
 	   property_set("pm.dexopt.install", "quicken");
+	   property_set("pm.dexopt.shared", "quicken");
 	   property_set("pm.dexopt.bg-dexopt", "speed-profile");
 	   property_set("dalvik.vm.usejitprofiles", "true");
 
