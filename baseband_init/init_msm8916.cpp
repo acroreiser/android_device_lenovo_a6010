@@ -90,14 +90,14 @@ int is2GB()
 void vendor_load_properties()
 {
 
+  // pm dexopt settings
+  property_set("pm.dexopt.install", "quicken");
+  property_set("pm.dexopt.shared", "quicken");
+  property_set("pm.dexopt.bg-dexopt", "speed-profile");
+  property_set("dalvik.vm.usejitprofiles", "true");
+
   if (is2GB())
   {
-	   // pm dexopt settings
-	   property_set("pm.dexopt.install", "quicken");
-	   property_set("pm.dexopt.shared", "quicken");
-	   property_set("pm.dexopt.bg-dexopt", "speed-profile");
-	   property_set("dalvik.vm.usejitprofiles", "true");
-
 	   property_set("ro.config.max_starting_bg", "8");
 	   property_set("dalvik.vm.heapstartsize", "8m");
 	   property_set("dalvik.vm.heapgrowthlimit", "128m");
@@ -111,7 +111,7 @@ void vendor_load_properties()
   }
   else
   {
-	   property_set("ro.config.max_starting_bg", "6");
+	   property_set("ro.config.max_starting_bg", "4");
 	   property_set("dalvik.vm.heapstartsize", "5m");
 	   property_set("dalvik.vm.heapgrowthlimit", "64m");
 	   property_set("dalvik.vm.heapsize", "128m");
