@@ -45,6 +45,8 @@ namespace light {
 namespace V2_0 {
 namespace implementation {
 
+uint32_t green_status;
+
 Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
              std::ofstream&& charging_led,
              std::ofstream&& notification_led)
@@ -111,7 +113,8 @@ void Light::setSpeakerBatteryLightLocked() {
 
 void Light::setSpeakerLightLocked(const LightState& state) {
     if (isLit(state)) {
-        mChargingLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
+        if(green_status == 0)
+            mChargingLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
     } else {
         // Lights off
         mChargingLed << 0 << std::endl;
@@ -132,11 +135,14 @@ void Light::setSpeakerNLightLocked(const LightState& state) {
     if (isLit(state)) {
         mNotificationLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
         mChargingLed << 0 << std::endl;
+        green_status = 1;
     } else {
         // Lights off
         mNotificationLed << 0 << std::endl;
         if (isLit(mBatteryState))
             mChargingLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
+
+        green_status = 0;
     }
 }
 
