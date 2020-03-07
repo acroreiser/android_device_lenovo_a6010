@@ -23,9 +23,6 @@
 namespace {
 using android::hardware::light::V2_0::LightState;
 
-static constexpr int RAMP_SIZE = 8;
-
-static constexpr int BRIGHTNESS_RAMP[RAMP_SIZE] = {0, 12, 25, 37, 50, 72, 85, 100};
 static constexpr int DEFAULT_MAX_BRIGHTNESS = 255;
 
 static uint32_t rgbToBrightness(const LightState& state) {
