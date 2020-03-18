@@ -48,8 +48,6 @@ PRODUCT_PACKAGES += \
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=c2d \
-    ro.surface_flinger.vsync_event_phase_offset_ns=5000000 \
-    ro.surface_flinger.vsync_sf_event_phase_offset_ns=7500000 \
     debug.mdpcomp.idletime=600 \
     persist.hwc.mdpcomp.enable=true \
     persist.hwc.ptor.enable=true \
