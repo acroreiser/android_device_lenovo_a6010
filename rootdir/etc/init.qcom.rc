@@ -77,6 +77,9 @@ on late-fs
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
 
+# GnssConfiguration doesn't actually look at vendor gps.conf
+    mount none /vendor/etc/gps.conf /system/etc/gps_debug.conf bind
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/fdAlbum 0770 camera camera
