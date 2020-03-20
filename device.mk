@@ -479,6 +479,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.isa.arm.features=div \
     persist.sys.dalvik.vm.lib.2=libart.so
 
+# Low Memory Killer
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.lmk.critical_upgrade=true \
+    ro.lmk.upgrade_pressure=40 \
+    ro.lmk.downgrade_pressure=60 \
+    ro.lmk.kill_heaviest_task=false
+
 # Battery
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.small_battery=true
