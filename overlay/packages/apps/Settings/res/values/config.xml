@@ -25,4 +25,6 @@
     <!-- Whether or not to show the night light suggestion. -->
     <bool name="config_night_light_suggestion_enabled">false</bool>
 
+    <!-- Device specific doze package -->
+    <string name="config_customDozePackage">org.lineageos.settings.doze/org.lineageos.settings.doze.DozeSettingsActivity</string>
 </resources>
