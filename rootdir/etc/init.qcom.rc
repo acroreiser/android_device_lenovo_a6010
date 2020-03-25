@@ -174,7 +174,7 @@ service irsc_util /system/vendor/bin/irsc_util "/system/vendor/etc/sec_config"
 service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
-    group wakelock
+    group system wakelock
     ioprio rt 0
     shutdown critical
     writepid /dev/cpuset/system-background/tasks
