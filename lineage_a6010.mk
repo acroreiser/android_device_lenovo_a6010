@@ -51,7 +51,7 @@ BUILD_FINGERPRINT := Lenovo/A6010/A6010:5.0.2/LRX22G/A6010_S045_170622_16G_ROW:u
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 
 # Animation
-# PRODUCT_COPY_FILES += device/lenovo/a6000/bootanimation.zip:system/media/bootanimation.zip
+PRODUCT_COPY_FILES += device/lenovo/a6010/bootanimation.zip:system/media/bootanimation.zip
 
 # Trust
 PRODUCT_PACKAGES += \
