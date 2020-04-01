@@ -50,6 +50,9 @@ KERNEL_TOOLCHAIN := $(TOP_PATH)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 TARGET_KERNEL_CONFIG := lineageos_a6010_defconfig
 
+# Ramdisk compression
+LZMA_RAMDISK_TARGETS := boot
+
 # File System
 TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
 BOARD_FLASH_BLOCK_SIZE := 131072
