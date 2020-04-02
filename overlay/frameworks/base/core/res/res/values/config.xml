@@ -375,11 +375,11 @@
 
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
          in hardware. -->
-    <bool name="config_setColorTransformAccelerated">true</bool>
+    <bool name="config_setColorTransformAccelerated">false</bool>
 
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
          in hardware for individual layers. -->
-    <bool name="config_setColorTransformAcceleratedPerLayer">true</bool>
+    <bool name="config_setColorTransformAcceleratedPerLayer">false</bool>
 
     <!-- Flag indicating whether we should enable the adaptive sleep.-->
     <bool name="config_adaptive_sleep_available">false</bool>
