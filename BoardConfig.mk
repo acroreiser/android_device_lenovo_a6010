@@ -169,7 +169,6 @@ BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_LEGACY_HW_DISK_ENCRYPTION := true
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
 # FM (Wired Radio)
 AUDIO_FEATURE_ENABLED_FM_POWER_OPT := true
