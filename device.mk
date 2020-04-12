@@ -65,6 +65,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfdenable=1 \
     persist.sys.wfd.virtual=1 \
     debug.hwui.renderer=opengl \
+    ro.config.avoid_gfx_accel=true \
     ro.qualcomm.cabl=2 \
     DEVICE_PROVISIONED=1
 
