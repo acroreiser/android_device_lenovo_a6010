@@ -472,7 +472,9 @@ PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-im
 
 # Animation
 PRODUCT_COPY_FILES += device/lenovo/a6010/bootanimation.zip:system/media/bootanimation.zip
-
+TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # Strip debug
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
