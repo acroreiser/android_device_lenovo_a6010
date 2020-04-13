@@ -228,8 +228,7 @@ PRODUCT_COPY_FILES += \
 
 # PrivApp Permissions
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:system/etc/permissions/privapp-permissions-qti.xml \
-    $(LOCAL_PATH)/configs/privapp-permissions-lineage.xml:system/etc/permissions/privapp-permissions-lineage.xml
+    $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:system/etc/permissions/privapp-permissions-qti.xml
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
