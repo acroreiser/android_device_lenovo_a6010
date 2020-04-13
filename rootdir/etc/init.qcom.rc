@@ -287,9 +287,8 @@ service wcnss-service /system/vendor/bin/wcnss_service
     oneshot
 
 service time_daemon /system/vendor/bin/time_daemon
-    class late_start
-    user root
-    group root
+    class main
+    user system
     writepid /dev/cpuset/system-background/tasks
 
 on property:init.svc.surfaceflinger=restarting
