@@ -294,7 +294,8 @@ service wcnss-service /system/vendor/bin/wcnss_service
 
 service time_daemon /system/vendor/bin/time_daemon
     class main
-    user system
+    user root
+    group root
     writepid /dev/cpuset/system-background/tasks
 
 on property:init.svc.surfaceflinger=restarting
