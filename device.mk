@@ -291,11 +291,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.cryptfshw@1.0-base
 
+# Telephony
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
 PRODUCT_PACKAGES += \
     telephony-ext
+
+# Disable FaceUnlock
+TARGET_DISABLE_ALTERNATIVE_FACE_UNLOCK := true
+TARGET_FACE_UNLOCK_SUPPORTED := false
 
 # Media
 PRODUCT_COPY_FILES += \
