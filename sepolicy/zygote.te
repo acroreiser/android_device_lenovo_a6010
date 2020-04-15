@@ -1,3 +1,0 @@
-#============= zygote ==============
-
-allow zygote self:capability sys_nice;

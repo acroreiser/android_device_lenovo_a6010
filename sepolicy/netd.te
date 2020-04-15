@@ -1,2 +1,0 @@
-allow netd firmware_file:dir search;
-allow netd self:capability sys_admin;

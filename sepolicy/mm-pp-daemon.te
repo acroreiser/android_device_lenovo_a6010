@@ -1,3 +1,0 @@
-allow mm-pp-daemon ion_device:chr_file w_file_perms;
-
-set_prop(mm-pp-daemon, postprocessing_prop)

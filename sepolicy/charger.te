@@ -1,2 +1,0 @@
-#============= charger ==============
-allow charger sysfs_leds:file write;

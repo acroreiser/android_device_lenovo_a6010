@@ -1,3 +1,0 @@
-allow audioserver unlabeled:file { read open };
-allow audioserver sysfs:dir { open read };
-allow audioserver sysfs:file { getattr open read };

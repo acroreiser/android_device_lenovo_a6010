@@ -1,1 +1,0 @@
-genfscon sysfs /sys/bus/i2c/drivers/ft5x06_ts/5-0038/disable_keys u:object_r:sysfs_keypad:s0
