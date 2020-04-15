@@ -1,0 +1,11 @@
+allow untrusted_app_27 adb_data_file:file { open getattr read execute execute_no_trans };
+allow untrusted_app_27 hal_memtrack_default:binder call;
+allow untrusted_app_27 hal_memtrack_hwservice:hwservice_manager find;
+allow untrusted_app_27 proc_tty_drivers:file { open read };
+allow untrusted_app_27 serialno_prop:file { open read };
+allow untrusted_app_27 device:chr_file { ioctl open read write };
+allow untrusted_app_27 rootfs:dir read;
+allow untrusted_app_27 sysfs:file { getattr open read };
+allow untrusted_app_27 adb_data_file:dir { search getattr };
+allow untrusted_app_27 proc_tty_drivers:file getattr;
+allow untrusted_app_27 selinuxfs:file { open read };

@@ -1,0 +1,2 @@
+allow surfaceflinger device:chr_file { ioctl open read write };
+allow surfaceflinger sysfs:file { getattr open read write };

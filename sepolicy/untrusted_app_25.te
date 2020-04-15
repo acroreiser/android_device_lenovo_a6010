@@ -1,0 +1,9 @@
+allow untrusted_app_25 adb_data_file:dir { getattr search };
+allow untrusted_app_25 adb_data_file:file { open getattr read execute execute_no_trans };
+allow untrusted_app_25 rootfs:dir read;
+allow untrusted_app_25 device:dir read;
+allow untrusted_app_25 selinuxfs:file { open read };
+allow untrusted_app_25 proc_stat:file open;
+allow untrusted_app_25 self:fifo_file ioctl;
+allow untrusted_app_25 usb_device:dir { open read };
+allow untrusted_app_25 device:chr_file { getattr read write };
