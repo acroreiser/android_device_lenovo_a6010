@@ -222,6 +222,13 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
     group radio cache inet misc audio log readproc wakelock
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
+service set_zram /vendor/bin/sh /system/vendor/bin/set_zram.sh
+    class late_start
+    disabled
+    user root
+    group system
+    oneshot
+
 service set_baseband /vendor/bin/sh /system/vendor/bin/set_baseband.sh
     class late_start
     disabled
@@ -304,6 +311,7 @@ on property:init.svc.surfaceflinger=restarting
 # Start it again on boot, just being double sure.
 on property:sys.boot_completed=1
     start set_baseband
+    start set_zram
     restart cameraserver
 
 on property:apexd.status=ready

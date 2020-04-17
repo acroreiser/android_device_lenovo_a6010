@@ -403,6 +403,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     set_baseband.sh
 
+# zRam
+PRODUCT_PACKAGES += \
+    set_zram.sh
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.msm8916
