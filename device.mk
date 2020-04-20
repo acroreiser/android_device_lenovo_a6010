@@ -256,6 +256,10 @@ PRODUCT_PACKAGES += \
    libaudioclient_shim \
    libcutils_shim
 
+# Charger
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.charger.enable_suspend=true
+
 # Charger images
 PRODUCT_PACKAGES += charger_res_images
 
