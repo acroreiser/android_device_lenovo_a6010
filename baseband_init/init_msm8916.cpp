@@ -94,6 +94,7 @@ void vendor_load_properties()
   property_set("pm.dexopt.install", "quicken");
   property_set("pm.dexopt.shared", "quicken");
   property_set("pm.dexopt.bg-dexopt", "speed-profile");
+  property_set("pm.dexopt.downgrade_after_inactive_days", "7");
   property_set("dalvik.vm.usejitprofiles", "true");
   property_set("dalvik.vm.heaptargetutilization", "0.75");
   property_set("dalvik.vm.heapminfree", "512k");
@@ -113,8 +114,6 @@ void vendor_load_properties()
   {
 	   property_set("dalvik.vm.heapgrowthlimit", "96m");
 	   property_set("dalvik.vm.heapsize", "256m");
-	   property_set("ro.config.low_ram", "true");
-	   property_set("persist.sys.force_highendgfx", "true");
 
 	   // Cached apps limit
 	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "8");
