@@ -61,6 +61,8 @@ on post-fs-data
     chmod 2770 /data/vendor/perfd
     rm /data/vendor/perfd/default_values
 
+    mkdir /data/vendor/mediadrm 0700 media media
+
     #Create IOP  deamon related dirs
     mkdir /data/vendor/iop 0700 root system
 
