@@ -79,3 +79,4 @@ allow init hal_perf_hwservice:hwservice_manager add;
 allow init hal_perf_hwservice:hwservice_manager find;
 allow init mediadrmserver:binder call;
 allow init hidl_memory_hwservice:hwservice_manager find;
+allow init hal_vibrator_hwservice:hwservice_manager add;
