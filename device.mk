@@ -405,7 +405,7 @@ PRODUCT_COPY_FILES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.1-service.shamu
+    android.hardware.vibrator@1.1-service.msm8916
 
 # RIL
 PRODUCT_PACKAGES += \

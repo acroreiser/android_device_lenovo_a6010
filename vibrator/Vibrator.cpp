@@ -35,9 +35,6 @@ namespace vibrator {
 namespace V1_1 {
 namespace implementation {
 
-static constexpr int MAX_VOLTAGE = 127;
-static constexpr int MIN_VOLTAGE = 32;
-
 static constexpr uint32_t CLICK_TIMING_MS = 40;
 static constexpr uint32_t TICK_TIMING_MS = 20;
 
@@ -72,15 +69,18 @@ Return<bool> Vibrator::supportsAmplitudeControl()  {
 }
 
 Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
-    if (amplitude == 0) {
-        return Status::BAD_VALUE;
-    }
-    // Scale the voltage such that an amplitude of 1 is MIN_VOLTAGE, an amplitude of 255 is
-    // MAX_VOLTAGE, and there are equal steps for every value in between.
-    long voltage =
-            std::lround((amplitude - 1) / 254.0 * (MAX_VOLTAGE - MIN_VOLTAGE) + MIN_VOLTAGE);
-    ALOGI("Setting amplitude  to: %ld", voltage);
-    mAmplitude << voltage << std::endl;
+	long buf;
+
+    if(amplitude < 12)
+        amplitude = 12;
+
+    if(amplitude > 31)
+        amplitude = 31;
+
+    buf = amplitude;
+
+    ALOGI("Setting amplitude  to: %u", amplitude);
+    mAmplitude << buf << std::endl;
     if (!mAmplitude) {
         ALOGE("Failed to set amplitude (%d): %s", errno, strerror(errno));
         return Status::UNKNOWN_ERROR;
@@ -93,14 +93,14 @@ static uint8_t convertEffectStrength(EffectStrength strength) {
 
     switch (strength) {
     case EffectStrength::LIGHT:
-        amplitude = 194;
+        amplitude = 18;
         break;
     case EffectStrength::MEDIUM:
-        amplitude = 208;
+        amplitude = 25;
         break;
     default:
     case EffectStrength::STRONG:
-        amplitude = 255;
+        amplitude = 31;
         break;
     }
 

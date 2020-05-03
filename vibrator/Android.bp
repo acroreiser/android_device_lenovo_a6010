@@ -14,9 +14,9 @@
 // limitations under the License.
 
 cc_binary {
-    name: "android.hardware.vibrator@1.1-service.shamu",
+    name: "android.hardware.vibrator@1.1-service.msm8916",
     relative_install_path: "hw",
-    init_rc: ["android.hardware.vibrator@1.1-service.shamu.rc"],
+    init_rc: ["android.hardware.vibrator@1.1-service.msm8916.rc"],
     srcs: ["service.cpp", "Vibrator.cpp"],
     cflags: ["-Wall", "-Werror"],
 
