@@ -19,3 +19,4 @@ allow untrusted_app_27 device:file getattr;
 allow untrusted_app_27 init_exec:lnk_file read;
 allow untrusted_app_27 persist_file:dir getattr;
 allow untrusted_app_27 rootfs:file getattr;
+allow untrusted_app_27 proc_net:file { open read };
