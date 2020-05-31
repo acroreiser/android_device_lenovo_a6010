@@ -83,3 +83,6 @@ allow init hal_vibrator_hwservice:hwservice_manager add;
 allow init proc:file write;
 allow init sysfs_devices_system_cpu:file write;
 allow init proc_interrupts:file { read open getattr };
+allow init hal_gnss_hwservice:hwservice_manager { find add };
+allow init qmuxd:unix_stream_socket connectto;
+allow init system_server:binder transfer;
