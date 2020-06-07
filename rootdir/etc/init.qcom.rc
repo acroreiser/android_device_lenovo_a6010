@@ -45,9 +45,6 @@ on fs
     mount_all /vendor/etc/fstab.qcom
     restorecon_recursive /persist
 
-on post-fs
-    start qseecomd
-
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/fdAlbum 0770 camera camera
@@ -273,7 +270,6 @@ service qseecomd /system/vendor/bin/qseecomd
    class core
    user root
    group root
-   disabled
    writepid /dev/cpuset/system-background/tasks
 
 service ppd /system/vendor/bin/mm-pp-daemon
