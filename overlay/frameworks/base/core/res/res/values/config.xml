@@ -60,6 +60,9 @@
        <item>"9,1"</item>
     </string-array>
 
+    <!-- Regex of wired ethernet ifaces -->
+    <string translatable="false" name="config_ethernet_iface_regex">usb\\d</string>
+
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
                   USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
