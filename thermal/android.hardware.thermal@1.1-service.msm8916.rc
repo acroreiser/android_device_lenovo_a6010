@@ -1,0 +1,4 @@
+service vendor.thermal-hal-1-1 /vendor/bin/hw/android.hardware.thermal@1.1-service.msm8916
+    class hal
+    user system
+    group system

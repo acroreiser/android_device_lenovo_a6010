@@ -86,3 +86,4 @@ allow init proc_interrupts:file { read open getattr };
 allow init hal_gnss_hwservice:hwservice_manager { find add };
 allow init qmuxd:unix_stream_socket connectto;
 allow init system_server:binder transfer;
+allow init hal_thermal_hwservice:hwservice_manager { find add };
