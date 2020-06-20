@@ -286,6 +286,12 @@ service wcnss-service /system/vendor/bin/wcnss_service
     group system wifi radio
     oneshot
 
+service thermal-engine /system/vendor/bin/thermal-engine
+    class hal
+    user root
+    group root system diag
+    writepid /dev/cpuset/system-background/tasks
+
 service time_daemon /system/vendor/bin/time_daemon
     class main
     user root
@@ -302,6 +308,9 @@ on property:sys.boot_completed=1
     start set_zram
     start boot_boost
     restart cameraserver
+
+on charger
+    start thermal-engine
 
 on property:apexd.status=ready
     mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind 
