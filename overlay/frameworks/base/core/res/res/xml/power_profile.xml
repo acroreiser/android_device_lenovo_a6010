@@ -19,9 +19,6 @@
         <value>1094400</value>
         <value>1152000</value>
         <value>1209600</value>
-        <value>1248000</value>
-        <value>1363200</value>
-        <value>1401600</value>
     </array>
     <!-- Additional power used by CPUs when running at different speeds. -->
     <array name="cpu.core_power.cluster0">
@@ -33,9 +30,6 @@
         <value>158</value>
         <value>184</value>
         <value>200</value>
-        <value>216</value>
-        <value>224</value>
-        <value>256</value>
     </array>
     <!-- Additional power used when screen is turned on at minimum brightness -->
     <item name="screen.on">80</item>
