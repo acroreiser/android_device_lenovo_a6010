@@ -289,6 +289,10 @@ service wcnss-service /system/vendor/bin/wcnss_service
 service thermal-engine /system/vendor/bin/thermal-engine
     class hal
     user root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
+    socket thermal-send-rule stream 0660 system system
     group root system diag
     writepid /dev/cpuset/system-background/tasks
 
