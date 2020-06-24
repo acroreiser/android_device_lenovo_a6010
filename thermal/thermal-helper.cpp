@@ -79,7 +79,7 @@ static ssize_t readTemperature(int sensor_num, TemperatureType type, const char 
     (*out).shutdownThreshold = shutdown_threshold;
     (*out).vrThrottlingThreshold = UNKNOWN_TEMPERATURE;
 
-    LOG(DEBUG) << android::base::StringPrintf(
+    LOG(INFO) << android::base::StringPrintf(
         "readTemperature: %d, %d, %s, %g, %g, %g",
         sensor_num, type, name, temp * mult, throttling_threshold, shutdown_threshold);
 
@@ -101,7 +101,7 @@ static ssize_t getCpuTemperatures(hidl_vec<Temperature> *temperatures) {
             sensor_nr = kCpu23SensorNum;
 
         // tsens_tz_sensor[5-8]: temperature in Celsius
-        ssize_t result = readTemperature(cpu + sensor_nr, TemperatureType::CPU, kCpuLabel[cpu],
+        ssize_t result = readTemperature(sensor_nr, TemperatureType::CPU, kCpuLabel[cpu],
                                           1, kCpuThrottlingThreshold, kCpuShutdownThreshold,
                                           &(*temperatures)[cpu]);
         if (result != 0) {
@@ -142,19 +142,7 @@ ssize_t fillTemperatures(hidl_vec<Temperature> *temperatures) {
     if (current_index < temperatures->size()) {
         // GPU_therm: tsens_tz_sensor11: temperature in Celsius.
         result = readTemperature(kGpuSensorNum, TemperatureType::GPU, kGpuLabel,
-                                  1, UNKNOWN_TEMPERATURE, UNKNOWN_TEMPERATURE,
-                                  &(*temperatures)[current_index]);
-        if (result < 0) {
-            return result;
-        }
-        current_index++;
-    }
-
-    // Skin temperature.
-    if (current_index < temperatures->size()) {
-        // skin: quiet_therm: temperature in Celsius
-        result = readTemperature(kSkinSensorNum, TemperatureType::SKIN, kSkinLabel,
-                                  1, kSkinTrottlingThreshold, UNKNOWN_TEMPERATURE,
+                                  1, kGpuThrottlingThreshold, UNKNOWN_TEMPERATURE,
                                   &(*temperatures)[current_index]);
         if (result < 0) {
             return result;
@@ -241,7 +229,7 @@ ssize_t fillCpuUsages(hidl_vec<CpuUsage> *cpuUsages) {
         (*cpuUsages)[size].total = total;
         (*cpuUsages)[size].isOnline = static_cast<bool>(online);
 
-        LOG(DEBUG) << "fillCpuUsages: "<< kCpuLabel[size] << ": "
+        LOG(INFO) << "fillCpuUsages: "<< kCpuLabel[size] << ": "
                    << active << " " << total << " " <<  online;
         size++;
     }

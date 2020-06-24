@@ -65,7 +65,7 @@ Return<void> Thermal::getTemperatures(getTemperatures_cb _hidl_cb) {
     _hidl_cb(status, temperatures);
 
     for (auto& t : temperatures) {
-        LOG(DEBUG) << "getTemperatures "
+        LOG(INFO) << "getTemperatures "
                    << " Type: " << static_cast<int>(t.type)
                    << " Name: " << t.name
                    << " CurrentValue: " << t.currentValue
@@ -90,7 +90,7 @@ Return<void> Thermal::getCpuUsages(getCpuUsages_cb _hidl_cb) {
     }
 
     for (auto& u : cpuUsages) {
-        LOG(DEBUG) << "getCpuUsages "
+        LOG(INFO) << "getCpuUsages "
                    << " Name: " << u.name
                    << " Active: " << u.active
                    << " Total: " << u.total
@@ -106,7 +106,7 @@ Return<void> Thermal::getCoolingDevices(getCoolingDevices_cb _hidl_cb) {
     status.code = ThermalStatusCode::SUCCESS;
     hidl_vec<CoolingDevice> coolingDevices;
 
-    LOG(DEBUG) << "No cooling device";
+    LOG(INFO) << "No cooling device";
     _hidl_cb(status, coolingDevices);
     return Void();
 }
@@ -128,6 +128,26 @@ Return<void> Thermal::registerThermalCallback(
         LOG(INFO) << "ThermalCallback unregistered";
     }
     return Void();
+}
+
+void Thermal::notifyThrottling(
+    bool isThrottling, const Temperature& temperature) {
+    if (gThermalCallback != nullptr) {
+        Return<void> ret =
+            gThermalCallback->notifyThrottling(isThrottling, temperature);
+        if (!ret.isOk()) {
+          if (ret.isDeadObject()) {
+              gThermalCallback = nullptr;
+              LOG(WARNING) << "Dropped throttling event, ThermalCallback died";
+          } else {
+              LOG(WARNING) <<
+                  "Failed to send throttling event to ThermalCallback";
+          }
+        }
+    } else {
+        LOG(WARNING) <<
+            "Dropped throttling event, no ThermalCallback registered";
+    }
 }
 
 }  // namespace implementation
