@@ -94,6 +94,13 @@ on charger
    load_system_props
    start vm_bms
 
+on fs
+    # boot time fs tune
+    write /sys/block/mmcblk0/queue/iostats 0
+    write /sys/block/mmcblk1/queue/iostats 0
+    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk0/queue/scheduler deadline
+
 on property:sys.boot_completed=1
     write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
     write /sys/module/process_reclaim/parameters/pressure_max 70
@@ -111,7 +118,7 @@ on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/rq_affinity 0
     write /sys/block/mmcblk1/queue/rq_affinity 0
     write /sys/block/mmcblk0/queue/nr_requests 1024
+    write /sys/block/mmcblk1/queue/nr_requests 512
     write /sys/block/mmcblk0/queue/read_ahead_kb 1024
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
-    write /sys/module/msm_thermal/core_control/enabled 1
+    write /sys/block/mmcblk1/queue/read_ahead_kb 512
     start vendor.msm_irqbalance
