@@ -49,8 +49,6 @@ PRODUCT_PACKAGES += \
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
-    ro.surface_flinger.vsync_event_phase_offset_ns=4000000 \
-    ro.surface_flinger.vsync_sf_event_phase_offset_ns=8000000 \
     debug.mdpcomp.idletime=600 \
     persist.hwc.mdpcomp.enable=true \
     persist.hwc.ptor.enable=true \
