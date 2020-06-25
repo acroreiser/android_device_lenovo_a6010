@@ -2,6 +2,13 @@ on init
     # Drop write bit from cpu_min_freq so that libqti-perfd can't set it
     chmod 0444 /sys/module/msm_performance/parameters/cpu_min_freq
 
+service boot_boost /vendor/bin/sh /system/vendor/bin/init.boot_boost.sh
+    class late_start
+    disabled
+    user root
+    group system
+    oneshot
+
 on enable-low-power
 
     # disable thermal core_control to update interactive governor settings
@@ -34,11 +41,6 @@ on enable-low-power
     write /sys/kernel/msm_thermal/sampling_ms 1000
     write /sys/kernel/msm_thermal/enabled 1
 
-    # Enable CPU-BOOST
-    write /sys/module/cpu_boost/parameters/boost_ms 80
-    write /sys/module/cpu_boost/parameters/input_boost_ms 40
-    write /sys/module/cpu_boost/parameters/input_boost_freq "0:998400 1:1152000"
-
     # Enable low power modes
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
@@ -52,6 +54,8 @@ on enable-low-power
     write /dev/cpuset/system-background/cpus 0-1
     write /dev/cpuset/top-app/cpus 0-3
 
+    # BOOST
+    start boot_boost
 
     # Set perfd properties
     setprop sys.post_boot.parsed 1
