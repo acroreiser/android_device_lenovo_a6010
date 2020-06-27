@@ -500,7 +500,7 @@ locClientStatusEnumType loc_sync_send_req
    locClientStatusEnumType status = eLOC_CLIENT_SUCCESS ;
    int select_id;
    int rc = 0;
-   size_t hax = 5;
+   size_t hax = 10;
 
    // Select the callback we are waiting for
    select_id = loc_sync_select_ind(client_handle, ind_id, req_id,
