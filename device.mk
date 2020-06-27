@@ -631,7 +631,8 @@ PRODUCT_PACKAGES += \
     calmodule.cfg \
     libcalmodule_common \
     libcalmodule_akm \
-    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-impl.msm8916 \
+    android.hardware.sensors@1.0-service.msm8916 \
     accelcal \
     AccCalibration \
     sensord \
