@@ -19,3 +19,5 @@ allow priv_app sysfs:dir open;
 allow priv_app sysfs:file { getattr open };
 allow priv_app dolby_prop:file { open read getattr };
 allow priv_app dolby_prop:property_service set;
+allow priv_app serialno_prop:file { open read };
+allow priv_app bluetooth_prop:file { open read };
