@@ -7,10 +7,10 @@
             "HotThreshold":[
                 "NAN",
                 "NAN",
-                "NAN",
                 65.0,
-                "NAN",
-                "NAN",
+                70.0,
+                75.0,
+                80.0,
                 85.0
             ],
             "VrThreshold":"NAN",
@@ -23,10 +23,42 @@
             "HotThreshold":[
                 "NAN",
                 "NAN",
+                65.0,
+                70.0,
+                75.0,
+                80.0,
+                85.0
+            ],
+            "VrThreshold":"NAN",
+            "Multiplier":1,
+            "Monitor":true
+        },
+        {
+            "Name":"tsens_tz_sensor1",
+            "Type":"CPU",
+            "HotThreshold":[
+                "NAN",
                 "NAN",
                 65.0,
+                70.0,
+                75.0,
+                80.0,
+                85.0
+            ],
+            "VrThreshold":"NAN",
+            "Multiplier":1,
+            "Monitor":true
+        },
+        {
+            "Name":"tsens_tz_sensor0",
+            "Type":"CPU",
+            "HotThreshold":[
                 "NAN",
                 "NAN",
+                65.0,
+                70.0,
+                75.0,
+                80.0,
                 85.0
             ],
             "VrThreshold":"NAN",
@@ -58,8 +90,24 @@
                 "NAN",
                 "NAN",
                 "NAN",
+                50.0,
+                70.0
+            ],
+            "VrThreshold":"NAN",
+            "Multiplier":0.001,
+            "Monitor":true
+        },
+        {
+            "Name":"bms",
+            "Type":"SKIN",
+            "HotThreshold":[
                 "NAN",
-                60.0
+                "NAN",
+                "NAN",
+                "NAN",
+                "NAN",
+                50.0,
+                70.0
             ],
             "VrThreshold":"NAN",
             "Multiplier":0.001,
@@ -67,14 +115,14 @@
         },
         {
             "Name":"pm8916_tz",
-            "Type":"SKIN",
+            "Type":"USB_PORT",
             "HotThreshold":[
                 "NAN",
                 "NAN",
                 "NAN",
                 62.0,
-                72.0,
                 "NAN",
+                72.0,
                 120.0
             ],
             "VrThreshold":"NAN",
