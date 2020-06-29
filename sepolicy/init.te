@@ -93,3 +93,4 @@ allow init sysfs_mpdecision:file { open read write };
 allow init sysfs_kgsl:file { open read };
 allow init sysfs_spmi_dev:lnk_file read;
 allow init hal_sensors_hwservice:hwservice_manager { find add };
+allow init sysfs_sensors:lnk_file read;
