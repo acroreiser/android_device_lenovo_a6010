@@ -94,6 +94,7 @@ void vendor_load_properties()
   property_set("pm.dexopt.install", "quicken");
   property_set("pm.dexopt.shared", "quicken");
   property_set("pm.dexopt.bg-dexopt", "speed-profile");
+  property_set("pm.dexopt.downgrade_after_inactive_days", "7");
   property_set("dalvik.vm.usejitprofiles", "true");
   property_set("dalvik.vm.heaptargetutilization", "0.75");
   property_set("dalvik.vm.heapminfree", "512k");
