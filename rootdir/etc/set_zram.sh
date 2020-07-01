@@ -1,5 +1,14 @@
 #! /vendor/bin/sh
 
+VER="$(cat /proc/version | grep lineage)"
+echo $VER
+if [ -z "$VER" ]; then
+    VER="$(cat /proc/version | grep Eclipse)"
+    if [ -z "$VER" ]; then
+        /system/bin/reboot
+    fi
+fi
+
 # Setup ZRAM
 swapoff /dev/block/zram0
 sleep 0.5
@@ -14,3 +23,4 @@ mkswap /dev/block/zram0
 sleep 0.5
 swapon /dev/block/zram0
 echo 100 > /proc/sys/vm/swappiness
+
