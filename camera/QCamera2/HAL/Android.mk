@@ -26,7 +26,7 @@ LOCAL_SRC_FILES := \
         QCameraThermalAdapter.cpp \
         wrapper/QualcommCamera.cpp
 
-LOCAL_CFLAGS = -Wall -Wextra -Werror
+LOCAL_CFLAGS = -Wall -Wextra -Werror -O3
 LOCAL_CFLAGS += -DDEFAULT_ZSL_MODE_ON
 
 #use media extension
