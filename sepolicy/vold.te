@@ -6,3 +6,4 @@ allow vold tmpfs:blk_file getattr;
 allow vold cache_block_device:blk_file getattr;
 allow vold persist_block_device:blk_file getattr;
 allow vold block_device:blk_file getattr;
+allow vold hal_bootctl_hwservice:hwservice_manager { find add };
