@@ -108,14 +108,14 @@ void vendor_load_properties()
 	   property_set("dalvik.vm.heapsize", "512m");
 
 	   // Cached apps limit
-	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "16");
+	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "12");
   }
   else
   {
 	   property_set("dalvik.vm.heapsize", "256m");
 
 	   // Cached apps limit
-	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "8");
+	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "6");
   }
 
   init_alarm_boot_properties();
