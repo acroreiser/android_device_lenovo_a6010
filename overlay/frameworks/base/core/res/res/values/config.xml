@@ -276,12 +276,6 @@
         <item>"/system/product/priv-app/SystemUI/SystemUI.apk"</item>
         <item>"/data/dalvik-cache/arm/system@product@priv-app@SystemUI@SystemUI.apk@classes.dex"</item>
         <item>"/data/dalvik-cache/arm/system@product@priv-app@SystemUI@SystemUI.apk@classes.vdex"</item>
-        <item>"/system/priv-app/DsUI/DsUI.apk"</item>
-        <item>"/system/priv-app/Ds/Ds.apk"</item>
-        <item>"/data/dalvik-cache/arm/system@priv-app@DsUI@DsUI.apk@classes.dex"</item>
-        <item>"/data/dalvik-cache/arm/system@priv-app@DsUI@DsUI.apk@classes.vdex"</item>
-        <item>"/data/dalvik-cache/arm/system@priv-app@Ds@Ds.apk@classes.dex"</item>
-        <item>"/data/dalvik-cache/arm/system@priv-app@Ds@Ds.apk@classes.vdex"</item>
     </string-array>
 
     <!-- Should the pinner service pin the Home application? -->
