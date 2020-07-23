@@ -545,7 +545,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.madvise-random=true \
     ro.vendor.qti.am.reschedule_service=true \
     dalvik.vm.isa.arm.features=div \
-    persist.sys.dalvik.vm.lib.2=libart.so
+    persist.sys.dalvik.vm.lib.2=libart.so \
+    dalvik.vm.systemservercompilerfilter=speed-profile
 
 # Improve scrolling
 PRODUCT_PROPERTY_OVERRIDES += \
