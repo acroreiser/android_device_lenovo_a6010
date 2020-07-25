@@ -545,8 +545,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.am.reschedule_service=true \
     dalvik.vm.isa.arm.features=div \
     persist.sys.dalvik.vm.lib.2=libart.so \
-    dalvik.vm.systemservercompilerfilter=speed-profile \
-    dalvik.vm.extra-opts=-Xcompiler-option --inline-max-code-units=0
+    dalvik.vm.systemservercompilerfilter=speed-profile 
+#    dalvik.vm.extra-opts=-Xcompiler-option --inline-max-code-units=0
 
 # Improve scrolling
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -582,6 +582,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.vendor.shutdown.waittime=500 \
     ro.build.shutdown_timeout=0
 
+# Profile boot classpath
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.extra-opts=-Xps-profile-boot-class-path
 # Battery
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.small_battery=true
