@@ -555,6 +555,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Low Memory Killer
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.qti.config.ulmk_memcg=true \
     ro.lmk.critical_upgrade=true \
     ro.lmk.upgrade_pressure=40 \
     ro.lmk.downgrade_pressure=60 \
