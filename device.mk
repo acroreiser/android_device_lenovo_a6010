@@ -687,6 +687,12 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
 
+# Makes device compatible with Google Dialer Go.
+# In better case it should be a part of Gapps
+# but we have no Gapps specially for Android Go devices
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/googledialergo-sysconfig.xml:system/etc/sysconfig/googledialergo-sysconfig.xml
+
 # Inherit common Android Go defaults.
 $(call inherit-product, build/make/target/product/go_defaults.mk)
 
