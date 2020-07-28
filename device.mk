@@ -610,6 +610,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Inherit customized Android Go defaults.
 $(call inherit-product, device/lenovo/a6010/go_defaults_custom.mk)
 
+# Makes device compatible with Google Dialer Go.
+# In best case this file should be a part of Gapps
+# but we have no Gapps specially for Android Go devices
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/googledialergo-sysconfig.xml:system/etc/sysconfig/googledialergo-sysconfig.xml
+
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
