@@ -64,7 +64,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.renderer=opengl \
     ro.config.avoid_gfx_accel=true \
     ro.qualcomm.cabl=2 \
-    DEVICE_PROVISIONED=1
+    DEVICE_PROVISIONED=1 \
+    dev.pm.dyn_samplingrate=1 \
+    persist.timed.enable=true
 
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
