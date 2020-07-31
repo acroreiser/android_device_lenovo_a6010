@@ -39,7 +39,7 @@ LOCAL_CFLAGS += \
     -Wno-unused-parameter \
     -Wno-unused-variable
 
-ifeq ($(TARGET_BUILD_VARIANT),user)
+ifeq ($(TARGET_BUILD_VARIANT),userdebug)
    LOCAL_CFLAGS += -DTARGET_BUILD_VARIANT_USER
 endif
 
