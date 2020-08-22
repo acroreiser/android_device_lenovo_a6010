@@ -610,7 +610,7 @@ const QCameraParameters::QCameraMap<cam_antibanding_mode_type>
 const QCameraParameters::QCameraMap<cam_iso_mode_type>
         QCameraParameters::ISO_MODES_MAP[] = {
     { ISO_AUTO,  CAM_ISO_MODE_AUTO },
-    { ISO_HJR,   CAM_ISO_MODE_AUTO }, // ISO DEBLUR is broken in the backend
+    { ISO_HJR,   CAM_ISO_MODE_DEBLUR },
     { ISO_100,   CAM_ISO_MODE_100 },
     { ISO_200,   CAM_ISO_MODE_200 },
     { ISO_400,   CAM_ISO_MODE_400 },
