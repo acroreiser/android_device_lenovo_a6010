@@ -22,6 +22,9 @@
     <!-- Whether memory from app_info_settings is available or not. -->
     <bool name="config_show_app_info_settings_memory">true</bool>
 
+    <!-- Whether to show a preference item for mobile plan -->
+    <bool name="config_show_mobile_plan">false</bool>
+
     <!-- Whether or not to show the night light suggestion. -->
     <bool name="config_night_light_suggestion_enabled">false</bool>
 
