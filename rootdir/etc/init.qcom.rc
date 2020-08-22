@@ -56,6 +56,9 @@ on late-fs
     start configstore-hal-1-0
     start gralloc-2-0
 
+    write /sys/class/leds/red/trigger none
+    write /sys/class/leds/green/trigger blinking
+
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
 
@@ -321,9 +324,11 @@ on property:sys.boot_completed=1
     start set_zram
     restart vendor.camera-provider-2-4
     restart cameraserver
+    write /sys/class/leds/green/trigger none
 
 on charger
     start thermal-engine
+    write /sys/class/leds/red/trigger blinking
 
 on property:apexd.status=ready
     mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind 
