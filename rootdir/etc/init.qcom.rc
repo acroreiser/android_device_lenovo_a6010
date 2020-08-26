@@ -35,6 +35,9 @@ on early-init
     chown system system /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
+    write /sys/class/leds/red/brightness 0
+    write /sys/class/leds/green/brightness 255
+
     # Turn off backlight on blank
     write /sys/class/leds/lcd-backlight/trigger "backlight"
 
@@ -55,9 +58,6 @@ on late-fs
     start bootanim
     start configstore-hal-1-0
     start gralloc-2-0
-
-    write /sys/class/leds/red/brightness 0
-    write /sys/class/leds/green/trigger blinking
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
@@ -280,6 +280,13 @@ on property:init.svc.media=restarting
 on property:init.svc.servicemanager=restarting
     restart qcamerasvr
 
+on property:init.svc.bootanim=running
+    write /sys/class/leds/green/brightness 0
+    write /sys/class/leds/green/trigger blinking
+
+on property:init.svc.bootanim=stopped
+    write /sys/class/leds/green/trigger none
+
 service qseecomd /system/vendor/bin/qseecomd
    class core
    user root
@@ -324,7 +331,6 @@ on property:sys.boot_completed=1
     start set_zram
     restart vendor.camera-provider-2-4
     restart cameraserver
-    write /sys/class/leds/green/trigger none
 
 on charger
     start thermal-engine
