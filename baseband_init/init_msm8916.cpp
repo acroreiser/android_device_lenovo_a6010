@@ -89,6 +89,7 @@ int is2GB()
 
 void vendor_load_properties()
 {
+  property_set("dalvik.vm.extra-opts", "-Xcompiler-option --inline-max-code-units=0");
 
   // pm dexopt settings
   property_set("pm.dexopt.install", "quicken");
