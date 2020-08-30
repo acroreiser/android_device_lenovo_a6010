@@ -541,7 +541,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.am.reschedule_service=true \
     dalvik.vm.isa.arm.features=div \
     persist.sys.dalvik.vm.lib.2=libart.so \
-    dalvik.vm.systemservercompilerfilter=speed-profile
+    dalvik.vm.systemservercompilerfilter=speed-profile \
+    dalvik.vm.minidebuginfo=false \
+    dalvik.vm.dex2oat-minidebuginfo=false
 
 # Improve scrolling
 PRODUCT_PROPERTY_OVERRIDES += \
