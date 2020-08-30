@@ -1,0 +1,510 @@
+From 1d86470cce29b3d2e3bf45435cab5bc9129f3618 Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhenrique09.mcz@hotmail.com>
+Date: Thu, 26 Mar 2020 04:56:47 -0300
+Subject: [PATCH] Settings: Port face unlock feature [4/4]
+
+* From motorola/foles_retail/foles:10/QPF30.130-15-7/38ece7:user/release-keys
+
+Change-Id: I906317e3d9c993fc5001ed9939dc25e67d3e636f
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ Android.mk                                    |  1 +
+ res/xml/security_settings_face.xml            |  3 +-
+ src/com/android/settings/Utils.java           | 15 +++++
+ .../BiometricEnrollIntroduction.java          |  2 +-
+ .../face/FaceEnrollIntroduction.java          | 43 ++++++++++++
+ ...FaceProfileStatusPreferenceController.java |  2 +-
+ .../FaceSettingsAppPreferenceController.java  |  6 ++
+ ...SettingsAttentionPreferenceController.java |  5 ++
+ ...ceSettingsConfirmPreferenceController.java |  5 ++
+ ...aceSettingsFooterPreferenceController.java |  8 ++-
+ ...aceSettingsManagePreferenceController.java | 43 ++++++++++++
+ ...tingsRemoveButtonPreferenceController.java |  9 ++-
+ .../face/FaceStatusPreferenceController.java  | 65 +++++++++++++++++--
+ .../settings/password/ChooseLockGeneric.java  | 18 +++--
+ .../settings/security/SecuritySettings.java   |  2 +-
+ 15 files changed, 213 insertions(+), 14 deletions(-)
+ create mode 100644 src/com/android/settings/biometrics/face/FaceSettingsManagePreferenceController.java
+
+diff --git a/Android.mk b/Android.mk
+index 420bdbe0ac..5d4e4fcf1a 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -52,6 +52,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
+     contextualcards \
+     settings-logtags \
+     zxing-core-1.7 \
++    faceunlock_utils \
+     org.lineageos.platform.internal
+ 
+ LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res \
+diff --git a/res/xml/security_settings_face.xml b/res/xml/security_settings_face.xml
+index e613470057..e9b6834a83 100644
+--- a/res/xml/security_settings_face.xml
++++ b/res/xml/security_settings_face.xml
+@@ -50,7 +50,8 @@
+ 
+     <PreferenceCategory
+         android:key="security_settings_face_manage_category"
+-        android:title="@string/security_settings_face_settings_require_category">
++        android:title="@string/security_settings_face_settings_require_category"
++        app:controller="com.android.settings.biometrics.face.FaceSettingsManagePreferenceController">
+         <SwitchPreference
+             android:key="security_settings_face_require_attention"
+             android:title="@string/security_settings_face_settings_require_attention"
+diff --git a/src/com/android/settings/Utils.java b/src/com/android/settings/Utils.java
+index 4db359c72b..d4c9ae217a 100644
+--- a/src/com/android/settings/Utils.java
++++ b/src/com/android/settings/Utils.java
+@@ -1072,4 +1072,19 @@ public static String normalizeTitleCaseIfRequired(Context context, String input)
+         }
+         return input;
+     }
++
++    public static boolean isFaceDisabledByAdmin(Context context) {
++        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
++        try {
++            if (devicePolicyManager.getPasswordQuality(null) > DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
++                return true;
++            }
++        } catch (SecurityException e) {
++            Log.e("Settings", "isFaceDisabledByAdmin error:", e);
++        }
++        if ((devicePolicyManager.getKeyguardDisabledFeatures(null) & DevicePolicyManager.KEYGUARD_DISABLE_FACE) != 0) {
++            return true;
++        }
++        return false;
++    }
+ }
+diff --git a/src/com/android/settings/biometrics/BiometricEnrollIntroduction.java b/src/com/android/settings/biometrics/BiometricEnrollIntroduction.java
+index d94686e3f2..2657862788 100644
+--- a/src/com/android/settings/biometrics/BiometricEnrollIntroduction.java
++++ b/src/com/android/settings/biometrics/BiometricEnrollIntroduction.java
+@@ -44,7 +44,7 @@
+         implements LinkSpan.OnClickListener {
+ 
+     private UserManager mUserManager;
+-    private boolean mHasPassword;
++    protected boolean mHasPassword;
+     private boolean mBiometricUnlockDisabledByAdmin;
+     private TextView mErrorText;
+     protected boolean mConfirmingCredentials;
+diff --git a/src/com/android/settings/biometrics/face/FaceEnrollIntroduction.java b/src/com/android/settings/biometrics/face/FaceEnrollIntroduction.java
+index 073c7e65e3..ddb8fc483f 100644
+--- a/src/com/android/settings/biometrics/face/FaceEnrollIntroduction.java
++++ b/src/com/android/settings/biometrics/face/FaceEnrollIntroduction.java
+@@ -18,9 +18,11 @@
+ 
+ import android.app.admin.DevicePolicyManager;
+ import android.app.settings.SettingsEnums;
++import android.content.ComponentName;
+ import android.content.Intent;
+ import android.hardware.face.FaceManager;
+ import android.os.Bundle;
++import android.os.UserHandle;
+ import android.widget.TextView;
+ 
+ import com.android.settings.R;
+@@ -36,6 +38,8 @@
+ import com.google.android.setupdesign.span.LinkSpan;
+ import com.google.android.setupdesign.template.RequireScrollMixin;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
+ 
+     private static final String TAG = "FaceIntro";
+@@ -97,6 +101,9 @@ protected void onCreate(Bundle savedInstanceState) {
+                         ? R.string.security_settings_face_enroll_introduction_footer_part_2
+                         : R.string.security_settings_face_settings_footer_attention_not_supported;
+         footer2.setText(footer2TextResource);
++        if (FaceUnlockUtils.hasMotoFaceUnlock() && mHasPassword && mToken != null) {
++            openMotoFaceUnlock();
++        }
+     }
+ 
+     @Override
+@@ -108,6 +115,42 @@ protected void onStop() {
+             finish();
+         }
+     }
++    @Override
++    public void onActivityResult(int requestCode, int resultCode, Intent data) {
++        super.onActivityResult(requestCode, resultCode, data);
++        if (!FaceUnlockUtils.hasMotoFaceUnlock()) {
++            return;
++        }
++        if (requestCode != CHOOSE_LOCK_GENERIC_REQUEST) {
++            if (requestCode != CONFIRM_REQUEST) {
++                if (requestCode == ENROLL_REQUEST) {
++                    if (resultCode == RESULT_FIRST_USER || resultCode == RESULT_OK) {
++                        setResult(RESULT_FIRST_USER);
++                        finish();
++                        return;
++                    }
++                    setResult(RESULT_CANCELED);
++                    finish();
++                }
++            } else if (resultCode == RESULT_OK && data != null) {
++                openMotoFaceUnlock();
++            }
++        } else if (resultCode == RESULT_FIRST_USER) {
++            openMotoFaceUnlock();
++        }
++    }
++
++    private void openMotoFaceUnlock() {
++        Intent intent = new Intent();
++        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
++        if (mUserId != UserHandle.USER_NULL) {
++            intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
++        }
++        intent.setComponent(new ComponentName("com.motorola.faceunlock", "com.motorola.faceunlock.SetupFaceIntroActivity"));
++        if (intent.resolveActivity(getPackageManager()) != null) {
++            startActivityForResult(intent, 5);
++        }
++    }
+ 
+     @Override
+     protected boolean isDisabledByAdmin() {
+diff --git a/src/com/android/settings/biometrics/face/FaceProfileStatusPreferenceController.java b/src/com/android/settings/biometrics/face/FaceProfileStatusPreferenceController.java
+index 56b325bdf8..7995c38f3d 100644
+--- a/src/com/android/settings/biometrics/face/FaceProfileStatusPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceProfileStatusPreferenceController.java
+@@ -28,7 +28,7 @@
+     private static final String KEY_FACE_SETTINGS = "face_settings_profile";
+ 
+     public FaceProfileStatusPreferenceController(Context context) {
+-        super(context, KEY_FACE_SETTINGS);
++        super(context, KEY_FACE_SETTINGS, null);
+     }
+ 
+     @Override
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsAppPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsAppPreferenceController.java
+index a54171e8c4..d2e7af9d4b 100644
+--- a/src/com/android/settings/biometrics/face/FaceSettingsAppPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceSettingsAppPreferenceController.java
+@@ -26,6 +26,8 @@
+ 
+ import androidx.preference.Preference;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ /**
+  * Preference controller for Face settings page controlling the ability to use
+  * Face authentication in apps (through BiometricPrompt).
+@@ -78,6 +80,10 @@ public void updateState(Preference preference) {
+ 
+     @Override
+     public int getAvailabilityStatus() {
++        if (FaceUnlockUtils.hasMotoFaceUnlock() ){
++            return UNSUPPORTED_ON_DEVICE;
++        }
++
+         if(mFaceManager == null){
+             return AVAILABLE_UNSEARCHABLE;
+         }
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsAttentionPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsAttentionPreferenceController.java
+index 9ae6a874b0..16ab6df79c 100644
+--- a/src/com/android/settings/biometrics/face/FaceSettingsAttentionPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceSettingsAttentionPreferenceController.java
+@@ -28,6 +28,8 @@
+ import com.android.settings.Utils;
+ import com.android.settings.core.TogglePreferenceController;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ /**
+  * Preference controller that manages the ability to use face authentication with/without
+  * user attention. See {@link FaceManager#setRequireAttention(boolean, byte[])}.
+@@ -119,6 +121,9 @@ public boolean setChecked(boolean isChecked) {
+ 
+     @Override
+     public int getAvailabilityStatus() {
++        if (FaceUnlockUtils.hasMotoFaceUnlock()){
++            return UNSUPPORTED_ON_DEVICE;
++        }
+         return AVAILABLE;
+     }
+ }
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsConfirmPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsConfirmPreferenceController.java
+index c65cd23342..6d66bdd6d4 100644
+--- a/src/com/android/settings/biometrics/face/FaceSettingsConfirmPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceSettingsConfirmPreferenceController.java
+@@ -27,6 +27,8 @@
+ import com.android.settings.Utils;
+ import com.android.settings.core.TogglePreferenceController;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ /**
+  * Preference controller giving the user an option to always require confirmation.
+  */
+@@ -76,6 +78,9 @@ public void updateState(Preference preference) {
+ 
+     @Override
+     public int getAvailabilityStatus() {
++        if (FaceUnlockUtils.hasMotoFaceUnlock() ){
++            return UNSUPPORTED_ON_DEVICE;
++        }
+         return AVAILABLE;
+     }
+ }
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsFooterPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsFooterPreferenceController.java
+index c66546790e..65d20fbf9b 100644
+--- a/src/com/android/settings/biometrics/face/FaceSettingsFooterPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceSettingsFooterPreferenceController.java
+@@ -28,6 +28,8 @@
+ import com.android.settingslib.HelpUtils;
+ import com.android.settingslib.widget.FooterPreference;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ /**
+  * Footer for face settings showing the help text and help link.
+  */
+@@ -60,10 +62,14 @@ public void updateState(Preference preference) {
+         final AnnotationSpan.LinkInfo linkInfo =
+                 new AnnotationSpan.LinkInfo(mContext, ANNOTATION_URL, helpIntent);
+ 
+-        final int footerRes = mProvider.isAttentionSupported(mContext)
++        int footerRes = mProvider.isAttentionSupported(mContext)
+                 ? R.string.security_settings_face_settings_footer
+                 : R.string.security_settings_face_settings_footer_attention_not_supported;
+ 
++        if (FaceUnlockUtils.hasMotoFaceUnlock()){
++            footerRes = R.string.security_settings_face_settings_footer_moto;
++        }
++
+         preference.setTitle(AnnotationSpan.linkify(
+                 mContext.getText(footerRes), linkInfo));
+     }
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsManagePreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsManagePreferenceController.java
+new file mode 100644
+index 0000000000..18a58b8db6
+--- /dev/null
++++ b/src/com/android/settings/biometrics/face/FaceSettingsManagePreferenceController.java
+@@ -0,0 +1,43 @@
++/*
++ * Copyright (C) 2018 The Android Open Source Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License
++ */
++
++package com.android.settings.biometrics.face;
++
++import android.content.Context;
++
++import com.android.settings.core.BasePreferenceController;
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
++public class FaceSettingsManagePreferenceController extends BasePreferenceController {
++
++    public static final String KEY = "security_settings_face_manage_category";
++
++    public FaceSettingsManagePreferenceController(Context context, String preferenceKey) {
++        super(context, preferenceKey);
++    }
++
++    public FaceSettingsManagePreferenceController(Context context) {
++        this(context, KEY);
++    }
++
++    @Override
++    public int getAvailabilityStatus() {
++        if (FaceUnlockUtils.hasMotoFaceUnlock()){
++            return UNSUPPORTED_ON_DEVICE;
++        }
++        return AVAILABLE;
++    }
++}
+diff --git a/src/com/android/settings/biometrics/face/FaceSettingsRemoveButtonPreferenceController.java b/src/com/android/settings/biometrics/face/FaceSettingsRemoveButtonPreferenceController.java
+index 1c1b81df6c..45b50aff3d 100644
+--- a/src/com/android/settings/biometrics/face/FaceSettingsRemoveButtonPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceSettingsRemoveButtonPreferenceController.java
+@@ -39,6 +39,8 @@
+ 
+ import java.util.List;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ /**
+  * Controller for the remove button. This assumes that there is only a single face enrolled. The UI
+  * will likely change if multiple enrollments are allowed/supported.
+@@ -62,8 +64,13 @@ public int getMetricsCategory() {
+         public Dialog onCreateDialog(Bundle savedInstanceState) {
+             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+ 
++            int remove_dialog_details_moto =
++                R.string.security_settings_face_settings_remove_dialog_details_moto;
++
+             builder.setTitle(R.string.security_settings_face_settings_remove_dialog_title)
+-                    .setMessage(R.string.security_settings_face_settings_remove_dialog_details)
++                    .setMessage(FaceUnlockUtils.hasMotoFaceUnlock() ?
++                        remove_dialog_details_moto :
++                        R.string.security_settings_face_settings_remove_dialog_details)
+                     .setPositiveButton(R.string.delete, mOnClickListener)
+                     .setNegativeButton(R.string.cancel, mOnClickListener);
+             AlertDialog dialog = builder.create();
+diff --git a/src/com/android/settings/biometrics/face/FaceStatusPreferenceController.java b/src/com/android/settings/biometrics/face/FaceStatusPreferenceController.java
+index cb82b5e856..380493a012 100644
+--- a/src/com/android/settings/biometrics/face/FaceStatusPreferenceController.java
++++ b/src/com/android/settings/biometrics/face/FaceStatusPreferenceController.java
+@@ -18,25 +18,55 @@
+ 
+ import android.content.Context;
+ import android.hardware.face.FaceManager;
++import androidx.preference.Preference;
++import androidx.preference.PreferenceCategory;
++import androidx.preference.PreferenceScreen;
+ 
+ import com.android.settings.R;
+ import com.android.settings.Settings;
+ import com.android.settings.Utils;
+ import com.android.settings.biometrics.BiometricStatusPreferenceController;
++import com.android.settings.overlay.FeatureFactory;
++import com.android.settings.security.SecurityFeatureProvider;
++import com.android.internal.widget.LockPatternUtils;
+ 
+-public class FaceStatusPreferenceController extends BiometricStatusPreferenceController {
++import com.android.settingslib.core.lifecycle.Lifecycle;
++import com.android.settingslib.core.lifecycle.LifecycleObserver;
++import com.android.settingslib.core.lifecycle.events.OnResume;
++
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
++public class FaceStatusPreferenceController extends BiometricStatusPreferenceController
++        implements LifecycleObserver, OnResume {
+ 
+     public static final String KEY_FACE_SETTINGS = "face_settings";
++    private static final String PREF_KEY_SECURITY_CATEGORY = "security_category";
+ 
+     protected final FaceManager mFaceManager;
++    protected final LockPatternUtils mLockPatternUtils;
++    private Preference mPreference;
+ 
+-    public FaceStatusPreferenceController(Context context) {
+-        this(context, KEY_FACE_SETTINGS);
++    public FaceStatusPreferenceController(Context context, Lifecycle lifecycle) {
++        this(context, KEY_FACE_SETTINGS, lifecycle);
+     }
+ 
+-    public FaceStatusPreferenceController(Context context, String key) {
++    public FaceStatusPreferenceController(Context context, String key,
++            Lifecycle lifecycle) {
+         super(context, key);
+         mFaceManager = Utils.getFaceManagerOrNull(context);
++        final SecurityFeatureProvider provider = FeatureFactory.getFactory(context)
++                .getSecurityFeatureProvider();
++        mLockPatternUtils = provider.getLockPatternUtils(context);
++        if (lifecycle != null) {
++            lifecycle.addObserver(this);
++        }
++    }
++
++    @Override
++    public void displayPreference(PreferenceScreen screen) {
++        super.displayPreference(screen);
++        PreferenceCategory category = screen.findPreference(PREF_KEY_SECURITY_CATEGORY);
++        mPreference = category.findPreference(KEY_FACE_SETTINGS);
+     }
+ 
+     @Override
+@@ -71,4 +101,31 @@ protected String getEnrollClassName() {
+         return FaceEnrollIntroduction.class.getName();
+     }
+ 
++    @Override
++    public void onResume() {
++        if (mPreference != null){
++            updateEnabledState(mPreference);
++        }
++    }
++
++    @Override
++    public void updateState(Preference preference) {
++        super.updateState(preference);
++        updateEnabledState(preference);
++    }
++
++    private void updateEnabledState(Preference preference) {
++        if (FaceUnlockUtils.hasMotoFaceUnlock()) {
++            if (Utils.isFaceDisabledByAdmin(mContext)){
++                preference.setEnabled(false);
++                preference.setSummary(R.string.disabled_by_administrator_summary);
++            }else if (!mLockPatternUtils.isSecure(getUserId())){
++                preference.setEnabled(false);
++                preference.setSummary(R.string.disabled_because_no_backup_security);
++            }else{
++                preference.setEnabled(true);
++            }
++        }
++    }
++
+ }
+diff --git a/src/com/android/settings/password/ChooseLockGeneric.java b/src/com/android/settings/password/ChooseLockGeneric.java
+index 2a7de05719..6d4ed15991 100644
+--- a/src/com/android/settings/password/ChooseLockGeneric.java
++++ b/src/com/android/settings/password/ChooseLockGeneric.java
+@@ -79,6 +79,8 @@
+ 
+ import java.util.List;
+ 
++import com.android.internal.util.custom.faceunlock.FaceUnlockUtils;
++
+ public class ChooseLockGeneric extends SettingsActivity {
+     public static final String CONFIRM_CREDENTIALS = "confirm_credentials";
+ 
+@@ -879,9 +881,7 @@ private void removeManagedProfileFingerprintsAndFinishIfNecessary(final int pare
+         private void removeAllFaceForUserAndFinish(final int userId, RemovalTracker tracker) {
+             if (mFaceManager != null && mFaceManager.isHardwareDetected()) {
+                 if (mFaceManager.hasEnrolledTemplates(userId)) {
+-                    mFaceManager.setActiveUser(userId);
+-                    Face face = new Face(null, 0, 0);
+-                    mFaceManager.remove(face, userId,
++                    FaceManager.RemovalCallback removalCallback =
+                             new FaceManager.RemovalCallback() {
+                         @Override
+                         public void onRemovalError(Face face, int errMsgId, CharSequence err) {
+@@ -894,7 +894,17 @@ public void onRemovalSucceeded(Face face, int remaining) {
+                                 removeManagedProfileFacesAndFinishIfNecessary(userId, tracker);
+                             }
+                         }
+-                    });
++                    };
++                    if (FaceUnlockUtils.hasMotoFaceUnlock()){
++                        final List<Face> faces = mFaceManager.getEnrolledFaces(userId);
++                        if (!faces.isEmpty()) {
++                            mFaceManager.remove(faces.get(0), userId, removalCallback);
++                        }
++                        return;
++                    }
++                    mFaceManager.setActiveUser(userId);
++                    Face face = new Face(null, 0, 0);
++                    mFaceManager.remove(face, userId, removalCallback);
+                 } else {
+                     // No faces in this user, we may also want to delete managed profile faces
+                     removeManagedProfileFacesAndFinishIfNecessary(userId, tracker);
+diff --git a/src/com/android/settings/security/SecuritySettings.java b/src/com/android/settings/security/SecuritySettings.java
+index 7c3391c0b5..fa2503f4e3 100644
+--- a/src/com/android/settings/security/SecuritySettings.java
++++ b/src/com/android/settings/security/SecuritySettings.java
+@@ -113,7 +113,7 @@ void updateUnificationPreference() {
+         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
+ 
+         final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
+-        securityPreferenceControllers.add(new FaceStatusPreferenceController(context));
++        securityPreferenceControllers.add(new FaceStatusPreferenceController(context, lifecycle));
+         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
+         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
+         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)

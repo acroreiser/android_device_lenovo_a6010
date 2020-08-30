@@ -1,0 +1,77 @@
+commit 81a9e00e3c6a1090da57a7914fb9992ebf0203cf
+Author: maxwen <max.weninger@gmail.com>
+Date:   Sat Sep 14 17:40:26 2019 +0200
+
+    SettingLib: Add deep sleep info to uptime preference
+    
+    Add deep sleep ratio to "About Phone" -> "Uptime"
+    original from Stefan
+    
+    Change-Id: I95562247df4b0315b5c5e735f72e74e2c066f516
+
+diff --git a/packages/SettingsLib/res/values-ru/strings.xml b/packages/SettingsLib/res/values-ru/strings.xml
+index 70fc3fa4..9fa21eb3 100644
+--- a/packages/SettingsLib/res/values-ru/strings.xml
++++ b/packages/SettingsLib/res/values-ru/strings.xml
+@@ -467,4 +467,6 @@
+     <string name="zen_mode_forever" msgid="3339224497605461291">"Пока вы не отключите"</string>
+     <string name="time_unit_just_now" msgid="3006134267292728099">"Только что"</string>
+     <string name="media_transfer_this_device_name" msgid="2858384945459339073">"Это устройство"</string>
++        <!-- Deep sleep info -->
++    <string name="status_deep_sleep">(Сон: %1$d%2$s)</string>
+ </resources>
+diff --git a/packages/SettingsLib/res/values-uk/strings.xml b/packages/SettingsLib/res/values-uk/strings.xml
+index d0f062de..af54a7f0 100644
+--- a/packages/SettingsLib/res/values-uk/strings.xml
++++ b/packages/SettingsLib/res/values-uk/strings.xml
+@@ -467,4 +467,6 @@
+     <string name="zen_mode_forever" msgid="3339224497605461291">"Доки не вимкнути"</string>
+     <string name="time_unit_just_now" msgid="3006134267292728099">"Щойно"</string>
+     <string name="media_transfer_this_device_name" msgid="2858384945459339073">"Цей пристрій"</string>
++    <!-- Deep sleep info -->
++    <string name="status_deep_sleep">(Сон: %1$d%2$s)</string>
+ </resources>
+diff --git a/packages/SettingsLib/res/values/strings.xml b/packages/SettingsLib/res/values/strings.xml
+index 0e918394..f6bd3e2e 100644
+--- a/packages/SettingsLib/res/values/strings.xml
++++ b/packages/SettingsLib/res/values/strings.xml
+@@ -1180,4 +1180,7 @@
+ 
+     <!-- Name of the this device. [CHAR LIMIT=30] -->
+     <string name="media_transfer_this_device_name">This device</string>
++
++    <!-- Deep sleep info -->
++    <string name="status_deep_sleep">(Deep sleep: %1$d%2$s)</string>
+ </resources>
+diff --git a/packages/SettingsLib/src/com/android/settingslib/deviceinfo/AbstractUptimePreferenceController.java b/packages/SettingsLib/src/com/android/settingslib/deviceinfo/AbstractUptimePreferenceController.java
+index 5f722696..51cff414 100644
+--- a/packages/SettingsLib/src/com/android/settingslib/deviceinfo/AbstractUptimePreferenceController.java
++++ b/packages/SettingsLib/src/com/android/settingslib/deviceinfo/AbstractUptimePreferenceController.java
+@@ -26,6 +26,7 @@ import androidx.annotation.VisibleForTesting;
+ import androidx.preference.Preference;
+ import androidx.preference.PreferenceScreen;
+ 
++import com.android.settingslib.R;
+ import com.android.settingslib.core.AbstractPreferenceController;
+ import com.android.settingslib.core.lifecycle.Lifecycle;
+ import com.android.settingslib.core.lifecycle.LifecycleObserver;
+@@ -89,7 +90,18 @@ public abstract class AbstractUptimePreferenceController extends AbstractPrefere
+     }
+ 
+     private void updateTimes() {
+-        mUptime.setSummary(DateUtils.formatElapsedTime(SystemClock.elapsedRealtime() / 1000));
++        long ut = Math.max((SystemClock.elapsedRealtime() / 1000), 1);
++
++        float deepSleepRatio = Math.max((float) (SystemClock.elapsedRealtime() - SystemClock.uptimeMillis()), 0f)
++                / SystemClock.elapsedRealtime();
++        int deepSleepPercent = Math.round(deepSleepRatio * 100);
++
++        final StringBuilder summary = new StringBuilder();
++        summary.append(DateUtils.formatElapsedTime(SystemClock.elapsedRealtime() / 1000));
++        summary.append(" ");
++        summary.append(mContext.getString(R.string.status_deep_sleep, deepSleepPercent, "%"));
++
++        mUptime.setSummary(summary.toString());
+     }
+ 
+     private static class MyHandler extends Handler {

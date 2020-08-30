@@ -1,0 +1,661 @@
+From b5344669b1700b09fdaa9bc932249e426e7c0adb Mon Sep 17 00:00:00 2001
+From: jhenrique09 <jhenrique09.mcz@hotmail.com>
+Date: Thu, 26 Mar 2020 04:56:47 -0300
+Subject: [PATCH] Settings: Add strings for face unlock feature
+
+Change-Id: I906317e3d9c993fc5001ed9939dc25e67d3e636f
+Signed-off-by: Pranav Vashi <neobuddy89@gmail.com>
+---
+ res/values-ar-rSA/moto_strings.xml | 5 +++++
+ res/values-az-rAZ/moto_strings.xml | 5 +++++
+ res/values-bg-rBG/moto_strings.xml | 5 +++++
+ res/values-bn-rBD/moto_strings.xml | 5 +++++
+ res/values-ca-rES/moto_strings.xml | 5 +++++
+ res/values-cs-rCZ/moto_strings.xml | 5 +++++
+ res/values-da-rDK/moto_strings.xml | 5 +++++
+ res/values-de-rDE/moto_strings.xml | 5 +++++
+ res/values-el-rGR/moto_strings.xml | 5 +++++
+ res/values-es-rES/moto_strings.xml | 5 +++++
+ res/values-fa-rIR/moto_strings.xml | 5 +++++
+ res/values-fi-rFI/moto_strings.xml | 5 +++++
+ res/values-fr-rFR/moto_strings.xml | 5 +++++
+ res/values-hi-rIN/moto_strings.xml | 5 +++++
+ res/values-hr-rHR/moto_strings.xml | 5 +++++
+ res/values-hu-rHU/moto_strings.xml | 5 +++++
+ res/values-in-rID/moto_strings.xml | 5 +++++
+ res/values-it-rIT/moto_strings.xml | 5 +++++
+ res/values-iw-rIL/moto_strings.xml | 5 +++++
+ res/values-ja-rJP/moto_strings.xml | 5 +++++
+ res/values-km-rKH/moto_strings.xml | 5 +++++
+ res/values-ko-rKR/moto_strings.xml | 5 +++++
+ res/values-ku-rTR/moto_strings.xml | 5 +++++
+ res/values-mk-rMK/moto_strings.xml | 5 +++++
+ res/values-mr-rIN/moto_strings.xml | 5 +++++
+ res/values-ms-rMY/moto_strings.xml | 5 +++++
+ res/values-my-rMM/moto_strings.xml | 5 +++++
+ res/values-nb-rNO/moto_strings.xml | 5 +++++
+ res/values-nl-rNL/moto_strings.xml | 5 +++++
+ res/values-pl-rPL/moto_strings.xml | 5 +++++
+ res/values-pt-rBR/moto_strings.xml | 5 +++++
+ res/values-pt-rPT/moto_strings.xml | 5 +++++
+ res/values-ro-rRO/moto_strings.xml | 5 +++++
+ res/values-ru-rRU/moto_strings.xml | 5 +++++
+ res/values-si-rLK/moto_strings.xml | 5 +++++
+ res/values-sk-rSK/moto_strings.xml | 5 +++++
+ res/values-sl-rSI/moto_strings.xml | 5 +++++
+ res/values-sr-rSP/moto_strings.xml | 5 +++++
+ res/values-sv-rSE/moto_strings.xml | 5 +++++
+ res/values-ta-rIN/moto_strings.xml | 5 +++++
+ res/values-th-rTH/moto_strings.xml | 5 +++++
+ res/values-tl-rPH/moto_strings.xml | 5 +++++
+ res/values-tr-rTR/moto_strings.xml | 5 +++++
+ res/values-uk-rUA/moto_strings.xml | 5 +++++
+ res/values-vi-rVN/moto_strings.xml | 5 +++++
+ res/values-zh-rCN/moto_strings.xml | 5 +++++
+ res/values-zh-rHK/moto_strings.xml | 5 +++++
+ res/values-zh-rSG/moto_strings.xml | 5 +++++
+ res/values-zh-rTW/moto_strings.xml | 5 +++++
+ res/values/moto_strings.xml        | 5 +++++
+ 50 files changed, 250 insertions(+)
+ create mode 100644 res/values-ar-rSA/moto_strings.xml
+ create mode 100644 res/values-az-rAZ/moto_strings.xml
+ create mode 100644 res/values-bg-rBG/moto_strings.xml
+ create mode 100644 res/values-bn-rBD/moto_strings.xml
+ create mode 100644 res/values-ca-rES/moto_strings.xml
+ create mode 100644 res/values-cs-rCZ/moto_strings.xml
+ create mode 100644 res/values-da-rDK/moto_strings.xml
+ create mode 100644 res/values-de-rDE/moto_strings.xml
+ create mode 100644 res/values-el-rGR/moto_strings.xml
+ create mode 100644 res/values-es-rES/moto_strings.xml
+ create mode 100644 res/values-fa-rIR/moto_strings.xml
+ create mode 100644 res/values-fi-rFI/moto_strings.xml
+ create mode 100644 res/values-fr-rFR/moto_strings.xml
+ create mode 100644 res/values-hi-rIN/moto_strings.xml
+ create mode 100644 res/values-hr-rHR/moto_strings.xml
+ create mode 100644 res/values-hu-rHU/moto_strings.xml
+ create mode 100644 res/values-in-rID/moto_strings.xml
+ create mode 100644 res/values-it-rIT/moto_strings.xml
+ create mode 100644 res/values-iw-rIL/moto_strings.xml
+ create mode 100644 res/values-ja-rJP/moto_strings.xml
+ create mode 100644 res/values-km-rKH/moto_strings.xml
+ create mode 100644 res/values-ko-rKR/moto_strings.xml
+ create mode 100644 res/values-ku-rTR/moto_strings.xml
+ create mode 100644 res/values-mk-rMK/moto_strings.xml
+ create mode 100644 res/values-mr-rIN/moto_strings.xml
+ create mode 100644 res/values-ms-rMY/moto_strings.xml
+ create mode 100644 res/values-my-rMM/moto_strings.xml
+ create mode 100644 res/values-nb-rNO/moto_strings.xml
+ create mode 100644 res/values-nl-rNL/moto_strings.xml
+ create mode 100644 res/values-pl-rPL/moto_strings.xml
+ create mode 100644 res/values-pt-rBR/moto_strings.xml
+ create mode 100644 res/values-pt-rPT/moto_strings.xml
+ create mode 100644 res/values-ro-rRO/moto_strings.xml
+ create mode 100644 res/values-ru-rRU/moto_strings.xml
+ create mode 100644 res/values-si-rLK/moto_strings.xml
+ create mode 100644 res/values-sk-rSK/moto_strings.xml
+ create mode 100644 res/values-sl-rSI/moto_strings.xml
+ create mode 100644 res/values-sr-rSP/moto_strings.xml
+ create mode 100644 res/values-sv-rSE/moto_strings.xml
+ create mode 100644 res/values-ta-rIN/moto_strings.xml
+ create mode 100644 res/values-th-rTH/moto_strings.xml
+ create mode 100644 res/values-tl-rPH/moto_strings.xml
+ create mode 100644 res/values-tr-rTR/moto_strings.xml
+ create mode 100644 res/values-uk-rUA/moto_strings.xml
+ create mode 100644 res/values-vi-rVN/moto_strings.xml
+ create mode 100644 res/values-zh-rCN/moto_strings.xml
+ create mode 100644 res/values-zh-rHK/moto_strings.xml
+ create mode 100644 res/values-zh-rSG/moto_strings.xml
+ create mode 100644 res/values-zh-rTW/moto_strings.xml
+ create mode 100644 res/values/moto_strings.xml
+
+diff --git a/res/values-ar-rSA/moto_strings.xml b/res/values-ar-rSA/moto_strings.xml
+new file mode 100644
+index 0000000000..be6b0650f2
+--- /dev/null
++++ b/res/values-ar-rSA/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">استخدم إلغاء قفل الجهاز بالوجه لإلغاء قفل جهازك.\n\nتذكّر:\nقد يؤدي النظر إلى الهاتف إلى إلغاء قفله حتى إذا لم تكن تنوِي القيام بذلك.\n\nيمكن إلغاء قفل هاتفك من قبل شخص آخر إذا تم توجيهه نحو وجهك عندما تكون عيناك مفتوحتَين.\n\nيمكن إلغاء قفل هاتفك من قبل شخص آخر يشبهك كثيرًا كأحد أولادك أو أشقائك الذين يتمتعون بالملامح نفسها كملامحك.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">سيتم حذف البيانات التي يتم تسجيلها بواسطة ميزة إلغاء قفل الجهاز بالوجه بشكل دائم وآمن. بعد الإزالة، ستحتاج إلى رقم التعريف الشخصي أو النقش أو كلمة المرور لإلغاء قفل هاتفك.</string>
++</resources>
+diff --git a/res/values-az-rAZ/moto_strings.xml b/res/values-az-rAZ/moto_strings.xml
+new file mode 100644
+index 0000000000..0f65b58471
+--- /dev/null
++++ b/res/values-az-rAZ/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Cihazınızın kilidini açmaq üçün Üz kilidindən istifadə edin.\n\n Yadında saxla: \n Telefona baxdığınız zaman kilidini aça bilərsiniz don’t niyyət etmək.\n\n Əgər telefonunuz varsa, başqası tərəfindən kilidlənə bilər it’s gözləriniz açıq olduqda üzünüzə tutulur.\n\n Telefonunuz sizin kimi çox görünən, məsələn uşağınıza və ya eyni bacıya baxan biri tərəfindən kilidlənə bilər.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Üz kilidini açmaqla qeydə alınan məlumatlar daimi və etibarlı şəkildə silinəcəkdir. Çıxarıldıqdan sonra telefonunuzun kilidini açmaq üçün PIN, şifrə və ya parolunuz lazımdır.</string>
++</resources>
+diff --git a/res/values-bg-rBG/moto_strings.xml b/res/values-bg-rBG/moto_strings.xml
+new file mode 100644
+index 0000000000..67814803ca
+--- /dev/null
++++ b/res/values-bg-rBG/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Използвайте функцията за отключване с лице, за да отключите устройството си. \n\nИмайте предвид:\nГледането към телефона може да го отключи, без да искате това.\n\nВашият телефон може да бъде отключен от някой друг, ако той държи телефона срещу лицето Ви, докато очите Ви са отворени.\n\nВашият телефон може да се отключи от човек, който много прилича на Вас, например Вашето дете или идентичен брат или сестра.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Данните, записани чрез отключване с лице, ще бъдат изтрити за постоянно и сигурно. След премахването ще Ви трябва PIN (код), модел или парола, за да отключите телефона си.</string>
++</resources>
+diff --git a/res/values-bn-rBD/moto_strings.xml b/res/values-bn-rBD/moto_strings.xml
+new file mode 100644
+index 0000000000..35797f2381
+--- /dev/null
++++ b/res/values-bn-rBD/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">আপনার ডিভাইসটি আনলক করতে মুখ আনলক বৈশিষ্ট্যটি ব্যবহার করুন।\n\nমনে রাখবেন:\nআপনি ইচ্ছাকৃতভাবে না করলেও, ফোনের দিকে তাকালেও এটি আনলক হয়ে যাবে।\n\nআপনার চোখ খোলা অবস্থায় অন্য কেউ আপনার ফোনটি আপনার মুখের কাছে ধরলেও এটি আনলক হয়ে যাবে।\n\nআপনার মতো একই রকম দেখতে, যেমন আপনার শিশু বা সদৃশ দেখতে ভাই বা বোন আপনার ফোনটি আনলক করতে পারবে।</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">মুখ আনলকের মাধ্যমে রেকর্ড করা ডেটা স্থায়ীভাবে ও নিরাপদে মুছে যাবে। অপসারণ করার পরে, আপনার ফোন আনলক করতে আপনার PIN, প্যাটার্ন বা পাসওয়ার্ডের প্রয়োজন হবে।</string>
++</resources>
+diff --git a/res/values-ca-rES/moto_strings.xml b/res/values-ca-rES/moto_strings.xml
+new file mode 100644
+index 0000000000..9d968e8ba7
+--- /dev/null
++++ b/res/values-ca-rES/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Fes servir el desbloqueig facial per desbloquejar el dispositiu.\n\nTingues en compte:\nMirar el telèfon el pot desbloquejar encara que no ho vulguis.\n\nUna altra persona pot desbloquejar el telèfon si l\'acosta a la teva cara quan tens els ulls oberts.\n\nEl telèfon es pot desbloquejar si hi ha algú que s\'assembla molt a tu, com un fill o un germà.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Les dades registrades pel desbloqueig facial s\'esborraràn permanentment de manera segura. Després d\'eliminar-les, necessitaràs el PIN, patró o contrasenya del telèfon per desbloquejar-lo.</string>
++</resources>
+diff --git a/res/values-cs-rCZ/moto_strings.xml b/res/values-cs-rCZ/moto_strings.xml
+new file mode 100644
+index 0000000000..6757c93888
+--- /dev/null
++++ b/res/values-cs-rCZ/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Zařízení odemknete pomocí odemknutí obličejem.\n\nNezapomeňte:\nTelefon můžete odemknout pohledem na obrazovku, i když to nemáte v úmyslu.\n\nVáš telefon může odemknout i jiná osoba, pokud jej podrží před vaším obličejem a vy budete mít otevřené oči.\n\nVáš telefon mohou odemknout osoby s podobným vzhledem, například vaše dítě nebo identický sourozenec.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Data, která se při odemknutí obličeje uloží, budou trvale a bezpečně smazána. Pokud chcete odemknout telefon po jejich odstranění, musíte zadat kód PIN, gesto nebo heslo.</string>
++</resources>
+diff --git a/res/values-da-rDK/moto_strings.xml b/res/values-da-rDK/moto_strings.xml
+new file mode 100644
+index 0000000000..dd770da94e
+--- /dev/null
++++ b/res/values-da-rDK/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Brug ansigtslås til at låse din enhed op.\n\nHusk:\nNår du kigger på telefonen, kan den låses op, når det ikke er din hensigt.\n\nDin telefon kan låses op af en anden, hvis den holdes op mod dit ansigt, mens dine øjne er åbne.\n\nDin telefon kan låses op af en person, der ligner dig meget, f.eks. dit barn eller en søskende.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Data, der er registreret med ansigtslås, slettes permanent og sikkert. Efter fjernelse skal du bruge din PIN-kode, dit mønster eller din adgangskode til at låse telefonen op.</string>
++</resources>
+diff --git a/res/values-de-rDE/moto_strings.xml b/res/values-de-rDE/moto_strings.xml
+new file mode 100644
+index 0000000000..135595cf5e
+--- /dev/null
++++ b/res/values-de-rDE/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Verwenden Sie die Gesichtsentsperrung, um das Gerät zu entsperren.\n\nBitte beachten Sie:\nDurch das Ansehen des Telefons könnten Sie es auch entsperren, wenn Sie dies nicht möchten.\n\nIhr Telefon kann von einer anderen Person entsperrt werden, wenn es auf Ihr Gesicht gehalten wird und Sie die Augen geöffnet haben.\n\nIhr Telefon kann von jemandem entsperrt werden, der Ihnen sehr ähnlich sieht, etwa Ihr Kind oder ein eineiiger Zwilling.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Durch die Gesichtsentsperrung aufgezeichnete Daten werden dauerhaft und sicher gelöscht. Nach dem Entfernen benötigen Sie Ihre PIN, Ihr Muster oder Ihr Passwort, um Ihr Telefon zu entsperren.</string>
++</resources>
+diff --git a/res/values-el-rGR/moto_strings.xml b/res/values-el-rGR/moto_strings.xml
+new file mode 100644
+index 0000000000..29d30e723d
+--- /dev/null
++++ b/res/values-el-rGR/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Χρησιμοποιήστε τη λειτουργία Face Unlock για να ξεκλειδώσετε τη συσκευή σας.\n\nΛάβετε υπόψη:\nΕάν κοιτάζετε το τηλέφωνο, μπορεί να το ξεκλειδώσετε ακούσια.\n\nΚάποιος άλλος μπορεί να ξεκλειδώσει το τηλέφωνό σας αν το έχει στραμμένο προς το πρόσωπό σας ενώ τα μάτια σας είναι ανοικτά.\n\nΚάποιος άλλος που σας μοιάζει αρκετά μπορεί να ξεκλειδώσει το τηλέφωνό σας, για παράδειγμα το παιδί σας ή ο δίδυμος αδελφός σας.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Τα δεδομένα που καταγράφονται από τη λειτουργία Face Unlock θα διαγραφούν οριστικά και με ασφάλεια. Μετά την κατάργησή τους, θα χρειαστείτε το PIN, το μοτίβο ή τον κωδικό πρόσβασης για να ξεκλειδώσετε το τηλέφωνό σας.</string>
++</resources>
+diff --git a/res/values-es-rES/moto_strings.xml b/res/values-es-rES/moto_strings.xml
+new file mode 100644
+index 0000000000..6764341893
+--- /dev/null
++++ b/res/values-es-rES/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Utiliza el desbloqueo facial para desbloquear el dispositivo.\n\nRecuerda:\nEs posible que el teléfono se desbloquee cuando lo estés mirando, aunque no tengas intención de hacerlo.\n\nOtra persona puede desbloquear tu teléfono si lo coloca frente a tu cara mientras tienes los ojos abiertos.\n\nAlguien que se parezca mucho a ti, como tu hijo o un hermano gemelo, puede desbloquear el teléfono.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Los datos registrados con el desbloqueo facial se eliminarán de forma permanente y segura. Después de la eliminación, necesitarás tu PIN, patrón o contraseña para desbloquear el teléfono.</string>
++</resources>
+diff --git a/res/values-fa-rIR/moto_strings.xml b/res/values-fa-rIR/moto_strings.xml
+new file mode 100644
+index 0000000000..9759661238
+--- /dev/null
++++ b/res/values-fa-rIR/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">برای بازگشایی قفل دستگاهتان از بازگشایی قفل با صورت استفاده کنید:\n\nبه خاطر داشته باشید:\nبا نگاه کردن به تلفن قفل تلفن باز می‌شود حتی اگر مایل به باز شدن قفل نباشید.\n\nاگر شخص دیگری تلفن را جلوی صورت شما بگیرد در حالی که چشم‌هایتان باز باشد، قفل تلفن باز می‌شود.\n\nقفل تلفن با صورت کسی که بسیار شبیه شما است، برای مثال فرزند یا خواهر/برادر دوقلوی یکسان شما باز می‌شود.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">اطلاعات ثبت شده توسط بازگشایی قفل با صورت برای همیشه و به صورت ایمن حذف می‌شود. بعد از حذف، برای بازگشایی قفل تلفن به پین، الگو یا رمزعبور نیاز دارید.</string>
++</resources>
+diff --git a/res/values-fi-rFI/moto_strings.xml b/res/values-fi-rFI/moto_strings.xml
+new file mode 100644
+index 0000000000..b71545c73f
+--- /dev/null
++++ b/res/values-fi-rFI/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Avaa näytön lukitus kasvojentunnistuksella.\n\nOta huomioon seuraavat seikat:\nKatsomalla puhelinta voit avata puhelimen lukituksen myös tahattomasti.\n\nJoku muu voi avata puhelimesi lukituksen, jos se kohdistetaan kasvoihisi, kun silmäsi ovat auki.\n\nPuhelimen lukituksen voi avata joku, joka on samannäköinen kuin sinä, kuten lapsesi tai identtinen kaksosesi.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Kasvojentunnistuksen tallentamat tiedot poistetaan pysyvästi ja turvallisesti. Poistamisen jälkeen tarvitse PIN-koodin, kuvion tai salasanan puhelimen lukituksen avaamiseen.</string>
++</resources>
+diff --git a/res/values-fr-rFR/moto_strings.xml b/res/values-fr-rFR/moto_strings.xml
+new file mode 100644
+index 0000000000..00fd659785
+--- /dev/null
++++ b/res/values-fr-rFR/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Utilisez la fonction de déverrouillage par reconnaissance faciale pour déverrouiller votre appareil.\n\nSouvenez-vous :\nVotre téléphone peut se déverrouiller lorsque vous le regardez, même si vous n’en avez pas l’intention.\n\nVotre téléphone peut se déverrouiller si quiconque le tient devant vous lorsque vos yeux sont ouverts.\n\nUne personne qui vous ressemble peut également déverrouiller votre téléphone (par exemple, vos enfants ou vos frères et sœurs).</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Les données de reconnaissance faciale enregistrées seront supprimées de façon permanente et de manière sécurisée. Après leur suppression, vous devrez utiliser votre code PIN, schéma ou mot de passe pour déverrouiller votre téléphone.</string>
++</resources>
+diff --git a/res/values-hi-rIN/moto_strings.xml b/res/values-hi-rIN/moto_strings.xml
+new file mode 100644
+index 0000000000..4e33224d85
+--- /dev/null
++++ b/res/values-hi-rIN/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">अपने उपकरण को अनलॉक करने के लिए चेहरे से अनलॉक सुविधा का उपयोग करें.\n\nध्यान रखें:\nफ़ोन को देखने पर न चाहते हुए भी वह अनलॉक हो सकता है.\n\nकोई और भी आपके फ़ोन को अनलॉक कर सकता है, यदि इसे आपके चेहरे की ओर करके रखा गया हो और आपकी आंखें खुली हुई हों.\n\nकिसी का चेहरा आपसे बहुत अधिक मिलता-जुलता हो, जैसे कि आपका बच्चा या आप ही की तरह दिखने वाले भाई-बहन, तो वे आपके फ़ोन को अनलॉक कर सकते हैं.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">चेहरे से अनलॉक सुविधा द्वारा रिकॉर्ड किया गया डेटा स्थायी और सुरक्षित रूप से हटा दिया जाएगा. हट जाने के बाद, आपको अपने फ़ोन को अनलॉक करने के लिए पिन, पैटर्न या पासवर्ड की आवश्यकता होगी.</string>
++</resources>
+diff --git a/res/values-hr-rHR/moto_strings.xml b/res/values-hr-rHR/moto_strings.xml
+new file mode 100644
+index 0000000000..5aadf4935e
+--- /dev/null
++++ b/res/values-hr-rHR/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Za otključavanje uređaja poslužite se licem.\n\nObratite pažnju na sljedeće:\nMogli biste nehotično otključati telefon gledajući u njega.\n\nNetko drugi mogao bi otključati vaš telefon tako da ga okrene prema vašem licu dok su vam oči otvorene.\n\nTelefon bi mogao otključati netko tko vam je jako sličan, primjerice dijete ili blizanac.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Podaci snimljeni otključavanjem licem trajno će se i sigurno izbrisati. Nakon uklanjanja, za otključavanje telefona trebat će vam PIN, uzorak ili lozinka.</string>
++</resources>
+diff --git a/res/values-hu-rHU/moto_strings.xml b/res/values-hu-rHU/moto_strings.xml
+new file mode 100644
+index 0000000000..313936ca3c
+--- /dev/null
++++ b/res/values-hu-rHU/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Használja az arcalapú feloldás funkciót az eszköz feloldásához.\n\nNe feledje:\nElőfordulhat, hogy a telefonra nézve szándéka ellenére is feloldja az eszközt.\n\nTelefonját más is feloldhatja, amennyiben az Ön arcához tartja a telefont, amikor szemei nyitva vannak.\n\nTelefonját egy Önhöz nagy mértékben hasonlító személy, például gyermeke vagy ikertestvére is képes feloldani.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Az arcalapú feloldás által rögzített adatok véglegesen és biztonságosan törlődnek. Az eltávolítást követően PIN-kódjára, feloldási mintázatára vagy jelszavára lesz szükség a telefon feloldásához.</string>
++</resources>
+diff --git a/res/values-in-rID/moto_strings.xml b/res/values-in-rID/moto_strings.xml
+new file mode 100644
+index 0000000000..7edfc2e3dc
+--- /dev/null
++++ b/res/values-in-rID/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Gunakan fitur pengenalan Wajah untuk membuka perangkat.\n\nPerlu diingat:\nMelihat ke ponsel dapat membuka kunci bahkan saat Anda tidak berniat melakukannya.\n\nPonsel Anda dapat dibuka oleh orang lain jika ponsel dihadapkan ke wajah Anda dengan mata terbuka.\n\nPonsel Anda dapat dibuka oleh orang lain yang mirip dengan Anda, seperti anak atau saudara yang mirip.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Data yang disimpan dengan metode pengenalan wajah akan dihapus dan diamankan secara permanen. Setelah dihapus, Anda akan memerlukan PIN, pola, atau kata sandi untuk membuka ponsel Anda.</string>
++</resources>
+diff --git a/res/values-it-rIT/moto_strings.xml b/res/values-it-rIT/moto_strings.xml
+new file mode 100644
+index 0000000000..1be03f1b10
+--- /dev/null
++++ b/res/values-it-rIT/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Usa lo sblocco con il viso per sbloccare il dispositivo.\n\nTieni presente che:\nSe guardi il telefono puoi sbloccarlo inavvertitamente.\n\nIl telefono può essere sbloccato da un\'altra persona se lo rivolge verso il tuo viso mentre hai gli occhi aperti.\n\nIl telefono può essere sbloccato da qualcuno che ti somiglia molto, ad esempio tuo figlio o un tuo gemello identico.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">I dati registrati tramite lo sblocco con il viso verranno eliminati in modo definitivo e sicuro. Dopo la rimozione, per sbloccare il telefono sarà necessario inserire il PIN, la sequenza o la password.</string>
++</resources>
+diff --git a/res/values-iw-rIL/moto_strings.xml b/res/values-iw-rIL/moto_strings.xml
+new file mode 100644
+index 0000000000..33ed32df4e
+--- /dev/null
++++ b/res/values-iw-rIL/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">השתמש בזיהוי פרצוף כדי לבטל את נעילת המכשיר.\n\nשים לב:\nנעילת הטלפון עלולה להתבטל כשאתה מביט בו, גם אם אינך מתכנן זאת.\n\nביטול נעילת הטלפון יכול להתבצע על-ידי מישהו אחר אם הטלפון מוחזק מול פניך בזמן שעיניך פקוחות.\n\nביטול נעילת הטלפון יכול להתבצע על-ידי מישהו שדומה לך מאוד, למשל הילד שלך או אח זהה.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">נתונים שמתועדים על-ידי זיהוי פרצוף יימחקו לצמיתות באופן מאובטח. לאחר ההסרה, תצטרך להשתמש ב-PIN, בקו ביטול נעילה או בסיסמה כדי לבטל את נעילת הטלפון.</string>
++</resources>
+diff --git a/res/values-ja-rJP/moto_strings.xml b/res/values-ja-rJP/moto_strings.xml
+new file mode 100644
+index 0000000000..3d60125efe
+--- /dev/null
++++ b/res/values-ja-rJP/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">[顔認証でロック解除]を使用してデバイスのロックを解除してください。\n\n注意: \n電話を見ると、意図しないときにロック解除されることがあります。\n\nあなたが目を開いているときに他の誰かに電話を顔の近くにかざされた場合、ロック解除されることがあります。\n\n自分の子供や双子など、自分によく似た誰かによって電話がロック解除されることがあります。</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">[顔認証でロック解除]によって記録されたデータは、完全かつ安全に削除されます。削除後、電話のロックを解除するには、PIN、パターン、またはパスワードが必要です。</string>
++</resources>
+diff --git a/res/values-km-rKH/moto_strings.xml b/res/values-km-rKH/moto_strings.xml
+new file mode 100644
+index 0000000000..69d3d96255
+--- /dev/null
++++ b/res/values-km-rKH/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">ប្រើការដោះសោតាមមុខ ដើម្បីដោះសោឧបករណ៍របស់អ្នក។\n\nសូមចងចាំ៖ \nការក្រឡេកមើលទូរសព្ទអាចដោះសោបាន នៅពេលដែលអ្នកមិនមានបំណងធ្វើវា។\n\nទូរសព្ទរបស់អ្នកអាចត្រូវបានដោះសោដោយអ្នកផ្សេង ប្រសិនបើដាក់វានៅចំមុខរបស់អ្នក ខណៈពេលដែលភ្នែករបស់អ្នកបើក។\n\nទូរសព្ទរបស់អ្នកអាចត្រូវបានដោះសោដោយអ្នកដែលមានមុខមាត់ដូចនឹងអ្នកបំផុត ពោលកូនរបស់អ្នក ឬបងប្អូនដែលមានមុខដូចគ្នា។</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">ទិន្នន័យដែលបានកត់ត្រាដោយការដោះសោតាមមុខនឹងត្រូវបានលុបជាអចិន្ត្រៃយ៍ និងប្រកបដោយសុវត្ថិភាព។ បន្ទាប់ពីការដកចេញ អ្នកនឹងត្រូវការលេខកូដ PIN លំនាំ ឬពាក្យសម្ងាត់របស់អ្នក ដើម្បីដោះសោទូរសព្ទរបស់អ្នក។</string>
++</resources>
+diff --git a/res/values-ko-rKR/moto_strings.xml b/res/values-ko-rKR/moto_strings.xml
+new file mode 100644
+index 0000000000..0326bfcde7
+--- /dev/null
++++ b/res/values-ko-rKR/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">얼굴인식 잠금해제를 사용하여 장치 잠금을 해제하십시오.\n\n참고: \n사용자가 의도하지 않고 휴대전화를 바라볼 때 잠금이 해제될 수 있습니다.\n\n눈을 뜨고 있을 때 휴대전화가 얼굴을 향해 있으면 다른 사람이 휴대전화를 잠금 해제할 수 있습니다.\n\n\n 자녀나 형제자매처럼 외관상 많이 닮은 사람이 휴대전화의 잠금을 해제할 수 있습니다.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">얼굴인식 잠금해제에 의해 기록된 데이터는 영구적으로 안전하게 삭제됩니다. 제거한 후 휴대전화의 잠금을 해제하려면 PIN, 패턴 또는 암호가 필요합니다.</string>
++</resources>
+diff --git a/res/values-ku-rTR/moto_strings.xml b/res/values-ku-rTR/moto_strings.xml
+new file mode 100644
+index 0000000000..7a260dbef3
+--- /dev/null
++++ b/res/values-ku-rTR/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">اپنا آلہ انلاک کرنے کے لیے چہرہ لاک استعمال کریں۔\n\nیاد رہے کہ:\nجب آپ کا فون انلاک کرنے کا ارادہ نہ ہو تو فون پر دیکھنے سے انلاک ہوسکتا ہے۔\n\nآپ کی آنکھیں کھلی ہونے کے وقت اگر کوئی شخص آپ کا فون آپ کے چہرے کے قریب لے جاتا ہے تو اس سے بھی آپ کا فون انلاک ہوسکتا ہے۔\n\nجو شخص دکھنے میں کافی حد تک آپ کی طرح ہو تو اس کے چہرے سے بھی آپ کا فون انلاک ہوسکتا ہے، مثلا، آپ کا بچہ یا آپ کا بھائی بہن۔</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">چہرہ انلاک کے ذریعہ ریکارڈ کردہ ڈیٹا مستقل اور محفوظ طریقے سے حذف ہوجائے گا۔ ہٹانے کے بعد، آپ کو اپنا فون انلاک کرنے کے لیے آپ کو اپنے PIN، نمونہ، یا پاس ورڈ کی ضرورت ہوگی۔</string>
++</resources>
+diff --git a/res/values-mk-rMK/moto_strings.xml b/res/values-mk-rMK/moto_strings.xml
+new file mode 100644
+index 0000000000..d5eeadfaed
+--- /dev/null
++++ b/res/values-mk-rMK/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Користете го отклучувањето со лице за да го отклучувате вашиот уред.\n\nИмајте предвид:\nтелефонот може да се отклучи и кога гледате во него без да имате намера да го отклучите.\n\nТелефонот може да го отклучи и некој друг ако го држи до вашето лице кога очите ви се отворени.\n\nТелефонот може да го отклучи и некој кој многу личи на вас, на пример, вашето дете или идентичен брат/сестра.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Податоците што ги регистрира отклучувањето со лице ќе бидат трајно и безбедно избришани. По отстранувањето, ќе ви биде потребен PIN-код, шема или лозинка за да го отклучите телефонот.</string>
++</resources>
+diff --git a/res/values-mr-rIN/moto_strings.xml b/res/values-mr-rIN/moto_strings.xml
+new file mode 100644
+index 0000000000..23c65e3d5b
+--- /dev/null
++++ b/res/values-mr-rIN/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">आपले उपकरण अनलॉक करण्यासाठी चेहरा अनलॉक वापरा.\n\nलक्षात ठेवा:\nआपला हेतू नसतानाफोन पाहणे त्यास अनलॉक करू शकते.\n\nआपले डोळे उघडे असताना जर कोणी फोन आपल्या चेहऱ्या समोर धरल्यास आपला फोन कोणाकडूनही अनलॉक केला जाऊ शकतो\n\nआपला फोन एखाद्याद्वारे अनलॉक केला जाऊ शकतो जो आपल्या सारखा दिसतो, जसे, आपले मुल किंवा सारखे दिसणारे भावंड असल्यास.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">चेहरा अनलॉकद्वारे रेकॉर्ड केलेला डेटा कायमचा आणि सुरक्षितपणे हटवला जाईल. काढल्यानंतर, आपला फोन अनलॉक करण्यासाठी आपल्याला आपला PIN, पॅटर्न किंवा पासवर्ड आवश्यक असेल.</string>
++</resources>
+diff --git a/res/values-ms-rMY/moto_strings.xml b/res/values-ms-rMY/moto_strings.xml
+new file mode 100644
+index 0000000000..3dcdcea739
+--- /dev/null
++++ b/res/values-ms-rMY/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Gunakan Buka kunci menggunakan pengecaman wajah untuk membuka kunci peranti anda.\n\nJangan lupa:.\nMelihat ke arah telefon boleh membuka kuncinya walaupun anda tidak ingin berbuat demikian.\n\nTelefon anda boleh dibuka kunci oleh orang lain jika telefon dihalakan ke arah muka anda semasa mata anda terbuka.\n\nTelefon anda boleh dibuka kunci oleh seseorang yang menyerupai anda, contohnya, anak anda atau adik-beradik yang berupa sama.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Data yang direkodkan oleh buka kunci menggunakan pengecaman wajah akan dipadamkan secara kekal dan selamat. Selepas dialih keluar, anda akan memerlukan PIN, corak, atau kata laluan untuk membuka kunci telefon anda.</string>
++</resources>
+diff --git a/res/values-my-rMM/moto_strings.xml b/res/values-my-rMM/moto_strings.xml
+new file mode 100644
+index 0000000000..69ad18f068
+--- /dev/null
++++ b/res/values-my-rMM/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">သင့်ရဲ့ device ကို unlock လုပ်ဖို့မျက်နှာသော့ဖွင့်သုံးပါ။\n\n စိတျထဲမှာသိမ်းဆည်းထားပါ: \n အခါသင်ဖုန်းကိုကြည့်ပါကသော့ဖွင့်နိုင်ပါတယ် don’t ရည်ရွယ်။\n\n သင့်ရဲ့ဖုန်းပါလျှင်အခြားသူတစ်ဦးဦးကသော့ဖွင့နိုင်ပါသည် it’s သင်၏မျက်စိပွင့်လင်းနေစဉ်သင်၏မျက်နှာကိုမှတက်ကျင်းပခဲ့တယ်။\n\n သင့်ရဲ့ဖုန်းဆို, သင်နှင့်တူတွေအများကြီးကြည့်သင့်ကလေးကိုသို့မဟုတ်တစ်ခုတူညီမှေးခငျြးသူတစ်ဦးကသော့ဖွင့နိုင်ပါသည်။</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">မကျြနှာကိုသော့ဖွင့်ခြင်းဖြင့်မှတ်တမ်းတင်ထားသောဒေတာများအပြီးတိုင်နဲ့လုံလုံခြုံခြုံဖျက်ပါမည်။ ဖယ်ရှားရေးပြီးနောက်, သင်သည်သင်၏ဖုန်းကိုသော့ဖွင့်ရန်သင့် PIN နံပါတ်, ပုံစံ, ဒါမှမဟုတ် password ကိုလိုအပ်ပါလိမ့်မယ်။</string>
++</resources>
+diff --git a/res/values-nb-rNO/moto_strings.xml b/res/values-nb-rNO/moto_strings.xml
+new file mode 100644
+index 0000000000..a13772254e
+--- /dev/null
++++ b/res/values-nb-rNO/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Bruk Ansiktslås til å låse opp enheten.\n\nHusk:\nDet kan hende du utilsiktet låser opp telefonen når du ser på den.\n\nTelefonen kan låses opp av andre hvis den holdes opp mot ansiktet ditt mens du har øynene åpne.\n\nTelefonen kan låses opp av noen som ligner på deg, for eksempel barnet ditt eller en identisk tvilling.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Data som er registrert av Ansiktslås, slettes for godt og på en sikker måte. Når du har fjernet funksjonen, trenger du PIN-kode, mønster eller passord for å låse opp telefonen.</string>
++</resources>
+diff --git a/res/values-nl-rNL/moto_strings.xml b/res/values-nl-rNL/moto_strings.xml
+new file mode 100644
+index 0000000000..d677ecf4d6
+--- /dev/null
++++ b/res/values-nl-rNL/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Gebruik Ontgrendelen via gezichtsherkenning om je apparaat te ontgrendelen.\n\nHoud er rekening mee dat je het apparaat onbedoeld kunt ontgrendelen.\n\nJe telefoon kan door iemand anders worden ontgrendeld als deze op je gezicht is gericht terwijl je ogen open zijn.\n\nEn je telefoon kan worden ontgrendeld door iemand die veel op je lijkt, zoals een kind of een broer/zus.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Gegevens die worden vastgelegd via Ontgrendelen via gezichtsherkenning, worden permanent en veilig verwijderd. Na het verwijderen heb je je pincode, patroon of wachtwoord nodig om je telefoon te ontgrendelen.</string>
++</resources>
+diff --git a/res/values-pl-rPL/moto_strings.xml b/res/values-pl-rPL/moto_strings.xml
+new file mode 100644
+index 0000000000..704570ea86
+--- /dev/null
++++ b/res/values-pl-rPL/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Użyj funkcji rozpoznania twarzy, aby odblokować urządzenie.\n\nPamiętaj:\nSpojrzenie na telefon może go odblokować, nawet gdy nie masz takiego zamiaru.\n\nInna osoba może odblokować telefon, trzymając go przed Twoją twarzą, gdy masz otwarte oczy.\n\nTelefon może odblokować osoba, która bardzo Ciebie przypomina, na przykład Twoje dziecko lub bliźniak.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Dane zapisane przez funkcję rozpoznania twarzy zostaną trwale i bezpiecznie usunięte. Po ich usunięciu konieczne będzie podanie kodu PIN, wzoru lub hasła, aby odblokować telefon.</string>
++</resources>
+diff --git a/res/values-pt-rBR/moto_strings.xml b/res/values-pt-rBR/moto_strings.xml
+new file mode 100644
+index 0000000000..3930bbf39a
+--- /dev/null
++++ b/res/values-pt-rBR/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Use o Desbloqueio facial para desbloquear seu dispositivo.\n\nLembre-se:\nOlhar para o telefone pode desbloqueá-lo, mesmo quando você não quiser.\n\nSeu telefone poderá ser desbloqueado por outra pessoa se ele for segurado na altura do seu rosto quando seus olhos estiverem abertos.\n\nSeu telefone pode ser desbloqueado por alguém que se parece muito com você, como seu filho ou gêmeo idêntico.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Os dados gravados pelo desbloqueio facial serão excluídos permanentemente e com segurança. Após a remoção, você precisará do PIN, da senha ou do padrão para desbloquear o telefone.</string>
++</resources>
+diff --git a/res/values-pt-rPT/moto_strings.xml b/res/values-pt-rPT/moto_strings.xml
+new file mode 100644
+index 0000000000..3930bbf39a
+--- /dev/null
++++ b/res/values-pt-rPT/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Use o Desbloqueio facial para desbloquear seu dispositivo.\n\nLembre-se:\nOlhar para o telefone pode desbloqueá-lo, mesmo quando você não quiser.\n\nSeu telefone poderá ser desbloqueado por outra pessoa se ele for segurado na altura do seu rosto quando seus olhos estiverem abertos.\n\nSeu telefone pode ser desbloqueado por alguém que se parece muito com você, como seu filho ou gêmeo idêntico.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Os dados gravados pelo desbloqueio facial serão excluídos permanentemente e com segurança. Após a remoção, você precisará do PIN, da senha ou do padrão para desbloquear o telefone.</string>
++</resources>
+diff --git a/res/values-ro-rRO/moto_strings.xml b/res/values-ro-rRO/moto_strings.xml
+new file mode 100644
+index 0000000000..939c58462c
+--- /dev/null
++++ b/res/values-ro-rRO/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Utilizaţi funcţia Deblocare facială pentru deblocarea dispozitivului.\n\nReţineţi:\nDacă priviţi spre telefon, îl puteţi debloca neintenţionat.\n\nTelefonul poate fi deblocat de altă persoană dacă este îndreptat spre faţa dumneavoastră atunci când aveţi ochii deschişi.\n\nTelefonul poate fi deblocat de o persoană care seamănă cu dumneavoastră, de exemplu copilul sau un frate geamăn.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Datele înregistrate de funcţia Deblocare facială vor fi şterse permanent şi în siguranţă. După eliminare, veţi avea nevoie de codul PIN, de model sau de parolă pentru deblocarea telefonului.</string>
++</resources>
+diff --git a/res/values-ru-rRU/moto_strings.xml b/res/values-ru-rRU/moto_strings.xml
+new file mode 100644
+index 0000000000..bd8df20b19
+--- /dev/null
++++ b/res/values-ru-rRU/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Используйте функцию фейсконтроля, чтобы разблокировать устройство.\n\nПомните:\nВзгляд на телефон может разблокировать его, даже если вы не собирались этого делать.\n\nТелефон может быть разблокирован другим человеком, если он поднесет его к вашему лицу, когда ваши глаза открыты.\n\nТелефон может быть разблокирован человеком, сильно похожим на вас, например вашим ребенком или близнецом.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Данные, записанные с помощью функции фейсконтроля, будут безвозвратно удалены. После удаления потребуется ввести PIN-код, графический ключ или пароль для разблокировки телефона.</string>
++</resources>
+diff --git a/res/values-si-rLK/moto_strings.xml b/res/values-si-rLK/moto_strings.xml
+new file mode 100644
+index 0000000000..fe2af420fd
+--- /dev/null
++++ b/res/values-si-rLK/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">ඔබගේ උපාංගය අගුලු හැරීමට මුහුණු අගුලු හැරීම භාවිතා කරන්න.\n\nසිතෙහි තබා ගන්න:\nදුරකථනය දෙස බැලීම එය ඔබ අදහස් නොකළද ඔබේ දුරකථනය අගුලු හැරිය හැකිය.\n\nඔබගේ දුරකථනය ඔබගේ දෑස් විවෘතව ඇති විට ඔබගේ මුහුණට ඇල්ලීමෙන් වෙනත් යම් කෙනෙකුට අගුලු හැරිය හැකිය.\n\nඔබ හා සමාන පෙනුමක් ඇති, ඔබේ දරුවා හෝ සර්වසම සහෝදරයකු හෝ සහෝදරියක විසින් ඔබගේ දුරකථනය අගුලු හැරීමට හැකිය.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">මුහුණු අගුලු හැරීම මගින් පටිගත කරන ලද දත්ත ස්ථිරව හා ආරක්ෂිතව මකනු ඇත. ඉවත් කිරීමෙන් පසු, ඔබට ඔබගේ දුරකථනය අගුලු හැරීමට ඔබගේ PIN, රටාව හෝ මුරපදය අවශ්‍ය වේ.</string>
++</resources>
+diff --git a/res/values-sk-rSK/moto_strings.xml b/res/values-sk-rSK/moto_strings.xml
+new file mode 100644
+index 0000000000..25df8c8a5f
+--- /dev/null
++++ b/res/values-sk-rSK/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Odomykanie zariadenia pomocou funkcie odomknutia tvárou:\n\nMajte na pamäti toto:\nTelefón môžete neúmyselne odomknúť tým, že sa naň pozriete.\n\nVáš telefón môže odomknúť aj niekto iný, ak ho priloží k vašej tvári, kým máte otvorené oči.\n\nVáš telefón môže odomknúť aj niekto, kto vyzerá podobne ako vy, napríklad vaše dieťa alebo identický súrodenec.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Údaje zaznamenané funkciou odomknutia tvárou sa natrvalo a bezpečne odstránia. Po odstránení budete na odomknutie telefónu potrebovať svoj kód PIN, vzor alebo heslo.</string>
++</resources>
+diff --git a/res/values-sl-rSI/moto_strings.xml b/res/values-sl-rSI/moto_strings.xml
+new file mode 100644
+index 0000000000..d88fd6e4a1
+--- /dev/null
++++ b/res/values-sl-rSI/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Napravo odklepajte s funkcijo odklepanja z obrazom.\n\nNe pozabite:\nČe gledate telefon, ga lahko odklenete, kadar ne želite.\n\nTelefon lahko odklene druga oseba, če ga pridrži pred vašim obrazom, ko imate odprte oči.\n\nTelefon lahko odklene oseba, ki vam je podobna, npr. vaš otrok ali identični dvojček oz. dvojčica.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Podatki, zabeleženi s funkcijo odklepanja z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona potrebovali PIN, vzorec ali geslo.</string>
++</resources>
+diff --git a/res/values-sr-rSP/moto_strings.xml b/res/values-sr-rSP/moto_strings.xml
+new file mode 100644
+index 0000000000..5cc8c00bd2
+--- /dev/null
++++ b/res/values-sr-rSP/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Користите Откључавање лицем да бисте откључали уређај.\n\nИмајте на уму:\nГледањем у телефон можете да га откључате када то не желите.\n\nНеко други може да откључа ваш телефон ако га принесе вашем лицу док су вам очи отворене.\n\nВаш телефон може да откључа неко други ко веома личи на вас, на пример, ваше дете или близанац.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Подаци које снима откључавање лицем се трајно и безбедно бришу. После уклањања, биће вам потребан PIN, шаблон или лозинка да бисте откључали телефон.</string>
++</resources>
+diff --git a/res/values-sv-rSE/moto_strings.xml b/res/values-sv-rSE/moto_strings.xml
+new file mode 100644
+index 0000000000..a6bd27b4ba
+--- /dev/null
++++ b/res/values-sv-rSE/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Använd Ansiktslås för att låsa upp enheten.\n\nObs!\nOm du tittar på telefonen kan du av misstag låsa upp den.\n\nTelefonen kan låsas upp av någon annan om den hålls upp framför ditt ansikte om du har ögonen öppna.\n\nTelefonen kan låsas upp av någon som är lik dig, till exempel ditt barn eller ett identiskt syskon.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Data som registrerats av Ansiktslås tas bort permanent och säkert. Efter borttagning behöver du PIN-kod, grafiskt lösenord eller lösenord för att låsa upp telefonen.</string>
++</resources>
+diff --git a/res/values-ta-rIN/moto_strings.xml b/res/values-ta-rIN/moto_strings.xml
+new file mode 100644
+index 0000000000..1b06c67342
+--- /dev/null
++++ b/res/values-ta-rIN/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">உங்கள் சாதனத்தைத் திறக்க, முகத் திறப்பைப் பயன்படுத்தவும்.\n\nகவனத்தில் கொள்ளுங்கள்:\nநீங்கள் விரும்பாத போதும் மொபைலைப் பார்ப்பது அதனைத் திறக்கும்.\n\nஉங்கள் கண்கள் திறந்த நிலையில் வேறு யாராவது உங்கள் மொபைலைப் பிடித்து உங்கள் முன் நீட்டினால் அது திறக்கப்படும்.\n\nஉங்களைப் போலவே தோற்றம் கொண்ட அதாவது உங்கள் குழந்தை அல்லது ஒத்த தோற்றம் கொண்ட உடன்பிறந்தவரால் உங்கள் மொபைலைத் திறக்க முடியும்.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">முகத் திறப்பு மூலம் பதிவுசெய்த தரவானது நிரந்தரமாகவும், பாதுகாப்பாகவும் நீக்கப்படும். அகற்றிய பிறகு, உங்கள் மொபைலைத் திறக்க PIN, பேட்டர்ன் மற்றும் கடவுச்சொல் தேவை.</string>
++</resources>
+diff --git a/res/values-th-rTH/moto_strings.xml b/res/values-th-rTH/moto_strings.xml
+new file mode 100644
+index 0000000000..3ee57a0755
+--- /dev/null
++++ b/res/values-th-rTH/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">ใช้การปลดล็อกด้วยใบหน้าเพื่อปลดล็อกอุปกรณ์ของคุณ\n\nโปรดจำไว้ว่า:\nการมองที่โทรศัพท์อาจทำให้ปลดล็อกได้โดยที่คุณไม่ตั้งใจ\n\nบุคคลอื่นสามารถปลดล็อกโทรศัพท์ของคุณได้หากมีการหันโทรศัพท์ไปที่ใบหน้าของคุณขณะที่คุณลืมตาอยู่\n\nบุคคลที่มีใบหน้าคล้ายกับคุณสามารถปลดล็อกโทรศัพท์ของคุณได้ เช่น บุตรหรือพี่น้องร่วมสายเลือดของคุณ</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">ข้อมูลที่บันทึกโดยการปลดล็อกด้วยใบหน้าจะถูกลบอย่างถาวรและปลอดภัย หลังจากการลบ คุณจะต้องใช้ PIN รูปแบบ หรือรหัสผ่านเพื่อปลดล็อกโทรศัพท์ของคุณ</string>
++</resources>
+diff --git a/res/values-tl-rPH/moto_strings.xml b/res/values-tl-rPH/moto_strings.xml
+new file mode 100644
+index 0000000000..861c22d346
+--- /dev/null
++++ b/res/values-tl-rPH/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Gamitin ang pag-unlock ng Mukha upang i-unlock ang iyong device.\n\nLaging isipin:\nAng pagtingin sa telepono ay maaaring makapag-unlock dito kung hindi mo sinasadya.\n\nMaaari ring ma-unlock ng ibang tao ang iyong telepono kung ito ays naitapat sa iyong mukha habang nakadilat ang iyong mga mata.\n\nMaaari ring ma-unlock ng ibang tao na kamukha mo ang iyong telepono, tulad ng, iyong anak o kamukha mong kapatid mo.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Ang data na narekord ng pag-unlock ng mukha ay permanente at ligtas na tatanggalin. Matapos matanggal, kakailanganin mo ang iyong PIN, pattern, o password upang i-unlock ang iyong telepono.</string>
++</resources>
+diff --git a/res/values-tr-rTR/moto_strings.xml b/res/values-tr-rTR/moto_strings.xml
+new file mode 100644
+index 0000000000..a5c7c05f71
+--- /dev/null
++++ b/res/values-tr-rTR/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Cihazınızın kilidini açmak için Yüz tanıma kilidini kullanın.\n\nŞunları unutmayın:\nFarkında olmadığınız durumlarda bile telefona baktığınızda telefonun kilidi açılabilir.\n\nGözleriniz açıkken telefonunuz yüzünüze doğru çevrilirse telefonunuzun kilidi başka biri tarafından açılabilir.\n\nTelefonunuzun kilidi, size çok benzeyen biri (ör. çocuğunuz ya da ikiz kardeşiniz) tarafından açılabilir.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Yüz tanıma kilidi ile kaydedilen veriler kalıcı ve güvenli bir şekilde silinir. Kaldırma işleminden sonra telefonunuzun kilidini açmak için PIN, desen veya şifre kullanmanız gerekir.</string>
++</resources>
+diff --git a/res/values-uk-rUA/moto_strings.xml b/res/values-uk-rUA/moto_strings.xml
+new file mode 100644
+index 0000000000..7b174bf47e
+--- /dev/null
++++ b/res/values-uk-rUA/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Для розблокування пристрою скористайтеся функцією фейсконтролю.\n\nПам’ятайте:\nколи ви дивитесь на телефон, то можете ненавмисне його розблокувати;\n\nтелефон може розблокувати інша особа, скерувавши його на ваше обличчя, коли у вас відкриті очі;\n\nтелефон може розблокувати інша особа, дуже схожа на вас, наприклад ваш близнюк або ваша дитина.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Дані, записані функцією розпізнавання обличчя, буде остаточно й безпечно видалено. Після їх видалення для розблокування телефону вам потрібно буде ввести PIN-код, графічний код або пароль.</string>
++</resources>
+diff --git a/res/values-vi-rVN/moto_strings.xml b/res/values-vi-rVN/moto_strings.xml
+new file mode 100644
+index 0000000000..d3335510cd
+--- /dev/null
++++ b/res/values-vi-rVN/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Sử dụng Mở khóa bằng khuôn mặt để mở khóa thiết bị của bạn.\n\nHãy nhớ:\nViệc nhìn vào điện thoại có thể mở khóa khi bạn không có ý định này.\n\nĐiện thoại của bạn có thể bị một người khác mở khóa nếu điện thoại điện giữ trước mặt bạn khi bạn mở mắt.\n\nĐiện thoại của bạn có thể bị ai đó trông rất giống bạn, ví như con hay anh chị em song sinh của bạn mở khóa.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Dữ liệu được ghi lại bằng tính năng mở khóa bằng khuôn mặt sẽ bị xóa vĩnh viễn và an toàn. Sau khi xóa, bạn sẽ cần mã PIN, mẫu hình, mật khẩu để mở khóa điện thoại.</string>
++</resources>
+diff --git a/res/values-zh-rCN/moto_strings.xml b/res/values-zh-rCN/moto_strings.xml
+new file mode 100644
+index 0000000000..580971f2f9
+--- /dev/null
++++ b/res/values-zh-rCN/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">使用人脸解锁功能解锁设备。\n\n请记住：\n看向手机可能会将其解锁，即便您无意如此。\n\n如果他人将您的手机对着您的面部，而您的眼睛处于睁开状态，则您的手机会被解锁。\n\n长相很像您的人（如您的孩子或同胞胎兄弟姐妹）可以解锁您的手机。</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">人脸解锁功能记录的数据将被永久安全删除。删除后，您将需要使用 PIN、图案或密码来解锁您的手机。</string>
++</resources>
+diff --git a/res/values-zh-rHK/moto_strings.xml b/res/values-zh-rHK/moto_strings.xml
+new file mode 100644
+index 0000000000..40d6891e3a
+--- /dev/null
++++ b/res/values-zh-rHK/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">使用 [臉部辨識解鎖] 為裝置解鎖。\n\n請記住：\n直視手機可能意外將其解鎖。\n\n如果有人在您的眼睛張開時，將手機面對您的臉部，可能會將您的手機解鎖。\n\n與您相貌很相似的人可能會將您的手機解鎖，例如您的孩子或兄弟姊妹。</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">透過 [臉部辨識解鎖] 記錄的資料將會安全地永久刪除。移除後，解鎖您的手機將需要使用 PIN、圖案或密碼。</string>
++</resources>
+diff --git a/res/values-zh-rSG/moto_strings.xml b/res/values-zh-rSG/moto_strings.xml
+new file mode 100644
+index 0000000000..40d6891e3a
+--- /dev/null
++++ b/res/values-zh-rSG/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">使用 [臉部辨識解鎖] 為裝置解鎖。\n\n請記住：\n直視手機可能意外將其解鎖。\n\n如果有人在您的眼睛張開時，將手機面對您的臉部，可能會將您的手機解鎖。\n\n與您相貌很相似的人可能會將您的手機解鎖，例如您的孩子或兄弟姊妹。</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">透過 [臉部辨識解鎖] 記錄的資料將會安全地永久刪除。移除後，解鎖您的手機將需要使用 PIN、圖案或密碼。</string>
++</resources>
+diff --git a/res/values-zh-rTW/moto_strings.xml b/res/values-zh-rTW/moto_strings.xml
+new file mode 100644
+index 0000000000..40d6891e3a
+--- /dev/null
++++ b/res/values-zh-rTW/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">使用 [臉部辨識解鎖] 為裝置解鎖。\n\n請記住：\n直視手機可能意外將其解鎖。\n\n如果有人在您的眼睛張開時，將手機面對您的臉部，可能會將您的手機解鎖。\n\n與您相貌很相似的人可能會將您的手機解鎖，例如您的孩子或兄弟姊妹。</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">透過 [臉部辨識解鎖] 記錄的資料將會安全地永久刪除。移除後，解鎖您的手機將需要使用 PIN、圖案或密碼。</string>
++</resources>
+diff --git a/res/values/moto_strings.xml b/res/values/moto_strings.xml
+new file mode 100644
+index 0000000000..7435204c92
+--- /dev/null
++++ b/res/values/moto_strings.xml
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++    <string name="security_settings_face_settings_footer_moto">Use Face unlock to unlock your device.\n\nKeep in mind:\nLooking at the phone can unlock it when you don’t intend to.\n\nYour phone can be unlocked by someone else if it’s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, your child or an identical sibling.</string>
++    <string name="security_settings_face_settings_remove_dialog_details_moto">Data recorded by face unlock will be permanently and securely deleted. After removal, you will need your PIN, pattern, or password to unlock your phone.</string>
++</resources>
+\ No newline at end of file
