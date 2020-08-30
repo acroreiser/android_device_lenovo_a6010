@@ -62,7 +62,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.cabl=2 \
     DEVICE_PROVISIONED=1 \
     dev.pm.dyn_samplingrate=1 \
-    persist.timed.enable=true
+    persist.timed.enable=true \
+    ro.hardware.egl=adreno
 
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
