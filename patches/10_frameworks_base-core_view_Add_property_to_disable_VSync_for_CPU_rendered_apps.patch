@@ -1,0 +1,100 @@
+From 179508209d7d1da5371e1113c0abcb3b88a98a40 Mon Sep 17 00:00:00 2001
+From: Balamurugan Thanikachalam <bthanika@codeaurora.org>
+Date: Tue, 30 Dec 2014 22:24:44 +0530
+Subject: [PATCH] core: view: Add property to disable VSync for CPU rendered
+ apps
+
+Choreographer VSync has some performance impact for CPU rendered apps as the
+app has to wait for VSync to start a new frame draw. When the frame draw time
+exceeds one VSync, this has a direct impact on the FPS.
+
+Add a feature to disable VSync for CPU rendered apps using system property.
+
+"debug.cpurend.vsync" property controls the VSync for CPU rendered apps.
+This is set to true by default to maintain upstream behavior. To disable VSync
+for CPU rendered app, the property is set to false.
+
+Change-Id: If302c003ddfa57b4b45d8ebbb9b241a049eb32c8
+Signed-off-by: Adithya R <radithya2002@gmail.com>
+---
+ core/java/android/view/Choreographer.java |  9 ++++++++-
+ core/java/android/view/ViewRootImpl.java  | 11 +++++++++++
+ 2 files changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/core/java/android/view/Choreographer.java b/core/java/android/view/Choreographer.java
+index 0e0c3541cfaf..fde54d8d7d4e 100644
+--- a/core/java/android/view/Choreographer.java
++++ b/core/java/android/view/Choreographer.java
+@@ -194,6 +194,8 @@ protected Choreographer initialValue() {
+     private boolean mIsVsyncScheduled = false;
+     private long mLastTouchOptTimeNanos = 0;
+     private boolean mIsDoFrameProcessing = false;
++    private boolean mSoftwareRendered;
++
+     /**
+      * Contains information about the current frame for jank-tracking,
+      * mainly timings of key events along with a bit of metadata about
+@@ -278,6 +280,7 @@ private Choreographer(Looper looper, int vsyncSource) {
+         for (int i = 0; i <= CALLBACK_LAST; i++) {
+             mCallbackQueues[i] = new CallbackQueue();
+         }
++        mSoftwareRendered = false;
+         // b/68769804: For low FPS experiments.
+         setFPSDivisor(SystemProperties.getInt(ThreadedRenderer.DEBUG_FPS_DIVISOR, 1));
+     }
+@@ -422,6 +425,10 @@ void dump(String prefix, PrintWriter writer) {
+                 writer.println(TimeUtils.formatUptime(mLastFrameTimeNanos / 1000000));
+     }
+ 
++    void setSoftwareRendering(boolean softRendered) {
++        mSoftwareRendered = softRendered;
++    }
++
+     /**
+      * Posts a callback to run on the next frame.
+      * <p>
+@@ -691,7 +698,7 @@ private void scheduleFrameLocked(long now) {
+                     }
+                 }
+             }
+-            if (USE_VSYNC) {
++            if (USE_VSYNC && !mSoftwareRendered) {
+                 if (DEBUG_FRAMES) {
+                     Log.d(TAG, "Scheduling next frame on vsync.");
+                 }
+diff --git a/core/java/android/view/ViewRootImpl.java b/core/java/android/view/ViewRootImpl.java
+index f889c38e9fc1..4acbf2f3d3ce 100644
+--- a/core/java/android/view/ViewRootImpl.java
++++ b/core/java/android/view/ViewRootImpl.java
+@@ -405,6 +405,7 @@
+     @UnsupportedAppUsage
+     FallbackEventHandler mFallbackEventHandler;
+     Choreographer mChoreographer;
++    boolean mDebugCpuRendVsync;
+ 
+     final Rect mTempRect; // used in the transaction to not thrash the heap.
+     final Rect mVisRect; // used to retrieve visible rect of focused view.
+@@ -646,6 +647,7 @@ public ViewRootImpl(Context context, Display display) {
+         mNoncompatDensity = context.getResources().getDisplayMetrics().noncompatDensityDpi;
+         mFallbackEventHandler = new PhoneFallbackEventHandler(context);
+         mChoreographer = Choreographer.getInstance();
++        mDebugCpuRendVsync = SystemProperties.getBoolean("debug.cpurend.vsync", true);
+         mDisplayManager = (DisplayManager)context.getSystemService(Context.DISPLAY_SERVICE);
+ 
+         String processorOverrideName = context.getResources().getString(
+@@ -844,6 +846,15 @@ public void setView(View view, WindowManager.LayoutParams attrs, View panelParen
+                     }
+                 }
+ 
++                if (!mDebugCpuRendVsync) {
++                    if(!mAttachInfo.mHardwareAccelerated ||
++                            mAttachInfo.mThreadedRenderer == null) {
++                        mChoreographer.setSoftwareRendering(true);
++                    } else {
++                        mChoreographer.setSoftwareRendering(false);
++                    }
++                }
++
+                 boolean restore = false;
+                 if (mTranslator != null) {
+                     mSurface.setCompatibilityTranslator(mTranslator);
