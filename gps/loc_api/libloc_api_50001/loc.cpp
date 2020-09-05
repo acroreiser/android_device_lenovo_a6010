@@ -52,15 +52,9 @@ using namespace loc_core;
 //Globals defns
 static gps_location_callback gps_loc_cb = NULL;
 static gps_sv_status_callback gps_sv_cb = NULL;
-static gps_ni_notify_callback gps_ni_cb = NULL;
 
 static void local_loc_cb(UlpLocation* location, void* locExt);
 static void local_sv_cb(GpsSvStatus* sv_status, void* svExt);
-static void local_ni_cb(GpsNiNotification *notification, bool esEnalbed);
-
-GpsNiExtCallbacks sGpsNiExtCallbacks = {
-    local_ni_cb
-};
 
 static const GpsGeofencingInterface* get_geofence_interface(void);
 
@@ -320,7 +314,7 @@ static int loc_init(GpsCallbacks* callbacks)
     loc_afw_data.adapter->mSupportsPositionInjection = !loc_afw_data.adapter->hasCPIExtendedCapabilities();
     loc_afw_data.adapter->mSupportsTimeInjection = !loc_afw_data.adapter->hasCPIExtendedCapabilities();
     loc_afw_data.adapter->setGpsLockMsg(0);
-    loc_afw_data.adapter->requestUlp(ContextBase::getCarrierCapabilities());
+    loc_afw_data.adapter->requestUlp(getCarrierCapabilities());
     loc_afw_data.adapter->setXtraUserAgent();
 
     if(retVal) {
@@ -358,6 +352,7 @@ static void loc_cleanup()
 {
     ENTRY_LOG();
 
+    loc_afw_data.adapter->setPowerVote(false);
     loc_afw_data.adapter->setGpsLockMsg(gps_conf.GPS_LOCK);
 
     loc_eng_cleanup(loc_afw_data);
@@ -735,7 +730,7 @@ static int  loc_agps_open_with_apniptype(const char* apn, ApnIpType apnIpType)
             bearerType = AGPS_APN_BEARER_IPV4V6;
             break;
         default:
-            bearerType = AGPS_APN_BEARER_IPV4;
+            bearerType = AGPS_APN_BEARER_INVALID;
             break;
     }
 
@@ -965,8 +960,7 @@ SIDE EFFECTS
 void loc_ni_init(GpsNiCallbacks *callbacks)
 {
     ENTRY_LOG();
-    gps_ni_cb = callbacks->notify_cb;
-    loc_eng_ni_init(loc_afw_data, &sGpsNiExtCallbacks);
+    loc_eng_ni_init(loc_afw_data,(GpsNiExtCallbacks*) callbacks);
     EXIT_LOG(%s, VOID_RET);
 }
 
@@ -1079,12 +1073,5 @@ static void local_sv_cb(GpsSvStatus* sv_status, void* svExt)
         gps_sv_cb(sv_status);
     }
     EXIT_LOG(%s, VOID_RET);
-}
-
-static void local_ni_cb(GpsNiNotification *notification, bool esEnalbed)
-{
-    if (NULL != gps_ni_cb) {
-        gps_ni_cb(notification);
-    }
 }
 
