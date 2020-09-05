@@ -319,10 +319,9 @@ static int loc_init(GpsCallbacks* callbacks)
     gps_sv_cb = callbacks->sv_status_cb;
 
     retVal = loc_eng_init(loc_afw_data, &clientCallbacks, event, NULL);
-    loc_afw_data.adapter->mSupportsAgpsRequests = !loc_afw_data.adapter->hasAgpsExtendedCapabilities();
-    loc_afw_data.adapter->mSupportsPositionInjection = !loc_afw_data.adapter->hasCPIExtendedCapabilities();
-    loc_afw_data.adapter->mSupportsTimeInjection = !loc_afw_data.adapter->hasCPIExtendedCapabilities()
-                                                   && !loc_afw_data.adapter->hasNativeXtraClient();
+    loc_afw_data.adapter->mSupportsAgpsRequests = true;
+    loc_afw_data.adapter->mSupportsPositionInjection = true;
+    loc_afw_data.adapter->mSupportsTimeInjection = true;
     loc_afw_data.adapter->setGpsLockMsg(0);
     loc_afw_data.adapter->requestUlp(ContextBase::getCarrierCapabilities());
     loc_afw_data.adapter->setXtraUserAgent();
