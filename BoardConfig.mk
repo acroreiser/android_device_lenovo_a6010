@@ -50,8 +50,8 @@ BOARD_RAMDISK_OFFSET := 0x01000000
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/zImage-dtb
 
 # Crypto
-TARGET_HW_DISK_ENCRYPTION := true
 TW_INCLUDE_CRYPTO := true
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 131072
