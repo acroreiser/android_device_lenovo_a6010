@@ -29,12 +29,12 @@
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
         <transport>hwbinder</transport>
-        <version>2.4</version>
+        <version>2.5</version>
         <interface>
             <name>ICameraProvider</name>
             <instance>legacy/0</instance>
         </interface>
-        <fqname>@2.4::ICameraProvider/legacy/0</fqname>
+        <fqname>@2.5::ICameraProvider/legacy/0</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.authsecret</name>

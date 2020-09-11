@@ -333,7 +333,7 @@ on property:init.svc.surfaceflinger=restarting
 on property:sys.boot_completed=1
     start set_baseband
     start set_zram
-    restart vendor.camera-provider-2-4
+    restart vendor.camera-provider-2-5
     restart cameraserver
 
 on charger
