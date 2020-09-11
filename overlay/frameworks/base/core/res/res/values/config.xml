@@ -429,6 +429,14 @@
     <string name="config_smartChargingSuspendValue" translatable="false">0</string>
     <string name="config_smartChargingResumeValue" translatable="false">1</string>
 
+    <!--Systeminfo for quick settings header -->
+    <string name="config_sysCPUTemp">/sys/class/thermal/thermal_zone4/temp</string>
+    <string name="config_sysBatteryTemp">/sys/class/power_supply/battery/temp</string>
+    <string name="config_sysGPUFreq">/sys/class/kgsl/kgsl-3d0/gpuclk</string>
+    <string name="config_sysGPULoad">/sys/class/kgsl/kgsl-3d0/gpubusy</string>
+    <integer name="config_sysCPUTempMultiplier">1</integer>
+    <integer name="config_sysBatteryTempMultiplier">10</integer>
+
     <!-- Screen brightness used to dim the screen when the user activity 
          timeout expires.  May be less than the minimum allowed brightness 
          setting that can be set by the user. -->
