@@ -534,7 +534,6 @@ PRODUCT_DISABLE_SCUDO := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.device_config.runtime_native.usap_pool_enabled=true \
-    persist.device_config.runtime_native.usap_pool_size_max=5 \
     dalvik.vm.zygotemaxfailedboots=5 \
     dalvik.vm.foreground-heap-growth-multiplier=4.0 \
     dalvik.vm.dex2oat-flags=--no-watch-dog \
