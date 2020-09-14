@@ -43,9 +43,10 @@
 #include "vendor_init.h"
 
 using android::base::GetProperty;
+using android::base::SetProperty;
 using android::base::ReadFileToString;
 using android::base::Trim;
-using android::init::property_set;
+
 
 static void init_alarm_boot_properties()
 {
@@ -74,9 +75,9 @@ static void init_alarm_boot_properties()
          */
         if ((Trim(boot_reason) == "3" || tmp == "true")
                 && Trim(power_off_alarm) == "1")
-            property_set("ro.alarm_boot", "true");
+            SetProperty("ro.alarm_boot", "true");
         else
-            property_set("ro.alarm_boot", "false");
+            SetProperty("ro.alarm_boot", "false");
     }
 }
 
@@ -89,34 +90,34 @@ int is2GB()
 
 void vendor_load_properties()
 {
-  property_set("dalvik.vm.extra-opts", "-Xcompiler-option --inline-max-code-units=0");
+  SetProperty("dalvik.vm.extra-opts", "-Xcompiler-option --inline-max-code-units=0");
 
   // pm dexopt settings
-  property_set("pm.dexopt.install", "quicken");
-  property_set("pm.dexopt.shared", "quicken");
-  property_set("pm.dexopt.bg-dexopt", "speed-profile");
-  property_set("pm.dexopt.downgrade_after_inactive_days", "7");
-  property_set("dalvik.vm.usejitprofiles", "true");
-  property_set("dalvik.vm.heaptargetutilization", "0.75");
-  property_set("dalvik.vm.heapminfree", "512k");
-  property_set("dalvik.vm.heapmaxfree", "8m");
-  property_set("dalvik.vm.heapstartsize", "16m");
-  property_set("dalvik.vm.heapgrowthlimit", "192m");
-  property_set("ro.config.max_starting_bg", "2");
+  SetProperty("pm.dexopt.install", "quicken");
+  SetProperty("pm.dexopt.shared", "quicken");
+  SetProperty("pm.dexopt.bg-dexopt", "speed-profile");
+  SetProperty("pm.dexopt.downgrade_after_inactive_days", "7");
+  SetProperty("dalvik.vm.usejitprofiles", "true");
+  SetProperty("dalvik.vm.heaptargetutilization", "0.75");
+  SetProperty("dalvik.vm.heapminfree", "512k");
+  SetProperty("dalvik.vm.heapmaxfree", "8m");
+  SetProperty("dalvik.vm.heapstartsize", "16m");
+  SetProperty("dalvik.vm.heapgrowthlimit", "192m");
+  SetProperty("ro.config.max_starting_bg", "2");
 
   if (is2GB())
   {
-	   property_set("dalvik.vm.heapsize", "512m");
+	   SetProperty("dalvik.vm.heapsize", "512m");
 
 	   // Cached apps limit
-	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "12");
+	   SetProperty("ro.vendor.qti.sys.fw.bg_apps_limit", "12");
   }
   else
   {
-	   property_set("dalvik.vm.heapsize", "256m");
+	   SetProperty("dalvik.vm.heapsize", "256m");
 
 	   // Cached apps limit
-	   property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "6");
+	   SetProperty("ro.vendor.qti.sys.fw.bg_apps_limit", "6");
   }
 
   init_alarm_boot_properties();
