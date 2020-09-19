@@ -235,6 +235,10 @@ PRODUCT_PACKAGES += \
     libshims_flp \
     libshims_get_process_name
 
+# RIL
+PRODUCT_PACKAGES += \
+   libaudioclient_shim
+
 # Charger images
 PRODUCT_PACKAGES += charger_res_images
 
