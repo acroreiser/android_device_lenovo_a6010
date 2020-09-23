@@ -665,7 +665,8 @@ PRODUCT_VENDOR_PROPERTIES += \
     ro.telephony.default_network=9,1 \
     persist.vendor.radio.add_power_save=1 \
     persist.sys.fflag.override.settings_network_and_internet_v2=true \
-    persist.data.netmgrd.qos.enable=true
+    persist.data.netmgrd.qos.enable=true \
+    ro.kernel.ebpf.supported=false
 
 # RIL
 PRODUCT_COPY_FILES += \
