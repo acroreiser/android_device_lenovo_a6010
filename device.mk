@@ -310,15 +310,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.cryptfshw@1.0-base
 
-# Telephony
-PRODUCT_BOOT_JARS += \
-    telephony-ext \
-    ims-ext-common_system
-
-PRODUCT_PACKAGES += \
-    telephony-ext \
-    ims-ext-common_system
-
 # Media
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
