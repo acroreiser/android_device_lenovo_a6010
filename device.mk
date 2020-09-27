@@ -142,10 +142,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.ethernet.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ethernet.xml
 
-# Face Unlock
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.biometrics.face.xml
-
 # APEX
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ld.config.txt:system/etc/swcodec/ld.config.txt
@@ -322,10 +318,6 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     telephony-ext \
     ims-ext-common_system
-
-# Enable FaceUnlock
-TARGET_DISABLE_ALTERNATIVE_FACE_UNLOCK := false
-TARGET_FACE_UNLOCK_SUPPORTED := true
 
 # Media
 PRODUCT_COPY_FILES += \
