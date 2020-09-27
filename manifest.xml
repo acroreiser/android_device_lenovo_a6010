@@ -285,6 +285,12 @@
             <name>IPictureAdjustment</name>
             <instance>default</instance>
         </interface>
+        <interface>
+            <name>IDisplayColorCalibration</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.0::IPictureAdjustment/default</fqname>
+        <fqname>@2.0::IDisplayColorCalibration/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.lineage.touch</name>
