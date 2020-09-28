@@ -241,7 +241,8 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-   libaudioclient_shim
+   libaudioclient_shim \
+   libcutils_shim
 
 # Charger images
 PRODUCT_PACKAGES += charger_res_images
