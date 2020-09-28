@@ -198,12 +198,15 @@ PRODUCT_COPY_FILES += \
 # Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.5-impl \
-    android.hardware.camera.provider@2.5-service \
+    android.hardware.camera.provider@2.5-service-lazy \
     camera.device@1.0-impl \
     camera.msm8916 \
     libmm-qcamera \
     libshim_atomic \
     Snap
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.camera.enableLazyHal=true
 
 # Screen Recorder
 PRODUCT_PACKAGES += \
@@ -485,7 +488,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # WiFi HAL
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
+    android.hardware.wifi@1.0-service-lazy
 
 # Wifi
 PRODUCT_PACKAGES += \
