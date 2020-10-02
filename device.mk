@@ -284,7 +284,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service \
-    android.hardware.authsecret@1.0-service
+    android.hardware.authsecret@1.0-service \
+    android.hardware.gatekeeper@1.0-service.software
 
 # Doze
 PRODUCT_PACKAGES += \
