@@ -94,6 +94,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Encryption
 PRODUCT_PACKAGES += \
+    vendor.qti.hardware.cryptfshw@1.0-base \
     vendor.qti.hardware.cryptfshw@1.0-service-qti.qsee
 
 # Audio
@@ -316,10 +317,6 @@ PRODUCT_PACKAGES += \
 # For config.fs
 PRODUCT_PACKAGES += \
     fs_config_files
-
-# Encryption
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.cryptfshw@1.0-base
 
 # Media
 PRODUCT_COPY_FILES += \
