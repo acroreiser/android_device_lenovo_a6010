@@ -42,4 +42,7 @@
 
     <!-- Cell broacast receiver package name [DO NOT TRANSLATE] -->
     <string name="cell_broadcast_receiver_package">com.android.cellbroadcastreceiver</string>
+
+    <!-- Whether or not device header widget tile should display in device info page -->
+    <bool name="config_show_device_header_in_device_info">false</bool>
 </resources>
