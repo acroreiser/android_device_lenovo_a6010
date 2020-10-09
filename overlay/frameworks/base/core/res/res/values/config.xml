@@ -498,4 +498,7 @@
 
     <!-- Feature flag to store TaskSnapshot in 16 bit pixel format to save memory. -->
     <bool name="config_use16BitTaskSnapshotPixelFormat">true</bool>
+
+    <!-- Allow devices to use a lower screenrecording encoder settings because of old hardware -->
+    <bool name="config_device_needs_lower_encoder_settings">true</bool>
 </resources>
