@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PLATFORM_PATH := device/lenovo/a6010
+DEVICE_PATH := device/lenovo/a6010
 
 # APEX
 TARGET_FLATTEN_APEX := true
@@ -71,7 +71,7 @@ TARGET_HAS_MEMFD_BACKPORT := true
 LZMA_RAMDISK_TARGETS := boot
 
 # File System
-TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
 BOARD_CACHEIMAGE_PARTITION_SIZE := 265289728
@@ -84,7 +84,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_SUPPRESS_EMMC_WIPE := true
 TARGET_KERNEL_HAVE_EXFAT := true
 TARGET_EXFAT_DRIVER := exfat
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_USES_MKE2FS := true
 BOARD_ROOT_EXTRA_FOLDERS := firmware persist
 
@@ -100,9 +100,9 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # Init
-TARGET_INIT_VENDOR_LIB := libinit_msm8916
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_msm8916
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8916
+TARGET_RECOVERY_DEVICE_MODULES := //$(DEVICE_PATH):libinit_msm8916
 
 # Security Patch Level
 VENDOR_SECURITY_PATCH := 2016-03-01
@@ -112,8 +112,8 @@ BOARD_USES_QCOM_HARDWARE := true
 MALLOC_SVELTE := true
 
 # HIDL
-DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 PRODUCT_VENDOR_MOVE_ENABLED := true
 
 # Display
@@ -171,7 +171,7 @@ TARGET_USES_QCOM_MM_AUDIO := true
 USE_XML_AUDIO_POLICY_CONF := 1
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_READ_ADDR_FROM_PROP := true
@@ -209,7 +209,7 @@ SELINUX_IGNORE_NEVERALLOWS := true
 
 # SEpolicy
 BOARD_SEPOLICY_DIRS += \
-    $(PLATFORM_PATH)/sepolicy_tmp
+    $(DEVICE_PATH)/sepolicy_tmp
 
 # Qcom Sepolicy
 # include device/qcom/sepolicy/sepolicy.mk
