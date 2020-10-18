@@ -207,6 +207,7 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     libmm-qcamera \
     libshim_atomic \
+    libboringssl-compat \
     Snap
 
 # Screen Recorder
