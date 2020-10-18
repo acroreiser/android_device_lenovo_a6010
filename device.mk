@@ -208,6 +208,7 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     libmm-qcamera \
     libshim_atomic \
+    libboringssl-compat \
     Snap
 
 PRODUCT_PROPERTY_OVERRIDES += \
