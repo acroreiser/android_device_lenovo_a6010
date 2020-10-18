@@ -65,6 +65,7 @@ TOP_PATH := $(realpath $(TOP))
 KERNEL_TOOLCHAIN := $(TOP_PATH)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-len-linux-gnueabi-
 TARGET_KERNEL_CONFIG := lineageos_a6010_defconfig
+TARGET_HAS_MEMFD_BACKPORT := true
 
 # Ramdisk compression
 LZMA_RAMDISK_TARGETS := boot
