@@ -224,6 +224,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.fflag.override.settings_fuse=false \
     persist.sys.fuse=false
 
+# Tethering all-in-one
+PRODUCT_PROPERTY_OVERRIDES += \
+    sys.fflag.override.settings_tether_all_in_one=true
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
