@@ -68,7 +68,7 @@ TARGET_KERNEL_CONFIG := lineageos_a6010_defconfig
 TARGET_HAS_MEMFD_BACKPORT := true
 
 # Ramdisk compression
-LZMA_RAMDISK_TARGETS := boot
+BOARD_RAMDISK_USE_XZ := true
 
 # File System
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
