@@ -66,6 +66,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.avoid_gfx_accel=true \
     ro.qualcomm.cabl=2 \
     DEVICE_PROVISIONED=1 \
+    ro.com.android.mobiledata=false \
     dev.pm.dyn_samplingrate=1 \
     persist.timed.enable=true \
     ro.hardware.egl=adreno
