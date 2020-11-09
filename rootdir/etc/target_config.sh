@@ -19,3 +19,6 @@ else
 	setprop pm.dexopt.install speed
 	setprop pm.dexopt.bg-dexopt speed
 fi
+
+# Don't account allocstalls for <= 2GB RAM targets on kernel versions < 4.9
+echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
