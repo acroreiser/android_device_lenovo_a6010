@@ -32,4 +32,6 @@
     <bool translatable="false" name="config_wifi_p2p_mac_randomization_supported">false</bool>
     <!-- Indicates that AP mode MAC randomization is supported on this device -->
     <bool translatable="false" name="config_wifi_ap_mac_randomization_supported">false</bool>
+    <!-- Enable WPA2 to WPA3 auto-upgrade -->
+    <bool translatable="false" name="config_wifiSaeUpgradeEnabled">false</bool>
 </resources>
