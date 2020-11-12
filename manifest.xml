@@ -56,6 +56,15 @@
         <fqname>@2.5::ICameraProvider/legacy/0</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.frameworks.cameraservice.service</name>
+        <transport>hwbinder</transport>
+        <version>2.1</version>
+        <interface>
+            <name>ICameraService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.authsecret</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
