@@ -134,7 +134,7 @@ void loc_eng_nmea_generate_pos(loc_eng_data_s_type *loc_eng_data_p,
         return;
     }
 
-    char sentence[NMEA_SENTENCE_MAX_LENGTH] = {0};
+    char sentence[NMEA_SENTENCE_MAX_LENGTH] = {};
     char* pMarker = sentence;
     int lengthRemaining = sizeof(sentence);
     int length = 0;
@@ -152,7 +152,7 @@ void loc_eng_nmea_generate_pos(loc_eng_data_s_type *loc_eng_data_p,
         // ------------------
 
         uint32_t svUsedCount = 0;
-        uint32_t svUsedList[32] = {0};
+        uint32_t svUsedList[32] = {};
         uint32_t mask = loc_eng_data_p->gps_used_mask;
         for (uint8_t i = 1; mask > 0 && svUsedCount < 32; i++)
         {
@@ -714,7 +714,7 @@ void loc_eng_nmea_generate_sv(loc_eng_data_s_type *loc_eng_data_p,
 {
     ENTRY_LOG();
 
-    char sentence[NMEA_SENTENCE_MAX_LENGTH] = {0};
+    char sentence[NMEA_SENTENCE_MAX_LENGTH] = {};
     char* pMarker = sentence;
     int lengthRemaining = sizeof(sentence);
     int length = 0;
