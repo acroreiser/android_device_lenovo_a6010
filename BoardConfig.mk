@@ -99,10 +99,7 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
-# Init
-TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_msm8916
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_RECOVERY_DEVICE_MODULES := //$(DEVICE_PATH):libinit_msm8916
 
 # Security Patch Level
 VENDOR_SECURITY_PATCH := 2016-03-01
