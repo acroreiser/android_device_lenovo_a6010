@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <!-- This system feature is required for getting play store updates
+       for Google Dialer Go app. -->
+    <feature name="com.google.android.apps.dialer.GO_EXPERIENCE" />
+</config>
