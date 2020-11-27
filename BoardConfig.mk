@@ -100,7 +100,6 @@ MALLOC_SVELTE := true
 
 # HIDL
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 PRODUCT_VENDOR_MOVE_ENABLED := true
 
 # Display
