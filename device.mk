@@ -609,6 +609,7 @@ PRODUCT_PACKAGES += \
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
+    keyguard.no_require_sim=true \
     persist.data.qmi.adb_logmask=0 \
     persist.radio.apm_sim_not_pwdn=1 \
     ro.telephony.call_ring.multiple=false \
