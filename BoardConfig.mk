@@ -227,5 +227,9 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 TARGET_HAS_BROKEN_WLAN_SET_INTERFACE := true
 
 DISABLE_APEX_TEST_MODULE := true
+
+# Dedupe VNDK libraries with identical core variants.
+TARGET_VNDK_USE_CORE_VARIANT := true
+
 # Proprietary Prebuilt
 -include vendor/lenovo/a6010/BoardConfigVendor.mk
