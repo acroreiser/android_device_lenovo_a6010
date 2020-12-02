@@ -1,0 +1,70 @@
+# Binaries
+/vendor/bin/adsprpcd                                        u:object_r:adsprpcd_exec:s0
+/vendor/bin/imsdatadaemon                                   u:object_r:ims_exec:s0
+/vendor/bin/imsqmidaemon                                    u:object_r:ims_exec:s0
+/vendor/bin/ims_rtp_daemon                                  u:object_r:hal_imsrtp_exec:s0
+/vendor/bin/irsc_util                                       u:object_r:irsc_util_exec:s0
+/vendor/bin/mm-qcamera-daemon                               u:object_r:mm-qcamerad_exec:s0
+/vendor/bin/netmgrd                                         u:object_r:netmgrd_exec:s0
+/vendor/bin/qmuxd                                           u:object_r:qmuxd_exec:s0
+/vendor/bin/qseecomd                                        u:object_r:tee_exec:s0
+/vendor/bin/rmt_storage                                     u:object_r:rmt_storage_exec:s0
+
+/(vendor|system/vendor)/bin/timekeep                        u:object_r:timekeep_exec:s0
+/(vendor|system/vendor)/bin/stml0xx                         u:object_r:stml0xx_exec:s0
+/(vendor|system/vendor)/bin/qmi_motext_hook                 u:object_r:rild_exec:s0
+/(vendor|system/vendor)/bin/akmd09912                       u:object_r:akmd09912_exec:s0
+/(vendor|system/vendor)/bin/init\.device\.config\.sh        u:object_r:device_config_exec:s0
+/(vendor|system/vendor)/bin/init\.mmi\.boot\.sh             u:object_r:mmi_boot_sh_exec:s0
+/(vendor|system/vendor)/bin/init\.mmi\.bt\.sh               u:object_r:mmi_bt_sh_exec:s0
+/(vendor|system/vendor)/bin/init\.mmi\.touch\.sh            u:object_r:mmi_touch_sh_exec:s0
+/(vendor|system/vendor)/bin/stml0xx_wrapper\.sh             u:object_r:stml0xx_exec:s0
+
+# Camera
+/sys/devices/virtual/camera(/.*)?                           u:object_r:sysfs_camera:s0
+/sys/devices/w1_bus_master1(/.*)?                           u:object_r:sysfs_graphics:s0
+
+# Device nodes
+/dev/stune(/.*)?                                            u:object_r:cgroup:s0
+
+# DRM
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.2-service\.widevine                u:object_r:hal_drm_widevine_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.3-service\.clearkey                u:object_r:hal_drm_clearkey_exec:s0
+/data/vendor/mediadrm(/.*)?                                 u:object_r:media_data_file:s0
+
+# Gatekeeper
+/(vendor|system/vendor)/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.software			u:object_r:hal_gatekeeper_default_exec:s0
+
+# Lights
+/sys/devices/soc\.0/leds-atc-[0-9]+/leds(/.*)?              u:object_r:sysfs_leds:s0
+/sys/devices/soc\.0/78b7000\.spi/spi_master/spi0/spi0\.0/leds/rgb(/.*)? u:object_r:sysfs_leds:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.msm8916    u:object_r:hal_light_default_exec:s0
+
+# mmi_touch related /sys files
+/sys/devices/soc\.0/78b6000\.i2c/i2c-2/2-0020(/.*)?         u:object_r:sysfs_mmi_touch:s0
+
+# Partitions
+/dev/block/platform/soc\.0/7824900\.sdhci/by-name/metadata  u:object_r:metadata_block_device:s0
+
+# FSG
+/fsg(/.*)?                                                  u:object_r:fsg_file:s0
+
+# RIL
+/data/misc/cutback(/.*)?                                    u:object_r:cutback_data_file:s0
+/data/misc/netmgr(/.*)?                                     u:object_r:netmgr_data_file:s0
+/dev/socket/cutback                                         u:object_r:rild_socket:s0
+/persist/mdm(/.*)?                                          u:object_r:persist_modem_file:s0
+
+# Sensors
+/dev/akm09912                                               u:object_r:sensors_device:s0
+/dev/akm09912_dev                                           u:object_r:sensors_device:s0
+/dev/stml0xx                                                u:object_r:sensors_device:s0
+/dev/stml0xx_as                                             u:object_r:sensors_device:s0
+/dev/stml0xx_ms                                             u:object_r:sensors_device:s0
+/data/misc/akmd(/.*)?                                       u:object_r:sensors_data_file:s0
+
+# sysfs - battery/charger
+/sys/devices/battery\.[0-9]+/power_supply(/.*)?             u:object_r:sysfs_batteryinfo:s0
+/sys/devices/i2c\.[0-9]+/i2c-[0-9]+/[0-9]+-[a-z0-9]+/max[a-z0-9]+-charger/power_supply(/.*)? u:object_r:sysfs_batteryinfo:s0
+/sys/devices/i2c\.[0-9]+/i2c-[0-9]+/[0-9]+-[a-z0-9]+/power_supply(/.*)?                      u:object_r:sysfs_batteryinfo:s0
+/sys/devices/msm_dwc3/power_supply(/.*)?                    u:object_r:sysfs_batteryinfo:s0

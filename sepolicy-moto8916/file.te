@@ -1,0 +1,24 @@
+# Cutback socket (RILD)
+type cutback_data_file, file_type, data_file_type;
+
+# fsg
+type fsg_file, fs_type, contextmount_type;
+
+# grep
+type grep_exec, exec_type, file_type;
+
+# Touch script
+type sysfs_mmi_touch, fs_type, sysfs_type;
+
+# proc
+type proc_bootinfo, fs_type, proc_type;
+
+# RIL
+type netmgr_data_file, file_type, data_file_type;
+type persist_modem_file, file_type;
+
+type sysfs_msm_subsys, sysfs_type, fs_type;
+type sysfs_timekeep, fs_type, sysfs_type;
+type sysfs_camera,  fs_type, sysfs_type;
+type proc_swap, fs_type;
+type proc_kernel_sched, fs_type, proc_type;

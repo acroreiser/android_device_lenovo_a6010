@@ -1,0 +1,13 @@
+type device_config, domain;
+type device_config_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(device_config)
+
+allow device_config vendor_shell_exec:file rx_file_perms;
+allow device_config vendor_toolbox_exec:file rx_file_perms;
+
+allow device_config sysfs:file r_file_perms;
+
+set_prop(device_config, dalvik_prop);
+set_prop(device_config, dualsim_prop);
+set_prop(device_config, exported_dalvik_prop);

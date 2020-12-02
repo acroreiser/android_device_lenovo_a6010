@@ -1,0 +1,9 @@
+# Motorola service properties
+ro.manufacturedate          u:object_r:manufacturedate_prop:s0
+ro.device.dualsim           u:object_r:dualsim_prop:s0
+ro.device.cdma              u:object_r:dualsim_prop:s0
+ro.hw.revision              u:object_r:hw_rev_prop:s0
+rmtfs.                      u:object_r:rmtfs_prop:s0
+persist.vendor.timeadjust   u:object_r:timekeep_prop:s0
+
+persist.vendor.service.bdroid.bdaddr       u:object_r:bluetooth_prop:s0

@@ -1,0 +1,9 @@
+allow cameraserver sysfs_batteryinfo:file r_file_perms;
+allow cameraserver sysfs_batteryinfo:dir search;
+allow cameraserver camera_bgproc_service:service_manager add;
+allow cameraserver camera_socket:dir rw_dir_perms;
+allow cameraserver camera_socket:file create_file_perms;
+allow cameraserver serialno_prop:file { getattr open read };
+set_prop(cameraserver, exported_system_prop);
+set_prop(cameraserver, camera_prop)
+

@@ -1,0 +1,7 @@
+type akmd09912, domain;
+type akmd09912_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(akmd09912)
+
+allow akmd09912 sensors_data_file:dir w_dir_perms;
+allow akmd09912 sensors_data_file:file create_file_perms;
+allow akmd09912 sensors_device:chr_file rw_file_perms;

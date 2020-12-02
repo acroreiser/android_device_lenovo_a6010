@@ -1,0 +1,8 @@
+allow mm-qcamerad persist_file:file r_file_perms;
+allow mm-qcamerad system_data_file:dir w_dir_perms;
+allow mm-qcamerad system_data_file:file open;
+
+#for v4L node "name" access
+allow mm-qcamerad sysfs_graphics:file rw_file_perms;
+
+set_prop(mm-qcamerad, debug_prop)

@@ -1,0 +1,18 @@
+allow system_app proc_pagetypeinfo:file { getattr open read };
+allow system_app sysfs_zram:dir search;
+allow system_app sysfs_zram:file { getattr open read };
+
+allow system_app time_data_file:dir { write search };
+allow system_app time_data_file:file { write open getattr };
+
+set_prop(system_app, timekeep_prop)
+r_dir_file(system_app, sysfs_timekeep)
+r_dir_file(system_app, sysfs_rtc)
+
+allow system_app apex_service:service_manager find;
+allow system_app wificond:binder call;
+
+dontaudit system_app {
+  apex_service
+  system_suspend_control_service
+}:service_manager find;

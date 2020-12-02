@@ -1,0 +1,10 @@
+type qcom_ril, domain;
+type qcom_ril_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(qcom_ril)
+
+allow qcom_ril vendor_shell_exec:file rx_file_perms;
+allow qcom_ril vendor_toolbox_exec:file rx_file_perms;
+
+get_prop(qcom_ril, radio_prop);
+set_prop(qcom_ril, ctl_rildaemon_prop);

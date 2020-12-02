@@ -1,0 +1,2 @@
+media.camera_bgproc u:object_r:camera_bgproc_service:s0
+qti.radio.extphone  u:object_r:radio_service:s0

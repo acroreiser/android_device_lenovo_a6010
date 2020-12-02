@@ -1,0 +1,12 @@
+allow system_server sensors_device:chr_file rw_file_perms;
+
+# Allow LineageHW (running as system server) to access LiveDisplay tuneables
+allow system_server sysfs_livedisplay_tuneable:file rw_file_perms;
+
+# location
+binder_call(system_server, location);
+
+get_prop(system_server, userspace_reboot_exported_prop);
+get_prop(system_server, userspace_reboot_config_prop);
+get_prop(system_server, exported_camera_prop);
+get_prop(system_server, vendor_security_patch_level_prop);

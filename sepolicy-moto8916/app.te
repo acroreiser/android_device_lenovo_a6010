@@ -1,0 +1,2 @@
+get_prop(appdomain, theme_prop)
+get_prop(appdomain, exported_camera_prop);

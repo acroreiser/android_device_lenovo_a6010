@@ -208,11 +208,10 @@ SELINUX_IGNORE_NEVERALLOWS := true
 
 # SEpolicy
 BOARD_SEPOLICY_DIRS += \
-    $(DEVICE_PATH)/sepolicy_tmp
+    $(DEVICE_PATH)/sepolicy-moto8916
 
 # Qcom Sepolicy
-# include device/qcom/sepolicy/sepolicy.mk
-#include device/qcom/sepolicy-legacy/sepolicy.mk
+include device/qcom/sepolicy-legacy/sepolicy.mk
 
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN := true

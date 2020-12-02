@@ -1,0 +1,2 @@
+allow qti_init_shell sysfs_mmi_touch:dir search;
+allow qti_init_shell sysfs_mmi_touch:file rw_file_perms;

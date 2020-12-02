@@ -1,0 +1,4 @@
+allow healthd device:dir r_dir_perms;
+allow healthd sysfs:file { getattr open read };
+
+r_dir_file(healthd, sysfs_batteryinfo)
