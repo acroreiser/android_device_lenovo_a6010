@@ -697,6 +697,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
 
+# Do not spin up a separate process for the network stack, use an in-process APK.
+PRODUCT_PACKAGES += InProcessNetworkStack
+PRODUCT_PACKAGES += com.android.tethering.inprocess
+
 # Makes device compatible with Google Dialer Go.
 # In better case it should be a part of Gapps
 # but we have no Gapps specially for Android Go devices
