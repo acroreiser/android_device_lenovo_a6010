@@ -307,10 +307,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     LenovoDoze
 
-# Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8916
-
 # FM
 PRODUCT_PACKAGES += \
     FMRadio \
