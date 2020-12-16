@@ -64,5 +64,5 @@
     <integer name="config_deviceLightCapabilities">64</integer>
 
     <!-- Default values for LiveDisplay -->
-    <bool name="config_enableLiveDisplay">false</bool>
+    <bool name="config_enableLiveDisplay">true</bool>
 </resources>
