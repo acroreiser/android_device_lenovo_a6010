@@ -692,6 +692,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.iorapd.enable=false \
 	persist.traced.enable=0
 
+# Updater properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.recovery_update=false
+
 # USB ID
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.midi=90BA \
