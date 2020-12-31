@@ -1,14 +1,5 @@
 #! /vendor/bin/sh
 
-VER="$(cat /proc/version | grep lineage)"
-echo $VER
-if [ -z "$VER" ]; then
-    VER="$(cat /proc/version | grep Eclipse)"
-    if [ -z "$VER" ]; then
-        /system/bin/reboot
-    fi
-fi
-
 # Setup ZRAM
 swapoff /dev/block/zram0
 sleep 0.5
