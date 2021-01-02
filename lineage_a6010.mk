@@ -55,4 +55,4 @@ PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
 
 # APN(s)
-PRODUCT_COPY_FILES += device/lenovo/a6010/apns-conf.xml:system/etc/apns-conf.xml
+PRODUCT_COPY_FILES += vendor/lineage/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
