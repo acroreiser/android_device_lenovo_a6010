@@ -33,5 +33,10 @@
     <bool name="config_smart_replies_in_notifications_requires_targeting_p">false</bool>
 
     <!-- Disable the automatic dimming animation to save cpu cycles -->
-    <bool name="config_navigation_bar_enable_auto_dim_no_visible_wallpaper">false</bool>  
+    <bool name="config_navigation_bar_enable_auto_dim_no_visible_wallpaper">false</bool>
+
+    <!-- The default tiles to display in QuickSettings -->
+    <string name="quick_settings_tiles_default" translatable="false">
+        wifi,bt,dnd,flashlight,rotation,battery,cell,airplane,location
+    </string>
 </resources>
