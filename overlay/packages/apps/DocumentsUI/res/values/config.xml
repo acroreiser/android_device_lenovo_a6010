@@ -15,11 +15,6 @@
 -->
 
 <resources>
-    <bool name="show_documents_root">true</bool>
-
-    <!-- Default folder -->
-    <string name="default_root_uri" translatable="false">content://com.android.externalstorage.documents/root/primary</string>
-
     <!-- Indicates if internal storage is shown as default or not. -->
     <bool name="config_default_show_device_root">true</bool>
 </resources>
