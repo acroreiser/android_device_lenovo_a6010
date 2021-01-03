@@ -487,6 +487,9 @@
          -->
     <item name="config_lowResTaskSnapshotScale" format="float" type="dimen">0.3</item>
 
+    <!-- Launcher Go customization requires AppWidgetService, but otherwise home screen widgets are not supported -->
+    <bool name="config_enableAppWidgetService">true</bool>
+
     <!-- Allow devices to use a lower screenrecording encoder settings because of old hardware -->
     <bool name="config_device_needs_lower_encoder_settings">true</bool>
 
