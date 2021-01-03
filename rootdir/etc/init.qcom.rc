@@ -61,7 +61,6 @@ on late-fs
     start servicemanager
     start surfaceflinger
     start bootanim
-    start vendor.configstore-hal-1-1
     start vendor.gralloc-2-0
 
     # Mount RW partitions which need run fsck

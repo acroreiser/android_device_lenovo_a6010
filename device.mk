@@ -28,7 +28,6 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Display
 PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.1-service \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
@@ -48,6 +47,11 @@ PRODUCT_PACKAGES += \
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
+    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
+    ro.surface_flinger.has_HDR_display=false \
+    ro.surface_flinger.has_wide_color_display=false \
+    ro.surface_flinger.start_graphics_allocator_service=true \
+    ro.surface_flinger.use_context_priority=true \
     debug.mdpcomp.idletime=600 \
     persist.hwc.mdpcomp.enable=true \
     persist.hwc.ptor.enable=true \
