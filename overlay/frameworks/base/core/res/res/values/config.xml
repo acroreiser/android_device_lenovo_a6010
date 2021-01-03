@@ -457,11 +457,6 @@
     <!-- Flag to disable all transition animations -->
     <bool name="config_disableTransitionAnimation">true</bool>
 
-    <!-- Feature flag to enable memory efficient task snapshots that are used in recents optimized
-         for low memory devices and replace the app transition starting window with the splash
-         screen. -->
-    <bool name="config_lowRamTaskSnapshotsAndRecents">true</bool>
-
     <!-- True if the device supports at least one form of multi-window.
          E.g. freeform, split-screen, picture-in-picture. -->
     <bool name="config_supportsMultiWindow">false</bool>
@@ -481,6 +476,16 @@
 
     <!-- Feature flag to store TaskSnapshot in 16 bit pixel format to save memory. -->
     <bool name="config_use16BitTaskSnapshotPixelFormat">true</bool>
+
+    <!-- The amount to scale fullscreen snapshots for Overview and snapshot starting windows. -->
+    <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.8</item>
+
+    <!-- The amount to scale reduced scale snapshots for Overview and snapshot starting windows.
+         Reduced scale snapshots are loaded before full screen snapshots to improve load times and
+         minimize the chance the user will see an empty task card. If set to 0, reduced scale
+         snapshots are disabled, and snapshots will only be stored at config_highResTaskSnapshotScale
+         -->
+    <item name="config_lowResTaskSnapshotScale" format="float" type="dimen">0.3</item>
 
     <!-- Allow devices to use a lower screenrecording encoder settings because of old hardware -->
     <bool name="config_device_needs_lower_encoder_settings">true</bool>
