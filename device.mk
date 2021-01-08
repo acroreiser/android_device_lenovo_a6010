@@ -163,8 +163,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
 # Enable iorapd perfetto tracing for app starts
+# Enable iorapd readahead for app starts
 PRODUCT_PROPERTY_OVERRIDES += \
-    iorapd.perfetto.enable=true
+    iorapd.perfetto.enable=true \
+    iorapd.readahead.enable=true
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
