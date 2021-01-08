@@ -68,7 +68,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.android.mobiledata=false \
     dev.pm.dyn_samplingrate=1 \
     persist.timed.enable=true \
-    ro.hardware.egl=adreno
+    ro.hardware.egl=adreno \
+    ro.surface_flinger.supports_background_blur=false \
+    persist.sys.sf.disable_blurs=true
 
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
