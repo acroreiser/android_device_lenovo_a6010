@@ -7,3 +7,6 @@ allow cameraserver serialno_prop:file { getattr open read };
 set_prop(cameraserver, exported_system_prop);
 set_prop(cameraserver, camera_prop)
 
+allow cameraserver init:unix_dgram_socket sendto;
+allow cameraserver camera_data_file:sock_file write;
+allow cameraserver device:chr_file { ioctl open read write };

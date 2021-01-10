@@ -202,7 +202,7 @@ SELINUX_IGNORE_NEVERALLOWS := true
 
 # SEpolicy
 BOARD_SEPOLICY_DIRS += \
-    $(DEVICE_PATH)/sepolicy-moto8916
+    $(DEVICE_PATH)/sepolicy
 
 # Qcom Sepolicy
 include device/qcom/sepolicy-legacy/sepolicy.mk

@@ -1,0 +1,2 @@
+allow tee vfat:file r_file_perms;
+allow tee vfat:dir { getattr search open read };

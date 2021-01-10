@@ -1,0 +1,1 @@
+allow hal_perf_default vendor_mpctl_prop:file { open read getattr };

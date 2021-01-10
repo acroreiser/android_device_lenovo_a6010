@@ -1,0 +1,15 @@
+allow init firmware_file:dir mounton;
+allow init fsg_file:dir mounton;
+allow init pstorefs:dir mounton;
+allow init sysfs_graphics:file { setattr w_file_perms };
+
+allow init {
+    sysfs_batteryinfo
+}:file setattr;
+
+allow init sysfs:file rw_file_perms;
+allow init sysfs_leds:lnk_file rw_file_perms;
+allow init system_server:binder { call transfer };
+allow init sysfs_sensors:lnk_file rw_file_perms;
+allow init hwservicemanager:binder { call transfer };
+allow init vendor_file:file { execute_no_trans };
