@@ -15,19 +15,15 @@
 
 /(vendor|system/vendor)/bin/timekeep                        u:object_r:timekeep_exec:s0
 /(vendor|system/vendor)/bin/stml0xx                         u:object_r:stml0xx_exec:s0
-/(vendor|system/vendor)/bin/qmi_motext_hook                 u:object_r:rild_exec:s0
 /(vendor|system/vendor)/bin/akmd09912                       u:object_r:akmd09912_exec:s0
 /(vendor|system/vendor)/bin/init\.device\.config\.sh        u:object_r:device_config_exec:s0
-/(vendor|system/vendor)/bin/init\.mmi\.boot\.sh             u:object_r:mmi_boot_sh_exec:s0
-/(vendor|system/vendor)/bin/init\.mmi\.bt\.sh               u:object_r:mmi_bt_sh_exec:s0
-/(vendor|system/vendor)/bin/init\.mmi\.touch\.sh            u:object_r:mmi_touch_sh_exec:s0
-/(vendor|system/vendor)/bin/stml0xx_wrapper\.sh             u:object_r:stml0xx_exec:s0
 
 # Camera
 /sys/devices/virtual/camera(/.*)?                           u:object_r:sysfs_camera:s0
 /sys/devices/w1_bus_master1(/.*)?                           u:object_r:sysfs_graphics:s0
 
 # Device nodes
+/dev/cpuset(/.*)?                                       u:object_r:cgroup:s0
 /dev/stune(/.*)?                                            u:object_r:cgroup:s0
 
 # DRM

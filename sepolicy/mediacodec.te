@@ -1,0 +1,2 @@
+allow mediacodec vfat:file { getattr open read };
+allow mediacodec vfat:dir { getattr search open read };
