@@ -7,6 +7,7 @@ cc_binary {
   relative_install_path: "hw",
   init_rc: [
     "android.hardware.thermal@2.0-service.msm8916.rc"],
+  vintf_fragments: ["android.hardware.thermal@2.0-service.msm8916.xml"],
   srcs: [
     "service.cpp",
     "Thermal.cpp",
