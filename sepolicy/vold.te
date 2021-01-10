@@ -1,9 +1,0 @@
-dontaudit vold dm_device:blk_file ioctl;
-allow vold proc_swaps:file { getattr open read };
-allow vold system_block_device:blk_file getattr;
-allow vold rootfs:blk_file getattr;
-allow vold tmpfs:blk_file getattr;
-allow vold cache_block_device:blk_file getattr;
-allow vold persist_block_device:blk_file getattr;
-allow vold block_device:blk_file getattr;
-allow vold hal_bootctl_hwservice:hwservice_manager { find add };

@@ -1,2 +1,0 @@
-allow usbd self:capability sys_admin;
-allow usbd kernel:system module_request;

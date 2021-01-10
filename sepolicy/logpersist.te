@@ -1,3 +1,0 @@
-allow logpersist cache_file:dir { add_name open read write };
-allow logpersist cache_file:file { append create getattr open read };
-allow logpersist self:capability { dac_override sys_admin };

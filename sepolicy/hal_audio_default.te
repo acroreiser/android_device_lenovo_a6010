@@ -1,4 +1,0 @@
-allow hal_audio_default device:chr_file { ioctl open read write };
-allow hal_audio_default sysfs:dir { open read };
-allow hal_audio_default sysfs:file { getattr open read };
-allow hal_audio_default init:binder call;

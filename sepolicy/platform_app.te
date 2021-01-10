@@ -1,4 +1,0 @@
-allow platform_app hal_lineage_touch_hwservice:hwservice_manager find;
-allow platform_app init:binder call;
-allow platform_app device:chr_file { ioctl open read write };
-allow platform_app sysfs:file { getattr open read };

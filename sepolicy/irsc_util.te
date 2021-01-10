@@ -1,2 +1,0 @@
-allow irsc_util irsc_util:socket getopt;
-allow irsc_util self:capability sys_admin;

@@ -1,8 +1,0 @@
-allow system_server adb_data_file:dir { getattr read search };
-allow system_server adb_data_file:file { getattr open read };
-allow system_server init:binder { call transfer };
-allow system_server default_prop:property_service set;
-allow system_server device:chr_file { ioctl open read write };
-allow system_server crash_dump:process getpgid;
-allow system_server adb_data_file:dir open;
-allow system_server unlabeled:file unlink;

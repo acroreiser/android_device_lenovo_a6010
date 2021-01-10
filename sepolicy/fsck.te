@@ -1,6 +1,0 @@
-allow fsck persist_file:dir getattr;
-allow fsck self:capability { dac_override sys_admin };
-allow fsck tmpfs:blk_file getattr;
-allow fsck rootfs:blk_file getattr;
-allow fsck media_rw_data_file:dir getattr;
-allow fsck mnt_media_rw_file:dir search;

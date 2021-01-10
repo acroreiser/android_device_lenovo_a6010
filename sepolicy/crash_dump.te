@@ -1,6 +1,0 @@
-allow crash_dump bluetooth_data_file:file { getattr open read };
-allow crash_dump bluetooth_prop:file open;
-allow crash_dump self:capability sys_admin;
-allow crash_dump camera_prop:file { getattr open };
-allow crash_dump hwservicemanager_prop:file { getattr open };
-allow crash_dump init:process ptrace;

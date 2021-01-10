@@ -1,1 +1,0 @@
-allow hal_graphics_allocator_default device:chr_file { ioctl open read write };

@@ -1,7 +1,0 @@
-allow vendor_init firmware_file:file { getattr open read };
-allow vendor_init proc:file write;
-allow vendor_init proc_dirty:file write;
-allow vendor_init proc_extra_free_kbytes:file write;
-allow vendor_init media_rw_data_file:file { getattr relabelfrom };
-allow vendor_init proc_dirty_ratio:file write;
-allow vendor_init firmware_file:dir search;

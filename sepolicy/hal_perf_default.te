@@ -1,2 +1,0 @@
-allow hal_perf_default self:capability sys_admin;
-allow hal_perf_default vendor_mpctl_prop:file { open read getattr };

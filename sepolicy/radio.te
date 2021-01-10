@@ -1,3 +1,0 @@
-allow radio adb_data_file:file { getattr open read };
-allow radio gpuservice:binder { call };
-allow radio system_app_data_file:dir { getattr };

@@ -1,7 +1,0 @@
-allow toolbox init:fifo_file write;
-allow toolbox self:capability { net_admin net_raw sys_admin };
-allow toolbox self:udp_socket { create ioctl };
-allow toolbox device:chr_file { read write };
-allow toolbox kernel:system module_request;
-allow toolbox self:udp_socket ioctl;
-allow toolbox diag_device:chr_file { read write };

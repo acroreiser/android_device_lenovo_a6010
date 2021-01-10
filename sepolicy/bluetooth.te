@@ -1,1 +1,0 @@
-allow bluetooth init:binder { call transfer };

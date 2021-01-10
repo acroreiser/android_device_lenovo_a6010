@@ -1,2 +1,0 @@
-allow installd device:file { open write };
-allow installd adb_data_file:dir { search };

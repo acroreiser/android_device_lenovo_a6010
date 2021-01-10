@@ -1,4 +1,0 @@
-allow cameraserver init:unix_dgram_socket sendto;
-allow cameraserver camera_data_file:sock_file write;
-allow cameraserver device:chr_file { ioctl open read write };
-allow cameraserver kernel:system module_request;

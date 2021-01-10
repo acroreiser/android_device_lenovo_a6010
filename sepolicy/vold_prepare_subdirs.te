@@ -1,3 +1,0 @@
-allow vold_prepare_subdirs self:capability sys_admin;
-allow vold_prepare_subdirs kernel:system module_request;
-allow vold_prepare_subdirs vold_data_file:file write;

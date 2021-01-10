@@ -1,1 +1,0 @@
-allow tombstoned kernel:system module_request;

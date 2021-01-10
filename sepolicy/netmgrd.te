@@ -1,3 +1,0 @@
-allow netmgrd self:capability { dac_override  sys_resource sys_admin };
-allow netmgrd device:file write;
-allow netmgrd hal_cne_hwservice:hwservice_manager find;

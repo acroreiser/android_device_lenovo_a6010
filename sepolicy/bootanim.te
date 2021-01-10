@@ -1,3 +1,0 @@
-allow bootanim device:chr_file { ioctl open read write };
-allow bootanim kernel:system module_request;
-allow bootanim sysfs:file { getattr open read };

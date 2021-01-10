@@ -1,1 +1,0 @@
-allow qmuxd self:capability sys_admin;

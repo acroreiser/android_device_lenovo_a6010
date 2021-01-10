@@ -1,4 +1,0 @@
-allow hal_wifi_default default_prop:property_service set;
-allow hal_wifi_default kernel:system module_request;
-allow hal_wifi_default vendor_default_prop:property_service set;
-allow hal_wifi_default proc_net:file write;

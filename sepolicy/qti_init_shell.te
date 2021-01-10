@@ -1,5 +1,0 @@
-allow qti_init_shell vendor_file:file execute_no_trans;
-allow qti_init_shell sysfs_kgsl:file { open read write };
-allow qti_init_shell proc_version:file { open read };
-allow qti_init_shell system_file:file { open read getattr execute_no_trans };
-allow qti_init_shell powerctl_prop:property_service set;
