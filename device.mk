@@ -387,8 +387,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # IOP
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.iop.enable_uxe=0 \
-    vendor.iop.enable_prefetch_ofr=0
+    vendor.enable_prefetch=1 \
+    vendor.iop.enable_uxe=1 \
+    vendor.iop.enable_prefetch_ofr=1 \
+    vendor.perf.iop_v3.enable=1 \
+    persist.vendor.qti.games.gt.prof=1
 
 # IRSC
 PRODUCT_COPY_FILES += \
