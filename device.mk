@@ -573,7 +573,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.use_psi=false
 
 # Inherit common Android Go defaults.
-$(call inherit-product, build/make/target/product/go_defaults.mk)
+$(call inherit-product, build/make/target/product/go_defaults_512.mk)
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
