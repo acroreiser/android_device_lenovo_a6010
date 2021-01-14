@@ -732,4 +732,8 @@ $(call inherit-product, build/make/target/product/go_defaults_512.mk)
 # Device was launched with L
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
 
+# Privapp-permissions whitelisting
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.control_privapp_permissions=enforce
+
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
