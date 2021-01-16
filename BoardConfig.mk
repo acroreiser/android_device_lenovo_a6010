@@ -15,9 +15,6 @@
 
 DEVICE_PATH := device/lenovo/a6010
 
-# APEX
-TARGET_FLATTEN_APEX := true
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8916
 TARGET_BOARD_PLATFORM := msm8916
@@ -45,7 +42,6 @@ BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7 pm.sleep_mode=1 vmalloc=400M  androidboot.memcg=true
-#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 TARGET_KERNEL_SOURCE := kernel/lenovo/a6010
@@ -110,8 +106,6 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_USE_COMPAT_GRALLOC_PERFORM := true
 TARGET_USES_ION := true
 BOARD_USES_ADRENO := true
-TARGET_USES_NEW_ION_API := true
-USE_OPENGL_RENDERER := true
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x2000U | 0x02000000U | 0x02002000U
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
@@ -119,7 +113,6 @@ TARGET_HAS_HDR_DISPLAY := false
 TARGET_HAS_WIDE_COLOR_DISPLAY := false
 TARGET_DISABLE_POSTRENDER_CLEANUP := true
 TARGET_USE_CONTEXT_PRIORITY := true
-TARGET_USES_LEGACY_WFD := true
 
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
@@ -185,20 +178,19 @@ BOARD_CAMERA_SENSORS := imx219_q8n13a gc2355_8916
 TARGET_USE_VENDOR_CAMERA_EXT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-	/system/bin/mediaserver=22 \
-        /system/bin/cameraserver=22 \
-	/system/vendor/bin/mm-qcamera-daemon=22
+    /system/bin/mediaserver=22 \
+    /system/bin/cameraserver=22 \
+    /system/vendor/bin/mm-qcamera-daemon=22
 
 # GPS
 TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
-SELINUX_IGNORE_NEVERALLOWS := true
 
-# SEpolicy
+# SELinux
+SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_DIRS += \
     $(DEVICE_PATH)/sepolicy
 
-# Qcom Sepolicy
 include device/qcom/sepolicy-legacy/sepolicy.mk
 
 # Wi-Fi
@@ -208,7 +200,6 @@ BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
 BOARD_WLAN_DEVICE := qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
-#TARGET_USES_QCOM_WCNSS_QMI := true
 WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
@@ -217,9 +208,6 @@ TARGET_HAS_BROKEN_WLAN_SET_INTERFACE := true
 TARGET_DISABLE_WCNSS_CONFIG_COPY := true
 
 DISABLE_APEX_TEST_MODULE := true
-
-# Dedupe VNDK libraries with identical core variants.
-TARGET_VNDK_USE_CORE_VARIANT := true
 
 # Proprietary Prebuilt
 -include vendor/lenovo/a6010/BoardConfigVendor.mk

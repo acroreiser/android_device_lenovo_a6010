@@ -59,11 +59,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.recomputecrop=0 \
     debug.sf.latch_unsignaled=1 \
     debug.cpurend.vsync=false \
-    persist.debug.wfdenable=1 \
-    persist.sys.wfd.virtual=1 \
-    debug.hwui.renderer=opengl \
     ro.config.avoid_gfx_accel=true \
-    ro.qualcomm.cabl=2 \
     DEVICE_PROVISIONED=1 \
     ro.com.android.mobiledata=false \
     dev.pm.dyn_samplingrate=1 \
@@ -174,9 +170,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.audio.fluence.voicecall=true \
     persist.vendor.audio.fluence.voicerec=true \
     persist.vendor.audio.fluence.speaker=false \
-    vendor.audio.offload_wakelock=false \
-    persist.debug.wfd.enable=1 \
-    persist.sys.wfd.virtual=1
+    vendor.audio.offload_wakelock=false
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -220,7 +214,9 @@ PRODUCT_PACKAGES += \
     Snap
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.camera.enableLazyHal=true
+    ro.camera.enableLazyHal=true \
+    persist.camera.cpp.duplication=false \
+    persist.camera.hal.debug.mask=0
 
 # Screen Recorder
 PRODUCT_PACKAGES += \
@@ -241,15 +237,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml
 
-# Properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.cpp.duplication=false \
-    persist.camera.hal.debug.mask=0
-
-# vendor_init
-PRODUCT_PACKAGES += \
-    libinit_msm8916
-
 # First stage init
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
@@ -259,7 +246,6 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     android.hardware.gnss@1.0-service \
     gps.msm8916 \
-    libshims_flp \
     libshims_get_process_name
 
 # RIL
@@ -448,20 +434,12 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2
 
-# Baseband Fix
+# 1) Baseband version fix, 2) zram setup,
+# 3) boosting after boot up, 4) set device dependement props 
 PRODUCT_PACKAGES += \
-    set_baseband.sh
-
-# zRam
-PRODUCT_PACKAGES += \
-    set_zram.sh
-
-# Reduce post boot lags
-PRODUCT_PACKAGES += \
-    init.boot_boost.sh
-
-# Set device-dependement props
-PRODUCT_PACKAGES += \
+    set_baseband.sh \
+    set_zram.sh \
+    init.boot_boost.sh \
     init.device.config.sh
 
 # Lights
@@ -508,22 +486,16 @@ PRODUCT_PACKAGES += \
 # Wifi
 PRODUCT_PACKAGES += \
     libwcnss_qmi \
-    wcnss_service
-
-PRODUCT_PACKAGES += \
+    wcnss_service \
     hostapd \
     wpa_supplicant \
     wpa_supplicant.conf \
-    libwpa_client \
-    wificond
+    libwpa_client
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini
-
-# Wifi
-PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
     $(LOCAL_PATH)/wifi/WCNSS_wlan_dictionary.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_wlan_dictionary.dat
@@ -538,8 +510,6 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.cyanogen_8916
 
 # Optimize
-PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
-PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
 PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := $(LOCAL_PATH)/profiles/boot.prof.txt
 PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
 
@@ -552,10 +522,6 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # Strip debug
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
-PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
-
-# Disable Scudo outside of eng builds to save RAM.
-PRODUCT_DISABLE_SCUDO := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.device_config.runtime_native.usap_pool_enabled=true \
@@ -565,7 +531,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false \
     dalvik.vm.dex2oat-threads=2 \
     dalvik.vm.dex2oat-cpu-set=0,1 \
-    dalvik.vm.madvise-random=true \
     ro.vendor.qti.am.reschedule_service=true \
     dalvik.vm.isa.arm.features=div \
     persist.sys.dalvik.vm.lib.2=libart.so \
@@ -585,8 +550,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.critical_upgrade=true \
     ro.lmk.upgrade_pressure=40 \
     ro.lmk.downgrade_pressure=60 \
-    ro.lmk.kill_heaviest_task=false \
-    ro.lmk.medium=800 \
     ro.lmk.critical=0 \
     ro.lmk.use_psi=false \
     ro.lmk.kill_heaviest_task=true
@@ -654,13 +617,11 @@ PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.msm8916
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
+    $(LOCAL_PATH)/configs/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
+    $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.thermal.config=thermal_info_config.json
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -715,10 +676,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums=2286 \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
-
-# Do not spin up a separate process for the network stack, use an in-process APK.
-PRODUCT_PACKAGES += InProcessNetworkStack
-PRODUCT_PACKAGES += com.android.tethering.inprocess
 
 # Makes device compatible with Google Dialer Go.
 # In better case it should be a part of Gapps
