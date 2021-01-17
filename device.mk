@@ -388,7 +388,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.radio.add_power_save=0 \
+    persist.radio.add_power_save=1 \
     ro.telephony.call_ring.multiple=false
 
 # HIDL
@@ -611,6 +611,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
     ro.telephony.default_network=9,1 \
+    persist.vendor.radio.add_power_save=1 \
     persist.sys.fflag.override.settings_network_and_internet_v2=true \
     persist.data.netmgrd.qos.enable=true
 
