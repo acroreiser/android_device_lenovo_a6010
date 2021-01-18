@@ -565,8 +565,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.kill_heaviest_task=false \
     ro.lmk.medium=800 \
     ro.lmk.critical=0 \
-    ro.lmk.use_psi=false \
-    ro.lmk.kill_heaviest_task=true
+    ro.lmk.use_psi=false
 
 
 # Memory optimizations
