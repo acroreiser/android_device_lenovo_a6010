@@ -551,8 +551,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.upgrade_pressure=40 \
     ro.lmk.downgrade_pressure=60 \
     ro.lmk.critical=0 \
-    ro.lmk.use_psi=false \
-    ro.lmk.kill_heaviest_task=true
+    ro.lmk.use_psi=false
 
 
 # Memory optimizations
