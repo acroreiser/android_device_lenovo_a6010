@@ -246,6 +246,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Charger images
 PRODUCT_PACKAGES += charger_res_images
 
+# GPS
+PRODUCT_PACKAGES += \
+	libcurl
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/flp.conf:system/vendor/etc/flp.conf \
     $(LOCAL_PATH)/gps/gps.conf:system/vendor/etc/gps.conf \
