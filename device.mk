@@ -407,7 +407,8 @@ PRODUCT_PACKAGES += \
     libhidltransport \
     libhidltransport.vendor \
     libjson \
-    libjson.vendor
+    libjson.vendor \
+    vndservicemanager
 
 # Health
 PRODUCT_PACKAGES += \
