@@ -225,6 +225,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.feature.cac=1 \
     vendor.camera.hal1.packagelist=com.google.android.apps.cameralite
 
+# FastCharge
+PRODUCT_PACKAGES += \
+    vendor.lineage.fastcharge@1.0-service.usb
+
 # Screen Recorder
 PRODUCT_PACKAGES += \
     Recorder
