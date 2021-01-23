@@ -4,3 +4,6 @@ type dualsim_prop, property_type;
 type manufacturedate_prop, property_type;
 type rmtfs_prop, property_type;
 type timekeep_prop, property_type;
+
+# FastCharge
+type fastcharge_prop, property_type;

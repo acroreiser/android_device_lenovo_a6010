@@ -7,3 +7,6 @@ rmtfs.                      u:object_r:rmtfs_prop:s0
 persist.vendor.timeadjust   u:object_r:timekeep_prop:s0
 
 persist.vendor.service.bdroid.bdaddr       u:object_r:bluetooth_prop:s0
+
+# FastCharge
+persist.vendor.fastcharge.enabled     u:object_r:fastcharge_prop:s0

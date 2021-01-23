@@ -22,3 +22,5 @@ type sysfs_timekeep, fs_type, sysfs_type;
 type sysfs_camera,  fs_type, sysfs_type;
 type proc_swap, fs_type;
 type proc_kernel_sched, fs_type, proc_type;
+
+type sysfs_fastcharge_switch, fs_type, sysfs_type;
