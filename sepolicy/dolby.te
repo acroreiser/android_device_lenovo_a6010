@@ -1,0 +1,1 @@
+allow platform_app dolby_prop:property_service { set };
