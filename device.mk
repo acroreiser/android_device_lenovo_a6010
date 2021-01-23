@@ -224,6 +224,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.hal.debug.mask=0 \
     persist.camera.feature.cac=1
 
+# FastCharge
+PRODUCT_PACKAGES += \
+    vendor.lineage.fastcharge@1.0-service.usb
+
 # Screen Recorder
 PRODUCT_PACKAGES += \
     Recorder
