@@ -210,5 +210,8 @@ TARGET_DISABLE_WCNSS_CONFIG_COPY := true
 
 DISABLE_APEX_TEST_MODULE := true
 
+# Ringtones
+TARGET_REDUCES_RINGTONES := true
+
 # Proprietary Prebuilt
 -include vendor/lenovo/a6010/BoardConfigVendor.mk
