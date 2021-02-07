@@ -83,6 +83,7 @@ ifeq ($(HOST_OS),linux)
       DONT_DEXPREOPT_PREBUILTS := true
       USE_DEX2OAT_DEBUG := false
       WITH_DEXPREOPT_DEBUG_INFO := false
+      DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES := div
   endif
 endif
 
