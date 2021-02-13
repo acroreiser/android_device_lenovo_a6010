@@ -14,9 +14,10 @@ allow hal_sensors_default sysfs:file { open read write };
 allow hal_sensors_default system_data_file:file { getattr setattr open read write };
 allow hal_sensors_default system_data_file:dir { getattr add_name search open read write };
 allow hal_sensors_default property_socket:sock_file { write };
+allow hal_sensors_default default_prop:property_service set;
 
 allow hal_sensors_default proc_net:file { getattr open read };
-
+allow hal_sensors_default init:unix_stream_socket { ioctl read getattr write setattr lock append bind connect getopt setopt connectto };
 allow hal_sensors_default {
     sysfs_batteryinfo
     sysfs_graphics

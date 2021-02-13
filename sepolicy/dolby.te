@@ -1,1 +1,2 @@
 allow platform_app dolby_prop:property_service { set };
+allow platform_app dolby_prop:file rw_file_perms;
