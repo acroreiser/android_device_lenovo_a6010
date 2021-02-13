@@ -13,3 +13,12 @@ echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo 1 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
 echo "msm-adreno-tz" > /sys/class/devfreq/1c00000.qcom,kgsl-3d0/governor
 echo 200000000 > /sys/class/devfreq/1c00000.qcom,kgsl-3d0/min_freq
+
+ram=$(cat /proc/meminfo | grep MemTotal | awk  '{print $2}')
+if [ "$ram" -gt "1100000" ]; then
+	echo 81920 > /proc/sys/vm/min_free_kbytes
+	echo 81920 > /proc/sys/vm/extra_free_kbytes
+else
+	echo 40960 > /proc/sys/vm/min_free_kbytes
+	echo 40960 > /proc/sys/vm/extra_free_kbytes
+fi

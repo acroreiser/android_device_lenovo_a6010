@@ -6,3 +6,4 @@ allow qti_init_shell powerctl_prop:property_service set;
 allow qti_init_shell vfat:file { getattr open read };
 allow qti_init_shell vfat:dir { getattr search open read };
 allow qti_init_shell proc_swap:file { open getattr read write };
+allow qti_init_shell proc_extra_free_kbytes:file rw_file_perms;
