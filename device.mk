@@ -563,6 +563,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.swap_util_max=60 \
     ro.lmk.use_psi=false
 
+# Dalvik heap values
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapstartsize=8m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapmaxfree=8m \
+    dalvik.vm.heapgrowthlimit=192m \
+    dalvik.vm.usejit=true \
+    dalvik.vm.usejitprofiles=true
 
 # Memory optimizations
 PRODUCT_PROPERTY_OVERRIDES += \
