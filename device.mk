@@ -557,10 +557,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low Memory Killer
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.config.ulmk_memcg=true \
-    ro.lmk.critical_upgrade=true \
-    ro.lmk.upgrade_pressure=40 \
-    ro.lmk.downgrade_pressure=60 \
-    ro.lmk.critical=0 \
+    ro.lmk.swap_free_low_percentage=60 \
+    ro.lmk.thrashing_limit=10 \
+    ro.lmk.thrashing_limit_decay=100 \
+    ro.lmk.swap_util_max=60 \
     ro.lmk.use_psi=false
 
 
