@@ -44,7 +44,6 @@ on early-init
 
     # Turn off backlight on blank
     write /sys/class/leds/lcd-backlight/trigger "backlight"
-    start init-config-sh
 
 on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
@@ -246,12 +245,6 @@ service set_baseband /vendor/bin/sh /system/vendor/bin/set_baseband.sh
     user system
     group shell
     oneshot
-
-service init-config-sh /vendor/bin/sh /vendor/bin/init.device.config.sh
-    class core
-    user root
-    oneshot
-    disabled
 
 on property:gsm.version.baseband=""
     start set_baseband

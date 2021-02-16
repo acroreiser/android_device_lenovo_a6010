@@ -443,8 +443,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     set_baseband.sh \
     set_zram.sh \
-    init.boot_boost.sh \
-    init.device.config.sh
+    init.boot_boost.sh
 
 # Lights
 PRODUCT_PACKAGES += \
