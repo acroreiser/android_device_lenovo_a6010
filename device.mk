@@ -583,8 +583,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.sys.fw.trim_empty_percent=100 \
     ro.vendor.qti.sys.fw.trim_cache_percent=100 \
     ro.vendor.qti.sys.fw.trim_enable_memory=2147483648 \
-    ro.vendor.qti.sys.fw.bg_apps_limit=7
-
+    ro.vendor.qti.sys.fw.bg_apps_limit=7 \
+    ro.config.max_starting_bg=2
 
 # Boot
 PRODUCT_PROPERTY_OVERRIDES += \
