@@ -3,4 +3,9 @@ dontaudit untrusted_app_25 hal_memtrack_hwservice:hwservice_manager find;
 dontaudit untrusted_app_27 hal_memtrack_hwservice:hwservice_manager find;
 dontaudit untrusted_app_29 hal_memtrack_hwservice:hwservice_manager find;
 dontaudit gmscore_app hal_memtrack_hwservice:hwservice_manager find;
-dontaudit gmscore_app hal_memtrack_hwservice:binder { call transfer };
+
+dontaudit untrusted_app hal_memtrack_hwservice:binder { call };
+dontaudit untrusted_app_25 hal_memtrack_hwservice:binder { call };
+dontaudit untrusted_app_27 hal_memtrack_hwservice:binder { call };
+dontaudit untrusted_app_29 hal_memtrack_hwservice:binder { call };
+dontaudit gmscore_app hal_memtrack_hwservice:binder { call };
