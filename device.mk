@@ -560,6 +560,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.thrashing_limit=10 \
     ro.lmk.thrashing_limit_decay=100 \
     ro.lmk.swap_util_max=60 \
+    ro.lmk.enhance_batch_kill=true \
+    ro.lmk.enable_watermark_check=true \
+    ro.lmk.nstrat_wmark_boost_factor=4 \
     ro.lmk.use_psi=false
 
 # Dalvik heap values
