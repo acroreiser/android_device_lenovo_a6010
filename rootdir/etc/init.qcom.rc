@@ -44,6 +44,7 @@ on early-init
 
     # Turn off backlight on blank
     write /sys/class/leds/lcd-backlight/trigger "backlight"
+    start set_zram
 
 on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
@@ -313,7 +314,6 @@ on property:init.svc.surfaceflinger=restarting
 # Start it again on boot, just being double sure.
 on property:sys.boot_completed=1
     start set_baseband
-    start set_zram
     restart vendor.camera-provider-2-5
     restart cameraserver
 
