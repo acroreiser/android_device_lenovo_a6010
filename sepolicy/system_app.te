@@ -16,3 +16,5 @@ dontaudit system_app {
   apex_service
   system_suspend_control_service
 }:service_manager find;
+
+allow system_app proc_vmallocinfo:file r_file_perms;
