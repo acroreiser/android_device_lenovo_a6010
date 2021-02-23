@@ -516,7 +516,7 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.cyanogen_8916
 
 # Optimize
-PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := $(LOCAL_PATH)/profiles/boot.prof.txt
+PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := $(LOCAL_PATH)/profiles/boot-image.prof
 PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
 
 # Animation
