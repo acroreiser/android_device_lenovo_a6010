@@ -280,6 +280,7 @@
         <item>"/data/dalvik-cache/arm/system@system_ext@priv-app@SystemUI@SystemUI.apk@classes.dex"</item>
         <item>"/data/dalvik-cache/arm/system@system_ext@priv-app@SystemUI@SystemUI.apk@classes.vdex"</item>
         <item>"/data/dalvik-cache/arm/system@system_ext@priv-app@SystemUI@SystemUI.apk@classes.art"</item>
+        <item>"/system/lib/libsurfaceflinger.so"</item>
     </string-array>
 
     <!-- Flag indicating whether we should enable smart battery. -->
