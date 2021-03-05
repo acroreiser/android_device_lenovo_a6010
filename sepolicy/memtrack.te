@@ -9,3 +9,4 @@ dontaudit untrusted_app_25 hal_memtrack_hwservice:binder { call };
 dontaudit untrusted_app_27 hal_memtrack_hwservice:binder { call };
 dontaudit untrusted_app_29 hal_memtrack_hwservice:binder { call };
 dontaudit gmscore_app hal_memtrack_hwservice:binder { call };
+dontaudit gmscore_app hal_memtrack_default:binder { call };
