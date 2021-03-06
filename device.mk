@@ -246,6 +246,14 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Charger images
 PRODUCT_PACKAGES += charger_res_images
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/flp.conf:system/vendor/etc/flp.conf \
+    $(LOCAL_PATH)/gps/gps.conf:system/vendor/etc/gps.conf \
+    $(LOCAL_PATH)/gps/izat.conf:system/vendor/etc/izat.conf \
+    $(LOCAL_PATH)/gps/sap.conf:system/vendor/etc/sap.conf \
+    $(LOCAL_PATH)/gps/lowi.conf:system/vendor/etc/lowi.conf \
+    $(LOCAL_PATH)/gps/xtwifi.conf:system/vendor/etc/xtwifi.conf
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
