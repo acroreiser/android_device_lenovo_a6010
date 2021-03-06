@@ -234,13 +234,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
 
-# GPS
-PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    android.hardware.gnss@1.0-service \
-    gps.msm8916 \
-    libshims_get_process_name
-
 # RIL
 PRODUCT_PACKAGES += \
    libaudioclient_shim \
@@ -252,12 +245,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Charger images
 PRODUCT_PACKAGES += charger_res_images
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf \
-    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
-    $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
-    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf 
 
 # Permissions
 PRODUCT_COPY_FILES += \
