@@ -251,6 +251,7 @@ PRODUCT_PACKAGES += \
 	libcurl
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/apdr.conf:system/vendor/etc/apdr.conf \
     $(LOCAL_PATH)/gps/flp.conf:system/vendor/etc/flp.conf \
     $(LOCAL_PATH)/gps/gps.conf:system/vendor/etc/gps.conf \
     $(LOCAL_PATH)/gps/izat.conf:system/vendor/etc/izat.conf \
