@@ -4,6 +4,12 @@
 swapoff /dev/block/zram0
 sleep 0.5
 ZMEM=$(cat /proc/meminfo | grep MemTotal | awk  '{print $2}')
+
+if [ "$ZMEM" -gt "1100000" ]; then
+   echo "50" > /proc/sys/vm/vmpressure_level_med
+fi
+
+
 let 'ZMEM=((ZMEM/100)*75)*1024'
 echo 1 > /sys/block/zram0/reset
 echo 'lz4' > /sys/block/zram0/comp_algorithm
