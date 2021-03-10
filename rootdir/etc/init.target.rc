@@ -82,7 +82,7 @@ on post-fs
     write /proc/sys/vm/dirty_expire_centisecs 200
     write /proc/sys/vm/dirty_ratio 10
     write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/vfs_cache_pressure 0
+    write /proc/sys/vm/vfs_cache_pressure 100
 
 on charger
    wait /dev/block/bootdevice/by-name/system
