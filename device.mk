@@ -704,4 +704,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.control_privapp_permissions=enforce
 
+# Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to  
+#  pick up the default Android Platform product locale list
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
