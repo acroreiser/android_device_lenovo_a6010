@@ -507,4 +507,8 @@
 
     <!-- Enable face auth when swiping security view -->
     <bool name="config_faceAuthOnSecurityView">true</bool>
+
+    <!-- Disable WiFi Debugging will save memory by reducing the volume of WiFi firmware debug information -->
+    <bool translatable="false" name="config_wifi_enable_wifi_firmware_debugging">false</bool>
+    <integer translatable="false" name="config_wifi_logger_ring_buffer_verbose_size_limit_kb">64</integer>
 </resources>
