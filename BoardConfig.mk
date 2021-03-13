@@ -87,6 +87,11 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
+# To leverage the P feature "Full Stack Integrity: expand verified boot to cover privapps" Android will  
+#  uncompress priv-apps for system APKs. Unfortunately this causes ~90MB increase system ROM size.  
+# For Go devices, you may disable this feature to save space.  
+DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
+
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
 # Security Patch Level
