@@ -98,27 +98,16 @@ on fs
     write /sys/block/mmcblk0/queue/iostats 0
     write /sys/block/mmcblk1/queue/iostats 0
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-    write /sys/block/mmcblk0/queue/scheduler deadline
+    write /sys/block/mmcblk0/queue/scheduler noop
 
 on property:sys.boot_completed=1
-    write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
-    write /sys/module/process_reclaim/parameters/pressure_max 70
-    write /sys/module/process_reclaim/parameters/swap_opt_eff 30
-    write /sys/module/process_reclaim/parameters/pressure_min 50
-    write /sys/module/process_reclaim/parameters/per_swap_size 512
-    write /proc/sys/vm/min_free_kbytes 2919
-    write /proc/sys/vm/extra_free_kbytes 6075
-    write /sys/kernel/mm/ksm/pages_to_scan 100
-    write /sys/kernel/mm/ksm/sleep_millisecs 500
-    write /sys/kernel/mm/ksm/run 1
-    write /proc/sys/kernel/iosched_boost_top_app 1
     write /proc/sys/kernel/tune_android_tasks 1
     write /sys/block/mmcblk0/queue/scheduler bfq
     write /sys/block/mmcblk1/queue/scheduler bfq
     write /sys/block/mmcblk0/queue/rq_affinity 0
     write /sys/block/mmcblk1/queue/rq_affinity 0
-    write /sys/block/mmcblk0/queue/nr_requests 1024
+    write /sys/block/mmcblk0/queue/nr_requests 4096
     write /sys/block/mmcblk1/queue/nr_requests 512
-    write /sys/block/mmcblk0/queue/read_ahead_kb 1024
-    write /sys/block/mmcblk1/queue/read_ahead_kb 512
+    write /sys/block/mmcblk0/queue/read_ahead_kb 128
+    write /sys/block/mmcblk1/queue/read_ahead_kb 128
     start vendor.msm_irqbalance
