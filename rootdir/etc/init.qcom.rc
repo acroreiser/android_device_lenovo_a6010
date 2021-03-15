@@ -44,6 +44,8 @@ on early-init
 
     # Turn off backlight on blank
     write /sys/class/leds/lcd-backlight/trigger "backlight"
+    # Use dimmer backlight
+    write /sys/module/mdss_fb/parameters/backlight_dimmer 1
     start set_zram
 
 on fs
