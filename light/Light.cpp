@@ -54,9 +54,11 @@ Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
     auto backlightFn(std::bind(&Light::setLcdBacklight, this, std::placeholders::_1));
     auto batteryFn(std::bind(&Light::setBatteryLight, this, std::placeholders::_1));
     auto notificationFn(std::bind(&Light::setNotificationLight, this, std::placeholders::_1));
+    auto attentionFn(std::bind(&Light::setNotificationLight, this, std::placeholders::_1));
     mLights.emplace(std::make_pair(Type::BACKLIGHT, backlightFn));
     mLights.emplace(std::make_pair(Type::BATTERY, batteryFn));
     mLights.emplace(std::make_pair(Type::NOTIFICATIONS, notificationFn));
+    mLights.emplace(std::make_pair(Type::ATTENTION, attentionFn));
 }
 
 // Methods from ::android::hardware::light::V2_0::ILight follow.
