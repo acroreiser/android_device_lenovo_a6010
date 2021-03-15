@@ -511,6 +511,12 @@ PRODUCT_PACKAGES += \
 # Optimize
 PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := $(LOCAL_PATH)/profiles/boot-image.prof
 PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
+DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES := div
+
+# To leverage the P feature "Full Stack Integrity: expand verified boot to cover privapps" Android will
+#  uncompress priv-apps for system APKs. Unfortunately this causes ~90MB increase system ROM size.
+# For Go devices, you may disable this feature to save space.
+DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
 
 # Animation
 TARGET_BOOT_ANIMATION_RES := 720
