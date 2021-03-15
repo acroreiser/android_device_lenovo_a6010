@@ -39,8 +39,8 @@ on early-init
     chown root gps /dev/subsys_modem
     chmod 0660 /dev/subsys_modem
 
-    write /sys/class/leds/red/brightness 0
-    write /sys/class/leds/green/brightness 255
+    write /sys/class/leds/red/trigger "none"
+    write /sys/class/leds/green/trigger "default-on"
 
     # Turn off backlight on blank
     write /sys/class/leds/lcd-backlight/trigger "backlight"
@@ -271,11 +271,7 @@ on property:init.svc.servicemanager=restarting
     restart vendor.qcamerasvr
 
 on property:init.svc.bootanim=running
-    write /sys/class/leds/green/brightness 0
     write /sys/class/leds/green/trigger blinking
-
-on property:init.svc.bootanim=stopped
-    write /sys/class/leds/green/trigger none
 
 service vendor.qseecomd /system/vendor/bin/qseecomd
    class core
@@ -316,7 +312,6 @@ on property:sys.boot_completed=1
 
 on charger
     start thermal-engine
-    write /sys/class/leds/red/brightness 255
 
 on property:apexd.status=ready
     mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind 

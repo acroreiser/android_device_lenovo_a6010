@@ -43,6 +43,7 @@ namespace V2_0 {
 namespace implementation {
 
 uint32_t green_status;
+uint32_t red_status;
 
 Light::Light(std::pair<std::ofstream, uint32_t>&& lcd_backlight,
              std::ofstream&& charging_led,
@@ -110,11 +111,20 @@ void Light::setSpeakerBatteryLightLocked() {
 
 void Light::setSpeakerLightLocked(const LightState& state) {
     if (isLit(state)) {
-        if(green_status == 0)
-            mChargingLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
+        if(green_status == 1)
+            mNotificationLed << "timer" << std::endl;
+        else
+            mChargingLed << "timer" << std::endl;
+
+        red_status = 1;
     } else {
         // Lights off
-        mChargingLed << 0 << std::endl;
+        if(green_status == 1)
+            mNotificationLed << "default-on" << std::endl;
+        else
+            mChargingLed << "none" << std::endl;
+
+        red_status = 0;
     }
 }
 
@@ -130,14 +140,20 @@ void Light::setSpeakerNotificationLightLocked() {
 
 void Light::setSpeakerNLightLocked(const LightState& state) {
     if (isLit(state)) {
-        mNotificationLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
-        mChargingLed << 0 << std::endl;
+        if(red_status == 1)
+        {
+            mChargingLed << "none" << std::endl;
+            mNotificationLed << "timer" << std::endl;
+        }
+        else
+            mNotificationLed << "default-on" << std::endl;
+
         green_status = 1;
     } else {
         // Lights off
-        mNotificationLed << 0 << std::endl;
-        if (isLit(mBatteryState))
-            mChargingLed << DEFAULT_MAX_BRIGHTNESS << std::endl;
+        mNotificationLed << "none" << std::endl;
+        if (red_status == 1)
+            mChargingLed << "timer" << std::endl;
 
         green_status = 0;
     }

@@ -92,6 +92,8 @@ on charger
    chmod 0664 /sys/class/power_supply/bms/current_now
    chmod 0664 /sys/class/power_supply/bms/voltage_ocv
    start vm_bms
+   write /sys/class/leds/green/trigger "none"
+   write /sys/class/leds/red/trigger "timer"
 
 on fs
     # boot time fs tune

@@ -32,8 +32,8 @@ using android::hardware::light::V2_0::implementation::Light;
 
 const static std::string kLcdBacklightPath = "/sys/class/leds/lcd-backlight/brightness";
 const static std::string kLcdMaxBacklightPath = "/sys/class/leds/lcd-backlight/max_brightness";
-const static std::string kChargingLedPath = "/sys/class/leds/red/brightness";
-const static std::string kNotificationLedPath = "/sys/class/leds/green/brightness";
+const static std::string kChargingLedPath = "/sys/class/leds/red/trigger";
+const static std::string kNotificationLedPath = "/sys/class/leds/green/trigger";
 
 int main() {
     uint32_t lcdMaxBrightness = 255;
