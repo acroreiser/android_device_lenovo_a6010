@@ -108,7 +108,6 @@
             <name>IMapper</name>
             <instance>default</instance>
         </interface>
-        <fqname>@3.0::IMapper/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.light</name>
