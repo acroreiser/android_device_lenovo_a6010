@@ -453,10 +453,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/ft5x06_ts.kl:system/usr/keylayout/ft5x06_ts.kl\
     $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl
 
-# Storage
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=true
-
 # Disable oem unlock
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=false
@@ -711,5 +707,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to  
 #  pick up the default Android Platform product locale list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
