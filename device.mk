@@ -555,13 +555,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.config.ulmk_memcg=true \
     ro.lmk.use_psi=false
 
-# Dalvik heap values
+# Inherit common Android Go defaults.
+$(call inherit-product, build/make/target/product/go_defaults.mk)
+
+# Setup dalvik vm configs
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapstartsize=16m \
-    dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapminfree=512k \
-    dalvik.vm.heapmaxfree=8m \
-    dalvik.vm.heapgrowthlimit=192m \
     dalvik.vm.usejit=true \
     dalvik.vm.usejitprofiles=true
 
@@ -699,9 +698,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # but we have no Gapps specially for Android Go devices
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/googledialergo-sysconfig.xml:system/etc/sysconfig/googledialergo-sysconfig.xml
-
-# Inherit common Android Go defaults.
-$(call inherit-product, build/make/target/product/go_defaults.mk)
 
 # Device was launched with L
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
