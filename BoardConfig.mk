@@ -182,7 +182,6 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
 TARGET_NO_RPC := true
 
 # SELinux
-SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 include device/qcom/sepolicy-legacy/sepolicy.mk
 
