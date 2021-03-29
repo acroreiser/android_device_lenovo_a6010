@@ -348,6 +348,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=pronto \
     bluetooth.core.le.vendor_capabilities.enabled=false
 
+# Incremental FS
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.incremental.enable=1
+
 # Keymaster HAL
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1-service \
