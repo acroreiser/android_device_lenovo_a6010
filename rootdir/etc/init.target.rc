@@ -118,11 +118,14 @@ on property:sys.boot_completed=1
 
  on property:dolby.ds.volumeleveler.state=on && property:dolby.ds.state=on
     write /sys/kernel/sound_control/headphone_gain "-12 -12"
+    write /sys/kernel/sound_control/speaker_gain "0"
 
  on property:dolby.ds.volumeleveler.state=off
     exec -- /system/bin/sleep 0.3
     write /sys/kernel/sound_control/headphone_gain "0 0"
+    write /sys/kernel/sound_control/speaker_gain "7"
 
  on property:dolby.ds.state=off
     exec -- /system/bin/sleep 0.3
     write /sys/kernel/sound_control/headphone_gain "0 0"
+    write /sys/kernel/sound_control/speaker_gain "7"
