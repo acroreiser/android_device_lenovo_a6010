@@ -11,7 +11,7 @@ binder_call(hal_sensors_default, platform_app)
 allow hal_sensors_default self:capability { dac_override };
 allow hal_sensors_default sensors_device:chr_file { ioctl open read };
 allow hal_sensors_default sysfs:file { open read write };
-allow hal_sensors_default system_data_file:file { getattr setattr open read write };
+allow hal_sensors_default system_data_file:file { create getattr setattr open read write };
 allow hal_sensors_default system_data_file:dir { getattr add_name search open read write };
 allow hal_sensors_default property_socket:sock_file { write };
 allow hal_sensors_default default_prop:property_service set;
