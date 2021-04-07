@@ -217,7 +217,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
-    persist.camera.hal.debug.mask=0
+    persist.camera.hal.debug.mask=0 \
+    persist.camera.feature.cac=1
 
 # Screen Recorder
 PRODUCT_PACKAGES += \
