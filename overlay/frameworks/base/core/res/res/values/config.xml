@@ -522,4 +522,12 @@
 
     <!-- Whether or not to add a "people" notifications section -->
     <bool name="config_usePeopleFiltering">true</bool>
+
+    <!-- Defines the blacklist for system icons.  That is to say, the icons in the status bar that
+         are part of the blacklist are never displayed. Each item in the blacklist must be a string
+         defined in core/res/res/config.xml to properly blacklist the icon.
+     -->
+    <string-array name="config_statusBarIconBlackList" translatable="false">
+        <item>@*android:string/status_bar_rotate</item>
+    </string-array>
 </resources>
