@@ -39,4 +39,7 @@
 
     <!-- Whether system_update_settings should be shown or not. -->
     <bool name="config_show_system_update_settings">false</bool>
+
+    <!-- Cell broacast receiver package name [DO NOT TRANSLATE] -->
+    <string name="cell_broadcast_receiver_package">com.android.cellbroadcastreceiver</string>
 </resources>
