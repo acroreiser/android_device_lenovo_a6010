@@ -530,4 +530,7 @@
     <string-array name="config_statusBarIconBlackList" translatable="false">
         <item>@*android:string/status_bar_rotate</item>
     </string-array>
+
+    <!-- Show area update info settings in CellBroadcastReceiver and information in SIM status in Settings app -->
+    <bool name="config_showAreaUpdateInfoSettings">true</bool>
 </resources>
