@@ -28,6 +28,7 @@
 on early-init
     #set non-stand-charger can used
     write /sys/module/phy_msm_usb/parameters/floated_charger_enable Y
+    write  /proc/sys/kernel/magisk_workaround 1
 
 on boot
     # charger
@@ -106,6 +107,7 @@ on zygote-start
 
 on property:sys.boot_completed=1
     write /proc/sys/kernel/tune_android_tasks 1
+    write  /proc/sys/kernel/magisk_workaround 0
     write /sys/block/mmcblk0/queue/scheduler bfq
     write /sys/block/mmcblk1/queue/scheduler deadline
     write /sys/block/mmcblk0/queue/rq_affinity 0
