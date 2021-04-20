@@ -8,6 +8,8 @@ genfscon proc /bootinfo                               u:object_r:proc_bootinfo:s
 
 genfscon sysfs /devices/soc.0/qpnp-rtc-8/             u:object_r:sysfs_rtc:s0
 genfscon proc /sys/vm/swappiness                      u:object_r:proc_swap:s0
+genfscon proc /sys/kernel/sched_cfs_bandwidth_slice_us    u:object_r:proc_sched:s0
 genfscon proc /sys/kernel/sched_small_task            u:object_r:proc_kernel_sched:s0
 genfscon proc /sys/kernel/sched_ravg_hist_size        u:object_r:proc_kernel_sched:s0
+genfscon proc /sys/kernel/sched_wake_to_idle              u:object_r:proc_sched:s0
 genfscon proc /sys/kernel/sched_window_stats_policy   u:object_r:proc_kernel_sched:s0
