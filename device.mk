@@ -98,7 +98,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Encryption
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.cryptfshw@1.0-base \
-    vendor.qti.hardware.cryptfshw@1.0-service-qti.qsee
+    vendor.qti.hardware.cryptfshw@1.0-service-qti.qsee \
+    fde_ext4_resize.sh
 
 # Audio
 PRODUCT_PACKAGES += \
