@@ -27,7 +27,7 @@ LOCAL_SRC_FILES := \
         wrapper/QualcommCamera.cpp
 
 LOCAL_CFLAGS = -Wall -Wextra -Werror -O3
-#LOCAL_CFLAGS += -DDEFAULT_ZSL_MODE_ON
+LOCAL_CFLAGS += -DDEFAULT_ZSL_MODE_ON
 
 #use media extension
 #ifeq ($(TARGET_USES_MEDIA_EXTENSIONS), true)
