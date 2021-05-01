@@ -29,7 +29,7 @@ PRODUCT_RELEASE_NAME := a6000
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
 # Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/pb/config/common.mk)
 
 # Inherit language packages
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
