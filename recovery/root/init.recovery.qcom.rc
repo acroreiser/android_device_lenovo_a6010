@@ -43,4 +43,4 @@ on property:ro.crypto.state=encrypted
 
 on property:ro.twrp.boot=1
     write /proc/boot_completed_prop 1
-    setprop persist.sys.usb.config=mtp,adb
+    setprop persist.sys.usb.config mtp,adb
