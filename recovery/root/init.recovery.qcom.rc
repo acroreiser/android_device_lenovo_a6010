@@ -8,6 +8,9 @@ on init
     chmod 0660 /dev/battery_data
     chown system system /dev/battery_data
 
+    write /sys/class/leds/red/trigger battery-charging
+    write /sys/class/leds/green/trigger battery-full
+
     # vm_bms
     chown root system /sys/bus/i2c/drivers/lc709203/batt_capacity
     chmod 0660 /sys/bus/i2c/drivers/lc709203/batt_capacity
