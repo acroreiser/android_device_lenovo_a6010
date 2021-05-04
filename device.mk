@@ -596,8 +596,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.critical=0 \
     ro.lmk.low=950
 
-# Inherit common Android Go defaults.
-$(call inherit-product, build/make/target/product/go_defaults_512.mk)
+# Inherit customized Android Go defaults.
+$(call inherit-product, device/lenovo/a6010/go_defaults_custom.mk)
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
