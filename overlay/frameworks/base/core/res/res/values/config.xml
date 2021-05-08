@@ -524,4 +524,7 @@
 
     <!-- Show area update info settings in CellBroadcastReceiver and information in SIM status in Settings app -->
     <bool name="config_showAreaUpdateInfoSettings">true</bool>
+
+    <!-- If not zero, limits the internal screen recorder's framerate to the set value. -->
+    <integer name="config_screenRecorderMaxFramerate">30</integer>
 </resources>
