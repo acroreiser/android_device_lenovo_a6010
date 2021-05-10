@@ -16,7 +16,9 @@
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_DEVICE), a6010)
-include $(call all-makefiles-under,$(LOCAL_PATH))
+subdir_makefiles=$(call first-makefiles-under,$(LOCAL_PATH))
+$(foreach mk,$(subdir_makefiles),$(info including $(mk) ...)$(eval include $(mk)))
+
 include $(CLEAR_VARS)
 
 CMN_IMAGES := \
