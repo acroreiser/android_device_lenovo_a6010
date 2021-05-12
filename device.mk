@@ -107,6 +107,7 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
+    audio.usbv2.default \
     tinyalsa \
     tinyplay \
     tinypcminfo \
