@@ -3,3 +3,6 @@ allow ueventd sysfs_mmi_touch:dir search;
 
 allow ueventd vendor_data_file:file r_file_perms;
 allow ueventd self:capability sys_nice;
+
+allow ueventd vfat:dir r_dir_perms;
+allow ueventd vfat:file r_file_perms;
