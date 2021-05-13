@@ -1,11 +1,5 @@
-# Authsecret
-/(vendor|system/vendor)/bin/hw/android\.hardware\.authsecret@1\.0-service			u:object_r:hal_authsecret_default_exec:s0
-
 # Binaries
 /vendor/bin/adsprpcd                                        u:object_r:adsprpcd_exec:s0
-/vendor/bin/imsdatadaemon                                   u:object_r:ims_exec:s0
-/vendor/bin/imsqmidaemon                                    u:object_r:ims_exec:s0
-/vendor/bin/ims_rtp_daemon                                  u:object_r:hal_imsrtp_exec:s0
 /vendor/bin/irsc_util                                       u:object_r:irsc_util_exec:s0
 /vendor/bin/mm-qcamera-daemon                               u:object_r:mm-qcamerad_exec:s0
 /vendor/bin/netmgrd                                         u:object_r:netmgrd_exec:s0
@@ -14,17 +8,9 @@
 /vendor/bin/rmt_storage                                     u:object_r:rmt_storage_exec:s0
 
 /(vendor|system/vendor)/bin/timekeep                        u:object_r:timekeep_exec:s0
-/(vendor|system/vendor)/bin/stml0xx                         u:object_r:stml0xx_exec:s0
-/(vendor|system/vendor)/bin/akmd09912                       u:object_r:akmd09912_exec:s0
-/(vendor|system/vendor)/bin/init\.device\.config\.sh        u:object_r:device_config_exec:s0
-
-# Camera
-/sys/devices/virtual/camera(/.*)?                           u:object_r:sysfs_camera:s0
-/sys/devices/w1_bus_master1(/.*)?                           u:object_r:sysfs_graphics:s0
 
 # Device nodes
 /dev/cpuset(/.*)?                                       u:object_r:cgroup:s0
-/dev/stune(/.*)?                                            u:object_r:cgroup:s0
 
 # DRM
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.3-service-lazy\.widevine                u:object_r:hal_drm_widevine_exec:s0
@@ -41,25 +27,9 @@
 /sys/class/leds(/.*)? u:object_r:sysfs_leds:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.msm8916    u:object_r:hal_light_default_exec:s0
 
-# Partitions
-/dev/block/platform/soc\.0/7824900\.sdhci/by-name/metadata  u:object_r:metadata_block_device:s0
-
-# FSG
-/fsg(/.*)?                                                  u:object_r:fsg_file:s0
-
-# RIL
-/data/misc/cutback(/.*)?                                    u:object_r:cutback_data_file:s0
-/data/misc/netmgr(/.*)?                                     u:object_r:netmgr_data_file:s0
-/dev/socket/cutback                                         u:object_r:rild_socket:s0
-/persist/mdm(/.*)?                                          u:object_r:persist_modem_file:s0
-
 # Sensors
-/dev/akm09912                                               u:object_r:sensors_device:s0
-/dev/akm09912_dev                                           u:object_r:sensors_device:s0
-/dev/stml0xx                                                u:object_r:sensors_device:s0
-/dev/stml0xx_as                                             u:object_r:sensors_device:s0
-/dev/stml0xx_ms                                             u:object_r:sensors_device:s0
-/data/misc/akmd(/.*)?                                       u:object_r:sensors_data_file:s0
+/dev/akm09911                                               u:object_r:sensors_device:s0
+/dev/akm09911_dev                                           u:object_r:sensors_device:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.sensors@1\.0-service.msm8916    u:object_r:hal_sensors_default_exec:s0
 
 # sysfs - battery/charger
