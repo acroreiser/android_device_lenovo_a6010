@@ -3,6 +3,8 @@
 # Script to boost cpus and gpus (sd-410) for 40 sec after boot, to
 # reduce lag and bad ux that lasts for about 1 min after booting
 
+echo "-1" > /proc/sys/kernel/sched_rt_runtime_us
+
 echo "performance" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo "performance" > /sys/class/devfreq/1c00000.qcom,kgsl-3d0/governor
 echo 400000000 > /sys/class/devfreq/1c00000.qcom,kgsl-3d0/min_freq
