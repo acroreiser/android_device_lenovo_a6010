@@ -152,6 +152,12 @@ TARGET_EXCLUDES_AUDIOFX := true
 # Audio package for Go
 $(call inherit-product, frameworks/base/data/sounds/AudioPackageGo.mk)
 
+# Dolby
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.feature.dolby_enable=true \
+    vendor.audio.dolby.ds2.enabled=true \
+    vendor.audio.dolby.ds2.hardbypass=false
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml
