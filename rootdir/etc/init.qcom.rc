@@ -283,6 +283,9 @@ on property:init.svc.servicemanager=restarting
 on property:init.svc.bootanim=running
     write /sys/class/leds/green/trigger blinking
 
+on property:init.svc.bootanim=stopped
+    write /sys/class/leds/green/trigger none
+
 service vendor.qseecomd /system/vendor/bin/qseecomd
    class core
    user root
