@@ -170,13 +170,6 @@ TARGET_QCOM_NO_FM_FIRMWARE := true
 # Media extentions
 TARGET_USES_MEDIA_EXTENSIONS := true
 
-# Camera
-BOARD_CAMERA_SENSORS := imx219_q8n13a gc2355_8916
-TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-    /system/bin/mediaserver=22 \
-    /system/bin/cameraserver=22 \
-    /system/vendor/bin/mm-qcamera-daemon=22
-
 # GPS
 TARGET_NO_RPC := true
 
