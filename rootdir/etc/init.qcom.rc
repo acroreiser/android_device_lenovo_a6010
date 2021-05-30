@@ -282,6 +282,7 @@ on property:init.svc.servicemanager=restarting
     restart vendor.qcamerasvr
 
 on property:init.svc.bootanim=running
+    write /sys/class/leds/red/trigger none
     write /sys/class/leds/green/trigger blinking
 
 on property:init.svc.bootanim=stopped
