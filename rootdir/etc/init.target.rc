@@ -63,6 +63,8 @@ on init
     write /dev/cpuset/audio-app/cpus 0-3
     write /dev/cpuset/audio-app/mems 0
 
+    write /dev/freezer/frozen/freezer.killable 1
+
     chown system system /sys/class/power_supply/battery/charging_enabled
     chmod 0664 /sys/class/power_supply/battery/charging_enabled
 
