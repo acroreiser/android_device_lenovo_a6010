@@ -25,6 +25,8 @@ on init
     chmod 0664 /dev/ion
     chown system system /dev/ion
 
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+
 on property:ro.crypto.state=encrypted
     start sbinqseecomd
 
