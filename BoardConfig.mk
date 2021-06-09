@@ -83,3 +83,6 @@ TW_NO_USB_STORAGE := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_CRYPTO_USE_SBIN_VOLD := true
+
+#adbd insecure
+BOARD_ALWAYS_INSECURE := true
