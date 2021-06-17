@@ -537,4 +537,9 @@
 
     <!-- The max scale for the wallpaper when it's zoomed in -->
     <item name="config_wallpaperMaxScale" format="float" type="dimen">1.00</item>
+
+    <!-- True if the device supports persisting security logs across reboots.
+         This requires the device's kernel to have pstore and pmsg enabled,
+         and DRAM to be powered and refreshed through all stages of reboot. -->
+    <bool name="config_supportPreRebootSecurityLogs">true</bool>
 </resources>
