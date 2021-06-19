@@ -578,7 +578,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low Memory Killer
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.config.ulmk_memcg=true \
-    ro.lmk.use_psi=false
+    ro.lmk.use_psi=false \
+    ro.lmk.critical=0 \
+    ro.lmk.low=950
 
 # Inherit common Android Go defaults.
 $(call inherit-product, build/make/target/product/go_defaults_512.mk)
