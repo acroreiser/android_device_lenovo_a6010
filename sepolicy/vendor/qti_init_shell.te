@@ -8,3 +8,5 @@ allow qti_init_shell vfat:dir { getattr search open read };
 allow qti_init_shell proc_swap:file { open getattr read write };
 allow qti_init_shell proc_extra_free_kbytes:file rw_file_perms;
 allow qti_init_shell proc_sched:file rw_file_perms;
+allow qti_init_shell system_data_root_file:file create_file_perms;
+allow qti_init_shell system_data_root_file:dir ra_dir_perms;
