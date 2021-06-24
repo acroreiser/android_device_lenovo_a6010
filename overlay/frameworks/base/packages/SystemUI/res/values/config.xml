@@ -50,4 +50,8 @@
     <!-- Whether to clip notification contents with a rounded rectangle. Might be expensive on
          certain GPU's and thus can be turned off with only minimal visual impact. -->
     <bool name="config_notifications_round_rect_clipping">false</bool>
+
+    <!-- Whether or not the fade on the notification is based on the amount that it has been swiped
+         off-screen. -->
+    <bool name="config_fadeDependingOnAmountSwiped">true</bool>
 </resources>
