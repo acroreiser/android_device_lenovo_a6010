@@ -513,22 +513,6 @@
     <!-- Whether or not to use assistant stream volume separately from music volume -->
     <bool name="config_useAssistantVolume">true</bool>
 
-    <!-- Smart replies in notifications: Whether by default tapping on a choice should let the user
-         edit the input before it is sent to the app. Developers can override this via
-         RemoteInput.Builder.setEditChoicesBeforeSending. -->
-    <bool name="config_smart_replies_in_notifications_edit_choices_before_sending">true</bool>
-
-    <!-- Whether or not to add a "people" notifications section -->
-    <bool name="config_usePeopleFiltering">true</bool>
-
-    <!-- Defines the blacklist for system icons.  That is to say, the icons in the status bar that
-         are part of the blacklist are never displayed. Each item in the blacklist must be a string
-         defined in core/res/res/config.xml to properly blacklist the icon.
-     -->
-    <string-array name="config_statusBarIconBlackList" translatable="false">
-        <item>@*android:string/status_bar_rotate</item>
-    </string-array>
-
     <!-- Show area update info settings in CellBroadcastReceiver and information in SIM status in Settings app -->
     <bool name="config_showAreaUpdateInfoSettings">true</bool>
 
