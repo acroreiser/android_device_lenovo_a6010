@@ -171,9 +171,7 @@ PRODUCT_COPY_FILES += \
 # Enable iorapd perfetto tracing for app starts
 # Enable iorapd readahead for app starts
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.iorapd.enable=true \
-    iorapd.perfetto.enable=true \
-    iorapd.readahead.enable=true
+    ro.iorapd.enable=false
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -455,7 +453,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     set_baseband.sh \
     set_zram.sh \
-    init.boot_boost.sh
+    init.boot_boost.sh \
+    target_config.sh
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -550,7 +549,6 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.device_config.runtime_native.usap_pool_enabled=true \
     dalvik.vm.zygotemaxfailedboots=5 \
     dalvik.vm.foreground-heap-growth-multiplier=2.0 \
     dalvik.vm.dex2oat-flags=--no-watch-dog \
@@ -588,9 +586,6 @@ $(call inherit-product, build/make/target/product/go_defaults_512.mk)
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.usejit=true \
-    dalvik.vm.usejitprofiles=true
 
 # Memory optimizations
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -601,13 +596,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.sys.fw.empty_app_percent=50 \
     ro.vendor.qti.sys.fw.trim_empty_percent=100 \
     ro.vendor.qti.sys.fw.trim_cache_percent=100 \
-    ro.vendor.qti.sys.fw.trim_enable_memory=2147483648 \
-    ro.vendor.qti.sys.fw.bg_apps_limit=8 \
     ro.config.max_starting_bg=1
 
 # Dexopt
 PRODUCT_PROPERTY_OVERRIDES += \
-    pm.dexopt.install=speed-profile \
     pm.dexopt.first-boot=quicken \
     pm.dexopt.boot=extract
 
