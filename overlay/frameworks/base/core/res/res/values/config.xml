@@ -534,4 +534,13 @@
 
     <!-- Number of notifications to keep in the notification service historical archive -->
     <integer name="config_notificationServiceArchiveSize">300</integer>
+
+    <!-- Whether UI for multi user should be shown -->
+    <bool name="config_enableMultiUserUI">false</bool>
+
+    <!--  Maximum number of supported users -->
+    <integer name="config_multiuserMaximumUsers">1</integer>
+
+    <!-- Maximum number of users we allow to be running at a time -->
+    <integer name="config_multiuserMaxRunningUsers">1</integer>
 </resources>
