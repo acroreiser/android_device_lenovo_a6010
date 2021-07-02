@@ -531,4 +531,7 @@
          key usage.  This adds noticeable additional overhead to volume key processing, so
          is disableable for products for which it is irrelevant. -->
     <bool name="config_useVolumeKeySounds">false</bool>
+
+    <!-- Number of notifications to keep in the notification service historical archive -->
+    <integer name="config_notificationServiceArchiveSize">300</integer>
 </resources>
