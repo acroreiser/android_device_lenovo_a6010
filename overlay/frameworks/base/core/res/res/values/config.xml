@@ -546,4 +546,7 @@
 
     <!-- Max number of connected audio devices supported by Bluetooth stack -->
     <integer name="config_bluetooth_max_connected_audio_devices">1</integer>
+
+    <!-- True if the device should block turning display on at boot until wallpaper is ready -->
+    <bool name="config_checkWallpaperAtBoot">false</bool>
 </resources>
