@@ -129,7 +129,7 @@ on property:sys.powerctl=*
     write /sys/power/wake_lock shutdown
 
  on property:dolby.ds.volumeleveler.state=on && property:dolby.ds.state=on
-    write /sys/kernel/sound_control/headphone_gain "-12 -12"
+    write /sys/kernel/sound_control/headphone_gain "-7 -7"
 
  on property:dolby.ds.volumeleveler.state=off
     exec -- /system/bin/sleep 0.3
