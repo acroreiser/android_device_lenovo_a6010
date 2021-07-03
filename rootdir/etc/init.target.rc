@@ -125,6 +125,9 @@ on property:sys.boot_completed=1
     # to hide Magisk & co.
     chmod 440 /proc/net/unix
 
+on property:sys.powerctl=*
+    write /sys/power/wake_lock shutdown
+
  on property:dolby.ds.volumeleveler.state=on && property:dolby.ds.state=on
     write /sys/kernel/sound_control/headphone_gain "-12 -12"
 
