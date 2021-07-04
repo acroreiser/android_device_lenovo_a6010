@@ -549,4 +549,12 @@
 
     <!-- True if the device should block turning display on at boot until wallpaper is ready -->
     <bool name="config_checkWallpaperAtBoot">false</bool>
+
+    <!-- The minimum number of visible recent tasks to be presented to the user through the
+         SystemUI. Can be -1 if there is no minimum limit. -->
+    <integer name="config_minNumVisibleRecentTasks_lowRam">-1</integer>
+
+    <!-- The maximum number of visible recent tasks to be presented to the user through the
+         SystemUI. Can be -1 if there is no maximum limit. -->
+    <integer name="config_maxNumVisibleRecentTasks_lowRam">4</integer>
 </resources>
