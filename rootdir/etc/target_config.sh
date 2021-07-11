@@ -16,7 +16,7 @@ else
 	setprop ro.vendor.qti.sys.fw.bg_apps_limit 2
 	setprop dalvik.vm.usejit false
 	setprop dalvik.vm.usejitprofiles false
-	setprop pm.dexopt.install speed
+	setprop pm.dexopt.install quicken
 	setprop pm.dexopt.bg-dexopt speed
 fi
 
