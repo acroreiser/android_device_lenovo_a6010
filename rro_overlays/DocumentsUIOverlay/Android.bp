@@ -1,0 +1,5 @@
+runtime_resource_overlay {
+    name: "DocumentsUIOverlay",
+    sdk_version: "current",
+    proprietary: true
+}
