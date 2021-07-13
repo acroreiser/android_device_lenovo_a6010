@@ -162,9 +162,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/enginedefault/config/example/phone/audio_policy_engine_product_strategies.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_engine_product_strategies.xml \
     frameworks/av/services/audiopolicy/enginedefault/config/example/phone/audio_policy_engine_stream_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_engine_stream_volumes.xml
 
-# Exclude AudioFX
-TARGET_EXCLUDES_AUDIOFX := true
-
 # Audio package for Go
 $(call inherit-product, frameworks/base/data/sounds/AudioPackageGo.mk)
 
