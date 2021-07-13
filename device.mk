@@ -289,6 +289,10 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 PRODUCT_PACKAGES += \
     DocumentsUIOverlay
 
+# Trebuchet overlay
+PRODUCT_PACKAGES += \
+    TrebuchetGoOverlay
+
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.bluetooth.disableabsvol=true \
