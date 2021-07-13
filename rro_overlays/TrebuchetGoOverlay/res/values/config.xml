@@ -1,0 +1,4 @@
+<resources>
+    <!-- Whether to enable background preloading of task thumbnails. -->
+    <bool name="config_enableTaskSnapshotPreloading">false</bool>
+</resources>
