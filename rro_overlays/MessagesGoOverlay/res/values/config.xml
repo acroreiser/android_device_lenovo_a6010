@@ -1,0 +1,7 @@
+<resources>
+	<bool name="link_preview_enabled_pref_default">false</bool>
+	<bool name="assistant_enabled_pref_default">false</bool>
+    <bool name="enable_rcs_pref_default">false</bool>
+    <bool name="enable_system_alarm_service_default">true</bool>
+    <bool name="suggested_stickers_enabled_pref_default">false</bool>
+</resources>
