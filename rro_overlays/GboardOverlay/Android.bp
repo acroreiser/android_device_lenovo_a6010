@@ -1,0 +1,5 @@
+runtime_resource_overlay {
+    name: "GboardOverlay",
+    sdk_version: "current",
+    proprietary: true
+}
