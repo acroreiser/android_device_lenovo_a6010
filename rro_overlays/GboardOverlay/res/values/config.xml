@@ -1,0 +1,10 @@
+<resources>
+    <bool name="firebase_enabled">false</bool>
+    <bool name="enable_simplified_ranking">true</bool>
+    <bool name="enable_res_for_tests">false</bool>
+    <bool name="pref_def_value_suggest_emojis">false</bool>
+    <bool name="pref_def_value_enable_emoji_suggestion">false</bool>
+    <bool name="pref_def_value_enable_user_metrics">false</bool>
+    <bool name="pref_def_value_enable_battery_saver_theme_switching">true</bool>
+	<bool name="pref_def_value_import_user_contacts">false</bool>
+</resources>
