@@ -290,6 +290,10 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 PRODUCT_PACKAGES += \
     GboardOverlay
 
+# Overlay for Google Messages
+PRODUCT_PACKAGES += \
+    MessagesGoOverlay
+
 # DocumentsUI overlay
 PRODUCT_PACKAGES += \
     DocumentsUIOverlay
