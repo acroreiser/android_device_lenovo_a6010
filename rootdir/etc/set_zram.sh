@@ -15,7 +15,7 @@ fi
 # Setup ZRAM to 75% of memtotal
 let 'ZMEM=((ZMEM/100)*75)*1024'
 echo 1 > /sys/block/zram0/reset
-echo 'lz4' > /sys/block/zram0/comp_algorithm
+echo 'zstd' > /sys/block/zram0/comp_algorithm
 sleep 0.5
 echo $ZMEM > /sys/block/zram0/disksize
 sleep 0.5
