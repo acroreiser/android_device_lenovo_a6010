@@ -5,12 +5,12 @@ ZMEM=$(cat /proc/meminfo | grep MemTotal | awk  '{print $2}')
 # Reduce io thrashing
 if [ "$ZMEM" -gt "1100000" ]; then
 	echo "50" > /proc/sys/vm/vmpressure_level_med
-	echo 81920 > /proc/sys/vm/min_free_kbytes
-	echo 81920 > /proc/sys/vm/extra_free_kbytes
+	echo 204800 > /proc/sys/vm/clean_min_kbytes
 else
-	echo 40960 > /proc/sys/vm/min_free_kbytes
-	echo 40960 > /proc/sys/vm/extra_free_kbytes
+	echo 102400 > /proc/sys/vm/clean_min_kbytes
 fi
+
+
 
 # Setup ZRAM to 75% of memtotal
 let 'ZMEM=((ZMEM/100)*75)*1024'
