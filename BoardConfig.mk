@@ -179,6 +179,9 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 TARGET_NO_RPC := true
 
 # SELinux
+ifeq ($(TARGET_BUILD_VARIANT),user)
+	SELINUX_IGNORE_NEVERALLOWS := true
+endif
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
 include device/qcom/sepolicy-legacy/sepolicy.mk

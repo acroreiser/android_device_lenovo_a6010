@@ -3,4 +3,5 @@ PRODUCT_MAKEFILES := \
 
 COMMON_LUNCH_CHOICES := \
     lineage_a6010-eng \
-    lineage_a6010-userdebug
+    lineage_a6010-userdebug \
+    lineage_a6010-user
