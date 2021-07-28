@@ -623,8 +623,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.small_battery=true
 
 # TextClassifier
-PRODUCT_PACKAGES += \
-    textclassifier.smartselection.bundle1
+PRODUCT_COPY_FILES += \
+    external/libtextclassifier/native/models/textclassifier.ru.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.ru.model
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
