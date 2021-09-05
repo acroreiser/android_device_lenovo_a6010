@@ -191,6 +191,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.vc_call_vol_steps=7 \
     ro.config.media_vol_steps=25 \
     persist.bluetooth.bluetooth_audio_hal.disabled=true \
+    ro.vendor.bluetooth.lazyhal=true \
     vendor.audio.offload.gapless.enabled=true
 
 PRODUCT_COPY_FILES += \
