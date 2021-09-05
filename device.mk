@@ -594,7 +594,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.config.ulmk_memcg=true \
     ro.lmk.use_psi=false \
     ro.lmk.critical=0 \
-    ro.lmk.low=950
+    ro.lmk.low=950 \
+    ro.lmk.swap_free_low_percentage=15
 
 # Inherit customized Android Go defaults.
 $(call inherit-product, device/lenovo/a6010/go_defaults_custom.mk)
