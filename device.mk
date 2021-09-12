@@ -272,8 +272,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/flp.conf:system/vendor/etc/flp.conf \
     $(LOCAL_PATH)/gps/gps.conf:system/vendor/etc/gps.conf \
     $(LOCAL_PATH)/gps/izat.conf:system/vendor/etc/izat.conf \
-    $(LOCAL_PATH)/gps/sap.conf:system/vendor/etc/sap.conf \
     $(LOCAL_PATH)/gps/lowi.conf:system/vendor/etc/lowi.conf \
+    $(LOCAL_PATH)/gps/sap.conf:system/vendor/etc/sap.conf \
     $(LOCAL_PATH)/gps/xtwifi.conf:system/vendor/etc/xtwifi.conf
 
 # Permissions
