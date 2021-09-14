@@ -1,0 +1,4 @@
+allow location wpa_data_file:dir create_dir_perms;
+allow location wpa_data_file:sock_file { create setattr write };
+allow location hal_wifi_supplicant_default:unix_dgram_socket { sendto };
+allow location wifi_vendor_data_file:dir r_dir_perms;
