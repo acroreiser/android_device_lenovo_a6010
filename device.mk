@@ -419,7 +419,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.add_power_save=1 \
-    ro.telephony.call_ring.multiple=false
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.iwlan_operation_mode=legacy
 
 # HIDL
 PRODUCT_PACKAGES += \
