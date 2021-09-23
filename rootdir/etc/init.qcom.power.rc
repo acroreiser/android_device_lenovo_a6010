@@ -32,9 +32,6 @@ on enable-low-power
     # enable thermal core_control now
     write /sys/module/msm_thermal/core_control/enabled 1
 
-    # Enable low power modes
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-
     # Set RPS mask
     write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 2
 
@@ -53,7 +50,6 @@ on enable-low-power
     setprop sys.post_boot.parsed 1
 
 on charger
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
 
 on property:init.svc.recovery=running
