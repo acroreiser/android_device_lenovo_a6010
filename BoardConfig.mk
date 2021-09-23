@@ -43,7 +43,7 @@ BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 \
                         androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 \
-                        androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 \
+                        androidboot.bootdevice=7824900.sdhci \
                         loop.max_part=16 pm.sleep_mode=1 vmalloc=400M  androidboot.memcg=true \
                         androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
