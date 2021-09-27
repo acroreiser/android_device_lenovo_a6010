@@ -21,6 +21,9 @@
     <Settings>
         <Setting name="max-video-encoder-input-buffers" value="9" />
     </Settings>
+    <Settings>
+        <Variant name="slow-cpu" enabled="true" />
+    </Settings>
     <Encoders>
         <!-- Video Hardware  -->
         <MediaCodec name="OMX.qcom.video.encoder.avc" type="video/avc" >
