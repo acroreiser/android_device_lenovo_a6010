@@ -328,9 +328,6 @@ on property:sys.boot_completed=1
     restart vendor.camera-provider-2-5
     restart cameraserver
 
-    # Back to default VM settings
-    write /proc/sys/vm/dirty_expire_centisecs 3000
-
 on charger
     start thermal-engine
 
