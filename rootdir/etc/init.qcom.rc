@@ -119,6 +119,9 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
+    write /sys/class/leds/red/trigger none
+    write /sys/class/leds/green/trigger blinking
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -282,10 +285,6 @@ on property:init.svc.media=restarting
 
 on property:init.svc.servicemanager=restarting
     restart vendor.qcamerasvr
-
-on property:init.svc.bootanim=running
-    write /sys/class/leds/red/trigger none
-    write /sys/class/leds/green/trigger blinking
 
 on property:init.svc.bootanim=stopped
     write /sys/class/leds/green/trigger none
