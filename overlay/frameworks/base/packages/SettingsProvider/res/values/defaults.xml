@@ -30,4 +30,8 @@
 
     <!-- Disable UI touch sounds by default -->
     <bool name="def_sound_effects_enabled">false</bool>
+
+    <!-- Set animation disabled by default  -->
+    <fraction name="def_window_animation_scale">0%</fraction>
+    <fraction name="def_window_transition_scale">0%</fraction>
 </resources>
