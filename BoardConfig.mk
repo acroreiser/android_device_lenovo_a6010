@@ -191,6 +191,9 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 TARGET_DISABLE_WCNSS_CONFIG_COPY := true
 
+# DoubleTap2Wake
+TARGET_TAP_TO_WAKE_NODE := /sys/android_touch/doubletap2wake
+
 DISABLE_APEX_TEST_MODULE := true
 
 # Proprietary Prebuilt

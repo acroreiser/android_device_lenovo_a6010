@@ -34,4 +34,7 @@
     <!-- Set animation disabled by default  -->
     <fraction name="def_window_animation_scale">0%</fraction>
     <fraction name="def_window_transition_scale">0%</fraction>
+
+    <!-- Default state of tap to wake -->
+    <bool name="def_double_tap_to_wake">false</bool>
 </resources>

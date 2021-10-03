@@ -50,6 +50,9 @@
 # Sysfs entry for the FastCharge node
 /sys/kernel/fast_charge(/.*)?                           u:object_r:sysfs_fastcharge_switch:s0
 
+# Tap To Wake node
+/sys/android_touch/doubletap2wake                       u:object_r:gesture_sysfs:s0
+
 # Thermal
 /(vendor|system/vendor)/bin/hw/android\.hardware\.thermal@2\.0-service.msm8916    u:object_r:hal_thermal_default_exec:s0
 
