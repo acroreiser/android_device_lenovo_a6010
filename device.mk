@@ -243,10 +243,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Recorder
 
-# Tethering all-in-one
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.fflag.override.settings_tether_all_in_one=true
-
 # Seamless transfer
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.fflag.override.settings_seamless_transfer=true
