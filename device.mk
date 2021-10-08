@@ -236,7 +236,7 @@ PRODUCT_PACKAGES += \
     libmm-qcamera \
     libshim_atomic \
     libboringssl-compat \
-    Snap
+    Camera2
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
