@@ -88,10 +88,6 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-service-lazy \
     android.hardware.drm@1.3-service-lazy.clearkey
 
-# Netflix
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.netflix.bsp_rev=Q660-13149-1
-
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196608
 
