@@ -56,4 +56,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += vendor/lineage/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # Time
-LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
+#LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
