@@ -67,10 +67,12 @@ std::map<std::string, SensorInfo> ParseSensorInfo(std::string_view config_path) 
         return sensors_parsed;
     }
 
+    JSONCPP_STRING err;
     Json::Value root;
-    Json::Reader reader;
-
-    if (!reader.parse(json_doc, root)) {
+    Json::CharReaderBuilder builder;
+    const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
+    
+    if (!reader->parse(json_doc.c_str(), json_doc.c_str() + json_doc.length(), &root, &err)) {
         LOG(ERROR) << "Failed to parse JSON config";
         return sensors_parsed;
     }
@@ -242,10 +244,12 @@ std::map<std::string, CoolingType> ParseCoolingDevice(std::string_view config_pa
         return cooling_devices_parsed;
     }
 
+    JSONCPP_STRING err;
     Json::Value root;
-    Json::Reader reader;
-
-    if (!reader.parse(json_doc, root)) {
+    Json::CharReaderBuilder builder;
+    const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
+    
+    if (!reader->parse(json_doc.c_str(), json_doc.c_str() + json_doc.length(), &root, &err)) {
         LOG(ERROR) << "Failed to parse JSON config";
         return cooling_devices_parsed;
     }
