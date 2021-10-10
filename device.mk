@@ -580,11 +580,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-threads=2 \
     dalvik.vm.dex2oat-cpu-set=0,1 \
     ro.vendor.qti.am.reschedule_service=true \
-    dalvik.vm.isa.arm.features=div \
     persist.sys.dalvik.vm.lib.2=libart.so \
-    dalvik.vm.systemservercompilerfilter=speed-profile \
-    dalvik.vm.minidebuginfo=false \
-    dalvik.vm.dex2oat-minidebuginfo=false
+    dalvik.vm.systemservercompilerfilter=speed-profile
 
 # Improve scrolling
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -744,10 +741,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Device was launched with L
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
-
-# Privapp-permissions whitelisting
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.control_privapp_permissions=enforce
 
 # Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to  
 #  pick up the default Android Platform product locale list
