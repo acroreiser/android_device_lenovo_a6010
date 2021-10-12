@@ -71,7 +71,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.egl=adreno \
     ro.surface_flinger.supports_background_blur=false \
     persist.sys.sf.disable_blurs=true \
-    sys.use_fifo_ui=1
+    sys.use_fifo_ui=1 \
+    debug.renderengine.backend=threaded
 
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
