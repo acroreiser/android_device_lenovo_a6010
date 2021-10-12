@@ -1,0 +1,3 @@
+<resources>
+    <bool name="flag_combined_status_bar_signal_icons">true</bool>
+</resources>
