@@ -112,9 +112,9 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libqcompostprocbundle \
-    android.hardware.audio@6.0-impl \
+    android.hardware.audio@7.0-impl \
     android.hardware.audio.service \
-    android.hardware.audio.effect@6.0-impl
+    android.hardware.audio.effect@7.0-impl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
