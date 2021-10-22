@@ -229,8 +229,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
     persist.camera.hal.debug.mask=0 \
-    persist.camera.feature.cac=1 \
-    vendor.camera.hal1.packagelist=com.google.android.apps.cameralite
+    persist.camera.feature.cac=1
 
 # FastCharge
 PRODUCT_PACKAGES += \
