@@ -519,4 +519,8 @@
 
     <!-- the number of the max cached processes in the system. -->
     <integer name="config_customizedMaxCachedProcesses">8</integer>
+
+    <!-- Enables the GnssTimeUpdate service. This is the global switch for enabling Gnss time based
+         suggestions to TimeDetector service. See also config_autoTimeSourcesPriority. -->
+    <bool name="config_enableGnssTimeUpdateService">true</bool>
 </resources>
