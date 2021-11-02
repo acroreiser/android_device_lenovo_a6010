@@ -1,7 +1,6 @@
 allow gmscore_app hal_memtrack_hwservice:hwservice_manager find;
 binder_call(gmscore_app, hal_memtrack_default);
 
-get_prop(gmscore_app, adbd_prop);
 get_prop(gmscore_app, alarm_boot_prop);
 get_prop(gmscore_app, alarm_handled_prop);
 get_prop(gmscore_app, alarm_instance_prop);
