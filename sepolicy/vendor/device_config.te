@@ -10,4 +10,4 @@ allow device_config sysfs:file r_file_perms;
 
 set_prop(device_config, dalvik_prop);
 set_prop(device_config, dualsim_prop);
-set_prop(device_config, exported_dalvik_prop);
+set_prop(device_config, dalvik_config_prop);
