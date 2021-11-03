@@ -8,8 +8,13 @@ allow rild persist_modem_file:dir rw_dir_perms;
 allow rild persist_modem_file:file create_file_perms;
 allow rild wifi_prop:file read;
 
+allow rild radio_core_data_file:lnk_file read;
+allow rild radio_core_data_file:dir rw_dir_perms;
+allow rild radio_core_data_file:file create_file_perms;
+
 # rild needs to execute /system/bin/qmi_motext_hook
 allow rild rild_exec:file execute_no_trans;
 
 dontaudit rild vendor_file:file ioctl;
 get_prop(rild, wifi_prop);
+get_prop(rild, vendor_rild_libpath_prop);
