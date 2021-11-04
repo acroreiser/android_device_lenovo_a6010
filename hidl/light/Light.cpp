@@ -144,12 +144,9 @@ void Light::setSpeakerNotificationLightLocked() {
 void Light::setSpeakerNLightLocked(const LightState& state) {
     if (isLit(state)) {
         if(red_status == 1)
-        {
             mChargingLed << "none" << std::endl;
-            mNotificationLed << "timer" << std::endl;
-        }
-        else
-            mNotificationLed << "default-on" << std::endl;
+
+        mNotificationLed << "default-on" << std::endl;
 
         green_status = 1;
     } else {
