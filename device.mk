@@ -155,6 +155,11 @@ PRODUCT_VENDOR_PROPERTIES += \
     vendor.audio.dolby.ds2.enabled=true \
     vendor.audio.dolby.ds2.hardbypass=false
 
+# SoC
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.soc.manufacturer=Qualcomm \
+	ro.soc.model=MSM8916
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml
