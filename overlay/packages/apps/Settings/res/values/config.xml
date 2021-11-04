@@ -45,4 +45,7 @@
 
     <!-- Whether or not device header widget tile should display in device info page -->
     <bool name="config_show_device_header_in_device_info">false</bool>
+
+    <!-- Whether to show the Preference for Adaptive connectivity -->
+    <bool name="config_show_adaptive_connectivity">true</bool>
 </resources>
