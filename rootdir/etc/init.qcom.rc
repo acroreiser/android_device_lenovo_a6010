@@ -275,7 +275,7 @@ service charger /system/bin/charger
 
 #start camera server as daemon
 service vendor.qcamerasvr /system/vendor/bin/mm-qcamera-daemon
-    class late_start
+    class hal
     user camera
     group camera gps system inet input graphics
     writepid /dev/cpuset/camera-daemon/tasks
@@ -324,8 +324,6 @@ on property:init.svc.surfaceflinger=restarting
 on property:sys.boot_completed=1
     exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/set_baseband.sh
     start set_zram
-    restart vendor.camera-provider-2-5
-    restart cameraserver
 
 on charger
     start thermal-engine
