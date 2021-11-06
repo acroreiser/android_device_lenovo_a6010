@@ -174,7 +174,7 @@ ifeq ($(TARGET_BUILD_VARIANT),user)
 	SELINUX_IGNORE_NEVERALLOWS := true
 endif
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 include device/qcom/sepolicy-legacy/sepolicy.mk
 
 # Wi-Fi
