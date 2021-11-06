@@ -4,3 +4,5 @@ allow zygote system_file:dir mounton;
 
 get_prop(zygote, bluetooth_prop);
 get_prop(zygote, exported_camera_prop);
+
+dontaudit zygote cgroup:file setattr;
