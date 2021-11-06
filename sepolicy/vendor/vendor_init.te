@@ -22,3 +22,5 @@ allow vendor_init proc_dirty:file rw_file_perms;
 allow vendor_init proc_dirty_ratio:file rw_file_perms;
 allow vendor_init vfat:dir { getattr search open read };
 allow vendor_init vfat:file r_file_perms;
+
+set_prop(vendor_init, system_prop);

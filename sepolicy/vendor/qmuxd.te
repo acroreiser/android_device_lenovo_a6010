@@ -1,1 +1,2 @@
 allow qmuxd diag_device:chr_file rw_file_perms;
+get_prop(qmuxd, radio_prop);
