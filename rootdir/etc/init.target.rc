@@ -74,6 +74,11 @@ on init
     chown system system /sys/class/power_supply/battery/charging_enabled
     chmod 0664 /sys/class/power_supply/battery/charging_enabled
 
+    chown system system /sys/class/power_supply/battery/capacity
+    chmod 0664 /sys/class/power_supply/battery/capacity
+    chown system system /sys/class/power_supply/battery/temp
+    chmod 0664 /sys/class/power_supply/battery/temp
+
     write /sys/kernel/sound_control/speaker_gain "0"
 
 service vm_bms /system/vendor/bin/vm_bms
