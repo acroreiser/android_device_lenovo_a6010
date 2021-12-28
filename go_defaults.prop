@@ -20,7 +20,7 @@
 ro.lmk.critical_upgrade=true
 ro.lmk.upgrade_pressure=30
 ro.lmk.downgrade_pressure=70
-ro.lmk.kill_heaviest_task=true
+ro.lmk.kill_heaviest_task=false
 ro.statsd.enable=true
 
 # set threshold to filter unused apps
