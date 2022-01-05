@@ -88,4 +88,7 @@
     <string name="wifi_tether_configure_ssid_default" translatable="false">Lenovo A6010</string>
 
     <integer translatable="false" name="config_wifi_logger_ring_buffer_verbose_size_limit_kb">64</integer>
+
+    <!-- Indicate the driver support NL80211_REG_CHANGED event. -->
+    <bool translatable="false" name="config_wifiDriverSupportedNl80211RegChangedEvent">true</bool>
 </resources>
