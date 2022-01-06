@@ -78,6 +78,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.use_fifo_ui=1 \
     debug.renderengine.backend=gles
 
+# Disable surfaceflinger prime_shader cache to improve post boot memory.
+PRODUCT_PROPERTY_OVERRIDES += service.sf.prime_shader_cache=0
+
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=280 \
