@@ -72,7 +72,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.supports_background_blur=false \
     persist.sys.sf.disable_blurs=true \
     sys.use_fifo_ui=1 \
-    debug.renderengine.backend=threaded
+    debug.renderengine.backend=gles
 
 # Screen density
 PRODUCT_PROPERTY_OVERRIDES += \
