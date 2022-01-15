@@ -183,6 +183,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     iorapd.perfetto.enable=true \
     iorapd.readahead.enable=true
 
+# Cgroup and task_profiles for freezer on cgroups v1
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
+    $(LOCAL_PATH)/configs/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.audio.sdk.fluencetype=none \
