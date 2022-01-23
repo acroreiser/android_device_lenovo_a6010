@@ -257,6 +257,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Recorder
 
+# Repainter integration
+PRODUCT_PACKAGES += \
+    RepainterServicePriv
+
 # Seamless transfer
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.fflag.override.settings_seamless_transfer=true
