@@ -448,6 +448,9 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0 \
     android.hidl.manager@1.0_system
 
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    debug.fdsan=0
+
 # Binder
 PRODUCT_PACKAGES += \
     libhwbinder \
