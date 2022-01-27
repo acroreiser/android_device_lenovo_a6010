@@ -461,6 +461,10 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2
 
+# Net
+PRODUCT_PACKAGES += \
+    netutils-wrapper-1.0
+
 # 1) Baseband version fix, 2) zram setup,
 # 3) boosting after boot up, 4) set device dependement props 
 PRODUCT_PACKAGES += \
