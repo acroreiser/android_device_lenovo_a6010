@@ -520,4 +520,9 @@
     <!-- Enables the GnssTimeUpdate service. This is the global switch for enabling Gnss time based
          suggestions to TimeDetector service. See also config_autoTimeSourcesPriority. -->
     <bool name="config_enableGnssTimeUpdateService">true</bool>
+
+    <!-- Config determines whether to update phone object when voice registration
+         state changes. Voice radio tech change will always trigger an update of
+         phone object irrespective of this config -->
+    <bool name="config_switch_phone_on_voice_reg_state_change">false</bool>
 </resources>
