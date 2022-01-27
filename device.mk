@@ -660,7 +660,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # TextClassifier
 PRODUCT_COPY_FILES += \
-    external/libtextclassifier/native/models/textclassifier.ru.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.ru.model
+    external/libtextclassifier/native/models/textclassifier.ru.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.ru.model \
+    external/libtextclassifier/native/models/textclassifier.fr.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.fr.model \
+    external/libtextclassifier/native/models/textclassifier.pl.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.pl.model
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
