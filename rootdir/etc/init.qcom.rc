@@ -170,8 +170,36 @@ on boot
     mkdir /dev/socket/qmux_bluetooth 2770 bluetooth bluetooth
     mkdir /dev/socket/qmux_gps 2770 gps gps
 
+    #create netmgr log dir
+    mkdir /data/vendor/netmgr 0770 radio radio
+    chmod 0770 /data/vendor/netmgr
+
+    # Create the directories used by DPM subsystem
+    mkdir /data/dpm 0771 system system
+    chown system system /data/dpm
+
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
+
+    # Create directory for radio
+    mkdir /data/vendor/radio 0770 system radio
+
+    # Mark the copy complete flag to not completed
+    write /data/vendor/radio/copy_complete 0
+    chown radio radio /data/vendor/radio/copy_complete
+    chmod 0660 /data/vendor/radio/copy_complete
+
+    # copy prebuilt qcril.db files always
+    copy /vendor/radio/qcril_database/qcril.db /data/vendor/radio/qcril_prebuilt.db
+    chown radio radio /data/vendor/radio/qcril_prebuilt.db
+    chmod 0660 /data/vendor/radio/qcril_prebuilt.db
+    # File flags for prebuilt ril db file
+    write /data/vendor/radio/prebuilt_db_support 1
+    chown radio radio /data/vendor/radio/prebuilt_db_support
+    chmod 0400 /data/vendor/radio/prebuilt_db_support
+    write /data/vendor/radio/db_check_done 0
+    chown radio radio /data/vendor/radio/db_check_done
+    chmod 0660 /data/vendor/radio/db_check_done
 
 #   Assign TCP buffer thresholds to be ceiling value of technology maximums
 #   Increased technology maximums should be reflected here.
@@ -214,18 +242,24 @@ on boot
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
-service irsc_util /system/vendor/bin/irsc_util "/system/vendor/etc/sec_config"
+on property:persist.env.fastdorm.enabled=true
+    setprop persist.radio.data_no_toggle 1
+
+service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
+    user system
+    group radio system
+
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
+    class core
     user root
     oneshot
 
-service rmt_storage /system/vendor/bin/rmt_storage
+service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
-    group system wakelock
-    ioprio rt 0
     shutdown critical
-    writepid /dev/cpuset/system-background/tasks
+    ioprio rt 0
 
 # FM
 on property:hw.fm.init=0
@@ -243,7 +277,7 @@ service qmuxd /system/vendor/bin/qmuxd
 
 service netmgrd /system/vendor/bin/netmgrd
     class main
-    group system wakelock
+    group system wakelock inet
     writepid /dev/cpuset/system-background/tasks
 
 on property:ro.data.large_tcp_window_size=true
