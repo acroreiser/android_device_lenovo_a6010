@@ -317,10 +317,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     MessagesGoOverlay
 
-# DocumentsUI overlay
-PRODUCT_PACKAGES += \
-    DocumentsUIOverlay
-
 # Trebuchet overlay
 PRODUCT_PACKAGES += \
     TrebuchetGoOverlay

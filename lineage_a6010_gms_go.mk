@@ -53,6 +53,10 @@ BUILD_FINGERPRINT := Lenovo/A6010/A6010:5.0.2/LRX22G/A6010_S045_170622_16G_ROW:u
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 
+# DocumentsUI overlay
+PRODUCT_PACKAGES += \
+    DocumentsUIOverlay
+
 # Trust
 PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
