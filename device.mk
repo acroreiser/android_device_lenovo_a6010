@@ -795,6 +795,13 @@ SKIP_BOOT_JARS_CHECK := true
 #  pick up the default Android Platform product locale list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_default.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+# Override build/make/target/product/emulated_storage.mk to disable casefold
+PRODUCT_QUOTA_PROJID := 1
+PRODUCT_FS_CASEFOLD := 0
+PRODUCT_VENDOR_PROPERTIES += \
+    external_storage.projid.enabled=1 \
+    external_storage.casefold.enabled=0 \
+    external_storage.sdcardfs.enabled=0
+
 
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
