@@ -63,7 +63,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.enable.sglscale=1 \
     debug.sf.hw=1 \
     debug.egl.hw=1 \
-    debug.sf.disable_backpressure=1 \
     debug.sf.enable_gl_backpressure=1 \
     debug.sf.recomputecrop=0 \
     debug.cpurend.vsync=false \
