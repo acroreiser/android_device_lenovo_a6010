@@ -56,6 +56,3 @@ PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 # DocumentsUI overlay
 PRODUCT_PACKAGES += \
     DocumentsUIOverlay
-
-# Time
-#LINEAGE_VERSION_APPEND_TIME_OF_DAY := true

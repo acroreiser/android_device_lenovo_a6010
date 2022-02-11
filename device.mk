@@ -160,10 +160,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.soc.manufacturer=Qualcomm \
 	ro.soc.model=MSM8916
 
-# APEX
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/ld.config.txt:system/etc/swcodec/ld.config.txt
-
 # Public Libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
@@ -332,10 +328,6 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1-service \
     android.hardware.gatekeeper@1.0-service.software
 
-# Doze
-PRODUCT_PACKAGES += \
-    LenovoDoze
-
 # FM
 PRODUCT_PACKAGES += \
     FMRadio \
@@ -401,14 +393,6 @@ PRODUCT_PACKAGES += \
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so
-
-# IOP
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.enable_prefetch=1 \
-    vendor.iop.enable_uxe=1 \
-    vendor.iop.enable_prefetch_ofr=1 \
-    vendor.perf.iop_v3.enable=1 \
-    persist.vendor.qti.games.gt.prof=1
 
 # IRSC
 PRODUCT_COPY_FILES += \

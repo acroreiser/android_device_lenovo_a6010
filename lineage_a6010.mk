@@ -57,6 +57,3 @@ PRODUCT_PACKAGES += \
 # but we don't ship Gapps in this target
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/googledialergo-sysconfig.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/googledialergo-sysconfig.xml
-
-# Time
-#LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
