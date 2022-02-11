@@ -20,3 +20,11 @@ fi
 
 # Don't account allocstalls for <= 2GB RAM targets on kernel versions < 4.9
 echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
+
+setprop persist.audio.calfile0 /vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
+setprop persist.audio.calfile1 /vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
+setprop persist.audio.calfile2 /vendor/etc/acdbdata/QRD/QRD_Global_cal.acdb
+setprop persist.audio.calfile3 /vendor/etc/acdbdata/QRD/QRD_Handset_cal.acdb
+setprop persist.audio.calfile4 /vendor/etc/acdbdata/QRD/QRD_Hdmi_cal.acdb
+setprop persist.audio.calfile5 /vendor/etc/acdbdata/QRD/QRD_Headset_cal.acdb
+setprop persist.audio.calfile6 /vendor/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
