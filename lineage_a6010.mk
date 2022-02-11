@@ -52,6 +52,12 @@ PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 PRODUCT_PACKAGES += \
     Etar
 
+# Makes device compatible with Google Dialer Go.
+# In best case this file should be a part of Gapps
+# but we don't ship Gapps in this target
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/googledialergo-sysconfig.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/googledialergo-sysconfig.xml
+
 # Trust
 PRODUCT_PACKAGES += \
     vendor.lineage.trust@1.0-service
