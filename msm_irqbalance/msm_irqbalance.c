@@ -16,6 +16,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <time.h>
+#include <string.h>
 #include <sys/capability.h>
 #include <sys/prctl.h>
 #include <poll.h>
@@ -23,7 +24,7 @@
 #include <private/android_filesystem_config.h>
 #include "msm_irqbalance.h"
 
-static char const *VERSION_STR = "1.3";
+static char const *VERSION_STR = "1.4";
 
 static char const *GIC_STR = "GIC";
 static char const *PROC_STAT_PATH = "/proc/stat";
@@ -36,7 +37,7 @@ static uint32_t const SCRATCH_BUF_LEN = 1024;
 
 static uint32_t const MAX_CPUS_POSSIBLE = 1024;
 
-static char const *DEBUG_LOG_LEVEL_PROP = "persist.msmirqbalance.debug";
+static char const *DEBUG_LOG_LEVEL_PROP = "persist.vendor.msmirqbalance.debug";
 static uint32_t debug_enabled = false;
 
 static uint32_t max_cpus;
@@ -862,7 +863,7 @@ static int32_t make_balancing_decision(uint32_t num_act_cpus, uint64_t iteration
 				struct irq_info *irq_info = find_irq_info(irq->irq_no);
 
 				if (irq_info) {
-					info("Decided to move IRQ%d from CPU%d to CPU%d\n", irq->irq_no, mac, lac);
+					debug("Decided to move IRQ%d from CPU%d to CPU%d\n", irq->irq_no, mac, lac);
 					ret = set_smp_affinity(lac, irq->irq_no);
 
 					if (!ret)
@@ -1030,7 +1031,7 @@ static uint32_t move_irq_from_banned_cpus(uint32_t num_act_cpus, uint64_t iterat
 
 					if (delta_ps > 0.0) {
 						if (!ignore_irq(irq_no, args) && check_deadband(irq_no, iteration)) {
-							info("Decided to move IRQ%d from CPU%d [P:%u] to CPU%d [P:%u] (banned)\n",
+							debug("Decided to move IRQ%d from CPU%d [P:%u] to CPU%d [P:%u] (banned)\n",
 							      irq_no, curr_cpu, curr_cpu_prio, last_dest_cpu, last_dest_cpu_prio);
 							ret = set_smp_affinity(last_dest_cpu, irq_no);
 
