@@ -221,7 +221,6 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.msm8916 \
     libmm-qcamera \
-    libshim_atomic \
     libboringssl-compat \
     Camera2
 
@@ -250,11 +249,6 @@ PRODUCT_COPY_FILES += \
 # First stage init
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
-
-# RIL
-PRODUCT_PACKAGES += \
-   libaudioclient_shim \
-   libcutils_shim
 
 # Charger
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
