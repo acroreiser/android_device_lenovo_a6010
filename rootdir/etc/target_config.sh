@@ -17,6 +17,8 @@ fi
 	setprop pm.dexopt.install speed-profile
 	setprop dalvik.vm.usejit true
 	setprop dalvik.vm.usejitprofiles true
+	setprop dalvik.vm.heapgrowthlimit 128m
+	setprop dalvik.vm.heapstartsize 8m
 
     setprop persist.audio.calfile0 /vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
     setprop persist.audio.calfile1 /vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
