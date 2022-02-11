@@ -17,6 +17,8 @@ fi
 	setprop pm.dexopt.install speed-profile
 	setprop dalvik.vm.usejit true
 	setprop dalvik.vm.usejitprofiles true
+	setprop dalvik.vm.heapgrowthlimit 128m
+	setprop dalvik.vm.heapstartsize 8m
 
 # Don't account allocstalls for <= 2GB RAM targets on kernel versions < 4.9
 echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
