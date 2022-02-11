@@ -769,5 +769,11 @@ PRODUCT_VENDOR_PROPERTIES += \
     external_storage.casefold.enabled=0 \
     external_storage.sdcardfs.enabled=0
 
+# Trust
+PRODUCT_PACKAGES += \
+    vendor.lineage.trust@1.0-service
+
+# APN(s)
+PRODUCT_COPY_FILES += vendor/lineage/prebuilt/common/etc/apns-conf.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/apns-conf.xml
 
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
