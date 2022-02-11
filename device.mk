@@ -181,7 +181,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.iorapd.enable=true \
     iorapd.perfetto.enable=true \
-    iorapd.readahead.enable=true
+    iorapd.readahead.enable=true \
+    persist.device_config.runtime_native_boot.iorap_perfetto_enable=true \
+    persist.device_config.runtime_native_boot.iorap_readahead_enable=true
 
 # Cgroup and task_profiles for freezer on cgroups v1
 PRODUCT_COPY_FILES += \
