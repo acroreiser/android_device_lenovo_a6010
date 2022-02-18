@@ -4,10 +4,8 @@
 
 /dev/block/bootdevice/by-name/system         /system      ext4    ro,discard                                                wait,first_stage_mount
 /dev/block/bootdevice/by-name/vendor         /vendor      ext4    ro,discard                                                wait,first_stage_mount
-/dev/block/bootdevice/by-name/userdata       /data        ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,journal_async_commit,quota              latemount,wait,check,formattable,encryptable=footer,reservedsize=128M
-/dev/block/bootdevice/by-name/userdata       /data        f2fs    lazytime,nosuid,nodev,inline_xattr,quota                           latemount,wait,check,formattable,encryptable=footer,reservedsize=128M
+/dev/block/bootdevice/by-name/userdata       /data        ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,journal_async_commit              latemount,wait,check,formattable,encryptable=footer,quota,reservedsize=128M
 /dev/block/bootdevice/by-name/cache          /cache       ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,journal_async_commit              wait,check,formattable
-/dev/block/bootdevice/by-name/cache          /cache       f2fs    noatime,nosuid,nodev,inline_xattr                           wait,check,formattable
 /dev/block/bootdevice/by-name/persist        /persist     ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc              wait
 /dev/block/bootdevice/by-name/boot           /boot        emmc    defaults                                                    defaults
 /dev/block/bootdevice/by-name/recovery       /recovery    emmc    defaults                                                    defaults
