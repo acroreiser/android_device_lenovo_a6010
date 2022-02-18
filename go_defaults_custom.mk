@@ -3,7 +3,7 @@
 DEVICE_PATH := device/lenovo/a6010
 
 # Set lowram options and enable traced by default
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_VENDOR_PROPERTIES += \
      ro.config.low_ram=true \
      persist.traced.enable=false
 
