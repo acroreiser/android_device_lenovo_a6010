@@ -2,7 +2,7 @@ on init
     # Drop write bit from cpu_min_freq so that libqti-perfd can't set it
     chmod 0444 /sys/module/msm_performance/parameters/cpu_min_freq
 
-service boot_boost /vendor/bin/sh /system/vendor/bin/init.boot_boost.sh
+service boot_boost /vendor/bin/sh /vendor/bin/init.boot_boost.sh
     class late_start
     disabled
     user root

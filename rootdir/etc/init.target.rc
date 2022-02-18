@@ -76,12 +76,12 @@ on init
 
     write /sys/kernel/sound_control/speaker_gain "0"
 
-service vm_bms /system/vendor/bin/vm_bms
+service vm_bms /vendor/bin/vm_bms
     class main
     user root
     group root wakelock
 
-service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
     class core
     user root
     group root

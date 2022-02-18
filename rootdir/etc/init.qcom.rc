@@ -55,9 +55,9 @@ on fs
     mount_all /vendor/etc/fstab.qcom --early
     restorecon_recursive /persist
 
-    exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/fde_ext4_resize.sh
+    exec u:r:su:s0 root root -- /system/bin/sh /vendor/bin/fde_ext4_resize.sh
 
-    exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/target_config.sh
+    exec u:r:su:s0 root root -- /system/bin/sh /vendor/bin/target_config.sh
 
 on late-fs
     # Start services for Boot Animation
@@ -245,7 +245,7 @@ on boot
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
+service dpmQmiMgr /vendor/bin/dpmQmiMgr
     class main
     user system
     group radio system
@@ -269,13 +269,13 @@ on property:hw.fm.init=1
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 1
 
 # QMUX must be in multiple groups to support external process connections
-service qmuxd /system/vendor/bin/qmuxd
+service qmuxd /vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps oem_2950 wakelock
     writepid /dev/cpuset/system-background/tasks
 
-service netmgrd /system/vendor/bin/netmgrd
+service netmgrd /vendor/bin/netmgrd
     class main
     group system wakelock inet
     writepid /dev/cpuset/system-background/tasks
@@ -289,7 +289,7 @@ service vendor.ril-daemon2 /vendor/bin/hw/rild -c 2
     group radio cache inet misc audio log readproc wakelock
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
-service set_zram /vendor/bin/sh /system/vendor/bin/set_zram.sh
+service set_zram /vendor/bin/sh /vendor/bin/set_zram.sh
     class late_start
     disabled
     user root
@@ -297,7 +297,7 @@ service set_zram /vendor/bin/sh /system/vendor/bin/set_zram.sh
     oneshot
 
 on property:gsm.version.baseband=""
-    exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/set_baseband.sh
+    exec u:r:su:s0 root root -- /system/bin/sh /vendor/bin/set_baseband.sh
 
 service charger /system/bin/charger
     class charger
@@ -308,7 +308,7 @@ service charger /system/bin/charger
 
 
 #start camera server as daemon
-service vendor.qcamerasvr /system/vendor/bin/mm-qcamera-daemon
+service vendor.qcamerasvr /vendor/bin/mm-qcamera-daemon
     class hal
     user camera
     group camera gps system inet input graphics
@@ -323,24 +323,24 @@ on property:init.svc.servicemanager=restarting
 on property:init.svc.bootanim=stopped
     write /sys/class/leds/green/trigger none
 
-service vendor.qseecomd /system/vendor/bin/qseecomd
+service vendor.qseecomd /vendor/bin/qseecomd
    class core
    user root
    group root
    writepid /dev/cpuset/system-background/tasks
 
-service loc_launcher /system/vendor/bin/loc_launcher
+service loc_launcher /vendor/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet diag wifi
 
-service wcnss-service /system/vendor/bin/wcnss_service
+service wcnss-service /vendor/bin/wcnss_service
     class late_start
     user system
     group system wifi radio
     oneshot
 
-service thermal-engine /system/vendor/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine
     class hal
     user root
     socket thermal-send-client stream 0666 system system
@@ -356,7 +356,7 @@ on property:init.svc.surfaceflinger=restarting
 
 # Start it again on boot, just being double sure.
 on property:sys.boot_completed=1
-    exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/set_baseband.sh
+    exec u:r:su:s0 root root -- /system/bin/sh /vendor/bin/set_baseband.sh
     start set_zram
 
 on charger
