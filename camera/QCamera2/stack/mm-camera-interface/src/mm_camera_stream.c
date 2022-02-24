@@ -35,6 +35,7 @@
 #include <fcntl.h>
 #include <poll.h>
 #include <time.h>
+#include <unistd.h>
 #include <cam_semaphore.h>
 #ifdef VENUS_PRESENT
 #include <media/msm_media_info.h>

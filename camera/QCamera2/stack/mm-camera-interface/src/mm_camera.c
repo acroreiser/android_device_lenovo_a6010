@@ -34,6 +34,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <poll.h>
+#include <unistd.h>
 
 #include <cam_semaphore.h>
 

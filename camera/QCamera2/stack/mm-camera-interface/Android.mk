@@ -46,6 +46,8 @@ LOCAL_CFLAGS += -Wall -Wextra -Werror
 
 LOCAL_SRC_FILES := $(MM_CAM_FILES)
 
+LOCAL_HEADER_LIBRARIES := libhardware_headers
+
 LOCAL_MODULE           := libmmcamera_interface
 LOCAL_SHARED_LIBRARIES := libdl libcutils liblog
 LOCAL_HEADER_LIBRARIES += camera_common_headers
