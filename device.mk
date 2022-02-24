@@ -369,7 +369,8 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libOmxVidcCommon \
     libstagefrighthw \
-    android.hardware.cas@1.2-service-lazy
+    android.hardware.cas@1.2-service-lazy \
+    libgui_vendor
 
 # Media config
 PRODUCT_COPY_FILES += \
