@@ -623,6 +623,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true \
     persist.radio.multisim.config=dsds \
     persist.radio.ecc_hard_count=1 \
+    rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
     vendor.rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
     ro.telephony.default_network=9,1 \
     persist.vendor.radio.add_power_save=1 \
