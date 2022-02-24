@@ -70,3 +70,6 @@
 
 # Dolby DMS
 /(vendor|system/vendor)/bin/hw/vendor\.dolby\.hardware\.dms@1\.0-service      u:object_r:hal_dms_default_exec:s0
+
+# linkerconfig-legacy
+/vendor/bin/linkerconfig-legacy      u:object_r:linkerconfig_exec:s0
