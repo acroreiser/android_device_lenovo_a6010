@@ -25,6 +25,9 @@ LOCAL_PROPRIETARY_MODULE := true
 
 LOCAL_CFLAGS := -Wall -Werror -DLOG_TAG=\"MultiHal\"
 
+
+LOCAL_HEADER_LIBRARIES := libhardware_headers
+
 LOCAL_SRC_FILES := \
     multihal.cpp \
     SensorEventQueue.cpp \
