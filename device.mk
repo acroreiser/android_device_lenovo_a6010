@@ -46,7 +46,7 @@ PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
 # Properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=1 \
     ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
     ro.surface_flinger.has_HDR_display=false \
@@ -75,12 +75,12 @@ PRODUCT_VENDOR_PROPERTIES += \
     debug.renderengine.backend=gles
 
 # Screen density
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=280 \
     persist.graphics.vulkan.disable=true
 
 # Disable buffer age
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.use_buffer_age=false
 
 # DRM
@@ -89,7 +89,7 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-service-lazy \
     android.hardware.drm@1.3-service-lazy.clearkey
 
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196608
 
 # Encryption
@@ -150,7 +150,7 @@ TARGET_EXCLUDES_AUDIOFX := true
 $(call inherit-product, frameworks/base/data/sounds/AudioPackageGo.mk)
 
 # Dolby
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.feature.dolby_enable=true \
     vendor.audio.dolby.ds2.enabled=true \
     vendor.audio.dolby.ds2.hardbypass=false
@@ -166,11 +166,11 @@ PRODUCT_COPY_FILES += \
 
 # Enable iorapd perfetto tracing for app starts
 # Enable iorapd readahead for app starts
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.iorapd.enable=false
 
 # Properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.audio.sdk.fluencetype=none \
     persist.vendor.audio.fluence.voicecall=true \
     persist.vendor.audio.fluence.voicerec=true \
@@ -178,7 +178,7 @@ PRODUCT_VENDOR_PROPERTIES += \
     vendor.audio.offload_wakelock=false
 
 # Properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     audio.deep_buffer.media=true \
     audio.offload.min.duration.secs=30 \
     audio.offload.video=true \
@@ -195,7 +195,7 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    libbt-vendor \
+    libbt-vendor
 
 PRODUCT_COPY_FILES += \
     prebuilts/vndk/v28/arm/arch-arm-armv7-a-neon/shared/vndk-sp/libbase.so:$(TARGET_COPY_OUT_VENDOR)/lib/libbase-v28.so
@@ -235,7 +235,7 @@ PRODUCT_PACKAGES += \
     libmm-qcamera \
     Camera2
 
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
     persist.camera.hal.debug.mask=0 \
     persist.camera.feature.cac=1
@@ -249,7 +249,7 @@ PRODUCT_PACKAGES += \
     Recorder
 
 # Seamless transfer
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     sys.fflag.override.settings_seamless_transfer=true
 
 # System
@@ -261,7 +261,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
 
 # Charger
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.charger.enable_suspend=true
 
 # Charger images
@@ -309,7 +309,7 @@ PRODUCT_PACKAGES += \
     TrebuchetGoOverlay
 
 # Properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.bluetooth.disableabsvol=true \
     vendor.qcom.bluetooth.soc=pronto \
     ro.bluetooth.dun=true \
@@ -329,7 +329,7 @@ PRODUCT_PACKAGES += \
     libfmjni
 
 # Google Assistant
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.opa.eligible_device=true
 
 # Init scripts
@@ -386,7 +386,7 @@ PRODUCT_PACKAGES += \
     android.hardware.power.stats@1.0-service.mock
 
 # Perf
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so
 
 # IRSC
@@ -394,11 +394,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
 # First api level, device has been commercially launched
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.first_api_level=21
 
 # Properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.add_power_save=1 \
@@ -412,7 +412,7 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0 \
     android.hidl.manager@1.0_system
 
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     debug.fdsan=0
 
 # Binder
@@ -464,7 +464,7 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.msm8916
 
 # Properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=1 \
     debug.stagefright.omx_default_rank.sw-audio=1 \
     debug.stagefright.omx_default_rank=0 \
@@ -480,11 +480,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl
 
 # Disable oem unlock
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=false
 
 # Properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.direct.interface=p2p0
 
@@ -513,7 +513,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_wlan_dictionary.dat:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_wlan_dictionary.dat
 
 # WFD
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0
 
@@ -546,7 +546,7 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 # Strip debug
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.zygotemaxfailedboots=5 \
     dalvik.vm.foreground-heap-growth-multiplier=2.0 \
     dalvik.vm.dex2oat-flags=--no-watch-dog \
@@ -563,17 +563,17 @@ PRODUCT_VENDOR_PROPERTIES += \
     dalvik.vm.dex2oat-minidebuginfo=false
 
 # Improve scrolling
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.scrollingcache=0 \
     ro.min.fling_velocity=160 \
     ro.max.fling_velocity=20000
 
 # IO Cgroups
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.iocgrp.config=1
 
 # Low Memory Killer
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.config.ulmk_memcg=true \
     ro.lmk.use_psi=false \
     ro.lmk.critical=0 \
@@ -587,7 +587,7 @@ $(call inherit-product, device/lenovo/a6010/go_defaults_custom.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # Memory optimizations
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.sys.fw.bservice_enable=true \
     ro.vendor.qti.sys.fw.bservice_limit=5 \
     ro.vendor.qti.sys.fw.bservice_age=5000 \
@@ -598,17 +598,17 @@ PRODUCT_VENDOR_PROPERTIES += \
     ro.config.max_starting_bg=1
 
 # Dexopt
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     pm.dexopt.first-boot=quicken \
     pm.dexopt.boot=extract
 
 # Boot
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     sys.vendor.shutdown.waittime=500 \
     ro.build.shutdown_timeout=0
 
 # Battery
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.small_battery=true
 
 # TextClassifier
@@ -616,7 +616,7 @@ PRODUCT_COPY_FILES += \
     external/libtextclassifier/native/models/textclassifier.ru.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.ru.model
 
 # Properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
     persist.data.qmi.adb_logmask=0 \
     ro.telephony.call_ring.multiple=false \
@@ -673,7 +673,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
     $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy \
-    $(LOCAL_PATH)/seccomp/mediaswcodec-seccomp.policy:system/vendor/etc/seccomp_policy/mediaswcodec.policy
+    $(LOCAL_PATH)/seccomp/mediaswcodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaswcodec.policy
 
 # Thermal HAL
 PRODUCT_PACKAGES += \
@@ -683,7 +683,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
     $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     vendor.thermal.config=thermal_info_config.json
 
 # Sensors
@@ -720,11 +720,11 @@ PRODUCT_PACKAGES += \
     mount.ntfs
 
 # Updater properties
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.recovery_update=false
 
 # USB ID
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.usb.id.midi=90BA \
     ro.usb.id.midi_adb=90BB \
     ro.usb.id.mtp=2281 \
@@ -739,7 +739,7 @@ PRODUCT_VENDOR_PROPERTIES += \
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
 
 # Privapp-permissions whitelisting
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.control_privapp_permissions=enforce
 
 # Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to  
@@ -749,7 +749,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_default.mk)
 # Override build/make/target/product/emulated_storage.mk to disable casefold
 PRODUCT_QUOTA_PROJID := 1
 PRODUCT_FS_CASEFOLD := 0
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     external_storage.projid.enabled=1 \
     external_storage.casefold.enabled=0 \
     external_storage.sdcardfs.enabled=0

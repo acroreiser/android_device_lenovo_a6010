@@ -3,7 +3,7 @@
 DEVICE_PATH := device/lenovo/a6010
 
 # Set lowram options and enable traced by default
-PRODUCT_VENDOR_PROPERTIES += \
+PRODUCT_PROPERTY_OVERRIDES += \
      ro.config.low_ram=true \
      persist.traced.enable=false
 
@@ -39,7 +39,7 @@ ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 endif
 
 # Add the system properties.
-TARGET_SYSTEM_PROP += \
+TARGET_VENDOR_PROP += \
     $(DEVICE_PATH)/go_defaults.prop
 
 # use the go specific handheld_core_hardware.xml from frameworks
