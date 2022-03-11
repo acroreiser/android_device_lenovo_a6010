@@ -20,7 +20,8 @@ $(call inherit-product, vendor/lineage/config/common_mini_go_phone.mk)
 
 # GMS GO (1GB)
 WITH_GMS := true
-WITH_GMS_GO := true
+GMS_MAKEFILE := gms_go.mk
+
 $(call inherit-product, vendor/lineage/config/partner_gms.mk)
 
 # Must define platform variant before including any common things
