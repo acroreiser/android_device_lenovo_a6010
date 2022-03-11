@@ -53,6 +53,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 TARGET_KERNEL_SOURCE := kernel/lenovo/a6010
 TOP_PATH := $(realpath $(TOP))
+TARGET_KERNEL_CLANG_COMPILE := false
 KERNEL_TOOLCHAIN := $(TOP_PATH)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-len-linux-gnueabi-
 TARGET_KERNEL_CONFIG := lineageos_a6010_defconfig
