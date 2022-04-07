@@ -27,3 +27,5 @@ allow hal_sensors_default {
     sysfs_batteryinfo
     sysfs_graphics
 }:file r_file_perms;
+
+get_prop(hal_sensors_default, default_prop);

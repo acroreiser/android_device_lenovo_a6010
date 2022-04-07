@@ -10,3 +10,6 @@ allow mm-qcamerad camera_data_file:dir { getattr read };
 allow mm-qcamerad self:tcp_socket { bind create setopt };
 allow mm-qcamerad hal_perf_default:hwservice_manager { find add };
 allow mm-qcamerad hal_perf_default:binder { call transfer };
+
+get_prop(mm-qcamerad, camera_prop);
+get_prop(mm-qcamerad, default_prop);
