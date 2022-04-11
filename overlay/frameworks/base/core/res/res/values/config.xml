@@ -522,4 +522,54 @@
 
     <!-- Maximum velocity to initiate a fling, as measured in dips per second. -->
     <dimen name="config_viewMaxFlingVelocity">20000dp</dimen>
+
+    <!-- default window inset isRound property -->
+    <bool name="config_windowIsRound">false</bool>
+
+    <!-- Whether the main built-in display is round. This will affect
+         Configuration.screenLayout's SCREENLAYOUT_ROUND_MASK flags for Configurations on the
+         main built-in display. Change this in device-specific overlays.
+         Defaults to the older, deprecated config_windowIsRound already used in
+         some existing device-specific resource overlays. -->
+    <bool name="config_mainBuiltInDisplayIsRound">@bool/config_windowIsRound</bool>
+
+    <!-- The bounding path of the cutout region of the main built-in display.
+         Must either be empty if there is no cutout region, or a string that is parsable by
+         {@link android.util.PathParser}.
+
+         The path is assumed to be specified in display coordinates with pixel units and in
+         the display's native orientation, with the origin of the coordinate system at the
+         center top of the display. Optionally, you can append either `@left` or `@right` to the
+         end of the path string, in order to change the path origin to either the top left,
+         or top right of the display.
+
+         To facilitate writing device-independent emulation overlays, the marker `@dp` can be
+         appended after the path string to interpret coordinates in dp instead of px units.
+         Note that a physical cutout should be configured in pixels for the best results.
+
+         Example for a 10px x 10px square top-center cutout:
+                <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z</string>
+         Example for a 10dp x 10dp square top-center cutout:
+                <string ...>M -5,0 L -5,10 L 5,10 L 5,0 Z @dp</string>
+
+         @see https://www.w3.org/TR/SVG/paths.html#PathData
+         -->
+    <string translatable="false" name="config_mainBuiltInDisplayCutout"></string>
+
+    <!-- Like config_mainBuiltInDisplayCutout, but this path is used to report the
+         one single bounding rect per device edge to the app via
+         {@link DisplayCutout#getBoundingRect}. Note that this path should try to match the visual
+         appearance of the cutout as much as possible, and may be smaller than
+         config_mainBuiltInDisplayCutout
+         -->
+    <string translatable="false" name="config_mainBuiltInDisplayCutoutRectApproximation">@string/config_mainBuiltInDisplayCutout</string>
+
+    <!-- Whether the display cutout region of the main built-in display should be forced to
+         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
+         -->
+    <bool name="config_fillMainBuiltInDisplayCutout">false</bool>
+
+    <!-- If true, and there is a cutout on the main built in display, the cutout will be masked
+         by shrinking the display such that it does not overlap the cutout area. -->
+    <bool name="config_maskMainBuiltInDisplayCutout">false</bool>
 </resources>
