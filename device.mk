@@ -486,7 +486,7 @@ PRODUCT_COPY_FILES += \
 
 # Disable oem unlock
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.oem_unlock_supported=false
+    ro.oem_unlock_supported=0
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
