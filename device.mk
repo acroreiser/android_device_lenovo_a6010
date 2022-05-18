@@ -246,6 +246,7 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.msm8916 \
     libmm-qcamera \
+    libmmcamera_ov13850 \
     Camera2
 
 PRODUCT_PROPERTY_OVERRIDES += \
