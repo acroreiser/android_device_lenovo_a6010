@@ -640,6 +640,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.ecc_hard_count=1 \
     vendor.rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
     ro.telephony.default_network=9,1 \
+    ro.telephony.use_old_mnc_mcc_format=true \
     persist.vendor.radio.add_power_save=1 \
     persist.vendor.radio.aosp_usr_pref_sel=true \
     persist.data.mode=concurrent \
