@@ -95,12 +95,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196608
 
-# Encryption
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.cryptfshw@1.0-base \
-    vendor.qti.hardware.cryptfshw@1.0-service-qti.qsee \
-    fde_ext4_resize.sh
-
 # Audio
 PRODUCT_PACKAGES += \
     audio.primary.msm8916 \
