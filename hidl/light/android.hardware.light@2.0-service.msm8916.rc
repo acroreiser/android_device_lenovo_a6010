@@ -1,10 +1,15 @@
 on init
-    # Change the ownership of the notification LED interface
+    # Change the ownership of the display backlight LED interface
+    chown system system /sys/class/leds/lcd-backlight/brightness
+    chown system system /sys/class/leds/lcd-backlight/max_brightness
+    chown system system /sys/class/leds/lcd-backlight/trigger
+
+    # Change permissions of the notification LED interface
     chmod 0664 /sys/class/leds/green/brightness
     chmod 0664 /sys/class/leds/green/max_brightness
     chmod 0664 /sys/class/leds/green/trigger
 
-    # Change the ownership of the charging LED interface
+    # Change permissions of the charging LED interface
     chmod 0664 /sys/class/leds/red/brightness
     chmod 0664 /sys/class/leds/red/max_brightness
     chmod 0664 /sys/class/leds/red/trigger
