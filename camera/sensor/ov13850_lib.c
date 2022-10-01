@@ -712,8 +712,8 @@ static struct sensor_res_cfg_table_t ov13850_res_table = {
 static struct sensor_lib_chromatix_t ov13850_chromatix[] = {
   {
     .common_chromatix = SKUF_OV13850_LOAD_CHROMATIX(common),
-    .camera_preview_chromatix = OV5670_Q5V41B_LOAD_CHROMATIX(snapshot),
-    .camera_snapshot_chromatix = OV5670_Q5V41B_LOAD_CHROMATIX(snapshot),
+    .camera_preview_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
+    .camera_snapshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
     .camcorder_chromatix = SKUF_OV13850_LOAD_CHROMATIX(default_video),
     .liveshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
   },
