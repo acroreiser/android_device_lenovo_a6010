@@ -65,6 +65,8 @@ KERNEL_TOOLCHAIN := $(TOP_PATH)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-len-linux-gnueabi-
 TARGET_KERNEL_CONFIG := lineageos_a6010_defconfig
 TARGET_HAS_MEMFD_BACKPORT := true
+TARGET_KERNEL_LLVM_BINUTILS := false
+TARGET_KERNEL_CLANG_COMPILE := false
 TARGET_KERNEL_ADDITIONAL_FLAGS := \
     HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
 
