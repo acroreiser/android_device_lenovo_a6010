@@ -255,7 +255,7 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     libmm-qcamera \
     libmmcamera_ov13850 \
-    Camera2
+    Aperture
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
