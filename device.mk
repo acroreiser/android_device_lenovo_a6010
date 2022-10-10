@@ -401,6 +401,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
     $(LOCAL_PATH)/configs/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
 
+# Disable media transcoding
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.fuse.transcode_user_control=true \
+    persist.sys.fuse.transcode_enabled=false
+
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti \
     android.hardware.power.stats@1.0-service.mock
