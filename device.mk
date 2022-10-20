@@ -37,7 +37,6 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack@1.0-service \
     gralloc.msm8916 \
     hwcomposer.msm8916 \
-    libgenlock \
     libtinyxml \
     memtrack.msm8916
 
@@ -103,7 +102,6 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     audio.usbv2.default \
-    tinyalsa \
     tinyplay \
     tinypcminfo \
     tinymix \
@@ -249,7 +247,6 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.5-impl \
     android.hardware.camera.provider@2.5-service \
     camera.device@1.0-impl \
     camera.msm8916 \
@@ -377,17 +374,13 @@ PRODUCT_COPY_FILES += \
 
 # Media
 PRODUCT_PACKAGES += \
-    libextmedia_jni \
     libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
-    libOmxG711Enc \
     libOmxQcelp13Enc \
     libOmxVdec \
-    libOmxVdecHevc \
-    libOmxSwVencHevc \
     libOmxVenc \
     libOmxVidcCommon \
     libstagefrighthw \
@@ -431,9 +424,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
-    android.hidl.base@1.0_system \
     android.hidl.manager@1.0 \
-    android.hidl.manager@1.0_system
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     debug.fdsan=0
@@ -441,11 +432,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Binder
 PRODUCT_PACKAGES += \
     libhwbinder \
-    libhwbinder.vendor \
     libhidltransport \
-    libhidltransport.vendor \
     libjson \
-    libjson.vendor \
     vndservicemanager
 
 # Health
@@ -459,7 +447,6 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    libcnefeatureconfig \
     librmnetctl \
     libxml2
 
@@ -517,7 +504,6 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    libwcnss_qmi \
     wcnss_service \
     hostapd \
     wpa_supplicant \
@@ -709,13 +695,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Sensors
 PRODUCT_PACKAGES += \
     calmodule.cfg \
-    libcalmodule_common \
-    libcalmodule_akm \
     android.hardware.sensors@1.0-impl.msm8916 \
     android.hardware.sensors@1.0-service.msm8916 \
-    accelcal \
-    AccCalibration \
-    sensord \
     sensors.msm8916
 
 # Sensors
