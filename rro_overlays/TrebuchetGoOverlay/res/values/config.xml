@@ -11,4 +11,6 @@
          determines how many thumbnails will be fetched in the background. -->
     <integer name="recentsThumbnailCacheSize">4</integer>
     <integer name="recentsIconCacheSize">4</integer>
+
+    <string name="wellbeing_provider_pkg" translatable="false">com.google.android.apps.wellbeing</string>
 </resources>
