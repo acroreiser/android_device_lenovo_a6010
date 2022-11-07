@@ -6,4 +6,9 @@
 		<item>"org.lineageos.aperture/.CameraLauncher"</item>
 		<item>"com.android.camera2/com.android.camera.CameraLauncher"</item>
     </string-array>
+
+    <!-- The number of thumbnails and icons to keep in the cache. The thumbnail cache size also
+         determines how many thumbnails will be fetched in the background. -->
+    <integer name="recentsThumbnailCacheSize">4</integer>
+    <integer name="recentsIconCacheSize">4</integer>
 </resources>
