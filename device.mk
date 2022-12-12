@@ -587,6 +587,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.low=900 \
     ro.lmk.swap_free_low_percentage=10
 
+
+# Zygote
+PRODUCT_PROPERTY_OVERRIDES += \
+    zygote.critical_window.minute=10
+
 # Inherit customized Android Go defaults.
 $(call inherit-product, device/lenovo/a6010/go_defaults_custom.mk)
 
