@@ -560,4 +560,7 @@
          True - we'll show the prompt to user, False - we'll not show it.
     -->
     <bool name="config_bg_prompt_abusive_apps_to_bg_restricted">true</bool>
+
+    <!-- Determines whether the shell features all run on another thread. -->
+    <bool name="config_enableShellMainThread">true</bool>
 </resources>
