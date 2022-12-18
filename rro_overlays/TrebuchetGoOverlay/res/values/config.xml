@@ -3,7 +3,7 @@
     <bool name="config_enableTaskSnapshotPreloading">false</bool>
 
     <string-array name="filtered_components" >
-		<item>"org.lineageos.aperture/.CameraLauncher"</item>
+		<item>"org.lineageos.aperture/com.android.camera.CameraLauncher"</item>
 		<item>"com.android.camera2/com.android.camera.CameraLauncher"</item>
     </string-array>
 
