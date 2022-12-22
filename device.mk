@@ -63,6 +63,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     debug.egl.hw=1 \
     debug.sf.enable_gl_backpressure=1 \
+    debug.sf.auto_latch_unsignaled=true \
     debug.sf.recomputecrop=0 \
     debug.cpurend.vsync=false \
     ro.config.avoid_gfx_accel=true \
