@@ -82,7 +82,7 @@
     <bool translatable="false" name="config_wifi_framework_enable_sar_tx_power_limit">false</bool>
 
     <!-- Enable WPA2 to WPA3 auto-upgrade -->
-    <bool translatable="false" name="config_wifiSaeUpgradeEnabled">false</bool>
+    <bool translatable="false" name="config_wifiSaeUpgradeEnabled">true</bool>
 
     <!-- Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default" translatable="false">Lenovo A6010</string>
