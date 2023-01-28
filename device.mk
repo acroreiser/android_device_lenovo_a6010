@@ -525,7 +525,8 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     wpa_cli \
     WifiOverlay \
-    TetheringConfigOverlay
+    TetheringConfigOverlay \
+    iw
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
