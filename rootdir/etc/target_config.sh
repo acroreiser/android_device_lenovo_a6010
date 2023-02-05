@@ -11,13 +11,13 @@ else
 	setprop ro.vendor.qti.sys.fw.trim_enable_memory 1073741824
 fi
 
-	setprop ro.vendor.qti.sys.fw.bg_apps_limit 8
-	setprop pm.dexopt.bg-dexopt speed-profile
-	setprop pm.dexopt.install speed-profile
-	setprop dalvik.vm.usejit true
-	setprop dalvik.vm.usejitprofiles true
-	setprop dalvik.vm.heapgrowthlimit 80m
-	setprop dalvik.vm.heapstartsize 4m
+setprop ro.vendor.qti.sys.fw.bg_apps_limit 8
+setprop pm.dexopt.bg-dexopt speed-profile
+setprop pm.dexopt.install speed-profile
+setprop dalvik.vm.usejit true
+setprop dalvik.vm.usejitprofiles true
+setprop dalvik.vm.heapgrowthlimit 80m
+setprop dalvik.vm.heapstartsize 4m
 
 # Don't account allocstalls for <= 2GB RAM targets on kernel versions < 4.9
 echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
