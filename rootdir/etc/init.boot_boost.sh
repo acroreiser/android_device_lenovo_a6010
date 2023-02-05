@@ -19,4 +19,4 @@ echo 1 > /sys/devices/system/cpu/cpufreq/interactive/fast_ramp_down
 echo 1 > /sys/devices/system/cpu/cpufreq/interactive/ignore_hispeed_on_notif
 
 echo "msm-adreno-tz" > /sys/class/devfreq/1c00000.qcom,kgsl-3d0/governor
-echo 200000000 > /sys/class/devfreq/1c00000.qcom,kgsl-3d0/min_freq
+echo 100000000 > /sys/class/devfreq/1c00000.qcom,kgsl-3d0/min_freq
