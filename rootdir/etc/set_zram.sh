@@ -21,4 +21,4 @@ sleep 0.5
 mkswap /dev/block/zram0
 sleep 0.5
 swapon -d /dev/block/zram0
-echo 100 > /proc/sys/vm/swappiness
+echo 150 > /proc/sys/vm/swappiness
