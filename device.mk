@@ -604,7 +604,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.kill_timeout_ms=20 \
     ro.lmk.critical=0 \
     ro.lmk.low=900 \
-    ro.lmk.swap_free_low_percentage=10
+    ro.lmk.swap_free_low_percentage=10 \
+    ro.lmk.thrashing_limit=10
 
 
 # Zygote
