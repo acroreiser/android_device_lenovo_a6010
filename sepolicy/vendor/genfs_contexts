@@ -11,3 +11,6 @@ genfscon proc /sys/vm/swappiness                      u:object_r:proc_swap:s0
 genfscon proc /sys/kernel/sched_small_task            u:object_r:proc_kernel_sched:s0
 genfscon proc /sys/kernel/sched_ravg_hist_size        u:object_r:proc_kernel_sched:s0
 genfscon proc /sys/kernel/sched_window_stats_policy   u:object_r:proc_kernel_sched:s0
+
+# Battery Saver
+genfscon sysfs /module/battery_saver/parameters/enabled     u:object_r:sysfs_battery_saver:s0

@@ -205,6 +205,9 @@ TARGET_DISABLE_WCNSS_CONFIG_COPY := true
 # DoubleTap2Wake
 TARGET_TAP_TO_WAKE_NODE := /sys/android_touch/doubletap2wake
 
+# Battery Saver
+TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power-libperfmgr/power/power-mode.cpp
+
 DISABLE_APEX_TEST_MODULE := true
 
 # Proprietary Prebuilt
