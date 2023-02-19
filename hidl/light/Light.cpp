@@ -115,9 +115,9 @@ void Light::setSpeakerBatteryLightLocked() {
 void Light::setSpeakerLightLocked(const LightState& state) {
     if (isLit(state)) {
         if(green_status == 1)
-            mNotificationLed << "timer" << std::endl;
+            mNotificationLed << "default-on" << std::endl;
         else
-            mChargingLed << "timer" << std::endl;
+            mChargingLed << "default-on" << std::endl;
 
         red_status = 1;
     } else {
@@ -161,7 +161,7 @@ void Light::setSpeakerNLightLocked(const LightState& state) {
 
         mNotificationLed << "none" << std::endl;
         if (red_status == 1)
-            mChargingLed << "timer" << std::endl;
+            mChargingLed << "default-on" << std::endl;
 
         green_status = 0;
     }
