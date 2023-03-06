@@ -605,7 +605,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.critical=0 \
     ro.lmk.low=900 \
     ro.lmk.swap_free_low_percentage=10 \
-    ro.lmk.thrashing_limit=10
+    ro.lmk.thrashing_limit=10 \
+    ro.lmk.filecache_min_kb=262144
 
 
 # Zygote
