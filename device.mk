@@ -78,7 +78,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.disable_blurs=true \
     sys.use_fifo_ui=1 \
     debug.renderengine.backend=gles \
-    debug.hwui.renderer=skiagl
+    debug.hwui.renderer=skiagl \
+    ro.hwui.render_ahead=1
 
 # Disable surfaceflinger prime_shader cache to improve post boot memory.
 PRODUCT_PROPERTY_OVERRIDES += service.sf.prime_shader_cache=0
