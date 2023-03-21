@@ -225,7 +225,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.profile.pan.nap.enabled=true \
     bluetooth.profile.pan.panu.enabled=true \
     bluetooth.profile.pbap.server.enabled=true \
-    bluetooth.profile.sap.server.enabled=true
+    bluetooth.profile.sap.server.enabled=true \
+    bluetooth.le.disable_apcf_extended_features=1
 
 PRODUCT_COPY_FILES += \
     prebuilts/vndk/v28/arm/arch-arm-armv7-a-neon/shared/vndk-sp/libbase.so:$(TARGET_COPY_OUT_VENDOR)/lib/libbase-v28.so
