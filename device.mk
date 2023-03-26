@@ -630,7 +630,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.sys.fw.empty_app_percent=50 \
     ro.vendor.qti.sys.fw.trim_empty_percent=100 \
     ro.vendor.qti.sys.fw.trim_cache_percent=100 \
-    ro.config.max_starting_bg=1
+    ro.config.max_starting_bg=1 \
+    ro.am.no_kill_cached_processes_until_boot_completed=false \
+    ro.am.no_kill_cached_processes_post_boot_completed_duration_millis=0
 
 # Dexopt
 PRODUCT_PROPERTY_OVERRIDES += \
