@@ -172,15 +172,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
-# Enable iorapd perfetto tracing for app starts
-# Enable iorapd readahead for app starts
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.iorapd.enable=true \
-    iorapd.perfetto.enable=true \
-    iorapd.readahead.enable=true \
-    persist.device_config.runtime_native_boot.iorap_perfetto_enable=true \
-    persist.device_config.runtime_native_boot.iorap_readahead_enable=true
-
 # Cgroup and task_profiles for freezer on cgroups v1
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/cgroups.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
@@ -324,7 +315,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 # Enforced RRO targets
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    $(LOCAL_PATH)/overlay/packages/apps/Snap \
     $(LOCAL_PATH)/overlay-lineage/lineage-sdk
 
 # Overlay for Gboard
