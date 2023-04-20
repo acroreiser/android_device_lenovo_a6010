@@ -3,9 +3,7 @@
 TMEM=$(cat /proc/meminfo | grep MemTotal | awk  '{print $2}')
 
 # Reduce io thrashing
-if [ "$TMEM" -gt "1100000" ]; then
-	echo "50" > /proc/sys/vm/vmpressure_level_med
-fi
+echo "50" > /proc/sys/vm/vmpressure_level_med
 
 # Reserve 10% of memory for clean pages
 let 'CMEM=(TMEM/100)*10'
