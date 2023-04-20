@@ -491,7 +491,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.mediacodec.binder.size=4 \
     media.stagefright.thumbnail.prefer_hw_codecs=true \
     debug.stagefright.ccodec=0 \
-    vidc.enc.narrow.searchrange=1
+    vidc.enc.narrow.searchrange=1 \
+    ro.media.maxmem=268435456
 
 # Keylayout
 PRODUCT_COPY_FILES += \
