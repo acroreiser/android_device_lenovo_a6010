@@ -349,8 +349,8 @@ PRODUCT_PACKAGES += \
 
 # FM
 PRODUCT_PACKAGES += \
-    FMRadio \
-    libfmjni
+    RevampedFMRadio \
+    libqcomfmjni
 
 # Google Assistant
 PRODUCT_PROPERTY_OVERRIDES += \
