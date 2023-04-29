@@ -556,10 +556,6 @@ DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES := div
 # For Go devices, you may disable this feature to save space.
 DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
 
-# SystemUI module for Android Go
-PRODUCT_PACKAGES += \
-    SystemUIGo
-
 # Animation
 TARGET_BOOT_ANIMATION_RES := 720
 TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
