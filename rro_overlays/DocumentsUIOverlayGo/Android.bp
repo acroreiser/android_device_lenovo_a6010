@@ -1,5 +1,5 @@
 runtime_resource_overlay {
-    name: "DocumentsUIOverlay",
+    name: "DocumentsUIOverlayGo",
     sdk_version: "current",
     proprietary: true
 }
