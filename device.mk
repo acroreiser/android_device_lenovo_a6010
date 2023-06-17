@@ -76,7 +76,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.supports_background_blur=false \
     persist.sys.sf.color_saturation=1.0 \
     persist.sys.sf.disable_blurs=true \
-    sys.use_fifo_ui=1 \
     debug.renderengine.backend=gles \
     debug.hwui.renderer=skiagl \
     ro.hwui.render_ahead=1 \
