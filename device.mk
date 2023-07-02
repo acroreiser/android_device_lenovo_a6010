@@ -464,10 +464,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
-# 1) Baseband version fix, 2) zram setup,
-# 3) boosting after boot up, 4) set device dependement props 
+# 1) Baseband version fix, 2) additional cpuset tuning,  3) zram setup,
+# 4) boosting after boot up, 5) set device dependement props
 PRODUCT_PACKAGES += \
     set_baseband.sh \
+    set_tasks.sh \
     set_zram.sh \
     init.boot_boost.sh \
     target_config.sh
