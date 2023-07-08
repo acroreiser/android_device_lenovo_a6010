@@ -34,3 +34,5 @@ setprop persist.audio.calfile5 /vendor/etc/acdbdata/QRD/QRD_Headset_cal.acdb
 setprop persist.audio.calfile6 /vendor/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
 
 /vendor/bin/timekeep restore
+
+sysctl -w vm.memfd_noexec=1
