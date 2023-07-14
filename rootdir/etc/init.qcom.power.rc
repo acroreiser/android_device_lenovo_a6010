@@ -22,7 +22,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1401600
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1363200
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration 60000
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
