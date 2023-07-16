@@ -427,7 +427,7 @@
 
     <!-- Whether to artificially interpret all signal strengths as
          one bar higher than they actually are -->
-    <bool name="config_inflateSignalStrength">true</bool>
+    <bool name="config_inflateSignalStrength">false</bool>
 
     <!-- Flag indicating whether round icons should be parsed from the application manifest. -->
     <bool name="config_useRoundIcon">true</bool>
