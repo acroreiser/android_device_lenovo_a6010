@@ -26,15 +26,15 @@ ro.statsd.enable=true
 # set threshold to filter unused apps
 pm.dexopt.downgrade_after_inactive_days=7
 
-# set the compiler filter for shared apks to quicken.
+# set the compiler filter for shared apks to verify.
 # Rationale: speed has a lot of dex code expansion, it uses more ram and space
-# compared to quicken. Using quicken for shared APKs on Go devices may save RAM.
+# compared to verify. Using verify for shared APKs on Go devices may save RAM.
 # Note that this is a trade-off: here we trade clean pages for dirty pages,
-# extra cpu and battery. That's because the quicken files will be jit-ed in all
+# extra cpu and battery. That's because the verify files will be jit-ed in all
 # the processes that load of shared apk and the code cache is not shared.
 # Some notable apps that will be affected by this are gms and chrome.
 # b/65591595.
-pm.dexopt.shared=quicken
+pm.dexopt.shared=verify
 
 # 512MB specific properties.
 

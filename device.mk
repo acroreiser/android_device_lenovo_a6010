@@ -629,8 +629,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Dexopt
 PRODUCT_PROPERTY_OVERRIDES += \
-    pm.dexopt.first-boot=quicken \
-    pm.dexopt.boot=extract
+    pm.dexopt.install=speed-profile \
+    pm.dexopt.bg-dexopt=speed-profile \
+    pm.dexopt.first-boot=verify \
+    pm.dexopt.boot-after-ota=verify \
+    pm.dexopt.boot=verify
 
 # Boot
 PRODUCT_PROPERTY_OVERRIDES += \
