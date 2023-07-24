@@ -569,7 +569,7 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.zygotemaxfailedboots=5 \
-    dalvik.vm.foreground-heap-growth-multiplier=5.0 \
+    dalvik.vm.foreground-heap-growth-multiplier=2.0 \
     dalvik.vm.dex2oat-flags=--no-watch-dog \
     dalvik.vm.dex2oat-swap=false \
     dalvik.vm.boot-dex2oat-threads=4 \
