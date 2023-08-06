@@ -301,6 +301,7 @@ PRODUCT_PACKAGES += charger_res_images
 PRODUCT_PACKAGES += \
     libandroid_net \
     libcurl \
+    libsensorndkbridge \
     xtra_daemon_toggler.sh
 
 PRODUCT_COPY_FILES += \
