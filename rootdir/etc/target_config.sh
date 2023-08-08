@@ -36,3 +36,6 @@ setprop persist.audio.calfile6 /vendor/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
 /vendor/bin/timekeep restore
 
 sysctl -w vm.memfd_noexec=1
+
+# Tune task scheduler to prefer idle cpus to place task
+sysctl -w kernel.sched_prefer_idle=1
