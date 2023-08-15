@@ -20,3 +20,7 @@ mkswap /dev/block/zram0
 sleep 0.5
 swapon -d /dev/block/zram0
 echo 150 > /proc/sys/vm/swappiness
+
+# Configure lowmemorykiller
+echo 0,50,100,200,250,300,400,500,600,700,800,900,950 > /sys/module/lowmemorykiller/parameters/adj
+echo 209715,230686,251658,272629,293601,314572,335544,356515,377487,398458,419430,440401,1048576 > /sys/module/lowmemorykiller/parameters/minfree
