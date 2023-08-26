@@ -219,4 +219,4 @@ DEVICE_SPECIFIC_DISPLAY_PATH := $(DEVICE_PATH)/hardware/display
 DEVICE_SPECIFIC_DISPLAY_PATH := $(DEVICE_PATH)/hardware/media
 
 # Proprietary Prebuilt
--include vendor/lenovo/a6010/BoardConfigVendor.mk
+include vendor/lenovo/a6010/BoardConfigVendor.mk
