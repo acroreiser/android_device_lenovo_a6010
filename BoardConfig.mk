@@ -211,7 +211,9 @@ TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power-libperfmgr/power/power-mode.cpp
 DISABLE_APEX_TEST_MODULE := true
 
 # Our audio/display/media HALs migrated from hardware/qcom-caf
+USE_DEVICE_SPECIFIC_AUDIO := true
 USE_DEVICE_SPECIFIC_DISPLAY := true
+DEVICE_SPECIFIC_AUDIO_PATH := $(DEVICE_PATH)/hardware/audio
 DEVICE_SPECIFIC_DISPLAY_PATH := $(DEVICE_PATH)/hardware/display
 
 # Proprietary Prebuilt
