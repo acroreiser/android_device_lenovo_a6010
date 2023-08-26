@@ -57,11 +57,11 @@ include $(CLEAR_VARS)
 
 # Common Includes
 libmm-vdec-inc          := $(LOCAL_PATH)/inc
-libmm-vdec-inc          += $(call project-path-for,qcom-media)/mm-video-v4l2/vidc/common/inc
-libmm-vdec-inc          += $(TOP)/$(call project-path-for,qcom-media)/mm-core/inc
+libmm-vdec-inc          += $(LOCAL_PATH)/../../../mm-video-v4l2/vidc/common/inc
+libmm-vdec-inc          += $(LOCAL_PATH)/../../../mm-core/inc
 libmm-vdec-inc          += $(TARGET_OUT_HEADERS)/qcom/display
 libmm-vdec-inc          += $(TARGET_OUT_HEADERS)/adreno
-libmm-vdec-inc      	+= $(TOP)/$(call project-path-for,qcom-media)/libc2dcolorconvert
+libmm-vdec-inc      	+= $(LOCAL_PATH)/../../../libc2dcolorconvert
 libmm-vdec-inc      	+= $(TOP)/frameworks/av/include/media/stagefright
 libmm-vdec-inc      	+= $(TARGET_OUT_HEADERS)/mm-video/SwVdec
 libmm-vdec-inc      	+= $(TARGET_OUT_HEADERS)/mm-video/swvdec
@@ -74,7 +74,7 @@ LOCAL_HEADER_LIBRARIES := \
 
 ifeq ($(PLATFORM_SDK_VERSION), 18)  #JB_MR2
 libmm-vdec-def += -DANDROID_JELLYBEAN_MR2=1
-libmm-vdec-inc += $(TOP)/$(call project-path-for,qcom-media)/libstagefrighthw
+libmm-vdec-inc += $(LOCAL_PATH)/../../../libstagefrighthw
 endif
 
 ifeq ($(call is-platform-sdk-version-at-least, 19),true)

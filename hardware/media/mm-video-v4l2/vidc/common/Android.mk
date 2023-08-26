@@ -21,9 +21,9 @@ libmm-vidc-def += -D_ANDROID_ICS_
 # ---------------------------------------------------------------------------------
 
 libmm-vidc-inc      := $(LOCAL_PATH)/inc
-libmm-vidc-inc      += $(TOP)/$(call project-path-for,qcom-media)/mm-core/inc
+libmm-vidc-inc      += $(LOCAL_PATH)/../../../mm-core/inc
 libmm-vidc-inc      += $(TARGET_OUT_HEADERS)/qcom/display
-libmm-vidc-inc      += $(TOP)/$(call project-path-for,qcom-media)/libc2dcolorconvert
+libmm-vidc-inc      += $(LOCAL_PATH)/../../../libc2dcolorconvert
 libmm-vidc-inc      += $(TOP)/frameworks/av/include/media/stagefright
 
 LOCAL_HEADER_LIBRARIES := display_headers generated_kernel_headers

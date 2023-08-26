@@ -1,4 +1,3 @@
-ifeq ($(call my-dir),$(call project-path-for,qcom-display))
 display-hals := include libgralloc libgenlock libcopybit
 display-hals += libhwcomposer liboverlay libqdutils libhdmi libqservice
 display-hals += libmemtrack
@@ -31,5 +30,3 @@ else
 endif
 
 include $(BUILD_HEADER_LIBRARY)
-
-endif

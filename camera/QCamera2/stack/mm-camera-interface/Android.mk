@@ -30,7 +30,7 @@ LOCAL_CFLAGS += -D_ANDROID_
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/inc \
     $(LOCAL_PATH)/../common \
-    $(call project-path-for,qcom-media)/mm-core/inc \
+    $(LOCAL_PATH)/../../../../media/mm-core/inc \
     system/media/camera/include
 
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
