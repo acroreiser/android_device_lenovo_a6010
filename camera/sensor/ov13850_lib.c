@@ -180,7 +180,7 @@ static struct csi_lane_params_t csi_lane_params = {
 };
 
 static struct msm_camera_i2c_reg_array init_reg_array0[] = {
-  {0x0103, 0x01, 1000}, /* SW reset + 1ms Delay */
+  {0x0103, 0x01},
 };
 
 static struct msm_camera_i2c_reg_array init_reg_array1[] = {
@@ -388,8 +388,6 @@ static struct msm_camera_i2c_reg_array init_reg_array1[] = {
   {0x5b09, 0x2},
   {0x5e00, 0x0},
   {0x5e10, 0x1c},
-  /* Enable VSync */
-  {0x3002, 0x80},
 };
 
 static struct msm_camera_i2c_reg_setting_5 init_reg_setting[] = {
@@ -954,7 +952,6 @@ static sensor_lib_t sensor_lib_ptr = {
   .chromatix_array = &ov13850_lib_chromatix_array,
   /* sensor pipeline immediate delay */
   .sensor_max_immediate_frame_delay = 2,
-  .sync_exp_gain = 1,
 };
 
 /*===========================================================================
