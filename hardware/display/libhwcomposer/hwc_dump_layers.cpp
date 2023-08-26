@@ -41,8 +41,6 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wconversion"
 #pragma GCC diagnostic ignored "-Wfloat-conversion"
-#include <SkBitmap.h>
-#include <SkImageEncoder.h>
 #pragma GCC diagnostic pop
 #endif
 #ifdef STDC_FORMAT_MACROS
@@ -315,50 +313,7 @@ void HwcDebug::dumpLayer(size_t layerIndex, hwc_layer_1_t hwLayers[])
     }
 
     getHalPixelFormatStr(hnd->format, pixFormatStr, sizeof(pixFormatStr));
-#ifdef QTI_BSP
-    if (needDumpPng && hnd->base) {
-        bool bResult = false;
-        char dumpFilename[PATH_MAX];
-        SkColorType colorType = kUnknown_SkColorType;
-        SkAlphaType alphaType = kUnknown_SkAlphaType;
-        snprintf(dumpFilename, sizeof(dumpFilename),
-            "%s/sfdump%03d.layer%zu.%s.png", mDumpDirPng,
-            mDumpCntrPng, layerIndex, mDisplayName);
 
-        switch (hnd->format) {
-            case HAL_PIXEL_FORMAT_RGBA_8888:
-            case HAL_PIXEL_FORMAT_RGBX_8888:
-                alphaType = kPremul_SkAlphaType;
-                colorType = kRGBA_8888_SkColorType;
-                break;
-            case HAL_PIXEL_FORMAT_BGRA_8888:
-                alphaType = kOpaque_SkAlphaType;
-                colorType = kRGBA_8888_SkColorType;
-                break;
-            case HAL_PIXEL_FORMAT_RGB_565:
-                alphaType = kOpaque_SkAlphaType;
-                colorType = kRGB_565_SkColorType;
-                break;
-            default:
-
-                break;
-        }
-        if (kUnknown_SkColorType != colorType) {
-            SkImageInfo info = SkImageInfo::Make(getWidth(hnd), getHeight(hnd),
-                                                 colorType, alphaType);
-            SkPixmap pixmap(info, (const void*)hnd->base, info.minRowBytes());
-            SkFILEWStream file(dumpFilename);
-            bResult = SkEncodeImage(&file, pixmap, SkEncodedImageFormat::kPNG, 100);
-            ALOGI("Display[%s] Layer[%zu] %s Dump to %s: %s",
-                mDisplayName, layerIndex, dumpLogStrPng,
-                dumpFilename, bResult ? "Success" : "Fail");
-        } else {
-            ALOGI("Display[%s] Layer[%zu] %s Skipping dump: Unsupported layer"
-                " format %s for png encoder",
-                mDisplayName, layerIndex, dumpLogStrPng, pixFormatStr);
-        }
-    }
-#endif
     if (needDumpRaw && hnd->base) {
         char dumpFilename[PATH_MAX];
         bool bResult = false;
