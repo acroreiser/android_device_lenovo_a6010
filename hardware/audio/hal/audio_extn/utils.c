@@ -592,7 +592,9 @@ int audio_extn_utils_send_app_type_cfg(struct audio_usecase *usecase)
         goto exit_send_app_type_cfg;
     }
 
-    if ((usecase->stream.out->devices & AUDIO_DEVICE_OUT_SPEAKER)) {
+    if ((out->flags & AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD))
+        out->app_type_cfg.sample_rate = usecase->stream.out->sample_rate;
+    else if ((usecase->stream.out->devices & AUDIO_DEVICE_OUT_SPEAKER)) {
         out->app_type_cfg.sample_rate = DEFAULT_OUTPUT_SAMPLING_RATE;
     } else if ((snd_device != SND_DEVICE_OUT_HEADPHONES_44_1 &&
         usecase->stream.out->sample_rate == OUTPUT_SAMPLING_RATE_44100) ||

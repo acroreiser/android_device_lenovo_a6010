@@ -3945,6 +3945,7 @@ bool platform_check_codec_backend_cfg(struct audio_device* adev,
     char value[PROPERTY_VALUE_MAX] = {0};
     unsigned int bit_width;
     unsigned int sample_rate;
+    unsigned int high_sample_rate;
     int backend_idx = DEFAULT_CODEC_BACKEND;
     int usecase_backend_idx = DEFAULT_CODEC_BACKEND;
     struct platform_data *my_data = (struct platform_data *)adev->platform;
@@ -3953,6 +3954,7 @@ bool platform_check_codec_backend_cfg(struct audio_device* adev,
 
     bit_width = *new_bit_width;
     sample_rate = *new_sample_rate;
+    high_sample_rate = sample_rate;
 
     ALOGI("%s Codec selected backend: %d current bit width: %d and sample rate: %d",
                __func__, backend_idx, bit_width, sample_rate);
@@ -4028,6 +4030,16 @@ bool platform_check_codec_backend_cfg(struct audio_device* adev,
      */
     if (!is_external_codec)
         sample_rate = CODEC_BACKEND_DEFAULT_SAMPLE_RATE;
+
+    switch(high_sample_rate)
+    {
+        case 96000:
+            sample_rate = 96000;
+            break;
+        case 192000:
+            sample_rate = 192000;
+            break;
+    }
 
     //check if mulitchannel clip needs to be down sampled to 48k
     property_get("vendor.audio.playback.mch.downsample",value,"");
