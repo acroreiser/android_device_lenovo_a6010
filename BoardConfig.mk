@@ -218,5 +218,10 @@ DEVICE_SPECIFIC_AUDIO_PATH := $(DEVICE_PATH)/hardware/audio
 DEVICE_SPECIFIC_DISPLAY_PATH := $(DEVICE_PATH)/hardware/display
 DEVICE_SPECIFIC_DISPLAY_PATH := $(DEVICE_PATH)/hardware/media
 
+# Lineage Health
+TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/power_supply/battery/charging_enabled
+TARGET_HEALTH_CHARGING_CONTROL_CHARGING_ENABLED := 1
+TARGET_HEALTH_CHARGING_CONTROL_CHARGING_DISABLED := 0
+
 # Proprietary Prebuilt
 include vendor/lenovo/a6010/BoardConfigVendor.mk
