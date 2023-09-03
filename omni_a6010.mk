@@ -23,7 +23,7 @@
 # components.
 
 # Release name
-PRODUCT_RELEASE_NAME := a6000
+PRODUCT_RELEASE_NAME := a6010
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
@@ -53,10 +53,10 @@ PRODUCT_COPY_FILES += \
 endif
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := a6000
-PRODUCT_NAME := omni_a6000
+PRODUCT_DEVICE := a6010
+PRODUCT_NAME := omni_a6010
 PRODUCT_BRAND := Lenovo
-PRODUCT_MODEL := A6000
+PRODUCT_MODEL := A6010
 PRODUCT_MANUFACTURER := Lenovo
 
 # Explicitly

@@ -23,7 +23,7 @@
 # components.
 
 FORCE_32_BIT := true
-DEVICE_PATH := device/lenovo/a6000
+DEVICE_PATH := device/lenovo/a6010
 
 #Bootloader
 TARGET_BOARD_PLATFORM := msm8916
@@ -49,10 +49,6 @@ BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/zImage-dtb
-
-# Crypto
-TW_INCLUDE_CRYPTO := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 131072
@@ -82,7 +78,6 @@ TW_NO_EXFAT := false
 TW_NO_USB_STORAGE := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
-TW_CRYPTO_USE_SBIN_VOLD := true
 
 #adbd insecure
 BOARD_ALWAYS_INSECURE := true

@@ -5,9 +5,11 @@
 /splash			emmc    /dev/block/bootdevice/by-name/splash       	flags=display="Splash";backup=1;flashimg=1
 /system			ext4	/dev/block/bootdevice/by-name/system
 /system_image	        emmc	/dev/block/bootdevice/by-name/system
+/vendor                 ext4    /dev/block/bootdevice/by-name/vendor
+/vendor_image           emmc    /dev/block/bootdevice/by-name/vendor
 /persist		ext4	/dev/block/bootdevice/by-name/persist		flags=display="Persist";backup=1
 /cache			ext4	/dev/block/bootdevice/by-name/cache
-/data			ext4	/dev/block/bootdevice/by-name/userdata		length=-16384,encryptable=footer
+/data			ext4	/dev/block/bootdevice/by-name/userdata
 /misc			emmc	/dev/block/bootdevice/by-name/misc		flags=display="Misc";backup=1
 /modem			emmc	/dev/block/bootdevice/by-name/modem		flags=display="Modem";backup=1
 
