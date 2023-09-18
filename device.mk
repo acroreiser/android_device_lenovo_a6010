@@ -275,9 +275,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     RepainterServicePriv
 
-# FaceUnlock
-$(call inherit-product, external/faceunlock/config.mk)
-
 # Seamless transfer
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.fflag.override.settings_seamless_transfer=true
