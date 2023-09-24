@@ -619,7 +619,7 @@ const QCameraParameters::QCameraMap<cam_iso_mode_type>
     { ISO_400,   CAM_ISO_MODE_400 },
     { ISO_800,   CAM_ISO_MODE_800 },
     { ISO_1600,  CAM_ISO_MODE_1600 },
-    { ISO_3200,  CAM_ISO_MODE_3200 }
+    { ISO_3200,  CAM_ISO_MODE_AUTO }
 };
 
 const QCameraParameters::QCameraMap<cam_hfr_mode_t>
