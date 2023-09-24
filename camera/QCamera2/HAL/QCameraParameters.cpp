@@ -625,10 +625,10 @@ const QCameraParameters::QCameraMap<cam_iso_mode_type>
 const QCameraParameters::QCameraMap<cam_hfr_mode_t>
         QCameraParameters::HFR_MODES_MAP[] = {
     { VIDEO_HFR_OFF, CAM_HFR_MODE_OFF },
-    { VIDEO_HFR_2X,  CAM_HFR_MODE_60FPS },
-    { VIDEO_HFR_3X,  CAM_HFR_MODE_90FPS },
-    { VIDEO_HFR_4X,  CAM_HFR_MODE_120FPS },
-    { VIDEO_HFR_5X,  CAM_HFR_MODE_150FPS }
+    { VIDEO_HFR_2X,  CAM_HFR_MODE_OFF },
+    { VIDEO_HFR_3X,  CAM_HFR_MODE_OFF },
+    { VIDEO_HFR_4X,  CAM_HFR_MODE_OFF },
+    { VIDEO_HFR_5X,  CAM_HFR_MODE_OFF }
 };
 
 const QCameraParameters::QCameraMap<cam_bracket_mode>
