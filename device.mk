@@ -67,6 +67,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.auto_latch_unsignaled=true \
     debug.sf.recomputecrop=0 \
     debug.cpurend.vsync=false \
+    debug.sf.layer_caching_active_layer_timeout_ms=1000 \
     ro.config.avoid_gfx_accel=true \
     DEVICE_PROVISIONED=1 \
     ro.com.android.mobiledata=false \
