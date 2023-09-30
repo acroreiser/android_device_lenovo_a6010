@@ -388,6 +388,8 @@ static struct msm_camera_i2c_reg_array init_reg_array1[] = {
   {0x5b09, 0x2},
   {0x5e00, 0x0},
   {0x5e10, 0x1c},
+  /* Enable VSync */
+  {0x3002, 0x80},
 };
 
 static struct msm_camera_i2c_reg_setting_5 init_reg_setting[] = {
