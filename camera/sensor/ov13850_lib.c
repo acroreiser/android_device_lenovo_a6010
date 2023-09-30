@@ -708,17 +708,17 @@ static struct sensor_res_cfg_table_t ov13850_res_table = {
 static struct sensor_lib_chromatix_t ov13850_chromatix[] = {
   {
     .common_chromatix = SKUF_OV13850_LOAD_CHROMATIX(common),
-    .camera_preview_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
-    .camera_snapshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
-    .camcorder_chromatix = SKUF_OV13850_LOAD_CHROMATIX(default_video),
-    .liveshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
-  },
-  {
-    .common_chromatix = SKUF_OV13850_LOAD_CHROMATIX(common),
     .camera_preview_chromatix = SKUF_OV13850_LOAD_CHROMATIX(preview),
     .camera_snapshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(preview),
     .camcorder_chromatix = SKUF_OV13850_LOAD_CHROMATIX(default_video),
     .liveshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(preview),
+  },
+  {
+    .common_chromatix = SKUF_OV13850_LOAD_CHROMATIX(common),
+    .camera_preview_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
+    .camera_snapshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
+    .camcorder_chromatix = SKUF_OV13850_LOAD_CHROMATIX(default_video),
+    .liveshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
   },
 };
 
