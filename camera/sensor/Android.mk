@@ -12,6 +12,11 @@ LOCAL_SRC_FILES:= ov13850_lib.c
 LOCAL_MODULE           := libmmcamera_ov13850
 LOCAL_SHARED_LIBRARIES := libcutils
 
+LOCAL_CFLAGS += \
+        -Wno-missing-field-initializers \
+        -Wno-unused-variable \
+        -Wno-unused-parameter
+
 LOCAL_MODULE_OWNER := qti
 LOCAL_32_BIT_ONLY := true
 LOCAL_PROPRIETARY_MODULE := true
