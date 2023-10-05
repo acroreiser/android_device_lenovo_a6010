@@ -146,7 +146,7 @@ static struct msm_sensor_output_reg_addr_t output_reg_addr = {
 
 static sensor_manual_exposure_info_t manual_exp_info = {
   .min_exposure_time = 100000,/*in nano sec = 1line*/
-  .max_exposure_time = 34482759,/*in nano sec = FFFF lines*/
+  .max_exposure_time = 1000000000,/*in nano sec = FFFF lines*/
   .min_iso = 50,
   .max_iso = 1174,
 };
@@ -840,7 +840,7 @@ static int32_t ov13850_fill_exposure_array(uint16_t gain,
 
   reg_setting->reg_setting[reg_count].reg_addr =
     sensor_lib_ptr.exp_gain_info->coarse_int_time_addr + 1;
-  reg_setting->reg_setting[reg_count].reg_data = (line&0xfff) >> 4;
+  reg_setting->reg_setting[reg_count].reg_data = (line&0xfff) >> 5;
   DEBUG_INFO("%s:lines:addr=0x%x,data=0x%x",__func__,
     reg_setting->reg_setting[reg_count].reg_addr,
     reg_setting->reg_setting[reg_count].reg_data) ;
