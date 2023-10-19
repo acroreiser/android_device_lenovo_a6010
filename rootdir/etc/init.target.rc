@@ -34,7 +34,7 @@ on early-init
     write /sys/block/mmcblk1/queue/iostats 0
     write /sys/block/mmcblk0/queue/read_ahead_kb 128
     write /sys/block/mmcblk1/queue/read_ahead_kb 128
-    write /sys/block/mmcblk0/queue/scheduler noop
+    write /sys/block/mmcblk0/queue/scheduler deadline
 
 on boot
     # charger
