@@ -25,7 +25,8 @@ LOCAL_SHARED_LIBRARIES := \
 	libcutils \
 	liblog \
 	libdl \
-	libtinyalsa
+	libtinyalsa \
+        libhardware
 
 LOCAL_CFLAGS += \
     -Wall \
@@ -38,6 +39,7 @@ LOCAL_VENDOR_MODULE := true
 
 LOCAL_C_INCLUDES := \
 	external/tinyalsa/include \
-	$(call include-path-for, audio-effects)
+	$(call include-path-for, audio-effects) \
+        system/media/audio/include
 
 include $(BUILD_SHARED_LIBRARY)

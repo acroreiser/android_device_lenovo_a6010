@@ -18,10 +18,12 @@ LOCAL_CFLAGS += \
     -Wno-unused-variable \
 
 LOCAL_C_INCLUDES += \
-    $(call include-path-for, audio-effects)
+    $(call include-path-for, audio-effects) \
+    hardware/libhardware/include \
+    system/media/audio/include
 
 LOCAL_SHARED_LIBRARIES := \
-    libcutils liblog
+    libcutils liblog libhardware
 
 LOCAL_SHARED_LIBRARIES += libdl
 

@@ -51,7 +51,7 @@ LOCAL_SRC_FILES := \
 LOCAL_SRC_FILES += audio_extn/audio_extn.c \
                    audio_extn/utils.c
 LOCAL_HEADER_LIBRARIES := generated_kernel_headers audio_headers
-LOCAL_CFLAGS += -DUSE_VENDOR_EXTN
+LOCAL_CFLAGS += -DUSE_VENDOR_EXTN -Wno-deprecated-non-prototype
 
 ifeq ($(strip $(AUDIO_FEATURE_ENABLED_HDMI_EDID)),true)
     LOCAL_SRC_FILES += edid.c
