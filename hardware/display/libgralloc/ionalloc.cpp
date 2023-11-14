@@ -35,11 +35,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#ifdef _ANDROID_
-#include <cutils/log.h>
-#else
 #include <log/log.h>
-#endif
 
 #include <errno.h>
 #include <utils/Trace.h>

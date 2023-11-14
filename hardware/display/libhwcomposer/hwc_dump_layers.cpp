@@ -33,7 +33,7 @@
 #define LOG_NDEBUG 0
 #include <hwc_utils.h>
 #include <hwc_dump_layers.h>
-#include <cutils/log.h>
+#include <log/log.h>
 #include <sys/stat.h>
 #include <comptype.h>
 #ifdef QTI_BSP

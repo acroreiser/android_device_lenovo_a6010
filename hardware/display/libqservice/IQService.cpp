@@ -20,13 +20,14 @@
 
 #include <fcntl.h>
 #include <stdint.h>
+#include <pwd.h>
 #include <sys/types.h>
 #include <binder/Parcel.h>
 #include <binder/IBinder.h>
 #include <binder/IInterface.h>
 #include <binder/IPCThreadState.h>
 #include <utils/Errors.h>
-#include <private/android_filesystem_config.h>
+#include <cutils/android_filesystem_config.h>
 #include <IQService.h>
 
 #define QSERVICE_DEBUG 0

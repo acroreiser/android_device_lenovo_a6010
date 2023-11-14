@@ -32,7 +32,7 @@
 
 #include <utils/Errors.h>
 #include <sys/types.h>
-#include <cutils/log.h>
+#include <log/log.h>
 #include <hwc_utils.h>
 #include <dlfcn.h>
 #include <binder/Parcel.h>

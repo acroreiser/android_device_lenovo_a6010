@@ -21,7 +21,7 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#include <cutils/log.h>
+#include <log/log.h>
 #include <cutils/atomic.h>
 #include <EGL/egl.h>
 #include <utils/Trace.h>

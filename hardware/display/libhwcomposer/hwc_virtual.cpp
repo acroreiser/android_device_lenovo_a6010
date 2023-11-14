@@ -20,7 +20,7 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#include <cutils/log.h>
+#include <log/log.h>
 #include <overlayWriteback.h>
 #include "hwc_utils.h"
 #include "hwc_fbupdate.h"

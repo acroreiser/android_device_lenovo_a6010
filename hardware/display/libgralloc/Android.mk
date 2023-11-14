@@ -21,7 +21,7 @@ LOCAL_MODULE                  := gralloc.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_RELATIVE_PATH    := hw
 LOCAL_VENDOR_MODULE           := true
 LOCAL_MODULE_TAGS             := optional
-LOCAL_SHARED_LIBRARIES        := $(common_libs) libmemalloc libqdMetaData
+LOCAL_SHARED_LIBRARIES        := $(common_libs) libmemalloc libqdMetaData libhardware
 LOCAL_SHARED_LIBRARIES        += libqdutils libGLESv1_CM
 LOCAL_CFLAGS                  := $(common_flags) -DLOG_TAG=\"qdgralloc\"
 LOCAL_HEADER_LIBRARIES        := generated_kernel_headers display_headers
@@ -35,7 +35,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE                  := libmemalloc
 LOCAL_MODULE_TAGS             := optional
 LOCAL_VENDOR_MODULE           := true
-LOCAL_SHARED_LIBRARIES        := $(common_libs) libqdutils libdl
+LOCAL_SHARED_LIBRARIES        := $(common_libs) libqdutils libdl libhardware
 LOCAL_CFLAGS                  := $(common_flags) -DLOG_TAG=\"qdmemalloc\"
 LOCAL_HEADER_LIBRARIES        := generated_kernel_headers display_headers
 LOCAL_SRC_FILES               := ionalloc.cpp alloc_controller.cpp

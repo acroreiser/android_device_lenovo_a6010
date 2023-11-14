@@ -16,11 +16,7 @@
  */
 
 #include <sys/mman.h>
-#ifdef _ANDROID_
-#include <cutils/log.h>
-#else
 #include <log/log.h>
-#endif
 #include <cutils/properties.h>
 #include <dlfcn.h>
 

@@ -32,7 +32,7 @@
 
 #include <utils/Errors.h>
 #include <sys/types.h>
-#include <cutils/log.h>
+#include <log/log.h>
 #include <utils/RefBase.h>
 #include <binder/IServiceManager.h>
 #include <media/IMediaDeathNotifier.h>
