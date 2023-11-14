@@ -61,6 +61,7 @@ libmm-vdec-inc          += $(LOCAL_PATH)/../../../mm-video-v4l2/vidc/common/inc
 libmm-vdec-inc          += $(LOCAL_PATH)/../../../mm-core/inc
 libmm-vdec-inc          += $(TARGET_OUT_HEADERS)/qcom/display
 libmm-vdec-inc          += $(TARGET_OUT_HEADERS)/adreno
+libmm-vdec-inc          += $(LOCAL_PATH)/../../../../display/libqdutils
 libmm-vdec-inc      	+= $(LOCAL_PATH)/../../../libc2dcolorconvert
 libmm-vdec-inc      	+= $(TOP)/frameworks/av/include/media/stagefright
 libmm-vdec-inc      	+= $(TARGET_OUT_HEADERS)/mm-video/SwVdec
@@ -97,7 +98,7 @@ endif
 
 include $(CLEAR_VARS)
 
-LOCAL_HEADER_LIBRARIES := display_headers generated_kernel_headers
+LOCAL_HEADER_LIBRARIES := display_headers generated_kernel_headers media_plugin_headers
 
 LOCAL_MODULE                    := libOmxVdec
 LOCAL_MODULE_TAGS               := optional
