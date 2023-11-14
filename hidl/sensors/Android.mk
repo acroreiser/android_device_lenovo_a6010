@@ -34,6 +34,7 @@ LOCAL_SHARED_LIBRARIES := \
     libdl \
     liblog \
     libutils \
+    libhardware
 
 LOCAL_STRIP_MODULE := false
 

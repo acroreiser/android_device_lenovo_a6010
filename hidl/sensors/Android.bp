@@ -10,6 +10,7 @@ cc_library_static {
         "libcutils",
         "libutils",
         "libdl",
+        "libhardware",
     ],
     export_include_dirs: ["."],
 }
