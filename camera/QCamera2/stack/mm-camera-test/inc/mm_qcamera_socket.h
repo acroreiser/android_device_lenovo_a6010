@@ -46,8 +46,11 @@
 #include <sys/mman.h>
 #include <sys/time.h>
 #include <linux/socket.h>
+
+typedef __uint32_t in_addr_t;
+
 #include <arpa/inet.h>
-#include <utils/Log.h>
+#include <log/log.h>
 
 #undef __FD_SET
 #define __FD_SET(fd, fdsetp) \

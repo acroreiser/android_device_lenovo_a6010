@@ -773,7 +773,7 @@ static float ov13850_register_to_real_gain(uint16_t reg_gain)
  * DESCRIPTION:
  *==========================================================================*/
 static int32_t ov13850_calculate_exposure(float real_gain,
-  uint16_t line_count, sensor_exposure_info_t *exp_info)
+  uint32_t line_count, sensor_exposure_info_t *exp_info)
 {
   if (!exp_info) {
     return -1;
