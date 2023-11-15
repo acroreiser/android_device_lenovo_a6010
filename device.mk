@@ -348,7 +348,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bluetooth.hfp.ver=1.7 \
     ro.bluetooth.sap=true \
     vendor.bluetooth.soc=pronto \
-    ro.qualcomm.bt.hci_transport=pronto
+    ro.qualcomm.bt.hci_transport=pronto \
+    bluetooth.core.le.vendor_capabilities.enabled=false
 
 # Keymaster HAL
 PRODUCT_PACKAGES += \
