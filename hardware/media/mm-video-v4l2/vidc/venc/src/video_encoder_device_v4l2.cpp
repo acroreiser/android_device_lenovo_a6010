@@ -33,6 +33,11 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <fcntl.h>
 #include "video_encoder_device_v4l2.h"
 #include "omx_video_encoder.h"
+
+#ifdef RENAME_NOREPLACE
+#undef RENAME_NOREPLACE
+#endif
+
 #include <linux/android_pmem.h>
 #include <media/msm_vidc.h>
 #ifdef USE_ION
