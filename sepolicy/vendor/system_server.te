@@ -15,3 +15,5 @@ get_prop(system_server, vendor_default_prop);
 
 allow system_server init:binder { call transfer };
 allow system_server app_zygote:process getpgid;
+
+allow system_server sysfs:file r_file_perms;

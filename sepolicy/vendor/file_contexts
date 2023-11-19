@@ -70,3 +70,8 @@
 
 # Dolby DMS
 /(vendor|system/vendor)/bin/hw/vendor\.dolby\.hardware\.dms@1\.0-service      u:object_r:hal_dms_default_exec:s0
+
+# Graphics
+/(vendor|system/vendor)/lib/hw/gralloc.msm8916.so      u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/lib/libmemalloc.so      u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/lib/libsc-a3xx.so      u:object_r:same_process_hal_file:s0

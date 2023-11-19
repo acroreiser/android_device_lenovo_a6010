@@ -15,3 +15,5 @@ allow timekeep_app sysfs_msm_subsys:dir search;
 
 set_prop(timekeep_app, timekeep_prop)
 allow timekeep_app sysfs:file { getattr open read };
+
+allow timekeep_app system_data_file:dir { search };

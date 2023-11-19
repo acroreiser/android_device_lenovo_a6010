@@ -2,3 +2,9 @@ allow location wpa_data_file:dir create_dir_perms;
 allow location wpa_data_file:sock_file { create setattr write unlink };
 allow location hal_wifi_supplicant_default:unix_dgram_socket { sendto };
 allow location wifi_vendor_data_file:dir r_dir_perms;
+
+get_prop(location, default_prop);
+
+allow location socket_device:file { create };
+allow location socket_device:dir { write add_name };
+allow location fwk_sensor_service:service_manager { find };
