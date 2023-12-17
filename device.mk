@@ -604,16 +604,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low Memory Killer
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.config.ulmk_memcg=true \
-    ro.lmk.use_psi=false \
+    ro.lmk.use_psi=true \
     ro.lmk.use_new_strategy=false \
-    ro.lmk.kill_timeout_ms=20 \
     ro.lmk.critical=0 \
-    ro.lmk.low=900 \
+    ro.lmk.low=950 \
     ro.lmk.swap_free_low_percentage=10 \
-    ro.lmk.thrashing_limit=10 \
-    ro.lmk.filecache_min_kb=262144 \
-    ro.lmk.thrashing_limit_critical=500
-
+    ro.lmk.thrashing_limit=15 \
+    ro.lmk.thrashing_limit_critical=100 \
+    ro.lmk.psi_partial_stall_ms=150 \
+    ro.lmk.psi_complete_stall_ms=300
 
 # Zygote
 PRODUCT_PROPERTY_OVERRIDES += \
