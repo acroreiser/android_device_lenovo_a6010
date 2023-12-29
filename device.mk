@@ -88,7 +88,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.0 \
     persist.sys.sf.disable_blurs=true \
     debug.renderengine.backend=gles \
-    debug.hwui.renderer=skiagl \
+    debug.hwui.renderer=opengl \
     ro.hwui.render_ahead=20 \
     ro.config.night_mode_on_battery_saver=false
 
