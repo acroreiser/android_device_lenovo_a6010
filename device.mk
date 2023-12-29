@@ -54,6 +54,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.enable_layer_caching=false \
     ro.surface_flinger.start_graphics_allocator_service=true \
     ro.surface_flinger.use_context_priority=true \
+    ro.surface_flinger.clear_slots_with_set_layer_buffer=true \
     debug.sf.enable_planner_prediction=false \
     debug.sf.disable_client_composition_cache=1 \
     debug.sf.early_phase_offset_ns=1500000 \
