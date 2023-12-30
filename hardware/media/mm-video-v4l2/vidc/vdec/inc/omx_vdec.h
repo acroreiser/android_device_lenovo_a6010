@@ -101,6 +101,11 @@ extern "C" {
 #ifdef MAX_RES_1080P
 #include "mp4_utils.h"
 #endif
+
+#ifdef RENAME_NOREPLACE
+#undef RENAME_NOREPLACE
+#endif
+
 #include <linux/android_pmem.h>
 #include "extra_data_handler.h"
 #include "ts_parser.h"
