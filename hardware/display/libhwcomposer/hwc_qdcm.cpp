@@ -54,12 +54,6 @@ void qdcmCloseContext(hwc_context_t *ctx)
     }
 }
 
-void qdcmApplyDefaultAfterBootAnimationDone(hwc_context_t *ctx)
-{
-    if (ctx->mQdcmInfo.mQdcmMode)
-        ctx->mQdcmInfo.mQdcmMode->applyDefaultMode(0);
-}
-
 static void qdcmSetActiveMode(hwc_context_t *ctx, const Parcel *in, Parcel *out)
 {
     int ret = 0;

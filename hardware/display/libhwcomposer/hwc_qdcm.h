@@ -87,7 +87,6 @@ static inline void unloadQdcmLibrary(hwc_context_t *ctx)
 
 void qdcmInitContext(hwc_context_t *);
 void qdcmCloseContext(hwc_context_t *);
-void qdcmApplyDefaultAfterBootAnimationDone(hwc_context_t *);
 void qdcmCmdsHandler(hwc_context_t*, const Parcel*, Parcel*);
 
 }; // namespace qQdcm

@@ -2620,21 +2620,6 @@ bool isPeripheral(const hwc_rect_t& rect1, const hwc_rect_t& rect2) {
     return (eqBounds == 3);
 }
 
-void processBootAnimCompleted(hwc_context_t *ctx) {
-    char value[PROPERTY_VALUE_MAX];
-
-    // Applying default mode after bootanimation is finished
-    property_get("init.svc.bootanim", value, "running");
-
-    if (!strncmp(value,"stopped",strlen("stopped"))) {
-        ctx->mBootAnimCompleted = true;
-
-        //one-shot action check if bootanimation completed then apply
-        //default display mode.
-        qdcmApplyDefaultAfterBootAnimationDone(ctx);
-    }
-}
-
 void BwcPM::setBwc(const hwc_rect_t& crop, const hwc_rect_t& dst,
         const int& transform,const int& downscale,
         ovutils::eMdpFlags& mdpFlags) {
