@@ -347,7 +347,7 @@ static void toggleScreenUpdate(hwc_context_t* ctx, uint32_t on) {
 static bool  setCameraDeathNotifier(
         android::sp<QClient::CamDeathNotifier> camDeathNotifier, bool on) {
     sp<IServiceManager> sm = defaultServiceManager();
-    sp<IBinder> binder = sm->getService(String16("media.camera"));
+    sp<IBinder> binder = sm->waitForService(String16("media.camera"));
     if (binder == 0) {
         ALOGW("%s: CameraService not published or dead...", __FUNCTION__);
         return false;

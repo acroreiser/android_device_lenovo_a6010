@@ -41,7 +41,7 @@ inline android::sp<qService::IQService> getBinder() {
     android::sp<android::IServiceManager> sm = android::defaultServiceManager();
     android::sp<qService::IQService> binder =
             android::interface_cast<qService::IQService>
-            (sm->getService(android::String16("display.qservice")));
+            (sm->waitForService(android::String16("display.qservice")));
     if (binder == NULL) {
         ALOGE("%s: invalid binder object", __FUNCTION__);
     }

@@ -393,7 +393,7 @@ void initContext(hwc_context_t *ctx)
     QService::init();
     sp<IQClient> client = new QClient(ctx);
     android::sp<qService::IQService> qservice_sp = interface_cast<IQService>(
-            defaultServiceManager()->getService(
+            defaultServiceManager()->waitForService(
             String16("display.qservice")));
     if (qservice_sp.get()) {
       qservice_sp->connect(client);
