@@ -612,8 +612,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.thrashing_limit=30 \
     ro.lmk.thrashing_limit_critical=500 \
     ro.lmk.psi_partial_stall_ms=150 \
-    ro.lmk.psi_complete_stall_ms=100 \
-    ro.lmk.kill_timeout_ms=100
+    ro.lmk.psi_complete_stall_ms=300 \
+    ro.lmk.kill_timeout_ms=100 \
+    ro.lmk.low=950
 
 # Zygote
 PRODUCT_PROPERTY_OVERRIDES += \
