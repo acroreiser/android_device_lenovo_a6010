@@ -23,7 +23,7 @@ LOCAL_C_INCLUDES += chromatix_ov13850_snapshot.h
 LOCAL_SRC_FILES:= chromatix_ov13850_snapshot.c
 
 
-LOCAL_MODULE           := libchromatix_ov13850_snapshot
+LOCAL_MODULE           := libchromatix_ov13850_snapshot_experimental
 
 
 LOCAL_SHARED_LIBRARIES := libcutils

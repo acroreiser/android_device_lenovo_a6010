@@ -262,9 +262,14 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.msm8916 \
     libmm-qcamera \
-    libmmcamera_ov13850 \
-    libchromatix_ov13850_snapshot \
     Aperture
+
+# Camera experimental libs
+PRODUCT_PACKAGES += \
+    libmmcamera_ov13850_experimental \
+    libchromatix_ov13850_snapshot_experimental
+
+PRODUCT_PROPERTY_OVERRIDES += ro.camera.experimental_libs=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \

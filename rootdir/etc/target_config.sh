@@ -45,3 +45,8 @@ sysctl -w kernel.sched_prefer_idle=1
 # Tune task scheduler to reduce possibility to pick some heavy task
 # to the same cpu with ui-threads
 sysctl -w kernel.sched_spill_load=85
+
+if [ "$(getprop ro.camera.experimental_libs)" == "true" ]; then
+  mount -o bind /vendor/lib/libchromatix_ov13850_snapshot_experimental.so /vendor/lib/libchromatix_ov13850_snapshot.so
+  mount -o bind /vendor/lib/libmmcamera_ov13850_experimental.so /vendor/lib/libmmcamera_ov13850.so
+fi
