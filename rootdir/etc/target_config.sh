@@ -50,3 +50,6 @@ if [ "$(getprop ro.camera.experimental_libs)" == "true" ]; then
   mount -o bind /vendor/lib/libchromatix_ov13850_snapshot_experimental.so /vendor/lib/libchromatix_ov13850_snapshot.so
   mount -o bind /vendor/lib/libmmcamera_ov13850_experimental.so /vendor/lib/libmmcamera_ov13850.so
 fi
+
+echo 1 > /sys/devices/platform/kcal_ctrl.0/kcal_enable
+echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
