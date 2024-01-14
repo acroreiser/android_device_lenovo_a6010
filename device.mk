@@ -168,12 +168,6 @@ TARGET_EXCLUDES_AUDIOFX := true
 # Audio package for Go
 $(call inherit-product, frameworks/base/data/sounds/AudioPackageGo.mk)
 
-# Dolby
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.feature.dolby_enable=true \
-    vendor.audio.dolby.ds2.enabled=true \
-    vendor.audio.dolby.ds2.hardbypass=false
-
 # SoC
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.soc.manufacturer=Qualcomm \
