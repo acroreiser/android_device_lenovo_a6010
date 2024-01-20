@@ -418,7 +418,8 @@ PRODUCT_PACKAGES += \
 
 # Music player
 PRODUCT_PACKAGES += \
-    Eleven
+    Eleven \
+    AudioFX
 
 
 # Perf
