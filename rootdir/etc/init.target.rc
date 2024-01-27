@@ -82,9 +82,6 @@ on init
 
     write /sys/kernel/sound_control/speaker_gain "0"
 
-    chown system system /sys/module/battery_saver/parameters/enabled
-    chmod 0664 /sys/module/battery_saver/parameters/enabled
-
 service vm_bms /system/vendor/bin/vm_bms
     class main
     user root
