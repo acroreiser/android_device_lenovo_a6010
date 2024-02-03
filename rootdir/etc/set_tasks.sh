@@ -9,7 +9,10 @@ echo $(pgrep rild | head -n 1) > /dev/cpuset/background/tasks
 echo $(pgrep rild | head -n 2 | sed /$(head -n1)/d) > /dev/cpuset/background/tasks
 echo $(pgrep qmuxd) > /dev/cpuset/background/tasks
 echo $(pgrep netmgrd) > /dev/cpuset/background/tasks
+
 echo $(pgrep logd) > /dev/cpuset/background/tasks
+chrt -p $(pgrep logd) -i 0
+
 echo $(pgrep wcnss_service) > /dev/cpuset/background/tasks
 
 # move critical and UI-related tasks to top-app cpuset
