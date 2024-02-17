@@ -2,13 +2,6 @@ on init
     # Drop write bit from cpu_min_freq so that libqti-perfd can't set it
     chmod 0444 /sys/module/msm_performance/parameters/cpu_min_freq
 
-service boot_boost /vendor/bin/sh /system/vendor/bin/init.boot_boost.sh
-    class late_start
-    disabled
-    user root
-    group system
-    oneshot
-
 on enable-low-power
 
     # disable thermal core_control to update interactive governor settings
@@ -34,14 +27,24 @@ on enable-low-power
     write /dev/cpuset/top-app/cpus 0-3
     write /dev/cpuset/restricted/cpus 1
 
-    # BOOST
-    start boot_boost
+    # Late configs
+    exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/init.post_boot.sh
 
     # Set perfd properties
     setprop sys.post_boot.parsed 1
 
 on charger
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    # Set lowest frequency as max and disable hispeed logic;
+    # offline cpu 1-3
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 200000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 200000
+    write /sys/devices/system/cpu/cpufreq/schedutil/hispeed_freq 0
+    write /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load 0
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
 
 on property:init.svc.recovery=running
     trigger enable-low-power

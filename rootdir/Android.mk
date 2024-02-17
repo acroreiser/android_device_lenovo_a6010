@@ -26,10 +26,10 @@ LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE       := init.boot_boost.sh
+LOCAL_MODULE       := init.post_boot.sh
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := EXECUTABLES
-LOCAL_SRC_FILES    := etc/init.boot_boost.sh
+LOCAL_SRC_FILES    := etc/init.post_boot.sh
 LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
 
