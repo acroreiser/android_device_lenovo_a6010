@@ -30,3 +30,6 @@ echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
 # Limit CPU and IO resources for background tasks
 echo 102 > /dev/cpuctl/background/cpu.shares
 echo 100 > /dev/blkio/background/blkio.weight
+
+# Limit resources for dex2oat
+echo 102 > /dev/cpuctl/dex2oat/cpu.shares
