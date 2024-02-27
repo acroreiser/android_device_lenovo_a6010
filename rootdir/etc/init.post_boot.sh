@@ -33,3 +33,11 @@ echo 100 > /dev/blkio/background/blkio.weight
 
 # Limit resources for dex2oat
 echo 102 > /dev/cpuctl/dex2oat/cpu.shares
+
+# Disable wsf for all targets beacause we are using efk.
+# wsf Range : 1..1000 So set to bare minimum value 1.
+echo 1 > /proc/sys/vm/watermark_scale_factor
+echo 10800 > /proc/sys/vm/extra_free_kbytes
+
+# Set allocstall_threshold to 0
+echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
