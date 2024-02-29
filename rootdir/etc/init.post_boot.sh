@@ -41,3 +41,8 @@ echo 10800 > /proc/sys/vm/extra_free_kbytes
 
 # Set allocstall_threshold to 0
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
+
+# Set kswapd threads
+echo 4 > /proc/sys/vm/kswapd_threads
+
+echo 5430 > /proc/sys/vm/min_free_kbytes

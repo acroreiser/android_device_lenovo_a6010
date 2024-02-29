@@ -95,10 +95,10 @@ service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/m
 
 on post-fs
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
-    write /proc/sys/vm/dirty_background_ratio 1
+    write /proc/sys/vm/dirty_background_ratio 5
     write /proc/sys/vm/dirty_expire_centisecs 300
     write /proc/sys/vm/dirty_ratio 10
-    write /proc/sys/vm/page-cluster 0
+    write /proc/sys/vm/page-cluster 3
     write /proc/sys/vm/vfs_cache_pressure 100
 
 on charger
