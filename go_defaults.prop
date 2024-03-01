@@ -17,10 +17,6 @@
 # Sets Android Go recommended default values for propreties.
 
 # Set lowram options
-ro.lmk.critical_upgrade=true
-ro.lmk.upgrade_pressure=40
-ro.lmk.downgrade_pressure=60
-ro.lmk.kill_heaviest_task=false
 ro.statsd.enable=true
 
 # set threshold to filter unused apps
@@ -37,9 +33,6 @@ pm.dexopt.downgrade_after_inactive_days=7
 pm.dexopt.shared=verify
 
 # 512MB specific properties.
-
-# lmkd can kill more now.
-ro.lmk.medium=700
 
 # madvise random in ART to reduce page cache thrashing.
 dalvik.vm.madvise-random=true
