@@ -1,7 +1,6 @@
 #! /vendor/bin/sh
 
-# move cpu-hungry kswapd and mmcqd/0 tasks to background cpuset
-echo $(pgrep kswapd) > /dev/cpuset/background/tasks
+# move janky tasks to background cpuset
 echo $(pgrep mmcqd/0 | head -n 1) > /dev/cpuset/background/tasks
 echo $(pgrep msm_watchdog) > /dev/cpuset/background/tasks
 echo $(pgrep irqbalance) > /dev/cpuset/background/tasks
