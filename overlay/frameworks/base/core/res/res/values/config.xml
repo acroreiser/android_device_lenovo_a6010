@@ -502,9 +502,6 @@
          2: gestures only for back, home and overview -->
     <integer name="config_navBarInteractionMode">2</integer>
 
-    <!-- the number of the max cached processes in the system. -->
-    <integer name="config_customizedMaxCachedProcesses">16</integer>
-
     <!-- Enables the GnssTimeUpdate service. This is the global switch for enabling Gnss time based
          suggestions to TimeDetector service. See also config_autoTimeSourcesPriority. -->
     <bool name="config_enableGnssTimeUpdateService">true</bool>
