@@ -10,9 +10,6 @@ setprop dalvik.vm.usejitprofiles true
 setprop dalvik.vm.heapgrowthlimit 80m
 setprop dalvik.vm.heapstartsize 4m
 
-# Don't account allocstalls for <= 2GB RAM targets on kernel versions < 4.9
-echo 100 > /sys/module/vmpressure/parameters/allocstall_threshold
-
 echo 50000 > /proc/sys/kernel/sched_freq_inc_notify
 echo 50000 > /proc/sys/kernel/sched_freq_dec_notify
 echo 75 > /proc/sys/kernel/sched_upmigrate
@@ -24,9 +21,6 @@ echo 5 > /proc/sys/kernel/sched_small_task
 echo 50 > /proc/sys/kernel/sched_init_task_load
 echo 15 > /proc/sys/kernel/sched_spill_nr_run
 echo 30 > /proc/sys/kernel/sched_mostly_idle_load
-
-echo 10 > /sys/module/process_reclaim/parameters/pressure_min
-echo 70 > /sys/module/process_reclaim/parameters/pressure_max
 
 setprop persist.audio.calfile0 /vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
 setprop persist.audio.calfile1 /vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
