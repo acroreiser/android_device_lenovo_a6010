@@ -118,6 +118,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.swap_free_low_percentage=35 \
     ro.lmk.filecache_min_kb=110592
 
+# Avoid thrashing to prevent freezes.
+# LMKD will not be tolerant to thrashing at all.
+# This will impact multitasking and cached apps.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.lmk.thrashing_limit=0
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
