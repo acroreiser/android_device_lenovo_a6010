@@ -7,8 +7,8 @@ on enable-low-power
     # disable thermal core_control to update interactive governor settings
     write /sys/module/msm_thermal/core_control/enabled 0
 
-    # Set mix CPU frequency and wake up all cpus
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 533333
+    # Set min CPU frequency and wake up all cpus
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 800000
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
