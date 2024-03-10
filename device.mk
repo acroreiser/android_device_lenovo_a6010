@@ -108,6 +108,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.support_one_handed_mode=true
 
+# UI and LMK configs from
+# Nokia C02 Nokia/Cypher_00WW/CYR:12/SP1A.210812.016/00WW_1_350:user/release-keys
+PRODUCT_PROPERTY_OVERRIDES += \
+    sys.use_fifo_ui=1 \
+    ro.config.per_app_memcg=false \
+    ro.lmk.psi_complete_stall_ms=400 \
+    ro.lmk.psi_partial_stall_ms=100 \
+    ro.lmk.swap_free_low_percentage=35 \
+    ro.lmk.filecache_min_kb=110592
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
