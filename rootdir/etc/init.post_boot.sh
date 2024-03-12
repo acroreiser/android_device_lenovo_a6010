@@ -52,3 +52,6 @@ echo 5430 > /proc/sys/vm/min_free_kbytes
 
 # Set lowest possible timeslice for SCHED_RR tasks
 echo 1 > /proc/sys/kernel/sched_rr_timeslice_ms
+
+# Set KGSL pwrlevel
+echo 2 > /sys/class/kgsl/kgsl-3d0/default_pwrlevel
