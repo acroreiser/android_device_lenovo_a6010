@@ -3,3 +3,4 @@ allow hal_gnss_qti location_data_file:sock_file write;
 allow hal_gnss_qti hal_health_default:binder { call transfer };
 allow hal_gnss_qti hal_health_hwservice:hwservice_manager find;
 allow hal_gnss_qti ssr_device:chr_file rw_file_perms;
+allow hal_gnss_qti hal_gnss_service:hwservice_manager { find add };
