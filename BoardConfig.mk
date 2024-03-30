@@ -94,6 +94,9 @@ TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
 TARGET_USES_MKE2FS := true
 BOARD_ROOT_EXTRA_FOLDERS := firmware persist
 
+# Verified Boot
+BOARD_AVB_ENABLE := false
+
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
