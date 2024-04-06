@@ -166,7 +166,7 @@ struct pcm_config pcm_config_afe_proxy_record = {
     .avail_min = AFE_PROXY_RECORD_PERIOD_SIZE,
 };
 
-const char * const use_case_table[AUDIO_USECASE_MAX] = {
+static const char * const use_case_table[AUDIO_USECASE_MAX] = {
     [USECASE_AUDIO_PLAYBACK_DEEP_BUFFER] = "deep-buffer-playback",
     [USECASE_AUDIO_PLAYBACK_LOW_LATENCY] = "low-latency-playback",
     [USECASE_AUDIO_PLAYBACK_MULTI_CH] = "multi-channel-playback",

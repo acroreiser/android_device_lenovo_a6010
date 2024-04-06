@@ -4650,12 +4650,12 @@ int platform_get_subsys_image_name(char *buf)
  * The audio interface for a particular input device need to be added in
  * audio_platform_info.xml file.
  */
-struct audio_device_to_audio_interface audio_device_to_interface_table[] = {
+static struct audio_device_to_audio_interface audio_device_to_interface_table[] = {
     {AUDIO_DEVICE_IN_BUILTIN_MIC, ENUM_TO_STRING(AUDIO_DEVICE_IN_BUILTIN_MIC), ""},
     {AUDIO_DEVICE_IN_BACK_MIC, ENUM_TO_STRING(AUDIO_DEVICE_IN_BACK_MIC), ""},
 };
 
-int audio_device_to_interface_table_len  =
+static int audio_device_to_interface_table_len  =
     sizeof(audio_device_to_interface_table) / sizeof(audio_device_to_interface_table[0]);
 
 int platform_set_audio_device_interface(const char * device_name,
