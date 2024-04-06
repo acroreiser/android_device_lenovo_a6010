@@ -175,7 +175,7 @@ status_t CameraContext::saveFile(const sp<IMemory>& mem, String8 path)
 
     fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0655);
     if(fd < 0) {
-        printf("Unable to open file %s %s\n", path.string(), strerror(fd));
+        printf("Unable to open file %s %s\n", path.c_str(), strerror(fd));
         return -errno;
     }
 
@@ -200,7 +200,7 @@ status_t CameraContext::saveFile(const sp<IMemory>& mem, String8 path)
     }
 
     printf("%s: buffer=%p, size=%lld stored at %s\n",
-            __FUNCTION__, buff, (long long int) size, path.string());
+            __FUNCTION__, buff, (long long int) size, path.c_str());
 
     if (fd >= 0)
         close(fd);
@@ -368,9 +368,9 @@ status_t CameraContext::encodeJPEG(SkWStream * stream,
         return BAD_VALUE;
     }
 
-    FILE *fh = fopen(path.string(), "r+");
+    FILE *fh = fopen(path.c_str(), "r+");
     if ( !fh ) {
-        printf("Could not open file %s\n", path.string());
+        printf("Could not open file %s\n", path.c_str());
         return BAD_VALUE;
     }
 
@@ -379,7 +379,7 @@ status_t CameraContext::encodeJPEG(SkWStream * stream,
     rewind(fh);
 
     if( !len ) {
-        printf("File %s is empty !\n", path.string());
+        printf("File %s is empty !\n", path.c_str());
         fclose(fh);
         return BAD_VALUE;
     }
@@ -444,7 +444,7 @@ status_t CameraContext::encodeJPEG(SkWStream * stream,
     len = (size_t)ftell(fh);
     rewind(fh);
     printf("%s: buffer=%p, size=%zu stored at %s\n",
-            __FUNCTION__, bitmap->getPixels(), len, path.string());
+            __FUNCTION__, bitmap->getPixels(), len, path.c_str());
 
     free(mJEXIFSection.Data);
     DiscardData();
@@ -872,7 +872,7 @@ void CameraContext::postData(int32_t msgType,
                     DiscardData();
                     DiscardSections();
 
-                    wStream = new SkFILEWStream(jpegPath.string());
+                    wStream = new SkFILEWStream(jpegPath.c_str());
                     skBMDec = PiPCopyToOneFile(&mInterpr->camera[0]->skBMtmp,
                             &mInterpr->camera[1]->skBMtmp);
                     if (encodeJPEG(wStream, skBMDec, jpegPath) != false) {
