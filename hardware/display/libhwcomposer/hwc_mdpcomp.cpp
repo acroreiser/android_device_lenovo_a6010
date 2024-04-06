@@ -2111,7 +2111,7 @@ int MDPComp::prepare(hwc_context_t *ctx, hwc_display_contents_1_t* list) {
                 (list->flags & HWC_GEOMETRY_CHANGED));
         android::String8 sDump("");
         dump(sDump, ctx);
-        ALOGD("%s",sDump.string());
+        ALOGD("%s",sDump.c_str());
     }
 
 #ifdef DYNAMIC_FPS

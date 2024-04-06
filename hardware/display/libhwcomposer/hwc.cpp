@@ -911,7 +911,7 @@ void hwc_dump(struct hwc_composer_device_1* dev, char *buff, int buff_len)
         ovDump[0] = '\0';
     }
     dumpsys_log(aBuf, "Copybit::isAbcInUse=%d\n\n",isAbcInUse(ctx) ? 1 : 0);
-    strlcpy(buff, aBuf.string(), buff_len);
+    strlcpy(buff, aBuf.c_str(), buff_len);
 }
 
 int hwc_getActiveConfig(struct hwc_composer_device_1* dev, int disp) {

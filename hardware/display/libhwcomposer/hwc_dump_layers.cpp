@@ -209,7 +209,7 @@ void HwcDebug::logHwcProps(uint32_t listFlags)
                 "[???]": "");
     }
     ALOGI("Display[%s] Layer[*] %s-HwcModuleCompType, %d-layer MdpComp %s",
-         mDisplayName, hwcModuleCompTypeLog.string(), sMdpCompMaxLayers,
+         mDisplayName, hwcModuleCompTypeLog.c_str(), sMdpCompMaxLayers,
         (listFlags & HWC_GEOMETRY_CHANGED)? "[HwcList Geometry Changed]": "");
 }
 
@@ -250,7 +250,7 @@ void HwcDebug::logLayer(size_t layerIndex, hwc_layer_1_t hwLayers[])
         sourceCrop.right, sourceCrop.bottom,
         displayFrame.left, displayFrame.top,
         displayFrame.right, displayFrame.bottom,
-        hwcVisRegsScrLog.string());
+        hwcVisRegsScrLog.c_str());
     // Log Line 2
     ALOGI("Display[%s] Layer[%zu] LayerCompType = %s, Format = %s, "
         "Orientation = %s, Flags = %s%s%s, Hints = %s%s%s, "
