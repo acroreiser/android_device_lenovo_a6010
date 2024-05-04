@@ -22,10 +22,7 @@ sysctl -w kernel.sched_prefer_idle=1
 
 # Tune task scheduler to reduce possibility to pick some heavy task
 # to the same cpu with ui-threads
-sysctl -w kernel.sched_spill_load=85
-
-sysctl -w kernel.sched_window_stats_policy=2
-sysctl -w kernel.sched_ravg_hist_size=2
+sysctl -w kernel.sched_spill_load=100
 
 echo 1 > /sys/devices/platform/kcal_ctrl.0/kcal_enable
 echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
