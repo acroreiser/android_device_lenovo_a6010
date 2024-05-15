@@ -35,6 +35,7 @@
 /sys/devices/soc\.0/78b7000\.spi/spi_master/spi0/spi0\.0/leds/rgb(/.*)? u:object_r:sysfs_leds:s0
 /sys/class/leds(/.*)? u:object_r:sysfs_leds:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.msm8916    u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.a6000    u:object_r:hal_light_default_exec:s0
 
 # Sensors
 /dev/akm09911                                               u:object_r:sensors_device:s0
