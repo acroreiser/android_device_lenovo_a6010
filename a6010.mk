@@ -23,3 +23,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.msm8916
+
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay-a6010
