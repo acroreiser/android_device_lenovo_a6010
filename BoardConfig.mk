@@ -107,7 +107,12 @@ endif
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
 # Security Patch Level
+ifeq ($(TARGET_DEVICE),a6010)
 VENDOR_SECURITY_PATCH := 2016-03-01
+endif
+ifeq ($(TARGET_DEVICE),a6000)
+VENDOR_SECURITY_PATCH := 2016-01-01
+endif
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
