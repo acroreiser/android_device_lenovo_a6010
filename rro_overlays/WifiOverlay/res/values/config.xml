@@ -88,7 +88,7 @@
     <bool translatable="false" name="config_wifi_softap_sae_supported">true</bool>
 
     <!-- Default access point SSID used for tethering -->
-    <string name="wifi_tether_configure_ssid_default" translatable="false">Lenovo A6010</string>
+    <string name="wifi_tether_configure_ssid_default" translatable="false">Lenovo A60x0</string>
 
     <integer translatable="false" name="config_wifi_logger_ring_buffer_verbose_size_limit_kb">64</integer>
 
