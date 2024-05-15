@@ -455,10 +455,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
-# First api level, device has been commercially launched
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.first_api_level=21
-
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
@@ -521,10 +517,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
-
-# Lights
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.msm8916
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -789,8 +781,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.usb.id.ums_adb=2285 \
     ro.usb.vid=2970
 
-# Device was launched with L
-$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
 
 # The target has no boot jars to check
 SKIP_BOOT_JARS_CHECK := true
@@ -807,5 +797,7 @@ PRODUCT_VENDOR_PROPERTIES += \
     external_storage.casefold.enabled=0 \
     external_storage.sdcardfs.enabled=0
 
+# APN(s)
+PRODUCT_COPY_FILES += vendor/lineage/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)

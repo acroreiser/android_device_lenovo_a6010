@@ -58,5 +58,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/googledialergo-sysconfig.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/googledialergo-sysconfig.xml
 
-# APN(s)
-PRODUCT_COPY_FILES += vendor/lineage/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+$(call inherit-product, device/lenovo/a6010/a6010.mk)

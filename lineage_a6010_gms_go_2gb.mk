@@ -58,5 +58,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 PRODUCT_PACKAGES += \
     DocumentsUIOverlayGo
 
-# APN(s)
-PRODUCT_COPY_FILES += vendor/lineage/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+$(call inherit-product, device/lenovo/a6010/a6010.mk)
