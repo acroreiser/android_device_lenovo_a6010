@@ -783,7 +783,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # The target has no boot jars to check
 SKIP_BOOT_JARS_CHECK := true
 
-# Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to  
+# Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to
 #  pick up the default Android Platform product locale list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_default.mk)
 
