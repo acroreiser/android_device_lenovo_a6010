@@ -797,5 +797,3 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 # APN(s)
 PRODUCT_COPY_FILES += vendor/lineage/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
-
-$(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)

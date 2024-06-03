@@ -33,3 +33,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/acdb/a6010/QRD_General_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/QRD/QRD_General_cal.acdb \
     $(LOCAL_PATH)/audio/acdb/a6010/QRD_Global_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/QRD/QRD_Global_cal.acdb \
     $(LOCAL_PATH)/audio/acdb/a6010/QRD_Speaker_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
+
+$(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
+$(call inherit-product, vendor/lenovo/a6010/a6010.mk)
