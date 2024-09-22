@@ -270,6 +270,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.5-service \
     camera.device@1.0-impl \
     camera.msm8916 \
+    camera.legacy.msm8916 \
     libmm-qcamera \
     Aperture
 
@@ -283,7 +284,8 @@ PRODUCT_PROPERTY_OVERRIDES += ro.camera.experimental_libs=false
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
     persist.camera.hal.debug.mask=0 \
-    persist.camera.feature.cac=1
+    persist.camera.feature.cac=1 \
+    persist.camera.no-display=1
 
 # FastCharge
 PRODUCT_PACKAGES += \
