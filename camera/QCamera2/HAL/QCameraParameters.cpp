@@ -5994,13 +5994,13 @@ int32_t  QCameraParameters::setISOValue(const char *isoValue)
                                       &mExposureTime);
 
             // Finally, re-enable ZSL if it was originally turned on
-            //if (m_bZslMode) {
+            if (m_bZslMode) {
                 zslValue = 1;
                 AddSetParmEntryToBatch(m_pParamBuf,
                                           CAM_INTF_PARM_ZSL_MODE,
                                           sizeof(zslValue),
                                           &zslValue);
-            //}
+            }
 
             return NO_ERROR;
         }
