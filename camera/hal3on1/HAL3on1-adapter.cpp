@@ -89,6 +89,10 @@ static int gCameraId = -1;
 
 static int device_api_version = CAMERA_DEVICE_API_VERSION_3_3;
 
+static camera_device_t *torch_hal1_device;
+static bool torch_in_use = false;
+static CameraParameters torch_params;
+
 static int get_legacy_module()
 {
     int ret = 0;
@@ -1284,6 +1288,13 @@ static int camera_device_open(const hw_module_t *module, const char *id, hw_devi
                 ALOGW("%s: failed to write to '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS);
             close(fd_brightness);
         }
+    } else if (torch_in_use) {
+        torch_params.set("flash-mode", "off");
+
+        HAL1_CALL(torch_hal1_device, set_parameters, torch_params.flatten());
+
+        torch_hal1_device->common.close((hw_device_t*)torch_hal1_device);
+        torch_in_use = false;
     }
 
     camera_device_t *hal1_device;
@@ -2095,10 +2106,6 @@ static int set_callbacks(const camera_module_callbacks_t *callbacks)
 
     return NO_ERROR;
 }
-
-static camera_device_t *torch_hal1_device;
-static bool torch_in_use = false;
-static CameraParameters torch_params;
 
 static int sysfs_torch_mode(const char* camera_id, bool enabled)
 {
