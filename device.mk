@@ -285,7 +285,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
     persist.camera.hal.debug.mask=0 \
     persist.camera.feature.cac=1 \
-    persist.camera.no-display=1
+    persist.camera.no-display=1 \
+    persist.camera.hal3on1.use_limited_level=1
 
 # FastCharge
 PRODUCT_PACKAGES += \
