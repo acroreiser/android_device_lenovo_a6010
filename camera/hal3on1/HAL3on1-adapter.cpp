@@ -995,7 +995,8 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
 
     if (cm.exists(ANDROID_SCALER_CROP_REGION)) {
         int32_t* crop_region = cm.find(ANDROID_SCALER_CROP_REGION).data.i32;
-        int zoom_value_hal3 = hal3_to_hal1_zoom(crop_region[0], crop_region[1], crop_region[2], crop_region[3], sensor_width, sensor_height, 78);
+        int zoom_value_hal3 = hal3_to_hal1_zoom(crop_region[0], crop_region[1], crop_region[2], crop_region[3],
+            sensor_width, sensor_height, atoi(current_params.get("max-zoom")));
 
         current_params.set("zoom", zoom_value_hal3);
     }
