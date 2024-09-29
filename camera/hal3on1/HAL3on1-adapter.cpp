@@ -55,7 +55,7 @@ typedef struct {
     bool use_memfd;
     bool use_limited_level;
     bool use_sysfs_torch;
-
+    bool use_manual_exposure;
 } adapter_config_t;
 
 struct CameraMemory {
@@ -77,6 +77,7 @@ adapter_config_t properties = {
     .use_memfd = false,
     .use_limited_level = false,
     .use_sysfs_torch = false,
+    .use_manual_exposure = false,
 };
 
 // Put your sysfs path here or use HAL1 torch mode
@@ -946,7 +947,12 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
     if (aeMode == ANDROID_CONTROL_AE_MODE_OFF &&
         cm.exists(ANDROID_SENSOR_SENSITIVITY) /* &&
         cm.exists(ANDROID_SENSOR_EXPOSURE_TIME) */) {
-/*
+
+        char exposure_time_str[20];
+
+if(properties.use_manual_exposure == true &&
+        cm.exists(ANDROID_SENSOR_EXPOSURE_TIME))
+{
         int64_t exposure_time = cm.find(ANDROID_SENSOR_EXPOSURE_TIME).data.i64[0];
         int64_t exposure_time_min = static_metadata[gCameraId].find(ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE).data.i64[0];
         int64_t exposure_time_max = static_metadata[gCameraId].find(ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE).data.i64[1];
@@ -956,10 +962,9 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
         if (exposure_time < exposure_time_min)
             exposure_time = exposure_time_min;
 
-        char exposure_time_str[20];
         double result = (double)exposure_time / 1000000.0;
         snprintf(exposure_time_str, sizeof(exposure_time_str), "%.6f", result);
-*/
+}
         int32_t iso = cm.find(ANDROID_SENSOR_SENSITIVITY).data.i32[0];
         int32_t min_iso = static_metadata[gCameraId].find(ANDROID_SENSOR_INFO_SENSITIVITY_RANGE).data.i32[0];
         int32_t max_iso = static_metadata[gCameraId].find(ANDROID_SENSOR_INFO_SENSITIVITY_RANGE).data.i32[1];
@@ -983,14 +988,21 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
         if (iso > 1600)
             strcpy(iso_str, "ISO3200");
 
+        current_params.set("iso", iso_str);
+        HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+
+if(properties.use_manual_exposure == true &&
+        cm.exists(ANDROID_SENSOR_EXPOSURE_TIME))
+{
         current_params.set("zsl", "off");
         HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
 
-        current_params.set("iso", iso_str);
-//        current_params.set("exposure-time", exposure_time_str);
+        current_params.set("exposure-time", exposure_time_str);
         HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
-
+} else {
+        HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
         current_params.set("zsl", "on");
+}
     }
 
     if (cm.exists(ANDROID_SCALER_CROP_REGION)) {
@@ -1802,17 +1814,25 @@ static void camera_convert_parameters(int camera_id, const char *settings, andro
                      sizeof(sensitivity_range) / sizeof(int32_t));
 
     int64_t exposure_time_range[2];
-//    const char* min_exposure_time_str = params.get("min-exposure-time");
-//    if (min_exposure_time_str)
-//        exposure_time_range[0] = (int64_t)(atoi(min_exposure_time_str) * 1000000);
-//    else
+
+if(properties.use_manual_exposure == true)
+{
+    const char* min_exposure_time_str = params.get("min-exposure-time");
+    if (min_exposure_time_str)
+        exposure_time_range[0] = (int64_t)(atof(min_exposure_time_str) * 1000000.0);
+    else
         exposure_time_range[0] = 0;
 
-//    const char* max_exposure_time_str = params.get("max-exposure-time");
-//    if (max_exposure_time_str)
-//        exposure_time_range[1] = (int64_t)(atoi(max_exposure_time_str) * 1000000);
-//    else
+    const char* max_exposure_time_str = params.get("max-exposure-time");
+    if (max_exposure_time_str)
+        exposure_time_range[1] = (int64_t)(atof(max_exposure_time_str) * 1000000.0);
+    else
         exposure_time_range[1] = 0;
+} else
+{
+    exposure_time_range[0] = 0;
+    exposure_time_range[1] = 0;
+}
 
     metadata->update(ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE, exposure_time_range,
                      sizeof(exposure_time_range) / sizeof(int64_t));
@@ -1941,7 +1961,7 @@ static void camera_convert_parameters(int camera_id, const char *settings, andro
         ANDROID_REQUEST_ID,
         ANDROID_REQUEST_TYPE,
         ANDROID_SCALER_CROP_REGION,
-//        ANDROID_SENSOR_EXPOSURE_TIME,
+        ANDROID_SENSOR_EXPOSURE_TIME,
         ANDROID_SENSOR_FRAME_DURATION,
         ANDROID_SENSOR_SENSITIVITY,
         //ANDROID_SHADING_MODE,
@@ -1981,7 +2001,7 @@ static void camera_convert_parameters(int camera_id, const char *settings, andro
         ANDROID_REQUEST_ID,
         ANDROID_SCALER_CROP_REGION,
         //ANDROID_SHADING_MODE,
-//        ANDROID_SENSOR_EXPOSURE_TIME,
+        ANDROID_SENSOR_EXPOSURE_TIME,
         ANDROID_SENSOR_FRAME_DURATION,
         ANDROID_SENSOR_SENSITIVITY,
         ANDROID_SENSOR_TIMESTAMP,
@@ -2030,7 +2050,7 @@ static void camera_convert_parameters(int camera_id, const char *settings, andro
         ANDROID_SCALER_AVAILABLE_MIN_FRAME_DURATIONS,
         ANDROID_SENSOR_INFO_ACTIVE_ARRAY_SIZE,
         ANDROID_SENSOR_INFO_SENSITIVITY_RANGE,
-//        ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE,
+        ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE,
         ANDROID_SENSOR_INFO_MAX_FRAME_DURATION,
         ANDROID_SENSOR_INFO_PHYSICAL_SIZE,
         ANDROID_SENSOR_INFO_PIXEL_ARRAY_SIZE,
@@ -2200,6 +2220,12 @@ static int init()
     if (atoi(value) == 1) {
         ALOGI("HAL3on1: using sysfs torch control instead of HAL1");
         properties.use_sysfs_torch = true;
+    }
+
+    property_get("persist.camera.hal3on1.use_manual_exposure", value, "0");
+    if (atoi(value) == 1) {
+        ALOGI("HAL3on1: DANGEROUS: manual exposure control will crash Camera HAL after snapshot!");
+        properties.use_manual_exposure = true;
     }
 
     return NO_ERROR;
