@@ -1093,6 +1093,14 @@ if(properties.use_manual_exposure == true &&
             current_params.set("denoise", "denoise-off");
     }
 
+    if (cm.exists(ANDROID_SHADING_MODE)) {
+        uint8_t lens_shading = cm.find(ANDROID_SHADING_MODE).data.u8[0];
+        if (lens_shading == ANDROID_SHADING_MODE_FAST)
+            current_params.set("lensshade", "enable");
+        else
+            current_params.set("lensshade", "disable");
+    }
+
     if (cm.exists(ANDROID_JPEG_THUMBNAIL_SIZE)) {
         int32_t* jpeg_thumbnail_size = cm.find(ANDROID_JPEG_THUMBNAIL_SIZE).data.i32;
         char jpeg_thumbnail_size_str[2][5];
@@ -1620,6 +1628,16 @@ static void camera_convert_parameters(int camera_id, const char *settings, andro
                      avail_noise_reduction_modes.array(),
                      avail_noise_reduction_modes.size());
 
+    Vector<uint8_t> lens_shading_modes;
+    lens_shading_modes.add(ANDROID_SHADING_MODE_OFF);
+
+    const char* lens_shading = params.get("lensshade");
+    if(lens_shading)
+        lens_shading_modes.add(ANDROID_SHADING_MODE_FAST);
+
+    metadata->update(ANDROID_SHADING_AVAILABLE_MODES, lens_shading_modes.array(),
+            lens_shading_modes.size());
+
     uint8_t availableFaceDetectModes[] = {
         ANDROID_STATISTICS_FACE_DETECT_MODE_OFF,
     };
@@ -1964,8 +1982,7 @@ if(properties.use_manual_exposure == true)
         ANDROID_SENSOR_EXPOSURE_TIME,
         ANDROID_SENSOR_FRAME_DURATION,
         ANDROID_SENSOR_SENSITIVITY,
-        //ANDROID_SHADING_MODE,
-//       ANDROID_SHADING_STRENGTH,
+        ANDROID_SHADING_MODE,
     };
 
     size_t request_keys_cnt =
@@ -2000,7 +2017,7 @@ if(properties.use_manual_exposure == true)
         ANDROID_NOISE_REDUCTION_MODE,
         ANDROID_REQUEST_ID,
         ANDROID_SCALER_CROP_REGION,
-        //ANDROID_SHADING_MODE,
+        ANDROID_SHADING_MODE,
         ANDROID_SENSOR_EXPOSURE_TIME,
         ANDROID_SENSOR_FRAME_DURATION,
         ANDROID_SENSOR_SENSITIVITY,
@@ -2056,6 +2073,7 @@ if(properties.use_manual_exposure == true)
         ANDROID_SENSOR_INFO_PIXEL_ARRAY_SIZE,
         ANDROID_SENSOR_ORIENTATION,
         ANDROID_NOISE_REDUCTION_AVAILABLE_NOISE_REDUCTION_MODES,
+        ANDROID_SHADING_AVAILABLE_MODES,
         ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL
     };
     metadata->update(ANDROID_REQUEST_AVAILABLE_CHARACTERISTICS_KEYS,
