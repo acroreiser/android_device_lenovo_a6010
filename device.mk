@@ -502,7 +502,8 @@ PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
 PRODUCT_PACKAGES += \
-    android.hardware.radio.config@1.0-service
+    android.hardware.radio.config@1.0-service \
+    android.hardware.radio@1.4-service.legacy
 
 # Configuring device during boot
 PRODUCT_PACKAGES += \
