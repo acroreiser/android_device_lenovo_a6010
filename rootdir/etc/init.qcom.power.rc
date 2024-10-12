@@ -8,7 +8,7 @@ on enable-low-power
     write /sys/module/msm_thermal/core_control/enabled 0
 
     # Set min CPU frequency and wake up all cpus
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 800000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 200000
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
