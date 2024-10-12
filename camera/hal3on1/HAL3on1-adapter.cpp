@@ -17,15 +17,21 @@
 #include <hardware/hardware.h>
 #include <hardware/camera3.h>
 #include <hardware/camera.h>
-#include <camera/Camera.h>
-#include <camera/CameraParameters.h>
+#include <CameraParameters.h>
+#include <CameraMetadata.h>
 #include <cutils/ashmem.h>
 #include <cutils/properties.h>
+#include <ui/Fence.h>
+#include <ui/GraphicBufferMapper.h>
+#include <utils/Mutex.h>
 #include <linux/errno.h>
 
 #define MAX_SIZES_CNT 40
 #define NSEC_PER_33MSEC 33000000LL
 
+using ::android::hardware::camera::common::helper::CameraParameters;
+using ::android::hardware::camera::common::helper::CameraMetadata;
+using ::android::hardware::camera::common::helper::Size;
 using namespace android;
 
 static Mutex gHAL3AdapterLock;
@@ -1357,7 +1363,7 @@ static int get_number_of_cameras(void)
     return gLegacyModule->get_number_of_cameras();
 }
 
-static void camera_convert_parameters(int camera_id, const char *settings, android::CameraMetadata *metadata)
+static void camera_convert_parameters(int camera_id, const char *settings, CameraMetadata *metadata)
 {
     CameraParameters params;
     params.unflatten(String8(settings));
@@ -1645,11 +1651,11 @@ static void camera_convert_parameters(int camera_id, const char *settings, andro
                      availableFaceDetectModes,
                      sizeof(availableFaceDetectModes)/sizeof(availableFaceDetectModes[0]));
 
-    android::Vector<android::Size> previewSizes;
+    android::Vector<Size> previewSizes;
     params.getSupportedPreviewSizes(previewSizes);
-    android::Vector<android::Size> pictureSizes;
+    android::Vector<Size> pictureSizes;
     params.getSupportedPictureSizes(pictureSizes);
-    android::Vector<android::Size> videoSizes;
+    android::Vector<Size> videoSizes;
     params.getSupportedVideoSizes(videoSizes);
 
     int sensor_width;
@@ -2100,7 +2106,7 @@ static int get_camera_info(int camera_id, struct camera_info *info)
 
     info->device_version = device_api_version;
 
-    android::CameraMetadata staticInfo;
+    CameraMetadata staticInfo;
 
     char *params = HAL1_CALL(hal1_device, get_parameters);
 

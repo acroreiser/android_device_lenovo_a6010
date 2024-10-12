@@ -14,13 +14,11 @@ LOCAL_SRC_FILES := \
 LOCAL_SHARED_LIBRARIES := \
     libhardware \
     liblog \
-    libcamera_client \
     libutils \
     libcutils \
     libbase \
-    libsensor \
     libhidltransport \
-    libnativewindow \
+    libcamera_metadata \
     libgui_vendor \
     libui \
     android.hidl.token@1.0-utils \
@@ -29,6 +27,7 @@ LOCAL_SHARED_LIBRARIES := \
     libjpeg
 
 LOCAL_STATIC_LIBRARIES := \
+    android.hardware.camera.common-helper \
     libarect \
     libyuv_static
 
