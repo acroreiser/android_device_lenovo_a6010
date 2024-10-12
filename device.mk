@@ -118,7 +118,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.psi_complete_stall_ms=400 \
     ro.lmk.psi_partial_stall_ms=100 \
     ro.lmk.swap_free_low_percentage=35 \
-    ro.lmk.filecache_min_kb=110592
+    ro.lmk.filecache_min_kb=153600
 
 # Avoid thrashing to prevent freezes.
 # LMKD will not be tolerant to thrashing at all.
