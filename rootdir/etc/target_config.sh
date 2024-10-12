@@ -24,8 +24,6 @@ echo 50 > /proc/sys/kernel/sched_init_task_load
 echo 15 > /proc/sys/kernel/sched_spill_nr_run
 echo 30 > /proc/sys/kernel/sched_mostly_idle_load
 
-echo 1000 > /proc/sys/kernel/sched_cfs_bandwidth_slice_us
-
 setprop persist.audio.calfile0 /vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
 setprop persist.audio.calfile1 /vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
 setprop persist.audio.calfile2 /vendor/etc/acdbdata/QRD/QRD_Global_cal.acdb
