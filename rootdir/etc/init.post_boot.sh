@@ -4,8 +4,8 @@
 
 # Setup CPUFreq
 echo "schedutil" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo 500 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-echo 20000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+echo 5000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
 echo 85 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
 
 # Setup CPU-boost
