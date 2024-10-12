@@ -117,7 +117,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.per_app_memcg=false \
     ro.lmk.psi_complete_stall_ms=400 \
     ro.lmk.psi_partial_stall_ms=100 \
-    ro.lmk.swap_free_low_percentage=35 \
+    ro.lmk.swap_free_low_percentage=20 \
     ro.lmk.filecache_min_kb=153600
 
 # Avoid thrashing to prevent freezes.
