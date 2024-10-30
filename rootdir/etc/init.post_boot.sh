@@ -27,13 +27,6 @@ sysctl -w kernel.sched_spill_load=100
 echo 1 > /sys/devices/platform/kcal_ctrl.0/kcal_enable
 echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
 
-# Limit CPU and IO resources for background tasks
-echo 102 > /dev/cpuctl/background/cpu.shares
-echo 100 > /dev/blkio/background/blkio.weight
-
-# Limit resources for dex2oat
-echo 102 > /dev/cpuctl/dex2oat/cpu.shares
-
 # Disable wsf for all targets beacause we are using efk.
 # wsf Range : 1..1000 So set to bare minimum value 1.
 echo 1 > /proc/sys/vm/watermark_scale_factor
