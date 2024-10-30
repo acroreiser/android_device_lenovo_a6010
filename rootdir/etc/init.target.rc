@@ -31,7 +31,7 @@ on early-init
 
 on late-fs
     # eMMC
-    write /sys/block/mmcblk0/queue/iostats 0
+    write /sys/block/mmcblk0/queue/iostats 1
     write /sys/block/mmcblk0/queue/read_ahead_kb 128
     write /sys/block/mmcblk0/queue/nr_requests 128
     write /sys/block/mmcblk0/queue/scheduler cfq
@@ -41,7 +41,7 @@ on late-fs
     write /sys/block/mmcblk0/queue/iosched/slice_async_us 400
 
     # SD (adoptable)
-    write /sys/block/mmcblk1/queue/iostats 0
+    write /sys/block/mmcblk1/queue/iostats 1
     write /sys/block/mmcblk1/queue/read_ahead_kb 128
     write /sys/block/mmcblk1/queue/nr_requests 128
     write /sys/block/mmcblk1/queue/scheduler cfq
