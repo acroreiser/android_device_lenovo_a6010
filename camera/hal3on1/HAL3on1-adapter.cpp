@@ -2226,6 +2226,14 @@ static int set_torch_mode(const char* camera_id, bool enabled)
 {
     Mutex::Autolock lock(hal3on1_lock);
 
+    if (enabled) {
+        if (adapter_callbacks.hal3_callbacks)
+            adapter_callbacks.hal3_callbacks->torch_mode_status_change(adapter_callbacks.hal3_callbacks, camera_id, TORCH_MODE_STATUS_AVAILABLE_ON);
+    } else {
+        if (adapter_callbacks.hal3_callbacks)
+            adapter_callbacks.hal3_callbacks->torch_mode_status_change(adapter_callbacks.hal3_callbacks, camera_id, TORCH_MODE_STATUS_AVAILABLE_OFF);
+    }
+
     if (properties.use_sysfs_torch)
         return sysfs_torch_mode(camera_id, enabled);
 
