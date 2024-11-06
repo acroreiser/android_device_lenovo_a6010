@@ -107,6 +107,7 @@ static int get_legacy_module()
     if (hal1_module)
         return NO_ERROR;
 
+    // => /vendor/lib/hw/camera.legacy.msm8916.so
     ret = hw_get_module_by_class("camera", "legacy",
                                  (const hw_module_t**)&hal1_module);
     if (ret)
@@ -391,7 +392,7 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
     HAL1_CALL(hal1_device, store_meta_data_in_buffers, 0);
 
     preview_params.set("preview-fps-range", "12000,30000");
-    preview_params.set("preview-frame-rate", "27");
+    preview_params.set("preview-frame-rate", "30");
     preview_params.set("preview-format", "yuv420sp");
     preview_params.set("preview-flip", "off");
     preview_params.set("video-frame-format", "yuv420sp");
@@ -673,6 +674,8 @@ int hal3_to_hal1_zoom(int crop_left, int crop_top, int crop_right, int crop_bott
 
     return zoom_value;
 }
+
+static CameraParameters previous_params;
 
 static int camera3_process_capture_request(const camera3_device_t* device, camera3_capture_request_t* request)
 {
@@ -1147,7 +1150,10 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
     if (trigger_af)
         HAL1_CALL(hal1_device, cancel_auto_focus);
 
-    HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+    if(strcmp(current_params.flatten(), previous_params.flatten()) != 0)
+        HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+
+    previous_params = current_params;
 
     if (trigger_af)
         HAL1_CALL(hal1_device, auto_focus);
