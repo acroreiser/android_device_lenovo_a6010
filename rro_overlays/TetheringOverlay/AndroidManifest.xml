@@ -4,7 +4,7 @@
     android:versionName="1.0">
     <application android:hasCode="false" />
     <overlay
-      android:targetPackage="com.android.networkstack.tethering.inprocess"
+      android:targetPackage="com.android.networkstack.tethering"
       android:targetName="TetheringConfig"
       android:isStatic="true"
       android:priority="0"/>
