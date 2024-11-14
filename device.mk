@@ -528,7 +528,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.omx_default_rank=0 \
     vendor.mediacodec.binder.size=4 \
     media.stagefright.thumbnail.prefer_hw_codecs=true \
-    debug.stagefright.ccodec=0 \
     vidc.enc.narrow.searchrange=1 \
     ro.media.maxmem=268435456
 
