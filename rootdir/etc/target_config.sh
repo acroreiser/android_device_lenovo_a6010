@@ -36,3 +36,5 @@ if [ "$(getprop ro.camera.experimental_libs)" == "true" ]; then
   mount -o bind /vendor/lib/libchromatix_ov13850_snapshot_experimental.so /vendor/lib/libchromatix_ov13850_snapshot.so
   mount -o bind /vendor/lib/libmmcamera_ov13850_experimental.so /vendor/lib/libmmcamera_ov13850.so
 fi
+
+mount -o bind /vendor/lib/libwifi-hal-prebuilt.so /vendor/lib/libwifi-hal.so
