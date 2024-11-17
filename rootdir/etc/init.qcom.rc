@@ -352,12 +352,13 @@ on property:init.svc.surfaceflinger=restarting
     stop hwcomposer-2-1
     start hwcomposer-2-1
 
-# Start it again on boot, just being double sure.
+# Late configs
 on property:sys.boot_completed=1
+    start set_zram
     exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/set_baseband.sh
+    exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/init.post_boot.sh
     exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/set_tasks.sh
     write /sys/class/leds/green/trigger none
-    start set_zram
 
 on charger
     start thermal-engine
