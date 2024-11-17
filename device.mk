@@ -632,8 +632,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     zygote.critical_window.minute=10
 
-# Inherit customized Android Go defaults.
-$(call inherit-product, device/lenovo/a6010/go_defaults_custom.mk)
+# Inherit 512M Android Go defaults.
+$(call inherit-product, build/make/target/product/go_defaults_512.mk)
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
