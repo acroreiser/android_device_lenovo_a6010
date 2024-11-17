@@ -148,7 +148,7 @@ static sensor_manual_exposure_info_t manual_exp_info = {
   .min_exposure_time = 100000,/*in nano sec = 1line*/
   .max_exposure_time = 1000000000,/*in nano sec = FFFF lines*/
   .min_iso = 100,
-  .max_iso = 3200,
+  .max_iso = 1600,
 };
 
 static struct msm_sensor_exp_gain_info_t exp_gain_info = {
