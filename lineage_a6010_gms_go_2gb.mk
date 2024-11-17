@@ -28,7 +28,7 @@ $(call inherit-product, vendor/lineage/config/partner_gms.mk)
 TARGET_BOARD_PLATFORM_VARIANT := msm8916
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := Kraft-T,a6000,K30-T,A6000,Kraft-W,Kraft-C,k30t,msm8916,Kraft-A6000,wt86518,a6010
+TARGET_OTA_ASSERT_DEVICE := a6010
 
 TARGET_VENDOR := Lenovo
 PRODUCT_DEVICE := a6010
