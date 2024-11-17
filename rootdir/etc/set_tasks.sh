@@ -12,6 +12,11 @@ echo $(pgrep netmgrd) > /dev/cpuset/background/tasks
 echo $(pgrep logd) > /dev/cpuset/background/tasks
 echo $(pgrep logd) > /dev/cpuctl/background/tasks
 
+echo $(pgrep kswapd0 | head -n1) > /dev/cpuset/background/tasks
+echo $(pgrep kswapd0 | head -n1) > /dev/cpuctl/background/tasks
+echo $(pgrep kswapd0:1) > /dev/cpuset/background/tasks
+echo $(pgrep kswapd0:1) > /dev/cpuctl/background/tasks
+
 echo $(pgrep wcnss_service) > /dev/cpuset/background/tasks
 
 # move critical and UI-related tasks to top-app cpuset
