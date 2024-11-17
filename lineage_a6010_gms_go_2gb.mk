@@ -35,7 +35,7 @@ PRODUCT_DEVICE := a6010
 PRODUCT_NAME := lineage_a6010_gms_go_2gb
 BOARD_VENDOR := Lenovo
 PRODUCT_BRAND := Lenovo
-PRODUCT_MODEL := A6010
+PRODUCT_MODEL := Lenovo A6010
 PRODUCT_MANUFACTURER := Lenovo
 
 # Build fingerprint
