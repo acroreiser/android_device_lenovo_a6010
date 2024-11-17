@@ -34,9 +34,9 @@ PRODUCT_MANUFACTURER := Lenovo
 
 # Build fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="Kraft-A6000-user 5.0.2 LRX22G Kraft-A6000_S061_160727 release-keys"
-
-BUILD_FINGERPRINT := Lenovo/Kraft-A6000/Kraft-A6000:5.0.2/LRX22G/Kraft-A6000_S061_160727:user/release-keys
+    BuildDesc="Kraft-A6000-user 5.0.2 LRX22G Kraft-A6000_S061_160727 release-keys" \
+    BuildFingerprint=Lenovo/Kraft-A6000/Kraft-A6000:5.0.2/LRX22G/Kraft-A6000_S061_160727:user/release-keys \
+    DeviceName=a6000
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
