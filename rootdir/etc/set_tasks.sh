@@ -10,7 +10,7 @@ echo $(pgrep qmuxd) > /dev/cpuset/background/tasks
 echo $(pgrep netmgrd) > /dev/cpuset/background/tasks
 
 echo $(pgrep logd) > /dev/cpuset/background/tasks
-chrt -p $(pgrep logd) -i 0
+echo $(pgrep logd) > /dev/cpuctl/background/tasks
 
 echo $(pgrep wcnss_service) > /dev/cpuset/background/tasks
 
