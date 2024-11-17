@@ -2,6 +2,7 @@
 
 # move janky tasks to background cpuset
 echo $(pgrep mmcqd/0 | head -n 1) > /dev/cpuset/background/tasks
+echo $(pgrep mmcqd/1 | head -n 1) > /dev/cpuset/background/tasks
 echo $(pgrep msm_watchdog) > /dev/cpuset/background/tasks
 echo $(pgrep irqbalance) > /dev/cpuset/background/tasks
 echo $(pgrep rild | head -n 1) > /dev/cpuset/background/tasks
