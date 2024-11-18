@@ -45,3 +45,9 @@ echo 1 > /proc/sys/kernel/sched_rr_timeslice_ms
 
 # Set KGSL pwrlevel
 echo 2 > /sys/class/kgsl/kgsl-3d0/default_pwrlevel
+
+# Limit background tasks IO bandwidth
+echo "179:0 1048576" > /dev/blkio/background/blkio.throttle.read_bps_device
+echo "179:0 524288" > /dev/blkio/background/blkio.throttle.write_bps_device
+echo "179:64 1048576" > /dev/blkio/background/blkio.throttle.read_bps_device
+echo "179:64 524288" > /dev/blkio/background/blkio.throttle.write_bps_device
