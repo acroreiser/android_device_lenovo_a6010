@@ -121,10 +121,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.filecache_min_kb=153600
 
 # Avoid thrashing to prevent freezes.
-# LMKD will not be tolerant to thrashing at all.
+# LMKD will not be tolerant to significant thrashing.
 # This will impact multitasking and cached apps.
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.lmk.thrashing_limit=0
+    ro.lmk.thrashing_limit=5
 
 # Bluetooth
 PRODUCT_PACKAGES += \
