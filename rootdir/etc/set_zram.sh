@@ -9,4 +9,4 @@ echo 'lz4' > /sys/block/zram0/comp_algorithm
 echo $ZMEM > /sys/block/zram0/disksize
 mkswap /dev/block/zram0
 swapon -d /dev/block/zram0
-echo 100 > /proc/sys/vm/swappiness
+echo 150 > /proc/sys/vm/swappiness
