@@ -640,7 +640,7 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # Memory optimizations
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_bg=1 \
+    ro.config.max_starting_bg=8 \
     ro.am.no_kill_cached_processes_until_boot_completed=false \
     ro.am.no_kill_cached_processes_post_boot_completed_duration_millis=0 \
     ro.hw_timeout_multiplier=6
