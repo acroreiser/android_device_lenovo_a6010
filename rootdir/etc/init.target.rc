@@ -117,7 +117,7 @@ on post-fs
     write /proc/sys/vm/dirty_background_bytes 4096
     write /proc/sys/vm/dirty_expire_centisecs 300
     write /proc/sys/vm/dirty_ratio 10
-    write /proc/sys/vm/page-cluster 3
+    write /proc/sys/vm/page-cluster 0
     write /proc/sys/vm/vfs_cache_pressure 100
 
 on charger
