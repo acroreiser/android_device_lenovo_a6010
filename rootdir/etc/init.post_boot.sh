@@ -27,9 +27,9 @@ sysctl -w kernel.sched_spill_load=100
 echo 1 > /sys/devices/platform/kcal_ctrl.0/kcal_enable
 echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
 
-# Disable efk and tune wsf.
+# Virtual memory management
 echo 0 > /proc/sys/vm/extra_free_kbytes
-echo 300 > /proc/sys/vm/watermark_scale_factor
+echo 230 > /proc/sys/vm/watermark_scale_factor
 echo 10572 > /proc/sys/vm/min_free_kbytes
 
 # Set allocstall_threshold to 0
