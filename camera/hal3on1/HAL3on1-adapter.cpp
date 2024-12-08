@@ -23,6 +23,7 @@
 #include <cutils/properties.h>
 #include <ui/Fence.h>
 #include <ui/GraphicBufferMapper.h>
+#include "../../hardware/display/libgralloc/gralloc_priv.h"
 #include <utils/Mutex.h>
 #include <linux/errno.h>
 
@@ -1196,10 +1197,12 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
 
             memcpy(buf, adapter->jpeg, adapter->jpeg_size);
 
-            camera3_jpeg_blob *jpegBlob = reinterpret_cast<camera3_jpeg_blob*>(buf + sizeof(camera3_jpeg_blob));
-            jpegBlob->jpeg_blob_id  = CAMERA3_JPEG_BLOB_ID;
-            jpegBlob->jpeg_size     = (uint32_t)adapter->jpeg_size;
+            camera3_jpeg_blob jpegBlob;
+            jpegBlob.jpeg_blob_id  = CAMERA3_JPEG_BLOB_ID;
+            jpegBlob.jpeg_size     = (uint32_t)adapter->jpeg_size;
             adapter->jpeg_size = 0;
+
+            memcpy(buf + ((private_handle_t*)(*output_buffer.buffer))->width - sizeof(camera3_jpeg_blob_t), &jpegBlob, sizeof(camera3_jpeg_blob_t));
 
             HAL1_CALL(hal1_device, disable_msg_type, CAMERA_MSG_COMPRESSED_IMAGE);
         } else {
