@@ -378,6 +378,7 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
                 if (stream->usage == 0x00010000)
                     stream->format = 0x102;
 
+                stream->usage = GRALLOC_USAGE_HW_COMPOSER;
                 break;
             }
         }
@@ -1185,8 +1186,13 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
         }
 
         uint8_t *buf = NULL;
+        int usage = GRALLOC_USAGE_SW_WRITE_OFTEN;
 
-        GraphicBufferMapper::get().lock(*output_buffer.buffer, GRALLOC_USAGE_SW_WRITE_OFTEN, rect, (void **)&buf);
+        if (output_buffer.stream->format == HAL_PIXEL_FORMAT_IMPLEMENTATION_DEFINED ||
+            output_buffer.stream->format == HAL_PIXEL_FORMAT_YCrCb_420_SP)
+            usage = GRALLOC_USAGE_HW_COMPOSER;
+
+        GraphicBufferMapper::get().lock(*output_buffer.buffer, usage, rect, (void **)&buf);
 
         buffers.setCapacity(request->num_output_buffers);
 
