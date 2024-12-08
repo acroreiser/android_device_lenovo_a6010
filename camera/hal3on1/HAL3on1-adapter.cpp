@@ -141,7 +141,7 @@ void hal1_data_callback(int32_t msg_type,
         break;
 
     case CAMERA_MSG_COMPRESSED_IMAGE:
-        memcpy(adapter->jpeg, data->data, data->size);
+        adapter->jpeg = (uint8_t*)data->data;
         adapter->jpeg_size = data->size;
 
         while (adapter->jpeg_size != 0) {
@@ -348,8 +348,6 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
             switch (stream->format) {
 
             case HAL_PIXEL_FORMAT_BLOB:
-                adapter->jpeg = (uint8_t*)malloc((stream->width * stream->height)*2);
-
                 preview_params.set("picture-format", "jpeg");
                 preview_params.setPictureSize(stream->width, stream->height);
                 break;
