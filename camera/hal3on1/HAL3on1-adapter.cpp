@@ -52,6 +52,8 @@ typedef struct {
 
     int stream_width;
     int stream_height;
+
+    int preview_really_started;
 } adapter_camera3_device_t;
 
 #define HAL1_CALL(hal1_device, func, ...) ({ \
@@ -138,6 +140,9 @@ void hal1_data_callback(int32_t msg_type,
     case CAMERA_MSG_PREVIEW_FRAME:
         memcpy(adapter->buffer, data->data, data->size);
         adapter->buffer_size = data->size;
+
+        if(adapter->preview_really_started == 0)
+            adapter->preview_really_started = 1;
 
         break;
 
@@ -446,6 +451,8 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
      * On QCamera2 HAL1: add persist.camera.no-display=1 property to build.prop or set "no-display-mode" parameter to 1.
      */
     HAL1_CALL(hal1_device, start_preview);
+
+    adapter->preview_really_started = 0;
 
     return NO_ERROR;
 }
@@ -1213,6 +1220,9 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
 
             HAL1_CALL(hal1_device, disable_msg_type, CAMERA_MSG_COMPRESSED_IMAGE);
         } else {
+            while (adapter->preview_really_started == 0)
+            { usleep(100); }
+
             // Crop yuv buffer for streams smaller than preview
             int crop_x, crop_y;
             yuv420sp_buffer *crop_buf = NULL;
