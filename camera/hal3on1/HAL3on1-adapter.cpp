@@ -425,6 +425,7 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
     preview_params.set("jpeg-thumbnail-quality", "85");
     preview_params.set("iso", "auto");
     preview_params.set("no-display-mode", "1");
+    preview_params.set("internal-restart", "true");
 
     HAL1_CALL(hal1_device, set_parameters, preview_params.flatten());
     current_params = preview_params;
