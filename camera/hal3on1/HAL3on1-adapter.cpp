@@ -1339,7 +1339,8 @@ static int camera_device_open(const hw_module_t *module, const char *id, hw_devi
     if (ret != 0) {
         ALOGE("Failed to open HAL1 device");
         return ret;
-    }
+    } else
+        ALOGI("Using %s (%s) as HAL1 backend", hal1_module->common.name, hal1_module->common.author);
 
     adapter_camera3_device_t *adapter = (adapter_camera3_device_t *)malloc(sizeof(adapter_camera3_device_t));
     if (!adapter) {
