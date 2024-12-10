@@ -424,6 +424,7 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
     preview_params.set("jpeg-thumbnail-width", "512");
     preview_params.set("jpeg-thumbnail-quality", "85");
     preview_params.set("iso", "auto");
+    preview_params.set("no-display-mode", "1");
 
     HAL1_CALL(hal1_device, set_parameters, preview_params.flatten());
     current_params = preview_params;
@@ -441,9 +442,8 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
      *
      * HAL1_CALL(hal1_device, set_preview_window, (struct preview_stream_ops *)????);
      *
-     * On QCamera2 HAL1: add persist.camera.no-display=1 property to build.prop.
+     * On QCamera2 HAL1: add persist.camera.no-display=1 property to build.prop or set "no-display-mode" parameter to 1.
      */
-
     HAL1_CALL(hal1_device, start_preview);
 
     return NO_ERROR;
