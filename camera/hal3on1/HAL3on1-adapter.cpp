@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <android/native_window.h>
 #include <hardware/hardware.h>
 #include <hardware/camera3.h>
 #include <hardware/camera.h>
@@ -54,6 +55,7 @@ typedef struct {
     int stream_height;
 
     int preview_really_started;
+    preview_stream_ops* preview_window;
 } adapter_camera3_device_t;
 
 #define HAL1_CALL(hal1_device, func, ...) ({ \
@@ -65,6 +67,7 @@ typedef struct {
     bool use_limited_level;
     bool use_sysfs_torch;
     bool use_manual_exposure;
+    bool use_preview_window_stub;
 } adapter_config_t;
 
 struct CameraMemory {
@@ -87,6 +90,7 @@ adapter_config_t properties = {
     .use_limited_level = false,
     .use_sysfs_torch = false,
     .use_manual_exposure = false,
+    .use_preview_window_stub = false,
 };
 
 // Put your sysfs path here or use HAL1 torch mode
@@ -317,6 +321,17 @@ static int camera3_initialize(const struct camera3_device *dev,
     return NO_ERROR;
 }
 
+/*
+ * Some HAL1 implementations require preview window to display (and call back)
+ * preview frames even in no-display mode.
+ */
+struct preview_stream_ops* preview_window_stub_create() {
+    struct preview_stream_ops* window = (preview_stream_ops*)malloc(sizeof(preview_stream_ops));
+    hal3on1_dev->preview_window = window;
+
+    return window;
+}
+
 static CameraParameters current_params;
 
 static int camera3_configure_streams(const struct camera3_device *dev, camera3_stream_configuration_t* stream_config)
@@ -444,12 +459,11 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
     /*
      * Some HAL1 implementations require ANativeWindow to display (and call back)
      * preview frames.
-     * TODO: implement fake preview window for such implementations.
-     *
-     * HAL1_CALL(hal1_device, set_preview_window, (struct preview_stream_ops *)????);
-     *
-     * On QCamera2 HAL1: add persist.camera.no-display=1 property to build.prop or set "no-display-mode" parameter to 1.
+     * We have a stub for such implementations.
      */
+    if (properties.use_preview_window_stub)
+        HAL1_CALL(hal1_device, set_preview_window, preview_window_stub_create());
+
     HAL1_CALL(hal1_device, start_preview);
 
     adapter->preview_really_started = 0;
@@ -1299,6 +1313,7 @@ static int camera3_flush(const struct camera3_device *dev)
 {
     HAL1_CALL(hal3on1_dev->hal1_device, cancel_picture);
     HAL1_CALL(hal3on1_dev->hal1_device, stop_preview);
+    free(hal3on1_dev->preview_window);
 
     return NO_ERROR;
 }
@@ -2290,6 +2305,12 @@ static int init()
     if (atoi(value) == 1) {
         ALOGI("HAL3on1: DANGEROUS: manual exposure control will crash Camera HAL after snapshot!");
         properties.use_manual_exposure = true;
+    }
+
+    property_get("persist.camera.hal3on1.use_preview_window_stub", value, "0");
+    if (atoi(value) == 1) {
+        ALOGI("HAL3on1: using preview window stub");
+        properties.use_preview_window_stub = true;
     }
 
     return NO_ERROR;
