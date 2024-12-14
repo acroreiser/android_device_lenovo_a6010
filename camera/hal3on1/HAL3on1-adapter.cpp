@@ -1327,12 +1327,22 @@ static int camera_device_open(const hw_module_t *module, const char *id, hw_devi
     }
 
     camera_device_t *hal1_device;
-    int ret = hal1_module->common.methods->open(&hal1_module->common, id, (hw_device_t **)&hal1_device);
+
+    int ret = -EINVAL;
+    bool open_legacy = false;
+
+    if (hal1_module->common.module_api_version == CAMERA_MODULE_API_VERSION_1_0)
+        ret = hal1_module->common.methods->open(&hal1_module->common, id, (hw_device_t **)&hal1_device);
+    else if(hal1_module->common.module_api_version >= CAMERA_MODULE_API_VERSION_2_3) {
+        ret = hal1_module->open_legacy(&hal1_module->common, id, CAMERA_MODULE_API_VERSION_1_0, (hw_device_t **)&hal1_device);
+        open_legacy = true;
+    }
     if (ret != 0) {
         ALOGE("Failed to open HAL1 device");
         return ret;
-    } else
-        ALOGI("Using %s (%s) as HAL1 backend", hal1_module->common.name, hal1_module->common.author);
+    }
+
+    ALOGI("HAL3on1: Using %s (%s) with ->%s method as HAL1 backend", hal1_module->common.name, hal1_module->common.author, open_legacy ? "open_legacy" : "common.methods->open");
 
     adapter_camera3_device_t *adapter = (adapter_camera3_device_t *)malloc(sizeof(adapter_camera3_device_t));
     if (!adapter) {
@@ -2112,8 +2122,13 @@ static int get_camera_info(int camera_id, struct camera_info *info)
         return ret;
 
     camera_device_t *hal1_device;
-    ret = hal1_module->common.methods->open(&hal1_module->common, !camera_id ? "0" : "1",
-            (hw_device_t **)&hal1_device);
+    if (hal1_module->common.module_api_version == CAMERA_MODULE_API_VERSION_1_0)
+        ret = hal1_module->common.methods->open(&hal1_module->common, !camera_id ? "0" : "1", (hw_device_t **)&hal1_device);
+    else if(hal1_module->common.module_api_version >= CAMERA_MODULE_API_VERSION_2_3)
+        ret = hal1_module->open_legacy(&hal1_module->common, !camera_id ? "0" : "1", CAMERA_MODULE_API_VERSION_1_0, (hw_device_t **)&hal1_device);
+    else
+        ret = -EINVAL;
+
     if (ret != 0) {
         ALOGE("Failed to open HAL1 device");
         return ret;
@@ -2200,11 +2215,18 @@ static int sysfs_torch_mode(const char* camera_id, bool enabled)
 
 static int hal1_torch_mode(const char* camera_id, bool enabled)
 {
+    int ret = -EINVAL;
+
     if (get_legacy_module())
-        return -EINVAL;
+        return ret;
 
     if (!torch_in_use && enabled) {
-        int ret = hal1_module->common.methods->open(&hal1_module->common, camera_id, (hw_device_t **)&torch_hal1_device);
+
+        if (hal1_module->common.module_api_version == CAMERA_MODULE_API_VERSION_1_0)
+            ret = hal1_module->common.methods->open(&hal1_module->common, camera_id, (hw_device_t **)&torch_hal1_device);
+        else if(hal1_module->common.module_api_version >= CAMERA_MODULE_API_VERSION_2_3)
+            ret = hal1_module->open_legacy(&hal1_module->common, camera_id, CAMERA_MODULE_API_VERSION_1_0, (hw_device_t **)&torch_hal1_device);
+
         if (ret != 0) {
             ALOGE("Failed to open HAL1 device");
             return ret;
