@@ -407,7 +407,7 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
     adapter->buffer_size = adapter->stream_width * adapter->stream_height * 3 / 2;  // For YUV420
     adapter->buffer = (uint8_t*)malloc(adapter->buffer_size);
 
-    ALOGE("----------------------------");
+    ALOGI("----------------------------");
 
     HAL1_CALL(hal1_device, store_meta_data_in_buffers, 0);
 
