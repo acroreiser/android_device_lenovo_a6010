@@ -411,41 +411,7 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
 
     HAL1_CALL(hal1_device, store_meta_data_in_buffers, 0);
 
-    preview_params.set("preview-fps-range", "12000,30000");
-    preview_params.set("preview-frame-rate", "30");
-    preview_params.set("preview-format", "yuv420sp");
-    preview_params.set("preview-flip", "off");
-    preview_params.set("video-frame-format", "yuv420sp");
-    preview_params.set("video-hfr", "off");
-    preview_params.set("video-hsr", "off");
-    preview_params.set("video-flip", "off");
-    preview_params.set("selectable-zone-af", "auto");
-    preview_params.set("video-size", "1920x1080");
-    preview_params.set("auto-exposure", "center-weighted");
-    preview_params.set("exposure-mode", "auto");
-    preview_params.set("whitebalance", "auto");
-    preview_params.set("scene-mode", "auto");
-    preview_params.set("scene-detect", "off");
-    preview_params.set("focus-mode", "auto");
-    preview_params.set("auto-exposure-lock", "false");
-    preview_params.set("auto-whitebalance-lock", "false");
-    preview_params.set("flash-mode", "off");
-    preview_params.set("antibanding", "auto");
-    preview_params.set("zsl", "on");
-    preview_params.set("long-shot", "off");
-    preview_params.set("face-detection", "off");
-    preview_params.set("denoise", "denoise-off");
-    preview_params.set("effect", "none");
-    preview_params.set("zoom", "0");
-    preview_params.set("lensshade", "enable");
-    preview_params.set("exposure-compensation", "0");
-    preview_params.set("jpeg-quality", "95");
-    preview_params.set("jpeg-thumbnail-height", "288");
-    preview_params.set("jpeg-thumbnail-width", "512");
-    preview_params.set("jpeg-thumbnail-quality", "85");
-    preview_params.set("iso", "auto");
     preview_params.set("no-display-mode", "1");
-    preview_params.set("internal-restart", "true");
 
     HAL1_CALL(hal1_device, set_parameters, preview_params.flatten());
     current_params = preview_params;
