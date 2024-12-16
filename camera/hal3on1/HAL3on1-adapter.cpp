@@ -2178,6 +2178,10 @@ static int set_callbacks(const camera_module_callbacks_t *callbacks)
 {
     adapter_callbacks.hal3_callbacks = callbacks;
 
+    // Legacy module may want callbacks to be set even in HAL1 mode
+    if (hal1_module->common.module_api_version >= CAMERA_MODULE_API_VERSION_2_1 && hal1_module->set_callbacks)
+        hal1_module->set_callbacks(callbacks);
+
     return NO_ERROR;
 }
 
