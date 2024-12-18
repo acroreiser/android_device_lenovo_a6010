@@ -36,7 +36,7 @@ echo 10572 > /proc/sys/vm/min_free_kbytes
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 
 # Set kswapd threads
-echo 2 > /proc/sys/vm/kswapd_threads
+echo 1 > /proc/sys/vm/kswapd_threads
 
 # Set lowest possible timeslice for SCHED_RR tasks
 echo 1 > /proc/sys/kernel/sched_rr_timeslice_ms
