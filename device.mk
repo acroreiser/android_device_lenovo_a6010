@@ -118,17 +118,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.per_app_memcg=false \
     ro.lmk.psi_complete_stall_ms=200 \
     ro.lmk.psi_partial_stall_ms=150 \
-    ro.lmk.swap_free_low_percentage=20 \
+    ro.lmk.swap_free_low_percentage=35 \
     ro.lmk.thrashing_limit_critical=20 \
     ro.lmk.stall_limit_critical=30 \
     ro.lmk.kill_timeout_ms=100 \
-    ro.lmk.filecache_min_kb=153600
+    ro.lmk.filecache_min_kb=153600 \
+    ro.lmk.kill_heaviest_task=true
 
 # Avoid thrashing to prevent freezes.
-# LMKD will not be tolerant to significant thrashing.
+# LMKD will not be tolerant to thrashing.
 # This will impact multitasking and cached apps.
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.lmk.thrashing_limit=5
+    ro.lmk.thrashing_limit=0
 
 # Bluetooth
 PRODUCT_PACKAGES += \
