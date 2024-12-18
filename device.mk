@@ -295,7 +295,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.no-display=1 \
     persist.camera.hal3on1.use_limited_level=1 \
     persist.camera.hal3on1.use_memfd=1 \
-    persist.camera.hal3on1.use_hwcomposer=1
+    persist.camera.hal3on1.use_hwcomposer=1 \
+    persist.camera.hal3on1.use_manual_exposure=1
 
 # FastCharge
 PRODUCT_PACKAGES += \
