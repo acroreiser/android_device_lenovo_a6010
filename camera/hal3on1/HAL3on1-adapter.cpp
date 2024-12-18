@@ -160,6 +160,10 @@ void hal1_data_callback(int32_t msg_type,
             usleep(100);
         }
 
+        HAL1_CALL(adapter->hal1_device, stop_preview);
+        HAL1_CALL(adapter->hal1_device, start_preview);
+        adapter->preview_really_started = 0;
+
         break;
     }
 }
