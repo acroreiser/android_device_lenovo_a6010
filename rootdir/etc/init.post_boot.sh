@@ -53,3 +53,7 @@ echo "179:64 4194304" > /dev/blkio/background/blkio.throttle.write_bps_device
 # Limit cputime for background tasks
 echo 1000000 > /dev/cpuctl/background/cpu.cfs_period_us
 echo 2000000 > /dev/cpuctl/background/cpu.cfs_quota_us
+
+# Limit cputime for foreground tasks
+echo 1000000 > /dev/cpuctl/background/cpu.cfs_period_us
+echo 3000000 > /dev/cpuctl/background/cpu.cfs_quota_us
