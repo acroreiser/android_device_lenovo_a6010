@@ -1465,6 +1465,8 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
     uint8_t avail_af_modes[6];
 
     while (token != NULL) {
+        avail_af_modes[fm_counter] = 255;
+
         if (!strcmp(token, "auto"))
             avail_af_modes[fm_counter] = ANDROID_CONTROL_AF_MODE_AUTO;
         if (!strcmp(token, "macro"))
@@ -1495,17 +1497,14 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
                              2);
         }
 
-        if (!strcmp(token, "fixed") && fm_counter == 0)
-            goto noaf;
-
-        if (avail_af_modes[fm_counter])
+        if (avail_af_modes[fm_counter] == 255) {
+            if (fm_counter == 0)
+                goto noaf;
+        } else
             fm_counter++;
 
         token = strtok(NULL, ",");
     }
-
-    avail_af_modes[fm_counter] = ANDROID_CONTROL_AF_MODE_OFF;
-    fm_counter++;
 
     metadata->update(ANDROID_CONTROL_AF_AVAILABLE_MODES, avail_af_modes, fm_counter);
 
