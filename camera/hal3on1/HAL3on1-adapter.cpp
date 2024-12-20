@@ -1480,7 +1480,23 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
 
             static const float min_focus_distance = 10.0;
             metadata->update(ANDROID_LENS_INFO_MINIMUM_FOCUS_DISTANCE, &min_focus_distance, 1);
+
+            const char* manual_focus_modes = params.get("manual-focus-modes");
+            uint8_t focus_distance_calibration;
+
+            if (manual_focus_modes)
+                focus_distance_calibration = ANDROID_LENS_INFO_FOCUS_DISTANCE_CALIBRATION_CALIBRATED;
+
+            metadata->update(ANDROID_LENS_INFO_FOCUS_DISTANCE_CALIBRATION, &focus_distance_calibration,
+                             1);
+
+            float focus_range[2] = { 10.0f, 0.1f };
+            metadata->update(ANDROID_LENS_FOCUS_RANGE, focus_range,
+                             2);
         }
+
+        if (!strcmp(token, "fixed") && fm_counter == 0)
+            goto noaf;
 
         if (avail_af_modes[fm_counter])
             fm_counter++;
@@ -1493,18 +1509,7 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
 
     metadata->update(ANDROID_CONTROL_AF_AVAILABLE_MODES, avail_af_modes, fm_counter);
 
-    const char* manual_focus_modes = params.get("manual-focus-modes");
-    uint8_t focus_distance_calibration;
-
-    if (manual_focus_modes)
-        focus_distance_calibration = ANDROID_LENS_INFO_FOCUS_DISTANCE_CALIBRATION_CALIBRATED;
-
-    metadata->update(ANDROID_LENS_INFO_FOCUS_DISTANCE_CALIBRATION, &focus_distance_calibration,
-                     1);
-
-    float focus_range[2] = { 10.0f, 0.1f };
-    metadata->update(ANDROID_LENS_FOCUS_RANGE, focus_range,
-                     2);
+noaf:
 
     const char* wb_values = params.get("whitebalance-values");
     char wb_modes[128];
