@@ -49,10 +49,6 @@ Needed for Camera2 API applications to use manual controls. If disabled, apps wi
 opening camera and issuing "flash-mode=torch" to HAL1.
 Set your sysfs path in SYSFS_FLASH_PATH_BRIGHTNESS definition and update SELinux policies (if needed).
 
-* persist.camera.hal3on1.use_manual_exposure [0-1]: expose manual exposure control to Camera2 API apps
-if supported by HAL1 (Qualcomm vendor extensions).
-Note: manual exposure control can crash or hang Camera HAL after snapshot!
-
 * persist.camera.hal3on1.use_preview_window_stub [0-1]: workaround for some HAL1 implementations
 that want preview window to be set even in no-display mode.
 
