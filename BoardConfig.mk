@@ -94,6 +94,9 @@ BOARD_ROOT_EXTRA_FOLDERS := firmware persist
 # Verified Boot
 BOARD_AVB_ENABLE := false
 
+# Use deprecated non_ab OTA
+AB_OTA_UPDATER := false
+
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
