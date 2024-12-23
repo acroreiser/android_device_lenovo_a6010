@@ -48,9 +48,9 @@ echo 2 > /sys/class/kgsl/kgsl-3d0/default_pwrlevel
 
 # Limit background tasks IO bandwidth
 echo "179:0 8388608" > /dev/blkio/background/blkio.throttle.read_bps_device
-echo "179:0 4194304" > /dev/blkio/background/blkio.throttle.write_bps_device
+echo "179:0 8388608" > /dev/blkio/background/blkio.throttle.write_bps_device
 echo "179:64 8388608" > /dev/blkio/background/blkio.throttle.read_bps_device
-echo "179:64 4194304" > /dev/blkio/background/blkio.throttle.write_bps_device
+echo "179:64 8388608" > /dev/blkio/background/blkio.throttle.write_bps_device
 
 # Limit cputime for background tasks
 echo 1000000 > /dev/cpuctl/background/cpu.cfs_period_us
