@@ -390,11 +390,6 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1-service \
     android.hardware.gatekeeper@1.0-service.software
 
-# FM
-PRODUCT_PACKAGES += \
-    RevampedFMRadio \
-    libqcomfmjni
-
 # Google Assistant
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opa.eligible_device=true
