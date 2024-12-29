@@ -716,7 +716,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.dev_name=rmnet_usb0 \
     persist.sys.fflag.override.settings_network_and_internet_v2=true \
     persist.data.netmgrd.qos.enable=true \
-    fw.max_users=1
+    fw.max_users=3
 
 # RIL
 PRODUCT_COPY_FILES += \

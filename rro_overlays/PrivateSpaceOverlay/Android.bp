@@ -1,0 +1,5 @@
+runtime_resource_overlay {
+    name: "PrivateSpaceOverlay",
+    sdk_version: "current",
+    proprietary: true
+}

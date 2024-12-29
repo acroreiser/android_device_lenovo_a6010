@@ -51,4 +51,8 @@ PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 PRODUCT_PACKAGES += \
     DocumentsUIOverlayGo
 
+# Enable Private Space feature
+PRODUCT_PACKAGES += \
+    PrivateSpaceOverlay
+
 $(call inherit-product, device/lenovo/a6010/a6010.mk)
