@@ -450,7 +450,7 @@ PRODUCT_PACKAGES += \
 
 # Music player
 PRODUCT_PACKAGES += \
-    Eleven \
+    Twelve \
     AudioFX
 
 
