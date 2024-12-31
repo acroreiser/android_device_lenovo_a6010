@@ -585,7 +585,7 @@ PRODUCT_PACKAGES += \
 
 # USB HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.cyanogen_8916
+    android.hardware.usb@1.3-service.basic
 
 # Optimize
 PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
