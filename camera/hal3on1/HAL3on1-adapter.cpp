@@ -2269,6 +2269,8 @@ static int hal1_torch_mode(const char* camera_id, bool enabled)
             return ret;
         }
 
+        HAL1_CALL(torch_hal1_device, set_callbacks, hal1_notify_callback, hal1_data_callback, hal1_data_timestamp_callback, get_memory, torch_hal1_device);
+
         char *settings = HAL1_CALL(torch_hal1_device, get_parameters);
         torch_params.unflatten(String8(settings));
         torch_params.set("flash-mode", "torch");
