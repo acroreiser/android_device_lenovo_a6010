@@ -116,6 +116,9 @@ endif
 ifeq ($(TARGET_DEVICE),a6000)
 VENDOR_SECURITY_PATCH := 2016-01-01
 endif
+ifeq ($(TARGET_DEVICE),sisleyr)
+VENDOR_SECURITY_PATCH := 2015-12-01
+endif
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
