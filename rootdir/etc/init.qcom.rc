@@ -355,6 +355,7 @@ on property:sys.boot_completed=1
     exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/init.post_boot.sh
     exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/set_tasks.sh
     write /sys/class/leds/green/trigger none
+    chown cameraserver cameraserver /sys/class/leds/torch-light/brightness
     chown cameraserver cameraserver /sys/class/leds/torch-light0/brightness
 
 on charger
