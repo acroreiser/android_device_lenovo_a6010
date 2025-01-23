@@ -38,3 +38,10 @@ if [ "$(getprop ro.camera.experimental_libs)" == "true" ]; then
 fi
 
 mount -o bind /vendor/lib/libwifi-hal-prebuilt.so /vendor/lib/libwifi-hal.so
+
+if [ "$(getprop ro.product.device)" == "sisleyr" ]; then
+  mount -o bind /vendor/lib/hw/camera.legacy.msm8916-sisleyr.so /vendor/lib/hw/camera.legacy.msm8916.so
+  mount -o bind /vendor/lib/libmmcamera_interface-sisleyr.so /vendor/lib/libmmcamera_interface.so
+  mount -o bind /vendor/lib/libmmjpeg_interface-sisleyr.so /vendor/lib/libmmjpeg_interface.so
+  mount -o bind /vendor/lib/libmm-qcamera-sisleyr.so /vendor/lib/libmm-qcamera.so
+fi
