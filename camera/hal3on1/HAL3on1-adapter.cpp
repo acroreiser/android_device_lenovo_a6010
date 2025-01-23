@@ -2222,10 +2222,13 @@ static int set_callbacks(const camera_module_callbacks_t *callbacks)
     return NO_ERROR;
 }
 
+static int hal1_torch_mode(const char* camera_id, bool enabled);
+
 static int sysfs_torch_mode(const char* camera_id, bool enabled)
 {
     int fd_brightness(-1);
     char buffer[16];
+    bool fallback_to_hal1 = false;
     int ret;
 
     fd_brightness = open(SYSFS_FLASH_PATH_BRIGHTNESS, O_RDWR);
@@ -2237,7 +2240,7 @@ static int sysfs_torch_mode(const char* camera_id, bool enabled)
 
     if (fd_brightness < 0) {
         ALOGE("%s: failed to open '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK);
-        return -EBADF;
+        fallback_to_hal1 = true;
     }
 
     if (enabled) {
@@ -2245,17 +2248,24 @@ static int sysfs_torch_mode(const char* camera_id, bool enabled)
         ret = write(fd_brightness, buffer, (size_t)bytes);
         if (ret <= 0) {
             ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
-            return -EBADFD;
+            fallback_to_hal1 = true;
         }
     } else {
         int bytes = snprintf(buffer, sizeof(buffer), "0");
         ret = write(fd_brightness, buffer, (size_t)bytes);
         if (ret <= 0) {
             ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
-            return -EBADFD;
+            fallback_to_hal1 = true;
         }
     }
     close(fd_brightness);
+
+    if (fallback_to_hal1) {
+        ALOGW("%s: sysfs torch mode cannot be used\n", __FUNCTION__);
+        ALOGW("%s: falling back to HAL1 torch mode\n", __FUNCTION__);
+        properties.use_sysfs_torch = false;
+        hal1_torch_mode(camera_id, enabled);
+    }
 
     return NO_ERROR;
 }
