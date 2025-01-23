@@ -95,6 +95,7 @@ adapter_config_t properties = {
 
 // Put your sysfs path here or use HAL1 torch mode
 #define SYSFS_FLASH_PATH_BRIGHTNESS "/sys/class/leds/torch-light0/brightness"
+#define SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK "/sys/class/leds/torch-light/brightness"
 
 static CameraMetadata static_metadata[2];
 static CameraParameters default_parameters[2];
@@ -1316,12 +1317,15 @@ static int camera_device_open(const hw_module_t *module, const char *id, hw_devi
 
         fd_brightness = open(SYSFS_FLASH_PATH_BRIGHTNESS, O_RDWR);
         if (fd_brightness < 0)
-            ALOGW("%s: failed to open '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS);
+            fd_brightness = open(SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK, O_RDWR);
+
+        if (fd_brightness < 0)
+            ALOGW("%s: failed to open '%s' and '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS, SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK);
         else {
             int bytes = snprintf(buffer, sizeof(buffer), "0");
             int ret = write(fd_brightness, buffer, (size_t)bytes);
             if (ret <= 0)
-                ALOGW("%s: failed to write to '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS);
+                ALOGW("%s: failed to write to torch sysfs node\n", __FUNCTION__);
             close(fd_brightness);
         }
     } else if (torch_in_use) {
@@ -2226,7 +2230,13 @@ static int sysfs_torch_mode(const char* camera_id, bool enabled)
 
     fd_brightness = open(SYSFS_FLASH_PATH_BRIGHTNESS, O_RDWR);
     if (fd_brightness < 0) {
-        ALOGE("%s: failed to open '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS);
+        ALOGW("%s: failed to open '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS);
+        ALOGW("%s: trying to open fallback node '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK);
+        fd_brightness = open(SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK, O_RDWR);
+    }
+
+    if (fd_brightness < 0) {
+        ALOGE("%s: failed to open '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK);
         return -EBADF;
     }
 
@@ -2234,14 +2244,14 @@ static int sysfs_torch_mode(const char* camera_id, bool enabled)
         int bytes = snprintf(buffer, sizeof(buffer), "1");
         ret = write(fd_brightness, buffer, (size_t)bytes);
         if (ret <= 0) {
-            ALOGE("%s: failed to write to '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS);
+            ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
             return -EBADFD;
         }
     } else {
         int bytes = snprintf(buffer, sizeof(buffer), "0");
         ret = write(fd_brightness, buffer, (size_t)bytes);
         if (ret <= 0) {
-            ALOGE("%s: failed to write to '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS);
+            ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
             return -EBADFD;
         }
     }
