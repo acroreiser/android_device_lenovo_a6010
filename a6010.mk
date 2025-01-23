@@ -20,6 +20,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Device was launched with L
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l.mk)
 
+# Camera experimental libs
+PRODUCT_PACKAGES += \
+    libmmcamera_ov13850_experimental \
+    libchromatix_ov13850_snapshot_experimental
+
+PRODUCT_PROPERTY_OVERRIDES += ro.camera.experimental_libs=true
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.msm8916

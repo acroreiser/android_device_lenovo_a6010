@@ -280,13 +280,6 @@ PRODUCT_PACKAGES += \
     libmm-qcamera \
     Aperture
 
-# Camera experimental libs
-PRODUCT_PACKAGES += \
-    libmmcamera_ov13850_experimental \
-    libchromatix_ov13850_snapshot_experimental
-
-PRODUCT_PROPERTY_OVERRIDES += ro.camera.experimental_libs=true
-
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
     persist.camera.hal.debug.mask=0 \
