@@ -10,3 +10,8 @@ persist.vendor.service.bdroid.bdaddr       u:object_r:bluetooth_prop:s0
 
 # FastCharge
 persist.vendor.fastcharge.enabled     u:object_r:fastcharge_prop:s0
+
+persist.data.   u:object_r:radio_prop:s0
+persist.data_netmgrd_mtu   u:object_r:radio_prop:s0
+persist.qcril.   u:object_r:radio_prop:s0
+persist.rmnet.   u:object_r:radio_prop:s0
