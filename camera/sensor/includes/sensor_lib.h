@@ -341,9 +341,32 @@ typedef struct {
   int32_t height;
 } msm_sensor_dimension_t;
 
+struct msm_sensor_id_info_t_a6010 {
+       uint16_t sensor_id_reg_addr;
+       uint16_t sensor_id;
+};
+
+struct msm_camera_sensor_slave_info_a6010 {
+       char sensor_name[32];
+       char eeprom_name[32];
+       char actuator_name[32];
+       char ois_name[32];
+       char flash_name[32];
+       enum msm_sensor_camera_id_t camera_id;
+       uint16_t slave_addr;
+       enum i2c_freq_mode_t i2c_freq_mode;
+       enum msm_camera_i2c_reg_addr_type addr_type;
+       struct msm_sensor_id_info_t_a6010 sensor_id_info;
+       struct msm_sensor_power_setting_array power_setting_array;
+       uint8_t  is_init_params_valid;
+       struct msm_sensor_init_params sensor_init_params;
+       uint8_t is_flash_supported;
+       enum msm_sensor_output_format_t output_format;
+};
+
 typedef struct {
   /* sensor slave info */
-  struct msm_camera_sensor_slave_info *sensor_slave_info;
+  struct msm_camera_sensor_slave_info_a6010 *sensor_slave_info;
 
   /* sensor info */
   struct msm_sensor_init_params *sensor_init_params;

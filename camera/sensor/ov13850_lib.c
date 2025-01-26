@@ -100,7 +100,7 @@ static struct msm_sensor_power_setting power_setting[] = {
 };
 
 
-static struct msm_camera_sensor_slave_info sensor_slave_info = {
+static struct msm_camera_sensor_slave_info_a6010 sensor_slave_info = {
   /* Camera slot where this camera is mounted */
   .camera_id = CAMERA_0,
   /* sensor slave address */
