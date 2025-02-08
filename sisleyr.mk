@@ -23,6 +23,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/acdb/sisleyr/MTP_Hdmi_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb \
     $(LOCAL_PATH)/audio/acdb/sisleyr/MTP_Headset_cal.acdb:$(TARGET_COPY_OUT_VENDOR)/etc/acdbdata/MTP/MTP_Headset_cal.acdb
 
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay-sisleyr
 
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
 $(call inherit-product, vendor/lenovo/a6010/sisleyr.mk)
