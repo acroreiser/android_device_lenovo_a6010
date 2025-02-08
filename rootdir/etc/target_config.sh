@@ -24,13 +24,23 @@ echo 50 > /proc/sys/kernel/sched_init_task_load
 echo 15 > /proc/sys/kernel/sched_spill_nr_run
 echo 30 > /proc/sys/kernel/sched_mostly_idle_load
 
-setprop persist.audio.calfile0 /vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
-setprop persist.audio.calfile1 /vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
-setprop persist.audio.calfile2 /vendor/etc/acdbdata/QRD/QRD_Global_cal.acdb
-setprop persist.audio.calfile3 /vendor/etc/acdbdata/QRD/QRD_Handset_cal.acdb
-setprop persist.audio.calfile4 /vendor/etc/acdbdata/QRD/QRD_Hdmi_cal.acdb
-setprop persist.audio.calfile5 /vendor/etc/acdbdata/QRD/QRD_Headset_cal.acdb
-setprop persist.audio.calfile6 /vendor/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
+if [ "$(getprop ro.product.device)" == "sisleyr" ]; then
+  setprop persist.audio.calfile0 /vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+  setprop persist.audio.calfile1 /vendor/etc/acdbdata/MTP/MTP_General_cal.acdb
+  setprop persist.audio.calfile2 /vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb
+  setprop persist.audio.calfile3 /vendor/etc/acdbdata/MTP/MTP_Handset_cal.acdb
+  setprop persist.audio.calfile4 /vendor/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
+  setprop persist.audio.calfile5 /vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
+  setprop persist.audio.calfile6 /vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+else
+  setprop persist.audio.calfile0 /vendor/etc/acdbdata/QRD/QRD_Bluetooth_cal.acdb
+  setprop persist.audio.calfile1 /vendor/etc/acdbdata/QRD/QRD_General_cal.acdb
+  setprop persist.audio.calfile2 /vendor/etc/acdbdata/QRD/QRD_Global_cal.acdb
+  setprop persist.audio.calfile3 /vendor/etc/acdbdata/QRD/QRD_Handset_cal.acdb
+  setprop persist.audio.calfile4 /vendor/etc/acdbdata/QRD/QRD_Hdmi_cal.acdb
+  setprop persist.audio.calfile5 /vendor/etc/acdbdata/QRD/QRD_Headset_cal.acdb
+  setprop persist.audio.calfile6 /vendor/etc/acdbdata/QRD/QRD_Speaker_cal.acdb
+fi
 
 if [ "$(getprop ro.camera.experimental_libs)" == "true" ]; then
   mount -o bind /vendor/lib/libchromatix_ov13850_snapshot_experimental.so /vendor/lib/libchromatix_ov13850_snapshot.so
