@@ -70,6 +70,7 @@ on boot
     chmod 0660 /sys/class/sensors/light/enable
 
     chown system system /sys/bus/i2c/drivers/ft5x06_ts/5-0038/disable_keys
+    chown system system /sys/bus/i2c/drivers/mms200_i2c/5-0048/disable_keys
 
 on init
     # add a cpuset for the camera daemon
