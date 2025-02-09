@@ -62,6 +62,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.a6000
 
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay-a60x0
+
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.target=dpm1 \

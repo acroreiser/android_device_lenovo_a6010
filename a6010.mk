@@ -33,7 +33,8 @@ PRODUCT_PACKAGES += \
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-a6010
+    $(LOCAL_PATH)/overlay-a6010 \
+    $(LOCAL_PATH)/overlay-a60x0
 
 # Audio
 PRODUCT_COPY_FILES += \
