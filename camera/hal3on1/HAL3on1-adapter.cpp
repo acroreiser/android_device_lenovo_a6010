@@ -1129,6 +1129,13 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
         current_params.set("jpeg-quality", jpeg_quality_str);
     }
 
+    if (cm.exists(ANDROID_JPEG_ORIENTATION)) {
+        int32_t orientation = cm.find(ANDROID_JPEG_ORIENTATION).data.i32[0];
+        char orientation_str[4];
+        sprintf(orientation_str, "%u", orientation);
+        current_params.set("rotation", orientation_str);
+    }
+
     if (cm.exists(ANDROID_LENS_FOCUS_DISTANCE) &&
         manual_focus == true) {
         float focus_distance = cm.find(ANDROID_LENS_FOCUS_DISTANCE).data.f[0];
