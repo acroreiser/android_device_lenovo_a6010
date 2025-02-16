@@ -29,8 +29,14 @@ namespace implementation {
 constexpr const char kControlPath[] =
     "/sys/bus/i2c/drivers/ft5x06_ts/5-0038/disable_keys";
 
+constexpr const char kControlPath2[] =
+    "/sys/bus/i2c/drivers/mms200_i2c/5-0048/disable_keys";
+
 KeyDisabler::KeyDisabler() {
-    mHasKeyDisabler = !access(kControlPath, F_OK);
+    if (!access(kControlPath, F_OK) || !access(kControlPath2, F_OK))
+        mHasKeyDisabler = true;
+    else
+        mHasKeyDisabler = false;
 }
 
 // Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
@@ -39,7 +45,8 @@ Return<bool> KeyDisabler::isEnabled() {
 
     if (!mHasKeyDisabler) return false;
 
-    if (!android::base::ReadFileToString(kControlPath, &buf)) {
+    if (!android::base::ReadFileToString(kControlPath, &buf) &&
+        !android::base::ReadFileToString(kControlPath2, &buf)) {
         LOG(ERROR) << "Failed to read " << kControlPath;
         return false;
     }
@@ -50,10 +57,13 @@ Return<bool> KeyDisabler::isEnabled() {
 Return<bool> KeyDisabler::setEnabled(bool enabled) {
     if (!mHasKeyDisabler) return false;
 
-    if(enabled == true)
+    if(enabled == true) {
         android::base::WriteStringToFile("1", kControlPath);
-    else
+        android::base::WriteStringToFile("1", kControlPath2);
+    } else {
         android::base::WriteStringToFile("0", kControlPath);
+        android::base::WriteStringToFile("0", kControlPath2);
+    }
 
     return true;
 }
