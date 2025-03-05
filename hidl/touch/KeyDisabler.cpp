@@ -64,13 +64,7 @@ Return<bool> KeyDisabler::isEnabled() {
 Return<bool> KeyDisabler::setEnabled(bool enabled) {
     if (!mHasKeyDisabler) return false;
 
-    if(enabled == true) {
-        android::base::WriteStringToFile("1", kControlPath);
-    } else {
-        android::base::WriteStringToFile("0", kControlPath);
-    }
-
-    return true;
+    return android::base::WriteStringToFile(enabled ? "1" : "0" , kControlPath);;
 }
 
 }  // namespace implementation
