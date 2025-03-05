@@ -36,6 +36,8 @@ const std::vector<std::string> kControlPathes = {
 static std::string& kControlPath;
 
 KeyDisabler::KeyDisabler() {
+	mHasKeyDisabler = false;
+
 	for (const auto& path : kControlPathes) {
 		if access(path.c_str(), F_OK) {
 			kControlPath = path;
@@ -43,8 +45,6 @@ KeyDisabler::KeyDisabler() {
 			break;
 		}
 	}
-
-	mHasKeyDisabler = false;
 }
 
 // Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
