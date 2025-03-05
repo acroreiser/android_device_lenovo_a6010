@@ -18,6 +18,8 @@
 #include <android-base/logging.h>
 #include <android-base/strings.h>
 
+#include <vector>
+
 #include "KeyDisabler.h"
 
 namespace vendor {
@@ -26,17 +28,23 @@ namespace touch {
 namespace V1_0 {
 namespace implementation {
 
-constexpr const char kControlPath[] =
-    "/sys/bus/i2c/drivers/ft5x06_ts/5-0038/disable_keys";
+const std::vector<std::string> kControlPathes = {
+	"/sys/bus/i2c/drivers/ft5x06_ts/5-0038/disable_keys",
+	"/sys/bus/i2c/drivers/mms200_i2c/5-0048/disable_keys"
+}
 
-constexpr const char kControlPath2[] =
-    "/sys/bus/i2c/drivers/mms200_i2c/5-0048/disable_keys";
+static std::string& kControlPath;
 
 KeyDisabler::KeyDisabler() {
-    if (!access(kControlPath, F_OK) || !access(kControlPath2, F_OK))
-        mHasKeyDisabler = true;
-    else
-        mHasKeyDisabler = false;
+	for (const auto& path : kControlPathes) {
+		if access(path.c_str(), F_OK) {
+			kControlPath = path;
+			mHasKeyDisabler = true;
+			break;
+		}
+	}
+
+	mHasKeyDisabler = false;
 }
 
 // Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
@@ -45,8 +53,7 @@ Return<bool> KeyDisabler::isEnabled() {
 
     if (!mHasKeyDisabler) return false;
 
-    if (!android::base::ReadFileToString(kControlPath, &buf) &&
-        !android::base::ReadFileToString(kControlPath2, &buf)) {
+    if (!android::base::ReadFileToString(kControlPath, &buf)) {
         LOG(ERROR) << "Failed to read " << kControlPath;
         return false;
     }
@@ -59,10 +66,8 @@ Return<bool> KeyDisabler::setEnabled(bool enabled) {
 
     if(enabled == true) {
         android::base::WriteStringToFile("1", kControlPath);
-        android::base::WriteStringToFile("1", kControlPath2);
     } else {
         android::base::WriteStringToFile("0", kControlPath);
-        android::base::WriteStringToFile("0", kControlPath2);
     }
 
     return true;
