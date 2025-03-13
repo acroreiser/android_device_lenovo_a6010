@@ -55,6 +55,20 @@ that want preview window to be set even in no-display mode.
 * persist.camera.hal3on1.use_hwcomposer [0-1]: use hwcomposer for preview buffers.
 May improve preview smoothness but doesn't work on some devices.
 
+* persist.camera.hal3on1.use_msm8916_raw [0-1]: experimental feature to dump bayer raw snapshot to /data/misc/cameraserver.
+
+EXPERIMENTAL
+
+Usage:
+
+    1. Set persist.camera.hal3on1.use_msm8916_raw property to 1 and reboot or restart camera provider HAL
+    2. Switch SELinux to permissive mode
+    3. Set 75% JPEG quality
+    4. Take a picture
+
+Camera app may hang or crash but raw snapshot is completelly handled by HAL so go to /data/misc/cameraserver for your snapshot.
+Use FreeDCam gallery to view your raw photo.
+
 5. Test your camera behavior
 
 NOTE: HAL3on1 is experimental and video recording is buggy.
