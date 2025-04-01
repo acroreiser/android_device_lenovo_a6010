@@ -16,7 +16,4 @@ allow mediaserver serialno_prop:file open;
 allow mediaserver sysfs_battery_supply:dir search;
 allow mediaserver sysfs_battery_supply:file { getattr open read };
 
-# Use HALs
-hal_client_domain(mediaserver, hal_lineage_camera_motor)
-
 allow mediaserver sysfs_camera:file { getattr open read };

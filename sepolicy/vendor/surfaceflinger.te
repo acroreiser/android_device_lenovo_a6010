@@ -3,3 +3,4 @@ allow surfaceflinger sysfs:file { getattr open read write };
 allow surfaceflinger hal_graphics_allocator_hwservice:hwservice_manager { find add };
 allow surfaceflinger default_android_service:service_manager { find add };
 allow surfaceflinger sysfs_kgsl:dir { open read getattr search };
+allow surfaceflinger vendor_file:file { open getattr read write execute };

@@ -1,0 +1,1 @@
+allow vold_prepare_subdirs vendor_file:file { open getattr read write execute };
