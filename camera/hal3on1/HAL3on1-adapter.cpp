@@ -1348,9 +1348,6 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
     capture_result.input_buffer = NULL;
     capture_result.partial_result = 1;
 
-    // TODO: Ratelimit capturing by max Fps supported by camera
-    usleep(1000000/30);
-
     adapter->callback_ops->process_capture_result(adapter->callback_ops, &capture_result);
     cm.unlock(result);
 
