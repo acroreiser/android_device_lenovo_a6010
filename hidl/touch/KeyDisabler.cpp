@@ -31,15 +31,15 @@ namespace implementation {
 const std::vector<std::string> kControlPathes = {
 	"/sys/bus/i2c/drivers/ft5x06_ts/5-0038/disable_keys",
 	"/sys/bus/i2c/drivers/mms200_i2c/5-0048/disable_keys"
-}
+};
 
-static std::string& kControlPath;
+static std::string kControlPath;
 
 KeyDisabler::KeyDisabler() {
 	mHasKeyDisabler = false;
 
 	for (const auto& path : kControlPathes) {
-		if access(path.c_str(), F_OK) {
+		if (!access(path.c_str(), F_OK)) {
 			kControlPath = path;
 			mHasKeyDisabler = true;
 			break;
