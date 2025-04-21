@@ -110,9 +110,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.support_one_handed_mode=true
 
-# Realtime policy for UI threads
-PRODUCT_PROPERTY_OVERRIDES += sys.use_fifo_ui=1
-
 # LMKD configs
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.per_app_memcg=false \
