@@ -2316,19 +2316,21 @@ static int sysfs_torch_mode(const char* camera_id, bool enabled)
         fallback_to_hal1 = true;
     }
 
-    if (enabled) {
-        int bytes = snprintf(buffer, sizeof(buffer), "1");
-        ret = write(fd_brightness, buffer, (size_t)bytes);
-        if (ret <= 0) {
-            ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
-            fallback_to_hal1 = true;
-        }
-    } else {
-        int bytes = snprintf(buffer, sizeof(buffer), "0");
-        ret = write(fd_brightness, buffer, (size_t)bytes);
-        if (ret <= 0) {
-            ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
-            fallback_to_hal1 = true;
+    if (!fallback_to_hal1) {
+        if (enabled) {
+            int bytes = snprintf(buffer, sizeof(buffer), "1");
+            ret = write(fd_brightness, buffer, (size_t)bytes);
+            if (ret <= 0) {
+                ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
+                fallback_to_hal1 = true;
+            }
+        } else {
+            int bytes = snprintf(buffer, sizeof(buffer), "0");
+            ret = write(fd_brightness, buffer, (size_t)bytes);
+            if (ret <= 0) {
+                ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
+                fallback_to_hal1 = true;
+            }
         }
     }
     close(fd_brightness);
