@@ -184,6 +184,10 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_READ_ADDR_FROM_PROP := true
 
+# Camera
+TARGET_SYSFS_FLASH_PATH_BRIGHTNESS := /sys/class/leds/torch-light0/brightness
+TARGET_SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK := /sys/class/leds/torch-light/brightness
+
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness

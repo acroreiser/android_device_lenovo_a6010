@@ -97,10 +97,6 @@ adapter_config_t properties = {
     .use_msm8916_raw = false,
 };
 
-// Put your sysfs path here or use HAL1 torch mode
-#define SYSFS_FLASH_PATH_BRIGHTNESS "/sys/class/leds/torch-light0/brightness"
-#define SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK "/sys/class/leds/torch-light/brightness"
-
 static CameraMetadata static_metadata[2];
 static CameraParameters default_parameters[2];
 static bool static_parameters_initialized[2] = { false, false };
