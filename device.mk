@@ -500,7 +500,6 @@ PRODUCT_PACKAGES += \
 # Configuring device during boot
 PRODUCT_PACKAGES += \
     set_baseband.sh \
-    set_tasks.sh \
     set_zram.sh \
     init.post_boot.sh \
     target_config.sh
