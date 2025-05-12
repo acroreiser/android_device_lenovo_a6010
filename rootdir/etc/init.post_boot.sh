@@ -10,8 +10,8 @@ echo 99 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
 echo 1401600 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_freq
 
 # Setup CPU-boost
-echo 0:1209600 > /sys/module/cpu_boost/parameters/input_boost_freq
-echo 0:1209600 > /sys/module/cpu_boost/parameters/powerkey_input_boost_freq
+echo 0:1401600 > /sys/module/cpu_boost/parameters/input_boost_freq
+echo 0:1401600 > /sys/module/cpu_boost/parameters/powerkey_input_boost_freq
 
 /vendor/bin/timekeep restore
 
