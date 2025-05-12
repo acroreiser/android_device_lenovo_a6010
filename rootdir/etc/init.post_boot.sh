@@ -34,6 +34,9 @@ echo 10572 > /proc/sys/vm/min_free_kbytes
 echo 0 > /proc/sys/vm/admin_reserve_kbytes
 echo 0 > /proc/sys/vm/user_reserve_kbytes
 
+echo 52428800 > /proc/sys/vm/dirty_bytes
+echo 4194304 > /proc/sys/vm/dirty_background_bytes
+
 # Set allocstall_threshold to 0
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 
