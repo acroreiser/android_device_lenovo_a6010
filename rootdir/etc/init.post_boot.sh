@@ -41,7 +41,7 @@ echo 4194304 > /proc/sys/vm/dirty_background_bytes
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 
 # Set kswapd threads
-echo 1 > /proc/sys/vm/kswapd_threads
+echo 4 > /proc/sys/vm/kswapd_threads
 
 # Set KGSL pwrlevel
 echo 2 > /sys/class/kgsl/kgsl-3d0/default_pwrlevel
