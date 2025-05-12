@@ -66,7 +66,6 @@ typedef struct {
 
 typedef struct {
     bool use_memfd;
-    bool use_limited_level;
     bool use_sysfs_torch;
     bool use_preview_window_stub;
     bool use_hwcomposer;
@@ -90,7 +89,6 @@ adapter_camera3_device_t *hal3on1_dev;
 
 adapter_config_t properties = {
     .use_memfd = false,
-    .use_limited_level = false,
     .use_sysfs_torch = false,
     .use_preview_window_stub = false,
     .use_hwcomposer = false,
@@ -1466,6 +1464,8 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
     params.unflatten(String8(settings));
     char *token = NULL;
 
+    uint8_t supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY;
+
     static const camera_metadata_rational control_ae_compensation_step = {1, 3};
     metadata->update(ANDROID_CONTROL_AE_COMPENSATION_STEP, &control_ae_compensation_step, 1);
 
@@ -1568,6 +1568,8 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
             float focus_range[2] = { 10.0f, 0.1f };
             metadata->update(ANDROID_LENS_FOCUS_RANGE, focus_range,
                              2);
+
+            supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
         }
 
         if (avail_af_modes[fm_counter] == 255) {
@@ -2004,8 +2006,10 @@ noaf:
             token = strtok(NULL, ",");
         }
 
-        if(supported)
+        if (supported) {
             avail_ae_modes.add(ANDROID_CONTROL_AE_MODE_OFF);
+            supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
+        }
     }
 
     if (flash_mode) {
@@ -2220,6 +2224,8 @@ noaf:
     metadata->update(ANDROID_REQUEST_AVAILABLE_CHARACTERISTICS_KEYS,
                      available_characteristics_keys,
                      sizeof(available_characteristics_keys)/sizeof(int32_t));
+
+    metadata->update(ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL, &supportedHardwareLevel, 1);
 }
 
 static int get_camera_info(int camera_id, struct camera_info *info)
@@ -2260,12 +2266,6 @@ static int get_camera_info(int camera_id, struct camera_info *info)
     static_info.update(ANDROID_REQUEST_AVAILABLE_CAPABILITIES,
                       available_capabilities.array(),
                       available_capabilities.size());
-
-    uint8_t supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY;
-    if (properties.use_limited_level)
-        supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
-
-    static_info.update(ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL, &supportedHardwareLevel, 1);
 
     int32_t sensor_orientation = info->orientation;
     static_info.update(ANDROID_SENSOR_ORIENTATION, &sensor_orientation, 1);
@@ -2407,12 +2407,6 @@ static int init()
     if (atoi(value) == 1) {
         ALOGI("HAL3on1: using memfd_create as shared memory");
         properties.use_memfd = true;
-    }
-
-    property_get("persist.camera.hal3on1.use_limited_level", value, "0");
-    if (atoi(value) == 1) {
-        ALOGI("HAL3on1: using hardware support level LIMITED");
-        properties.use_limited_level = true;
     }
 
     property_get("persist.camera.hal3on1.use_sysfs_torch", value, "0");

@@ -27,6 +27,10 @@ Android 12-15 with HAL3on1:
 CameraProvider <-> [HAL3on1 <-> HAL1] <-> Camera stack backend
 ***
 
+Hardware support level (automatically detected by camera capabilities, can be different for front and rear cameras):
+* LEGACY
+* LIMITED (if manual exposure/ISO/focus available)
+
 How to use?
 
 1. Import HAL3on1 into your device tree.
@@ -41,9 +45,6 @@ How to use?
 4. Tune HAL3on1 for your needs using next build properties:
 
 * persist.camera.hal3on1.use_memfd [0-1]: use memfd_create() as shared memory provider.
-
-* persist.camera.hal3on1.use_limited_level [0-1]: report hardware support level LIMITED. 
-Needed for Camera2 API applications to use manual controls. If disabled, apps will fallback to Camera1 API.
 
 * persist.camera.hal3on1.use_sysfs_torch [0-1]: allows to control torch faster using sysfs node instead of
 opening camera and issuing "flash-mode=torch" to HAL1.
