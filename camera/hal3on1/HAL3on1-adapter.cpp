@@ -1621,7 +1621,7 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
 
         if (avail_af_modes[fm_counter] == 255) {
             if (fm_counter == 0)
-                goto noaf;
+                avail_af_modes[fm_counter] = ANDROID_CONTROL_AF_MODE_OFF;
         } else
             fm_counter++;
 
@@ -1629,8 +1629,6 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
     }
 
     metadata->update(ANDROID_CONTROL_AF_AVAILABLE_MODES, avail_af_modes, fm_counter);
-
-noaf:
 
     const char* wb_values = params.get("whitebalance-values");
     char wb_modes[128];
