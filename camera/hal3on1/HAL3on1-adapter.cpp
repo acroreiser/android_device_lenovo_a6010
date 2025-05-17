@@ -711,6 +711,7 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
     uint8_t capture_intent;
     uint8_t ae_mode = ANDROID_CONTROL_AE_MODE_ON;
     bool use_scene = false;
+    bool manual_wb = false;
     bool manual_focus = false;
     bool dump_raw = false;
     status_t e;
@@ -882,6 +883,8 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
         current_params.set("exposure-compensation", exposure_compensation_str);
     }
 
+    char manual_awb_value_str[32];
+
     if (!dump_raw && cm.exists(ANDROID_CONTROL_AWB_MODE) && !use_scene) {
         uint8_t awb_mode = cm.find(ANDROID_CONTROL_AWB_MODE).data.u8[0];
         char awb_mode_str[32];
@@ -912,11 +915,41 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
             strcpy(awb_mode_str, "shade");
             break;
         case ANDROID_CONTROL_AWB_MODE_OFF:
+            if (!cm.exists(ANDROID_COLOR_CORRECTION_GAINS))
+               goto skip_mwb;
+
+            manual_wb = true;
+
+            char* manual_awb_mode_str = "1";
             strcpy(awb_mode_str, "manual");
+
+            float *gains = cm.find(ANDROID_COLOR_CORRECTION_GAINS).data.f;
+            float r_gain = gains[0];
+            float g_gain = (gains[1] + gains[2]) / 2;
+            float b_gain = gains[3];
+
+            float min_gain = std::min({r_gain, g_gain, b_gain});
+            if (min_gain < 1.0f) {
+                float scale = 1.0f / std::max(min_gain, 0.5f);
+                r_gain *= scale;
+                g_gain *= scale;
+                b_gain *= scale;
+            }
+
+            r_gain = std::clamp(r_gain, 1.0f, 4.0f);
+            g_gain = std::clamp(g_gain, 1.0f, 4.0f);
+            b_gain = std::clamp(b_gain, 1.0f, 4.0f);
+
+            sprintf(manual_awb_value_str, "%.4f,%.4f,%.4f", r_gain, g_gain, b_gain);
+            current_params.set("manual-wb-type", manual_awb_mode_str);
+            current_params.set("manual-wb-value", manual_awb_value_str);
+
             break;
         }
         current_params.set("whitebalance", awb_mode_str);
     }
+
+skip_mwb:
 
     if (cm.exists(ANDROID_CONTROL_AF_MODE) && !use_scene) {
         uint8_t af_mode = cm.find(ANDROID_CONTROL_AF_MODE).data.u8[0];
@@ -1047,6 +1080,7 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
             strcpy(iso_str, "ISO3200");
 
         current_params.set("iso", iso_str);
+        current_params.set("whitebalance", "auto");
         HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
 
         if (cm.exists(ANDROID_SENSOR_EXPOSURE_TIME)) {
@@ -1059,6 +1093,16 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
             HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
             current_params.set("zsl", "on");
         }
+    } else {
+        current_params.set("iso", "auto");
+        current_params.set("exposure-time", "0");
+        current_params.set("zsl", "on");
+        if (manual_wb) {
+            current_params.set("whitebalance", "manual");
+            current_params.set("manual-wb-type", "1");
+            current_params.set("manual-wb-value", manual_awb_value_str);
+        }
+        HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
     }
 
     if (cm.exists(ANDROID_SCALER_CROP_REGION)) {
@@ -1466,6 +1510,9 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
 
     uint8_t supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY;
 
+    Vector<uint8_t> available_capabilities;
+    available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE);
+
     static const camera_metadata_rational control_ae_compensation_step = {1, 3};
     metadata->update(ANDROID_CONTROL_AE_COMPENSATION_STEP, &control_ae_compensation_step, 1);
 
@@ -1594,6 +1641,8 @@ noaf:
     uint8_t available_awb_modes[9];
 
     while (token != NULL) {
+        available_awb_modes[wb_counter] = 255;
+
         if (!strcmp(token, "auto"))
             available_awb_modes[wb_counter] = ANDROID_CONTROL_AWB_MODE_AUTO;
         if (!strcmp(token, "incandescent"))
@@ -1610,10 +1659,23 @@ noaf:
             available_awb_modes[wb_counter] = ANDROID_CONTROL_AWB_MODE_TWILIGHT;
         if (!strcmp(token, "shade"))
             available_awb_modes[wb_counter] = ANDROID_CONTROL_AWB_MODE_SHADE;
-        if (!strcmp(token, "manual"))
-            available_awb_modes[wb_counter] = ANDROID_CONTROL_AWB_MODE_OFF;
 
-        if (available_awb_modes[wb_counter])
+        if (available_awb_modes[wb_counter] == 255) {
+            if (wb_counter == 0)
+                available_awb_modes[wb_counter] = ANDROID_CONTROL_AWB_MODE_AUTO;
+
+            if (strstr(wb_values, "manual") && camera_id == 0) {
+                available_awb_modes[wb_counter] = ANDROID_CONTROL_AWB_MODE_OFF;
+
+                static const uint8_t color_filter_arrangement = ANDROID_SENSOR_INFO_COLOR_FILTER_ARRANGEMENT_BGGR;
+                metadata->update(ANDROID_SENSOR_INFO_COLOR_FILTER_ARRANGEMENT,
+                              &color_filter_arrangement, 1);
+                supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
+                available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_MANUAL_POST_PROCESSING);
+
+                wb_counter++;
+            }
+        } else
             wb_counter++;
 
         token = strtok(NULL, ",");
@@ -2009,6 +2071,7 @@ noaf:
         if (supported) {
             avail_ae_modes.add(ANDROID_CONTROL_AE_MODE_OFF);
             supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
+            available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_MANUAL_SENSOR);
         }
     }
 
@@ -2226,6 +2289,9 @@ noaf:
                      sizeof(available_characteristics_keys)/sizeof(int32_t));
 
     metadata->update(ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL, &supportedHardwareLevel, 1);
+    metadata->update(ANDROID_REQUEST_AVAILABLE_CAPABILITIES,
+                      available_capabilities.array(),
+                      available_capabilities.size());
 }
 
 static int get_camera_info(int camera_id, struct camera_info *info)
@@ -2259,13 +2325,6 @@ static int get_camera_info(int camera_id, struct camera_info *info)
     hal1_device->common.close((hw_device_t*)hal1_device);
 
     camera_convert_parameters(camera_id, params, &static_info);
-
-    Vector<uint8_t> available_capabilities;
-    available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE);
-
-    static_info.update(ANDROID_REQUEST_AVAILABLE_CAPABILITIES,
-                      available_capabilities.array(),
-                      available_capabilities.size());
 
     int32_t sensor_orientation = info->orientation;
     static_info.update(ANDROID_SENSOR_ORIENTATION, &sensor_orientation, 1);
