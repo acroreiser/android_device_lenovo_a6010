@@ -95,10 +95,6 @@ adapter_config_t properties = {
     .use_msm8916_raw = false,
 };
 
-// Put your sysfs path here or use HAL1 torch mode
-#define SYSFS_FLASH_PATH_BRIGHTNESS "/sys/class/leds/torch-light0/brightness"
-#define SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK "/sys/class/leds/torch-light/brightness"
-
 static CameraMetadata static_metadata[2];
 static CameraParameters default_parameters[2];
 static bool static_parameters_initialized[2] = { false, false };
@@ -1390,8 +1386,10 @@ static int camera_device_open(const hw_module_t *module, const char *id, hw_devi
         if (fd_brightness < 0)
             fd_brightness = open(SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK, O_RDWR);
 
-        if (fd_brightness < 0)
+        if (fd_brightness < 0) {
             ALOGW("%s: failed to open '%s' and '%s'\n", __FUNCTION__, SYSFS_FLASH_PATH_BRIGHTNESS, SYSFS_FLASH_PATH_BRIGHTNESS_FALLBACK);
+            properties.use_sysfs_torch = false;
+        }
         else {
             int bytes = snprintf(buffer, sizeof(buffer), "0");
             int ret = write(fd_brightness, buffer, (size_t)bytes);
@@ -1399,7 +1397,9 @@ static int camera_device_open(const hw_module_t *module, const char *id, hw_devi
                 ALOGW("%s: failed to write to torch sysfs node\n", __FUNCTION__);
             close(fd_brightness);
         }
-    } else if (torch_in_use) {
+    }
+
+    if (!properties.use_sysfs_torch && torch_in_use) {
         torch_params.set("flash-mode", "off");
 
         HAL1_CALL(torch_hal1_device, set_parameters, torch_params.flatten());
@@ -2316,19 +2316,21 @@ static int sysfs_torch_mode(const char* camera_id, bool enabled)
         fallback_to_hal1 = true;
     }
 
-    if (enabled) {
-        int bytes = snprintf(buffer, sizeof(buffer), "1");
-        ret = write(fd_brightness, buffer, (size_t)bytes);
-        if (ret <= 0) {
-            ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
-            fallback_to_hal1 = true;
-        }
-    } else {
-        int bytes = snprintf(buffer, sizeof(buffer), "0");
-        ret = write(fd_brightness, buffer, (size_t)bytes);
-        if (ret <= 0) {
-            ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
-            fallback_to_hal1 = true;
+    if (!fallback_to_hal1) {
+        if (enabled) {
+            int bytes = snprintf(buffer, sizeof(buffer), "1");
+            ret = write(fd_brightness, buffer, (size_t)bytes);
+            if (ret <= 0) {
+                ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
+                fallback_to_hal1 = true;
+            }
+        } else {
+            int bytes = snprintf(buffer, sizeof(buffer), "0");
+            ret = write(fd_brightness, buffer, (size_t)bytes);
+            if (ret <= 0) {
+                ALOGE("%s: failed to write to sysfs\n", __FUNCTION__);
+                fallback_to_hal1 = true;
+            }
         }
     }
     close(fd_brightness);

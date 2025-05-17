@@ -48,7 +48,7 @@ How to use?
 
 * persist.camera.hal3on1.use_sysfs_torch [0-1]: allows to control torch faster using sysfs node instead of
 opening camera and issuing "flash-mode=torch" to HAL1.
-Set your sysfs path in SYSFS_FLASH_PATH_BRIGHTNESS definition and update SELinux policies (if needed).
+Set your sysfs path in TARGET_SYSFS_FLASH_PATH_BRIGHTNESS definition at BoardConfig.mk and update SELinux policies (if needed).
 
 * persist.camera.hal3on1.use_preview_window_stub [0-1]: workaround for some HAL1 implementations
 that want preview window to be set even in no-display mode.
