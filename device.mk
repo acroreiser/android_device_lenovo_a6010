@@ -439,6 +439,9 @@ PRODUCT_PACKAGES += \
     Twelve \
     AudioFX
 
+# LineageOS PDF reader
+PRODUCT_PACKAGES += \
+    Camelot
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
