@@ -33,7 +33,10 @@ echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
 # to the same cpu with ui-threads
 sysctl -w kernel.sched_spill_load=100
 
+sysctl -w kernel.sched_rr_timeslice_ms=50
+
 sysctl -w kernel.sched_min_granularity_ns=3000000
+sysctl -w kernel.sched_latency_ns=100000
 
 echo 1 > /sys/devices/platform/kcal_ctrl.0/kcal_enable
 echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
