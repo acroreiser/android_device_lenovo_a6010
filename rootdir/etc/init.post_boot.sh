@@ -7,7 +7,7 @@ echo "schedutil" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
 echo 300 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
 echo 99 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
-echo 1401600 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_freq
+echo 1209600 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_freq
 
 # Setup CPU-boost
 echo 0:1401600 > /sys/module/cpu_boost/parameters/input_boost_freq
