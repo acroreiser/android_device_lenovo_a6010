@@ -78,3 +78,17 @@ echo 20480 > /dev/cpuctl/camera-daemon/cpu.shares
 echo 20480 > /dev/cpuctl/system/cpu.shares
 echo 20480 > /dev/cpuctl/nnapi-hal/cpu.shares
 echo 20480 > /dev/cpuctl/rt/cpu.shares
+
+echo 0 > /sys/block/mmcblk0/queue/iosched/back_seek_max
+echo 0 > /sys/block/mmcblk0/queue/iosched/back_seek_penalty
+echo 128 > /sys/block/mmcblk0/queue/nr_requests
+echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb
+echo 1 > /sys/block/mmcblk0/queue/iosched/strict_guarantees
+echo 1 > /sys/block/mmcblk0/queue/iosched/slice_idle
+
+echo 0 > /sys/block/mmcblk1/queue/iosched/back_seek_max
+echo 0 > /sys/block/mmcblk1/queue/iosched/back_seek_penalty
+echo 128 > /sys/block/mmcblk1/queue/nr_requests
+echo 128 > /sys/block/mmcblk1/queue/read_ahead_kb
+echo 1 > /sys/block/mmcblk1/queue/iosched/strict_guarantees
+echo 1 > /sys/block/mmcblk1/queue/iosched/slice_idle
