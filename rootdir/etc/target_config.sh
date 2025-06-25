@@ -17,10 +17,12 @@ echo 0 > /proc/sys/kernel/sched_downmigrate
 echo 0 > /proc/sys/kernel/sched_window_stats_policy
 echo 2 > /proc/sys/kernel/sched_ravg_hist_size
 
+echo 0 > /proc/sys/kernel/sched_util_clamp_min
+
 echo 0 > /proc/sys/kernel/sched_enable_power_aware
 
-echo 0 > /proc/sys/kernel/sched_small_task
-echo 50 > /proc/sys/kernel/sched_init_task_load
+echo 30 > /proc/sys/kernel/sched_small_task
+echo 0 > /proc/sys/kernel/sched_init_task_load
 echo 15 > /proc/sys/kernel/sched_spill_nr_run
 echo 30 > /proc/sys/kernel/sched_mostly_idle_load
 

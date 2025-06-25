@@ -19,8 +19,15 @@ echo 0:1209600 > /sys/module/cpu_boost/parameters/powerkey_input_boost_freq
 # Harden memfd_create
 sysctl -w vm.memfd_noexec=1
 
-# Tune task scheduler to prefer idle cpus to place task
-sysctl -w kernel.sched_prefer_idle=1
+echo 5 > /dev/cpuctl/background/cpu.uclamp.max
+echo 40 > /dev/cpuctl/system-background/cpu.uclamp.max
+echo 50 > /dev/cpuctl/foreground/cpu.uclamp.max
+echo 30 > /dev/cpuctl/foreground/cpu.uclamp.min
+echo 5 > /dev/cpuctl/dex2oat/cpu.uclamp.max
+echo max > /dev/cpuctl/top-app/cpu.uclamp.min
+echo 1 > /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+echo max > /dev/cpuctl/camera-daemon/cpu.uclamp.min
+echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
 
 # Tune task scheduler to reduce possibility to pick some heavy task
 # to the same cpu with ui-threads
