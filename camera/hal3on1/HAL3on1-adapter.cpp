@@ -326,8 +326,7 @@ static int camera3_close(hw_device_t *device)
         adapter_dev->hal1_device->common.close((hw_device_t *)adapter_dev->hal1_device);
     }
 
-    free(adapter_dev);
-    hal3on1_dev = NULL;
+    free(hal3on1_dev);
     current_camera_id = -1;
 
     return NO_ERROR;
