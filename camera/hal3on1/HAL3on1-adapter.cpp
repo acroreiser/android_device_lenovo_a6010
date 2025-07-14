@@ -1826,7 +1826,7 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
     int sensor_width;
     int sensor_height;
 
-    int32_t available_resolutions[MAX_SIZES_CNT * 2];
+    int32_t available_resolutions[MAX_SIZES_CNT];
     size_t max_jpeg_size_sz = 0;
 
     int n = 0;
