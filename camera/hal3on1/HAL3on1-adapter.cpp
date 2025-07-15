@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024-2025 acroreiser
+ * Copyright (C) 2024 acroreiser
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@
 #include "../../hardware/display/libgralloc/gralloc_priv.h"
 #include <utils/Mutex.h>
 #include <linux/errno.h>
-#include <ctime>
 #include <stdlib.h>
 
 #define MAX_SIZES_CNT 40
@@ -57,7 +56,6 @@ typedef struct {
     int stream_height;
 
     int preview_really_started;
-    int wait_for_raw;
     preview_stream_ops* preview_window;
 } adapter_camera3_device_t;
 
@@ -70,7 +68,6 @@ typedef struct {
     bool use_sysfs_torch;
     bool use_preview_window_stub;
     bool use_hwcomposer;
-    bool use_msm8916_raw;
 } adapter_config_t;
 
 struct CameraMemory {
@@ -93,7 +90,6 @@ adapter_config_t properties = {
     .use_sysfs_torch = false,
     .use_preview_window_stub = false,
     .use_hwcomposer = false,
-    .use_msm8916_raw = false,
 };
 
 static CameraMetadata static_metadata[2];
@@ -153,40 +149,18 @@ void hal1_data_callback(int32_t msg_type,
         break;
 
     case CAMERA_MSG_COMPRESSED_IMAGE:
-        if (adapter->wait_for_raw != 1) {
-            adapter->jpeg = (uint8_t*)data->data;
-            adapter->jpeg_size = data->size;
+        adapter->jpeg = (uint8_t*)data->data;
+        adapter->jpeg_size = data->size;
 
-            while (adapter->jpeg_size != 0) { usleep(100); }
-
-            HAL1_CALL(adapter->hal1_device, stop_preview);
-            HAL1_CALL(adapter->hal1_device, start_preview);
-            adapter->preview_really_started = 0;
-
-            break;
-        } else {
-            char filename[128];
-            time_t now = time(NULL);
-            /* It's an experimental feature so user must know what he is doing */
-            strftime(filename, sizeof(filename), "/data/misc/cameraserver/frame_%Y-%m-%d_%H-%M-%S.raw", localtime(&now));
-
-            ALOGI("HAL3on1: dumping Bayer RAW image from sensor (bayer-qcom-10bggr) to %s\n", filename);
-
-            int file_fd = open(filename, O_RDWR | O_CREAT, 0644);
-            if (file_fd >= 0) {
-                ssize_t written_len = write(file_fd, data->data, data->size);
-                ALOGI("HAL3on1: written number of bytes %ld\n", (long)written_len);
-                close(file_fd);
-            } else
-                ALOGE("HAL3on1: failed to open file to dump image: %s\n", strerror(errno));
-
-            HAL1_CALL(adapter->hal1_device, stop_preview);
-            HAL1_CALL(adapter->hal1_device, start_preview);
-            adapter->preview_really_started = 0;
-            adapter->wait_for_raw = 0;
-
-            break;
+        while (adapter->jpeg_size != 0) {
+            usleep(100);
         }
+
+        HAL1_CALL(adapter->hal1_device, stop_preview);
+        HAL1_CALL(adapter->hal1_device, start_preview);
+        adapter->preview_really_started = 0;
+
+        break;
     }
 }
 
@@ -362,7 +336,6 @@ struct preview_stream_ops* preview_window_stub_create() {
 }
 
 static CameraParameters current_params;
-static CameraParameters default_params;
 
 static int camera3_configure_streams(const struct camera3_device *dev, camera3_stream_configuration_t* stream_config)
 {
@@ -377,9 +350,6 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
     char *settings = HAL1_CALL(hal1_device, get_parameters);
     CameraParameters preview_params;
     preview_params.unflatten(String8(settings));
-
-    // Save default camera parameters to use for RAW dump
-    default_params.unflatten(String8(settings));
 
     ALOGI("----------------------------");
     ALOGI("| Configuring streams:");
@@ -472,7 +442,6 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
     HAL1_CALL(hal1_device, start_preview);
 
     adapter->preview_really_started = 0;
-    adapter->wait_for_raw = 0;
 
     return NO_ERROR;
 }
@@ -725,7 +694,6 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
     bool use_scene = false;
     bool manual_wb = false;
     bool manual_focus = false;
-    bool dump_raw = false;
     status_t e;
 
     if (!request || request->num_output_buffers == 0 || !request->output_buffers) {
@@ -733,32 +701,7 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
         return -EINVAL;
     }
 
-    if (cm.exists(ANDROID_JPEG_QUALITY)) {
-        int32_t jpeg_quality = cm.find(ANDROID_JPEG_QUALITY).data.u8[0];
-
-        /*
-         * We cannot use RAW directly via Camera2 API.
-         * ANDROID_JPEG_QUALITY == 75 will signal HAL to dump bayer RAW
-         * Most people want highest possible quality so no real reason to use 75% quality
-         * excepting special cases. We just adding such case here: to get a bayer raw snapshot!
-         * Additionally 75% is available option in most camera apps where jpeg quality setting is present.
-         *
-         * When jpeg_quality == 75 HAL will reset current CameraParameters and
-         * skip JPEG and post-processing parameters. 
-         */
-
-        if (jpeg_quality == 75 && properties.use_msm8916_raw) {
-            dump_raw = true;
-            previous_params = current_params;
-            current_params = default_params;
-        } else {
-            char jpeg_quality_str[4];
-            sprintf(jpeg_quality_str, "%u", jpeg_quality);
-            current_params.set("jpeg-quality", jpeg_quality_str);
-        }
-    }
-
-    if (!dump_raw && cm.exists(ANDROID_CONTROL_MODE)) {
+    if (cm.exists(ANDROID_CONTROL_MODE)) {
         switch (cm.find(ANDROID_CONTROL_MODE).data.u8[0]) {
 
         case ANDROID_CONTROL_MODE_USE_SCENE_MODE:
@@ -780,7 +723,7 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
         }
     }
 
-    if (!dump_raw && cm.exists(ANDROID_CONTROL_SCENE_MODE) && use_scene) {
+    if (cm.exists(ANDROID_CONTROL_SCENE_MODE) && use_scene) {
         uint8_t scene_mode = cm.find(ANDROID_CONTROL_SCENE_MODE).data.u8[0];
         char scene_mode_str[32];
 
@@ -897,7 +840,7 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
 
     char manual_awb_value_str[32];
 
-    if (!dump_raw && cm.exists(ANDROID_CONTROL_AWB_MODE) && !use_scene) {
+    if (cm.exists(ANDROID_CONTROL_AWB_MODE) && !use_scene) {
         uint8_t awb_mode = cm.find(ANDROID_CONTROL_AWB_MODE).data.u8[0];
         char awb_mode_str[32];
 
@@ -991,7 +934,7 @@ skip_mwb:
         current_params.set("focus-mode", af_mode_str);
     }
 
-    if (!dump_raw && cm.exists(ANDROID_CONTROL_EFFECT_MODE)) {
+    if (cm.exists(ANDROID_CONTROL_EFFECT_MODE)) {
         uint8_t effect_mode = cm.find(ANDROID_CONTROL_EFFECT_MODE).data.u8[0];
         char effect_mode_str[32];
 
@@ -1197,7 +1140,7 @@ skip_mwb:
             current_params.set("auto-whitebalance-lock", "false");
     }
 
-    if (!dump_raw && cm.exists(ANDROID_NOISE_REDUCTION_MODE)) {
+    if (cm.exists(ANDROID_NOISE_REDUCTION_MODE)) {
         uint8_t noise_reduction = cm.find(ANDROID_NOISE_REDUCTION_MODE).data.u8[0];
 
         if (noise_reduction == ANDROID_NOISE_REDUCTION_MODE_FAST)
@@ -1214,7 +1157,7 @@ skip_mwb:
             current_params.set("lensshade", "disable");
     }
 
-    if (!dump_raw && cm.exists(ANDROID_JPEG_THUMBNAIL_SIZE)) {
+    if (cm.exists(ANDROID_JPEG_THUMBNAIL_SIZE)) {
         int32_t* jpeg_thumbnail_size = cm.find(ANDROID_JPEG_THUMBNAIL_SIZE).data.i32;
         char jpeg_thumbnail_size_str[2][5];
         sprintf(jpeg_thumbnail_size_str[0], "%u", jpeg_thumbnail_size[0]);
@@ -1223,14 +1166,21 @@ skip_mwb:
         current_params.set("jpeg-thumbnail-height", jpeg_thumbnail_size_str[1]);
     }
 
-    if (!dump_raw && cm.exists(ANDROID_JPEG_THUMBNAIL_QUALITY)) {
+    if (cm.exists(ANDROID_JPEG_THUMBNAIL_QUALITY)) {
         int32_t jpeg_thumbnail_quality = cm.find(ANDROID_JPEG_THUMBNAIL_QUALITY).data.u8[0];
         char jpeg_thumbnail_quality_str[4];
         sprintf(jpeg_thumbnail_quality_str, "%u", jpeg_thumbnail_quality);
         current_params.set("jpeg-thumbnail-quality", jpeg_thumbnail_quality_str);
     }
 
-    if (!dump_raw && cm.exists(ANDROID_JPEG_ORIENTATION)) {
+    if (cm.exists(ANDROID_JPEG_QUALITY)) {
+        int32_t jpeg_quality = cm.find(ANDROID_JPEG_QUALITY).data.u8[0];
+        char jpeg_quality_str[4];
+        sprintf(jpeg_quality_str, "%u", jpeg_quality);
+        current_params.set("jpeg-quality", jpeg_quality_str);
+    }
+
+    if (cm.exists(ANDROID_JPEG_ORIENTATION)) {
         int32_t orientation = cm.find(ANDROID_JPEG_ORIENTATION).data.i32[0];
         char orientation_str[4];
         sprintf(orientation_str, "%u", orientation);
@@ -1267,26 +1217,7 @@ skip_mwb:
         capture_intent = cm.find(ANDROID_CONTROL_CAPTURE_INTENT).data.u8[0];
 
         if (capture_intent == CAMERA3_TEMPLATE_STILL_CAPTURE) {
-           HAL1_CALL(hal1_device, enable_msg_type, CAMERA_MSG_COMPRESSED_IMAGE);
-
-           if (dump_raw) {
-                /* See ../QCamera2/HAL/QCameraParameters.cpp at line 204 for possible formats. */
-                current_params.set("picture-format", "bayer-qcom-10bggr");
-                current_params.set("zsl", "off"); // HAL1 refuses to take bayer snapshot when ZSL is on.
-                HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
-
-                HAL1_CALL(hal1_device, take_picture);
-
-                // Wait for dump
-                adapter->wait_for_raw = 1;
-                while (adapter->wait_for_raw == 1) { usleep(100); }
-
-                /* Reset to JPEG and take a second snapshot to feed a camera app */
-                current_params.set("picture-format", "jpeg");
-                current_params.set("zsl", "on");
-                HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
-                current_params = previous_params;
-            }
+            HAL1_CALL(hal1_device, enable_msg_type, CAMERA_MSG_COMPRESSED_IMAGE);
             HAL1_CALL(hal1_device, take_picture);
         }
     }
@@ -2509,12 +2440,6 @@ static int init()
     if (atoi(value) == 1) {
         ALOGI("HAL3on1: using hwcomposer for preview buffers");
         properties.use_hwcomposer = true;
-    }
-
-    property_get("persist.camera.hal3on1.use_msm8916_raw", value, "0");
-    if (atoi(value) == 1) {
-        ALOGI("HAL3on1: will dump raw snapshot on ANDROID_JPEG_QUALITY = 75");
-        properties.use_msm8916_raw = true;
     }
 
     return NO_ERROR;
