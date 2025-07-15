@@ -28,6 +28,7 @@
 #include <utils/Mutex.h>
 #include <linux/errno.h>
 #include <ctime>
+#include <stdlib.h>
 
 #define MAX_SIZES_CNT 40
 #define NSEC_PER_33MSEC 33000000LL
@@ -99,6 +100,8 @@ static CameraMetadata static_metadata[2];
 static CameraParameters default_parameters[2];
 static bool static_parameters_initialized[2] = { false, false };
 static int current_camera_id = -1;
+static int hal1_zoom_ratios[2][256];
+static int hal1_zoom_steps[2];
 
 static int device_api_version = CAMERA_DEVICE_API_VERSION_3_3;
 
@@ -680,20 +683,26 @@ void nv21_to_nv12(unsigned char* nv21, unsigned char* nv12, int width, int heigh
     }
 }
 
-// Ugly zoom mapping implementation. But better than nothing.
-int hal3_to_hal1_zoom(int crop_left, int crop_top, int crop_right, int crop_bottom,
-    int sensor_width, int sensor_height, int max_zoom_value) {
-    float max_ratio = 2.0;
-    int crop_width = crop_right - crop_left;
-    int crop_height = crop_bottom - crop_top;
+// Map ANDROID_SCALER_CROP_REGION to HAL1 zoom index
+int hal3_to_hal1_zoom(CameraMetadata cm)
+{
+    int32_t crop_width = cm.find(ANDROID_SCALER_CROP_REGION).data.i32[2];
+    int32_t active_width = static_metadata[current_camera_id].find(ANDROID_SENSOR_INFO_ACTIVE_ARRAY_SIZE).data.i32[2];
 
-    if (crop_left == 0)
-        return 0;
+    float target_ratio = (float) active_width / crop_width;
+    int zoom_value = 0;
 
-    float zoom_factor = ((float)sensor_width + (float)sensor_height) / ((float)crop_width + (float)crop_height);
-    zoom_factor = zoom_factor / 2;
+    int target = (int)(target_ratio * 100.0f);
+    int min_diff = INT_MAX;
 
-    int zoom_value = (int)(zoom_factor / (max_ratio / max_zoom_value));
+    for (int i = 0; i <= hal1_zoom_steps[current_camera_id]; i++) {
+        int diff = std::abs(target - hal1_zoom_ratios[current_camera_id][i]);
+
+        if (diff < min_diff) {
+            min_diff = diff;
+            zoom_value = i;
+        }
+    }
 
     return zoom_value;
 }
@@ -1108,10 +1117,11 @@ skip_mwb:
 
     if (cm.exists(ANDROID_SCALER_CROP_REGION)) {
         int32_t* crop_region = cm.find(ANDROID_SCALER_CROP_REGION).data.i32;
-        int zoom_value_hal3 = hal3_to_hal1_zoom(crop_region[0], crop_region[1], crop_region[2], crop_region[3],
-            sensor_width, sensor_height, atoi(current_params.get("max-zoom")));
+        int zoom_value = hal3_to_hal1_zoom(cm);
+        char zoom_idx[5];
 
-        current_params.set("zoom", zoom_value_hal3);
+        sprintf(zoom_idx, "%d", zoom_value);
+        current_params.set("zoom", zoom_idx);
     }
 
     bool trigger_af = false;
@@ -2126,12 +2136,26 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
     metadata->update(ANDROID_CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES,
                      available_vstab_modes, sizeof(available_vstab_modes));
 
-    // TODO: implement zoom properly
     const char* zoom_support_str = params.get("zoom-supported");
     float zoom_max = 1.0;
 
-    if (zoom_support_str)
-        zoom_max = 2.0f;
+    if (zoom_support_str) {
+        char zoom_ratios[1024];
+        strncpy(zoom_ratios, params.get("zoom-ratios"), 1024);
+
+        int ratios[256];
+        int count = 0;
+
+        char *token = strtok(zoom_ratios, ",");
+        while (token != NULL && count < 256) {
+            hal1_zoom_ratios[camera_id][count++] = atoi(token);
+            token = strtok(NULL, ",");
+        }
+        hal1_zoom_steps[camera_id] = count - 1;
+
+        if (count > 1)
+            zoom_max = (float)hal1_zoom_ratios[camera_id][count - 1] * 0.01f;
+    }
 
     metadata->update(ANDROID_SCALER_AVAILABLE_MAX_DIGITAL_ZOOM, &zoom_max, 1);
 
