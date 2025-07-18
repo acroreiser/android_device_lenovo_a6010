@@ -117,8 +117,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.lmk.psi_partial_stall_ms=200 \
     ro.lmk.swap_free_low_percentage=35 \
     ro.lmk.kill_timeout_ms=50 \
-    ro.lmk.filecache_min_kb=153600 \
-    ro.lmk.kill_heaviest_task=true
+    ro.lmk.filecache_min_kb=153600
 
 # Avoid thrashing to prevent freezes.
 # LMKD will not be tolerant to thrashing.
