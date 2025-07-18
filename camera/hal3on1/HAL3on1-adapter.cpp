@@ -326,9 +326,11 @@ static int camera3_close(hw_device_t *device)
     adapter_camera3_device_t *adapter_dev = (adapter_camera3_device_t *)device;
 
     if (adapter_dev->hal1_device) {
+        HAL1_CALL(hal3on1_dev->hal1_device, stop_preview);
         adapter_dev->hal1_device->common.close((hw_device_t *)adapter_dev->hal1_device);
     }
 
+    free(hal3on1_dev->preview_window);
     free(hal3on1_dev);
     current_camera_id = -1;
 
@@ -1408,8 +1410,6 @@ static void camera3_dump(const struct camera3_device *dev, int fd) { }
 static int camera3_flush(const struct camera3_device *dev)
 {
     HAL1_CALL(hal3on1_dev->hal1_device, cancel_picture);
-    HAL1_CALL(hal3on1_dev->hal1_device, stop_preview);
-    free(hal3on1_dev->preview_window);
 
     return NO_ERROR;
 }
