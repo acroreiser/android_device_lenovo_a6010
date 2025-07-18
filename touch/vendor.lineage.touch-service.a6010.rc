@@ -1,0 +1,5 @@
+service vendor.touch-hal-a6010 /vendor/bin/hw/vendor.lineage.touch-service.a6010
+    interface aidl vendor.lineage.touch.IKeyDisabler/default
+    class hal
+    user system
+    group system

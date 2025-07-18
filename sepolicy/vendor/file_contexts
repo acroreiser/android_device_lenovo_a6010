@@ -58,7 +58,7 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.thermal@2\.0-service.msm8916    u:object_r:hal_thermal_default_exec:s0
 
 # Touch
-/(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch@1\.0-service.a6010    u:object_r:hal_lineage_touch_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch-service.a6010    u:object_r:hal_lineage_touch_default_exec:s0
 
 # Vibrator
 /(vendor|system/vendor)/bin/hw/android\.hardware\.vibrator@1\.1-service.msm8916    u:object_r:hal_vibrator_default_exec:s0

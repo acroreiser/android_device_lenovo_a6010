@@ -708,7 +708,7 @@ PRODUCT_PACKAGES += \
 
 # Touch
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.a6010
+    vendor.lineage.touch-service.a6010
 
 # AOSP filesystems
 PRODUCT_PACKAGES += \
