@@ -48,7 +48,7 @@ BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 \
                         msm_rtb.filter=0x237 \
                         ehci-hcd.park=3 \
                         androidboot.bootdevice=7824900.sdhci \
-                        loop.max_part=16 \
+                        loop.max_part=7 \
                         pm.sleep_mode=1 \
                         androidboot.memcg=true \
                         androidboot.init_fatal_reboot_target=recovery
