@@ -532,7 +532,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # WiFi HAL
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service-lazy
+    android.hardware.wifi-service-lazy
 
 # Wifi
 PRODUCT_PACKAGES += \
