@@ -135,7 +135,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service-lazy \
-    android.hardware.drm@1.4-service-lazy.clearkey
+    android.hardware.drm-service-lazy.clearkey
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196608
