@@ -491,7 +491,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.radio.config@1.0-service \
-    android.hardware.radio@1.4-service.legacy
+    android.hardware.radio@1.4-service.msm8916
 
 # Configuring device during boot
 PRODUCT_PACKAGES += \
