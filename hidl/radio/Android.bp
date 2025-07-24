@@ -1,0 +1,32 @@
+//
+// Copyright (C) 2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "android.hardware.radio@1.4-service.legacy",
+    owner: "lineage",
+    relative_install_path: "hw",
+    vendor: true,
+    init_rc: ["android.hardware.radio@1.4-service.legacy.rc"],
+    srcs: [
+        "Radio.cpp",
+        "RadioIndication.cpp",
+        "RadioResponse.cpp",
+        "service.cpp",
+        "Helpers.cpp",
+        "hidl-utils.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "libutils",
+        "android.hardware.radio@1.0",
+        "android.hardware.radio@1.1",
+        "android.hardware.radio@1.2",
+        "android.hardware.radio@1.3",
+        "android.hardware.radio@1.4",
+        "android.hidl.safe_union@1.0",
+    ],
+}
