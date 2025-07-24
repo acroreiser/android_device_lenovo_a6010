@@ -5,11 +5,11 @@
 //
 
 cc_binary {
-    name: "android.hardware.radio@1.4-service.legacy",
+    name: "android.hardware.radio@1.4-service.msm8916",
     owner: "lineage",
     relative_install_path: "hw",
     vendor: true,
-    init_rc: ["android.hardware.radio@1.4-service.legacy.rc"],
+    init_rc: ["android.hardware.radio@1.4-service.msm8916.rc"],
     srcs: [
         "Radio.cpp",
         "RadioIndication.cpp",

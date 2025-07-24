@@ -37,6 +37,8 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.msm8916    u:object_r:hal_light_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service.a6000    u:object_r:hal_light_default_exec:s0
 
+/(vendor|system/vendor)/bin/hw/android\.hardware\.radio@1\.4-service.msm8916    u:object_r:hal_radio_default_exec:s0
+
 # Sensors
 /dev/akm09911                                               u:object_r:sensors_device:s0
 /dev/akm09911_dev                                           u:object_r:sensors_device:s0

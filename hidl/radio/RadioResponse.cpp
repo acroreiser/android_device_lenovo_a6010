@@ -8,6 +8,8 @@
 #include "Helpers.h"
 #include<string>
 
+extern int slotId;
+
 namespace android::hardware::radio::implementation {
 
 // Methods from ::android::hardware::radio::V1_0::IRadioResponse follow.
@@ -16,7 +18,12 @@ Return<void> RadioResponse::getIccCardStatusResponse(const V1_0::RadioResponseIn
     V1_4::CardStatus newCS = {};
     newCS.base.base = cardStatus;
     newCS.base.physicalSlotId = -1;
-    newCS.base.iccid = hidl_string(" ");
+
+    if (slotId == 1)
+        newCS.base.iccid = hidl_string("00000000000000000000");
+    else
+       newCS.base.iccid = hidl_string("11111111111111111111");
+
     return mRealRadioResponse->getIccCardStatusResponse_1_4(info, newCS);
 }
 

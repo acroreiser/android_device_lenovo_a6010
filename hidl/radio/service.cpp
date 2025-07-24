@@ -26,28 +26,27 @@ using android::OK;
 using android::sp;
 using android::status_t;
 
-#define MAX_SLOT_ID 4
+int slotId = 1;
 
-int main() {
+int main(int argc, char **argv) {
     // Note: Starts from slot 1
     std::map<int, sp<V1_4::IRadio>> slotIdToRadio;
 
-    for (int slotId = 1; slotId <= MAX_SLOT_ID; slotId++) {
-        sp<V1_0::IRadio> realRadio = V1_0::IRadio::getService("slot" + std::to_string(slotId));
-        if (realRadio == nullptr) {
-            LOG(INFO) << "Cannot get radio service for slot " << slotId;
-
-            if (slotId == 1) {
-                LOG(ERROR) << "Cannot get radio service for slot 1.";
-                return 1;
-            }
-
+    for (int i = 1; i < argc ;) {
+        if (0 == strcmp(argv[i], "-s")) {
+            slotId = 2;
             break;
         }
-
-        slotIdToRadio[slotId] = new Radio(realRadio);
-        linkDeathToDeath(realRadio);
     }
+
+    sp<V1_0::IRadio> realRadio = V1_0::IRadio::getService("slot" + std::to_string(slotId));
+    if (realRadio == nullptr) {
+        LOG(INFO) << "Cannot get radio service for slot " << slotId;
+        return 1;
+    }
+
+    slotIdToRadio[slotId] = new Radio(realRadio);
+    linkDeathToDeath(realRadio);
 
     configureRpcThreadpool(1, true);
 
