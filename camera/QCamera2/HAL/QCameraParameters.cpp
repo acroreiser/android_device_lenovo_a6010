@@ -2641,11 +2641,53 @@ int32_t  QCameraParameters::setContinuousISO(const char *isoValue)
 
     if (continous_iso >= 0 && continous_iso <= m_pCapability->max_iso) {
         CDBG_HIGH("%s: Setting continuous ISO value %d", __func__, continous_iso);
+
+        int32_t expTimeUs = 0;
+        int32_t zslValue;
+
+        // Our proprietary libraries have weird conditions regarding
+        // manual ISO, so the following steps are needed in order to set
+        // a manual ISO
+
+        // First, ZSL needs to be turned off from backend if it's enabled
+        if (m_bZslMode) {
+            zslValue = 0;
+            AddSetParmEntryToBatch(m_pParamBuf,
+                                      CAM_INTF_PARM_ZSL_MODE,
+                                      sizeof(zslValue),
+                                      &zslValue);
+        }
+
         updateParamEntry(KEY_QC_CONTINUOUS_ISO, isoValue);
-        return AddSetParmEntryToBatch(m_pParamBuf,
+
+        // Next, send non-zero, valid manual exposure time to backend
+        // in order to halt the auto-exposure algorithm
+        expTimeUs = m_pCapability->min_exposure_time;
+        AddSetParmEntryToBatch(m_pParamBuf,
+                                  CAM_INTF_PARM_EXPOSURE_TIME,
+                                  sizeof(expTimeUs),
+                                  &expTimeUs);
+
+        // Next, send manual ISO setting to backend. Now that the
+        // AE algorithm is halted, the ISO setting will not be ignored
+        AddSetParmEntryToBatch(m_pParamBuf,
                                       CAM_INTF_PARM_ISO,
                                       sizeof(continous_iso),
                                       &continous_iso);
+
+        // Next, restore user-set manual exposure time
+        AddSetParmEntryToBatch(m_pParamBuf,
+                                      CAM_INTF_PARM_EXPOSURE_TIME,
+                                      sizeof(mExposureTime),
+                                      &mExposureTime);
+
+        // Finally, re-enable ZSL if it was originally turned on
+        zslValue = 1;
+        AddSetParmEntryToBatch(m_pParamBuf,
+                                        CAM_INTF_PARM_ZSL_MODE,
+                                        sizeof(zslValue),
+                                        &zslValue);
+        return NO_ERROR;
     }
     ALOGE("Invalid iso value: %d", continous_iso);
     return BAD_VALUE;
