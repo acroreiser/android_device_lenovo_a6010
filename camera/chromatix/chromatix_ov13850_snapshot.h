@@ -6654,7 +6654,7 @@ Diversion contrary to U.S. law prohibited.
 // ISO 100 gain is calibrated by Chromatix tool.
 /*********************************************************************/
 
-   4.000000f, /* ISO 100 Gain */
+   2.000000f, /* ISO 100 Gain */
 
 /*********************************************************************/
 // Feature name :
