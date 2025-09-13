@@ -524,9 +524,9 @@ static const camera_metadata_t* camera3_construct_default_request_settings(const
     static const uint8_t flash_mode = ANDROID_FLASH_MODE_OFF;
     settings.update(ANDROID_FLASH_MODE, &flash_mode, 1);
 
-//    /* Exposure time(Update the Min Exposure Time)*/
-//    int64_t default_exposure_time = 10000000;
-//   settings.update(ANDROID_SENSOR_EXPOSURE_TIME, &default_exposure_time, 1);
+    /* Exposure time(Update the Min Exposure Time)*/
+    int64_t default_exposure_time = 0;
+    settings.update(ANDROID_SENSOR_EXPOSURE_TIME, &default_exposure_time, 1);
 
     /* frame duration */
     static const int64_t default_frame_duration = NSEC_PER_33MSEC;
@@ -992,24 +992,23 @@ skip_mwb:
     }
 
     if (ae_mode == ANDROID_CONTROL_AE_MODE_OFF &&
-        cm.exists(ANDROID_SENSOR_SENSITIVITY) /* &&
-        cm.exists(ANDROID_SENSOR_EXPOSURE_TIME) */) {
+        cm.exists(ANDROID_SENSOR_SENSITIVITY) &&
+        cm.exists(ANDROID_SENSOR_EXPOSURE_TIME)) {
 
         char exposure_time_str[20];
 
-        if (cm.exists(ANDROID_SENSOR_EXPOSURE_TIME)) {
-            int64_t exposure_time = cm.find(ANDROID_SENSOR_EXPOSURE_TIME).data.i64[0];
-            int64_t exposure_time_min = static_metadata[current_camera_id].find(ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE).data.i64[0];
-            int64_t exposure_time_max = static_metadata[current_camera_id].find(ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE).data.i64[1];
+        int64_t exposure_time = cm.find(ANDROID_SENSOR_EXPOSURE_TIME).data.i64[0];
+        int64_t exposure_time_min = static_metadata[current_camera_id].find(ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE).data.i64[0];
+        int64_t exposure_time_max = static_metadata[current_camera_id].find(ANDROID_SENSOR_INFO_EXPOSURE_TIME_RANGE).data.i64[1];
 
-            if (exposure_time > exposure_time_max)
-                exposure_time = exposure_time_max;
-            if (exposure_time < exposure_time_min)
-                exposure_time = exposure_time_min;
+        if (exposure_time > exposure_time_max)
+            exposure_time = exposure_time_max;
+        if (exposure_time < exposure_time_min)
+            exposure_time = exposure_time_min;
 
-            double result = (double)exposure_time / 1000000.0;
-            snprintf(exposure_time_str, sizeof(exposure_time_str), "%.6f", result);
-        }
+        double result = (double)exposure_time / 1000000.0;
+        snprintf(exposure_time_str, sizeof(exposure_time_str), "%.6f", result);
+
 
         int32_t iso = cm.find(ANDROID_SENSOR_SENSITIVITY).data.i32[0];
         int32_t min_iso = static_metadata[current_camera_id].find(ANDROID_SENSOR_INFO_SENSITIVITY_RANGE).data.i32[0];
