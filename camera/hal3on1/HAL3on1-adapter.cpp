@@ -1457,7 +1457,7 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
     params.unflatten(String8(settings));
     char *token = NULL;
 
-    uint8_t supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY;
+    uint8_t supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
 
     Vector<uint8_t> available_capabilities;
     available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE);
@@ -1564,8 +1564,6 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
             float focus_range[2] = { 10.0f, 0.1f };
             metadata->update(ANDROID_LENS_FOCUS_RANGE, focus_range,
                              2);
-
-            supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
         }
 
         if (avail_af_modes[fm_counter] == 255) {
@@ -1617,7 +1615,6 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
                 static const uint8_t color_filter_arrangement = ANDROID_SENSOR_INFO_COLOR_FILTER_ARRANGEMENT_BGGR;
                 metadata->update(ANDROID_SENSOR_INFO_COLOR_FILTER_ARRANGEMENT,
                               &color_filter_arrangement, 1);
-                supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
                 available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_MANUAL_POST_PROCESSING);
 
                 wb_counter++;
@@ -2017,7 +2014,6 @@ static void camera_convert_parameters(int camera_id, const char *settings, Camer
 
         if (supported) {
             avail_ae_modes.add(ANDROID_CONTROL_AE_MODE_OFF);
-            supportedHardwareLevel = ANDROID_INFO_SUPPORTED_HARDWARE_LEVEL_LIMITED;
             available_capabilities.add(ANDROID_REQUEST_AVAILABLE_CAPABILITIES_MANUAL_SENSOR);
         }
     }
