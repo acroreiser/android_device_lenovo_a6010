@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 acroreiser
+ * Copyright (C) 2024-2025 acroreiser
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1013,7 +1013,9 @@ skip_mwb:
         int32_t iso = cm.find(ANDROID_SENSOR_SENSITIVITY).data.i32[0];
         int32_t min_iso = static_metadata[current_camera_id].find(ANDROID_SENSOR_INFO_SENSITIVITY_RANGE).data.i32[0];
         int32_t max_iso = static_metadata[current_camera_id].find(ANDROID_SENSOR_INFO_SENSITIVITY_RANGE).data.i32[1];
+
         char iso_str[8];
+        char exact_iso_str[8];
 
         if (iso > max_iso)
             iso = max_iso;
@@ -1032,6 +1034,12 @@ skip_mwb:
             strcpy(iso_str, "ISO1600");
         if (iso > 1600)
             strcpy(iso_str, "ISO3200");
+
+        if (iso < 1251) {
+            strcpy(iso_str, "manual");
+            sprintf(exact_iso_str, "%d", iso);
+            current_params.set("continuous-iso", exact_iso_str);
+        }
 
         current_params.set("iso", iso_str);
         current_params.set("whitebalance", "auto");
