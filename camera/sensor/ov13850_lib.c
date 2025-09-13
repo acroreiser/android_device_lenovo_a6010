@@ -147,8 +147,8 @@ static struct msm_sensor_output_reg_addr_t output_reg_addr = {
 static sensor_manual_exposure_info_t manual_exp_info = {
   .min_exposure_time = 100000,/*in nano sec = 1line*/
   .max_exposure_time = 1000000000,/*in nano sec = FFFF lines*/
-  .min_iso = 100,
-  .max_iso = 1600,
+  .min_iso = 50,
+  .max_iso = 3200,
 };
 
 static struct msm_sensor_exp_gain_info_t exp_gain_info = {
@@ -710,7 +710,7 @@ static struct sensor_res_cfg_table_t ov13850_res_table = {
 static struct sensor_lib_chromatix_t ov13850_chromatix[] = {
   {
     .common_chromatix = SKUF_OV13850_LOAD_CHROMATIX(common),
-    .camera_preview_chromatix = SKUF_OV13850_LOAD_CHROMATIX(preview),
+    .camera_preview_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
     .camera_snapshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(snapshot),
     .camcorder_chromatix = SKUF_OV13850_LOAD_CHROMATIX(default_video),
     .liveshot_chromatix = SKUF_OV13850_LOAD_CHROMATIX(preview),
