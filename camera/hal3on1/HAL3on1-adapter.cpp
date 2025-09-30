@@ -48,12 +48,16 @@ typedef struct {
     uint8_t focus_state;
 
     int buffer_size;
+    int video_buffer_size;
     int jpeg_size;
     uint8_t* buffer;
+    uint8_t* video_buffer;
     uint8_t* jpeg;
 
     int stream_width;
     int stream_height;
+    bool video_stream;
+    nsecs_t video_frame_timestamp;
 
     int preview_really_started;
     preview_stream_ops* preview_window;
@@ -166,7 +170,13 @@ void hal1_data_callback(int32_t msg_type,
 
 void process_camera_frame(void* buffer, size_t size, nsecs_t timestamp)
 {
+    adapter_camera3_device_t* adapter = hal3on1_dev;
     ALOGE("Processing frame of size: %zu at timestamp: %lld\n", size, (long long)timestamp);
+            adapter->video_buffer = (uint8_t*)buffer;
+            adapter->video_buffer_size = size;
+            adapter->video_frame_timestamp = timestamp;
+
+            while (adapter->video_buffer_size > 0) { usleep(1); }
 }
 
 void hal1_data_timestamp_callback(nsecs_t timestamp, int32_t msg_type,
@@ -347,6 +357,15 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
         return -ENODEV;
     }
 
+    if (adapter->video_stream) {
+        HAL1_CALL(hal3on1_dev->hal1_device, disable_msg_type, CAMERA_MSG_VIDEO_FRAME);
+        HAL1_CALL(hal3on1_dev->hal1_device, stop_recording);
+        adapter->video_buffer_size = 0;
+        adapter->video_stream = false;
+    }
+
+ALOGE("Processing frame CONFIGURE STREAMS");
+
     char *settings = HAL1_CALL(hal1_device, get_parameters);
     CameraParameters preview_params;
     preview_params.unflatten(String8(settings));
@@ -385,6 +404,13 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
                 // Override format for legacy gralloc
                 stream->format = HAL_PIXEL_FORMAT_YCrCb_420_SP;
 
+                if (stream->usage == 0x00010000) {
+                    stream->format = HAL_PIXEL_FORMAT_NV12_ENCODEABLE;
+                    adapter->video_buffer_size = 0;
+                    preview_params.setVideoSize(stream->width, stream->height);
+                    break;
+                }
+
                 if (stream->width > adapter->stream_width &&
                     stream->height > adapter->stream_height) {
                     adapter->stream_width = stream->width;
@@ -398,9 +424,6 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
                     stream->height = adapter->stream_height;
                 }
 
-                if (stream->usage == 0x00010000)
-                    stream->format = 0x102;
-
                 if (properties.use_hwcomposer)
                     stream->usage = GRALLOC_USAGE_HW_COMPOSER;
                 else
@@ -408,7 +431,16 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
 
                 break;
             }
+                    ALOGI("=> p=%p  fmt=0x%.2x  type=%u  usage=0x%.8x  size=%4ux%-4u  buf_no=%u",
+              stream,
+              stream->format,
+              stream->stream_type,
+              stream->usage,
+              stream->width,
+              stream->height,
+              stream->max_buffers);
         }
+
     }
 
     adapter->buffer_size = adapter->stream_width * adapter->stream_height * 3 / 2;  // For YUV420
@@ -690,6 +722,7 @@ static int camera3_process_capture_request(const camera3_device_t* device, camer
     CameraMetadata cm;
     cm = request->settings;
     uint8_t capture_intent;
+    bool video_frame = false;
     uint8_t ae_mode = ANDROID_CONTROL_AE_MODE_ON;
     bool use_scene = false;
     bool manual_wb = false;
@@ -1233,6 +1266,10 @@ skip_mwb:
     if (request->input_buffer)
         request->input_buffer->release_fence = -1;
 
+    auto timestamp = systemTime();
+    int64_t sensor_timestamp = timestamp;
+    int64_t sync_frame_number = request->frame_number;
+
     Vector<camera3_stream_buffer> buffers;
     for (uint32_t i = 0; i < request->num_output_buffers; ++i) {
         const camera3_stream_buffer_t& output_buffer = request->output_buffers[i];
@@ -1281,11 +1318,21 @@ skip_mwb:
             yuv420sp_buffer *crop_buf = NULL;
             unsigned char* nv12_buf;
 
-            if (output_buffer.stream->format == 0x102) {
-                nv12_buf = (unsigned char*)malloc(output_buffer.stream->width * output_buffer.stream->height * 3 / 2);
-                nv21_to_nv12(adapter->buffer, nv12_buf, output_buffer.stream->width, output_buffer.stream->height);
-                memcpy(buf, nv12_buf, adapter->buffer_size);
-                free(nv12_buf);
+            if (output_buffer.stream->format == HAL_PIXEL_FORMAT_NV12_ENCODEABLE) {
+                if (adapter->video_stream != true) {
+                    current_params.set("video-frame-format", "nv12-venus");
+                    HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+                    HAL1_CALL(hal1_device, enable_msg_type, CAMERA_MSG_VIDEO_FRAME);
+                    HAL1_CALL(hal1_device, start_recording);
+                    adapter->video_stream = true;
+                }
+
+                while (adapter->video_buffer_size == 0) {
+                    usleep(1);
+                }
+                memcpy(buf, adapter->video_buffer, adapter->video_buffer_size);
+                HAL1_CALL(adapter->hal1_device, release_recording_frame, adapter->video_buffer);
+                adapter->video_buffer_size = 0;
             } else if (output_buffer.stream->width < adapter->stream_width ||
                        output_buffer.stream->height < adapter->stream_height) {
                 get_crop_point(adapter->stream_width, adapter->stream_height,
@@ -1315,10 +1362,6 @@ skip_mwb:
         buffers.editTop().status = CAMERA3_BUFFER_STATUS_OK;
     }
 
-    auto timestamp = systemTime();
-    int64_t sensor_timestamp = timestamp;
-    int64_t sync_frame_number = request->frame_number;
-
     camera3_notify_msg_t msg;
     msg.type = CAMERA3_MSG_SHUTTER;
     msg.message.shutter.frame_number = sync_frame_number;
@@ -1347,7 +1390,18 @@ static void camera3_dump(const struct camera3_device *dev, int fd) { }
 
 static int camera3_flush(const struct camera3_device *dev)
 {
+    adapter_camera3_device_t *adapter = (adapter_camera3_device_t *)dev;
+
+    if (adapter->video_stream) {
+            HAL1_CALL(hal3on1_dev->hal1_device, disable_msg_type, CAMERA_MSG_VIDEO_FRAME);
+        HAL1_CALL(hal3on1_dev->hal1_device, stop_recording);
+         adapter->video_stream = false;
+    } else {
+    HAL1_CALL(hal3on1_dev->hal1_device, disable_msg_type, CAMERA_MSG_COMPRESSED_IMAGE);
     HAL1_CALL(hal3on1_dev->hal1_device, cancel_picture);
+}
+
+HAL1_CALL(hal3on1_dev->hal1_device, release);
 
     return NO_ERROR;
 }
