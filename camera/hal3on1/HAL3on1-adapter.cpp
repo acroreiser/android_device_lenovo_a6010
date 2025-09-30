@@ -1100,6 +1100,59 @@ skip_mwb:
         HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
     }
 
+    char halt_expo[PROPERTY_VALUE_MAX];
+    char force_zsl[PROPERTY_VALUE_MAX];
+    property_get("persist.camera.hal3on1.user_param_halt_exposure", halt_expo, "0");
+    property_get("persist.camera.hal3on1.user_param_zsl", force_zsl, "-1");
+    if (strcmp(force_zsl, "-1"))
+    {
+        current_params.set("zsl", force_zsl);
+        HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+    }
+
+    if (strcmp(halt_expo, "-1"))
+    {
+    int64_t exposure_time = cm.find(ANDROID_SENSOR_EXPOSURE_TIME).data.i64[0];
+
+        double result = (double)exposure_time / 1000000.0;
+        sprintf(halt_expo, "%.6f", result);
+
+        current_params.set("exposure-time", halt_expo);
+        HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+    }
+
+    char param1[PROPERTY_VALUE_MAX];
+    char value1[PROPERTY_VALUE_MAX];
+    property_get("persist.camera.hal3on1.user_param1", param1, "0");
+    property_get("persist.camera.hal3on1.user_param1_value", value1, "0");
+
+    if (strcmp(param1, "0"))
+{
+        current_params.set(param1, value1);
+HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+}
+    char param2[PROPERTY_VALUE_MAX];
+    char value2[PROPERTY_VALUE_MAX];
+    property_get("persist.camera.hal3on1.user_param2", param2, "0");
+    property_get("persist.camera.hal3on1.user_param2_value", value2, "0");
+
+    if (strcmp(param2, "0"))
+{
+        current_params.set(param2, value2);
+HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+}
+
+    char param3[PROPERTY_VALUE_MAX];
+    char value3[PROPERTY_VALUE_MAX];
+    property_get("persist.camera.hal3on1.user_param3", param3, "0");
+    property_get("persist.camera.hal3on1.user_param3_value", value3, "0");
+
+    if (strcmp(param3, "0"))
+{
+        current_params.set(param3, value3);
+HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
+}
+
     if (cm.exists(ANDROID_SCALER_CROP_REGION)) {
         int32_t* crop_region = cm.find(ANDROID_SCALER_CROP_REGION).data.i32;
         int zoom_value = hal3_to_hal1_zoom(cm);
