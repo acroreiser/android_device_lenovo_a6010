@@ -128,11 +128,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0 \
+    android.hardware.bluetooth@1.0.vendor \
     android.hardware.bluetooth.audio@2.0-impl \
     audio.bluetooth.default
 
 # DRM
 PRODUCT_PACKAGES += \
+    android.hardware.drm@1.3.vendor \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service-lazy \
     android.hardware.drm-service-lazy.clearkey
@@ -451,7 +453,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # HIDL
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
+    android.hidl.base@1.0.vendor \
     android.hidl.manager@1.0 \
+
+# libstdc++ for vendor blobs
+PRODUCT_PACKAGES += \
+    libstdc++_vendor
+
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     debug.fdsan=0
@@ -459,6 +467,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # Binder
 PRODUCT_PACKAGES += \
     libhwbinder \
+    libhwbinder.vendor \
     libhidltransport \
     libjson \
     vndservicemanager
@@ -478,11 +487,14 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
+    libsqlite.vendor \
     librmnetctl \
     libxml2
 
 # Net
 PRODUCT_PACKAGES += \
+    android.system.net.netd@1.0.vendor \
+    libnetutils.vendor \
     netutils-wrapper-1.0
 
 PRODUCT_PACKAGES += \
@@ -687,8 +699,16 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.thermal.config=thermal_info_config.json
 
+# GNSS
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@2.1.vendor \
+    android.hardware.gnss.measurement_corrections@1.1.vendor \
+    android.hardware.gnss.visibility_control@1.0.vendor \
+    android.hardware.power@1.2.vendor
+
 # Sensors
 PRODUCT_PACKAGES += \
+    android.frameworks.sensorservice@1.0.vendor \
     calmodule.cfg \
     android.hardware.sensors@1.0-impl.msm8916 \
     android.hardware.sensors@1.0-service.msm8916 \
