@@ -1388,7 +1388,7 @@ int platform_acdb_init(void *platform)
     snd_card_name = mixer_get_name(my_data->adev->mixer);
     acdb_snd_card_name = get_snd_card_name_for_acdb_loader(snd_card_name);
 
-    result = my_data->acdb_init(acdb_snd_card_name, cvd_version, key);
+    result = my_data->acdb_init();
 
     if (cvd_version)
         free(cvd_version);

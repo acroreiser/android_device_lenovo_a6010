@@ -635,7 +635,7 @@ exit:
     return status.status;
 }
 
-static void* spkr_calibration_thread()
+static void* spkr_calibration_thread(void *)
 {
     unsigned long sec = 0;
     int t0;
