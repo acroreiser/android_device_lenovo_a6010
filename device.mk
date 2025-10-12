@@ -104,7 +104,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Disable buffer age
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.hwui.use_buffer_age=false
+    debug.hwui.use_buffer_age=false \
+    debug.hwui.use_partial_updates=false
 
 # Enable support of one-handed mode
 PRODUCT_PROPERTY_OVERRIDES += \
