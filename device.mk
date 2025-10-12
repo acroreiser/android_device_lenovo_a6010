@@ -269,7 +269,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.5-service \
+    android.hardware.camera.provider-service.lineage \
     camera.device@1.0-impl \
     camera.msm8916 \
     camera.legacy.msm8916 \
