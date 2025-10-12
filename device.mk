@@ -283,10 +283,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.hal3on1.use_hwcomposer=1 \
     persist.camera.hal3on1.use_sysfs_torch=1
 
-# FastCharge
-PRODUCT_PACKAGES += \
-    vendor.lineage.fastcharge@1.0-service.usb
-
 # Screen Recorder
 PRODUCT_PACKAGES += \
     Recorder

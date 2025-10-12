@@ -20,9 +20,6 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.4-service-lazy\.clearkey                u:object_r:hal_drm_clearkey_exec:s0
 /data/vendor/mediadrm(/.*)?                                 u:object_r:media_data_file:s0
 
-# FastCharge HAL
-/(vendor|system/vendor)/bin/hw/vendor\.lineage\.fastcharge@1\.0-service\.usb                   u:object_r:hal_lineage_fastcharge_default_exec:s0
-
 # Gatekeeper
 /(vendor|system/vendor)/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.software			u:object_r:hal_gatekeeper_default_exec:s0
 
