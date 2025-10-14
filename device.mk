@@ -480,7 +480,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.1-service.msm8916
+    android.hardware.vibrator-service.msm8916
 
 # RIL
 PRODUCT_PACKAGES += \

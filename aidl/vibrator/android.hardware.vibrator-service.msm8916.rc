@@ -1,0 +1,10 @@
+on early-boot
+    chown system system /sys/class/timed_output/vibrator/vtg_level
+    chown system system /sys/class/timed_output/vibrator/enable
+    chmod 0660 /sys/class/timed_output/vibrator/vtg_level
+    chmod 0660 /sys/class/timed_output/vibrator/enable
+
+service vendor.vibrator /vendor/bin/hw/android.hardware.vibrator-service.msm8916
+    class hal
+    user system
+    group system input
