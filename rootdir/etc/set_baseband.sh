@@ -9,6 +9,6 @@
 if [ -f "/data/modem_version.txt" ]; then
     setprop gsm.version.baseband `cat /data/modem_version.txt`
 else
-    echo `strings /firmware/image/modem.b* | grep "QC_IMAGE_VERSION_STRING" | head -1  | sed s/QC_IMAGE_VERSION_STRING=//` > /data/modem_version.txt
+    echo `strings /vendor/firmware_mnt/image/modem.b* | grep "QC_IMAGE_VERSION_STRING" | head -1  | sed s/QC_IMAGE_VERSION_STRING=//` > /data/modem_version.txt
     setprop gsm.version.baseband `cat /data/modem_version.txt`
 fi
