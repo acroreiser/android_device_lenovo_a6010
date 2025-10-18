@@ -2,3 +2,4 @@ allow hal_graphics_composer_default default_android_vndservice:service_manager {
 get_prop(hal_graphics_composer_default, system_prop);
 get_prop(hal_graphics_composer_default, bootanim_system_prop);
 get_prop(hal_graphics_composer_default, default_prop);
+allow hal_graphics_composer_default hal_graphics_allocator_service:service_manager { add find };

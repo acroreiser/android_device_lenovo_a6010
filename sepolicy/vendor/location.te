@@ -9,3 +9,4 @@ get_prop(location, radio_prop);
 allow location socket_device:file { create };
 allow location socket_device:dir { write add_name };
 allow location fwk_sensor_service:service_manager { find };
+allow location diag_device:chr_file { read write };

@@ -15,3 +15,19 @@ persist.data.   u:object_r:radio_prop:s0
 persist.data_netmgrd_mtu   u:object_r:radio_prop:s0
 persist.qcril.   u:object_r:radio_prop:s0
 persist.rmnet.   u:object_r:radio_prop:s0
+ro.use_data_netmgrd   u:object_r:radio_prop:s0
+ro.usb.   u:object_r:radio_prop:s0
+
+# Camera/media
+persist.hwc.   u:object_r:system_prop:s0
+ro.camera.experimental_libs   u:object_r:camera_prop:s0
+vidc.enc.narrow.searchrange   u:object_r:camera_prop:s0
+ro.media.maxmem   u:object_r:system_prop:s0
+
+# Configuration
+ro.config.night_mode_on_battery_saver   u:object_r:system_prop:s0
+ro.opa.eligible_device   u:object_r:config_prop:s0
+ro.com.android.mobiledata   u:object_r:system_prop:s0
+ro.build.shutdown_timeout   u:object_r:system_prop:s0
+ro.support_one_handed_mode   u:object_r:config_prop:s0
+fw.max_users   u:object_r:config_prop:s0

@@ -69,6 +69,11 @@
 /(vendor|system/vendor)/lib/hw/gralloc.msm8916.so      u:object_r:same_process_hal_file:s0
 /(vendor|system/vendor)/lib/libmemalloc.so      u:object_r:same_process_hal_file:s0
 /(vendor|system/vendor)/lib/libsc-a3xx.so      u:object_r:same_process_hal_file:s0
+/vendor/lib/libbinder.so      u:object_r:same_process_hal_file:s0
+/vendor/lib/libui.so      u:object_r:same_process_hal_file:s0
+/vendor/lib/android.hardware.graphics.allocator@2.0.so      u:object_r:same_process_hal_file:s0
+/vendor/lib/android.hardware.graphics.allocator@3.0.so      u:object_r:same_process_hal_file:s0
+/vendor/lib/android.hardware.graphics.allocator@4.0.so      u:object_r:same_process_hal_file:s0
 
 # GLES-enabled surfaceflinger for GSI
 /(vendor|system/vendor)/bin/surfaceflinger-gles      u:object_r:surfaceflinger_exec:s0
