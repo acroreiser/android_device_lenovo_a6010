@@ -31,6 +31,10 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.sisleyr.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
 
+# Camera
+PRODUCT_PACKAGES += \
+    libcamera_compat
+
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
 $(call inherit-product, vendor/lenovo/a6010/sisleyr.mk)
 $(call inherit-product, vendor/lenovo/a6010/legacyril.mk)
