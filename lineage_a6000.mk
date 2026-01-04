@@ -83,7 +83,7 @@ PRODUCT_COPY_FILES += \
 
 # First stage init
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+    $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.legacy.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
 
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
 $(call inherit-product, vendor/lenovo/a6010/a60x0.mk)

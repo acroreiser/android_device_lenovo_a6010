@@ -29,7 +29,7 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 # First stage init
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.sisleyr.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+    $(LOCAL_PATH)/rootdir/etc/fstab.ramdisk.legacy.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
 
 # Camera
 PRODUCT_PACKAGES += \
