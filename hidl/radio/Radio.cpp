@@ -7,6 +7,7 @@
 #define LOG_TAG "android.hardware.radio@1.4-service.legacy"
 
 #include "Radio.h"
+#include "RadioIndication.h"
 #include "Helpers.h"
 #include <vector>
 #include <string>
@@ -56,6 +57,7 @@
     } while (0)
 
 namespace android::hardware::radio::implementation {
+sp<RadioIndication> xxRadioIndication = new RadioIndication();
 
 Radio::Radio(sp<V1_0::IRadio> realRadio) : mRealRadio(realRadio) {}
 
@@ -64,6 +66,7 @@ Return<void> Radio::setResponseFunctions(const sp<V1_0::IRadioResponse>& radioRe
                                          const sp<V1_0::IRadioIndication>& radioIndication) {
     mRadioResponse->mRealRadioResponse = V1_4::IRadioResponse::castFrom(radioResponse);
     mRadioIndication->mRealRadioIndication = V1_4::IRadioIndication::castFrom(radioIndication);
+    xxRadioIndication->mRealRadioIndication = V1_4::IRadioIndication::castFrom(radioIndication);
     WRAP_V1_0_CALL(setResponseFunctions, mRadioResponse, mRadioIndication);
 }
 
@@ -824,17 +827,14 @@ Return<void> Radio::emergencyDial(int32_t serial, const V1_0::Dial& dialInfo,
     return Void();
 }
 
-Return<void> Radio::startNetworkScan_1_4(int32_t serial, const V1_2::NetworkScanRequest& request) {
-    MAYBE_WRAP_V1_4_CALL(startNetworkScan_1_4, serial, request);
-    MAYBE_WRAP_V1_2_CALL(startNetworkScan_1_2, serial, request);
+Return<void> Radio::startNetworkScan_1_4(int32_t serial, const V1_2::NetworkScanRequest&) {
+    V1_0::RadioResponseInfo info = {};
+    info.serial = serial;
+    info.type = V1_0::RadioResponseType::SOLICITED;
+    info.error = V1_0::RadioError::NONE;
+    mRadioResponse->mRealRadioResponse->startNetworkScanResponse_1_4(info);
+    WRAP_V1_0_CALL(getAvailableNetworks, serial);
 
-    V1_1::NetworkScanRequest legacyRequest = {};
-    legacyRequest.type = request.type;
-    legacyRequest.interval = request.interval;
-    legacyRequest.specifiers = request.specifiers;
-
-    MAYBE_WRAP_V1_1_CALL(startNetworkScan, serial, legacyRequest);
-    // TODO implement
     return Void();
 }
 
