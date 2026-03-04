@@ -15,6 +15,7 @@ extern int slotId;
 namespace android::hardware::radio::implementation {
 
 extern sp<RadioIndication> xxRadioIndication;
+extern int32_t emergency_dial_serial;
 
 // Methods from ::android::hardware::radio::V1_0::IRadioResponse follow.
 Return<void> RadioResponse::getIccCardStatusResponse(const V1_0::RadioResponseInfo& info,
@@ -79,6 +80,11 @@ Return<void> RadioResponse::getCurrentCallsResponse(const V1_0::RadioResponseInf
 }
 
 Return<void> RadioResponse::dialResponse(const V1_0::RadioResponseInfo& info) {
+    if (info.serial == emergency_dial_serial) {
+        emergency_dial_serial = -1;
+        return mRealRadioResponse->emergencyDialResponse(info);
+    }
+
     return mRealRadioResponse->dialResponse(info);
 }
 

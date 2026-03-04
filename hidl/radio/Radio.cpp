@@ -58,6 +58,7 @@
 
 namespace android::hardware::radio::implementation {
 sp<RadioIndication> xxRadioIndication = new RadioIndication();
+int32_t emergency_dial_serial = -1;
 
 Radio::Radio(sp<V1_0::IRadio> realRadio) : mRealRadio(realRadio) {}
 
@@ -823,7 +824,11 @@ Return<void> Radio::emergencyDial(int32_t serial, const V1_0::Dial& dialInfo,
     MAYBE_WRAP_V1_4_CALL(emergencyDial, serial, dialInfo, categories, urns, routing,
                          hasKnownUserIntentEmergency, isTesting);
 
-    // TODO implement
+    if (emergency_dial_serial == -1) {
+        emergency_dial_serial = serial;
+        WRAP_V1_0_CALL(dial, serial, dialInfo);
+    }
+
     return Void();
 }
 
