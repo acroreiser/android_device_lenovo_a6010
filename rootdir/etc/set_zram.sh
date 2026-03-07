@@ -13,3 +13,6 @@ echo 100 > /proc/sys/vm/swappiness
 
 # Set kswapd threads
 echo 4 > /proc/sys/vm/kswapd_threads
+
+# Virtual memory management
+echo 300 > /proc/sys/vm/watermark_scale_factor

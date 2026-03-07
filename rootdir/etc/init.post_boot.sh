@@ -38,9 +38,6 @@ sysctl -w kernel.sched_min_granularity_ns=3000000
 echo 1 > /sys/devices/platform/kcal_ctrl.0/kcal_enable
 echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
 
-# Virtual memory management
-echo 230 > /proc/sys/vm/watermark_scale_factor
-
 # Set allocstall_threshold to 0
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 
