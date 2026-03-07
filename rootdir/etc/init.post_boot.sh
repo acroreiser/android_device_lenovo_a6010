@@ -33,23 +33,13 @@ echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
 # to the same cpu with ui-threads
 sysctl -w kernel.sched_spill_load=100
 
-sysctl -w kernel.sched_rr_timeslice_ms=50
-
 sysctl -w kernel.sched_min_granularity_ns=3000000
-sysctl -w kernel.sched_latency_ns=100000
 
 echo 1 > /sys/devices/platform/kcal_ctrl.0/kcal_enable
 echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
 
 # Virtual memory management
-echo 0 > /proc/sys/vm/extra_free_kbytes
 echo 230 > /proc/sys/vm/watermark_scale_factor
-echo 10572 > /proc/sys/vm/min_free_kbytes
-echo 0 > /proc/sys/vm/admin_reserve_kbytes
-echo 0 > /proc/sys/vm/user_reserve_kbytes
-
-echo 52428800 > /proc/sys/vm/dirty_bytes
-echo 4194304 > /proc/sys/vm/dirty_background_bytes
 
 # Set allocstall_threshold to 0
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
@@ -79,14 +69,5 @@ echo 20480 > /dev/cpuctl/system/cpu.shares
 echo 20480 > /dev/cpuctl/nnapi-hal/cpu.shares
 echo 20480 > /dev/cpuctl/rt/cpu.shares
 
-echo 0 > /sys/block/mmcblk0/queue/iosched/back_seek_max
-echo 0 > /sys/block/mmcblk0/queue/iosched/back_seek_penalty
 echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb
-echo 1 > /sys/block/mmcblk0/queue/iosched/strict_guarantees
-echo 150000 > /sys/block/mmcblk0/queue/iosched/max_budget
-echo 60 > /sys/block/mmcblk0/queue/iosched/timeout_sync
-
-echo 0 > /sys/block/mmcblk1/queue/iosched/back_seek_max
-echo 0 > /sys/block/mmcblk1/queue/iosched/back_seek_penalty
 echo 128 > /sys/block/mmcblk1/queue/read_ahead_kb
-echo 1 > /sys/block/mmcblk1/queue/iosched/strict_guarantees
