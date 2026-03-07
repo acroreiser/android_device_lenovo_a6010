@@ -10,3 +10,6 @@ echo $ZMEM > /sys/block/zram0/disksize
 mkswap /dev/block/zram0
 swapon -d /dev/block/zram0
 echo 150 > /proc/sys/vm/swappiness
+
+# Set kswapd threads
+echo 4 > /proc/sys/vm/kswapd_threads

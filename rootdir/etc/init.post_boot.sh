@@ -44,9 +44,6 @@ echo 230 > /proc/sys/vm/watermark_scale_factor
 # Set allocstall_threshold to 0
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 
-# Set kswapd threads
-echo 1 > /proc/sys/vm/kswapd_threads
-
 # Set KGSL pwrlevel
 echo 2 > /sys/class/kgsl/kgsl-3d0/default_pwrlevel
 
