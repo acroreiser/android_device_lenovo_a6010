@@ -168,31 +168,15 @@ void hal1_data_callback(int32_t msg_type,
     }
 }
 
-void process_camera_frame(void* buffer, size_t size, nsecs_t timestamp)
-{
-    adapter_camera3_device_t* adapter = hal3on1_dev;
-    ALOGE("Processing frame of size: %zu at timestamp: %lld\n", size, (long long)timestamp);
-            adapter->video_buffer = (uint8_t*)buffer;
-            adapter->video_buffer_size = size;
-            adapter->video_frame_timestamp = timestamp;
-
-            while (adapter->video_buffer_size > 0) { usleep(1); }
-}
-
 void hal1_data_timestamp_callback(nsecs_t timestamp, int32_t msg_type,
                                   const camera_memory_t* data, unsigned index, void* user)
 {
-    if (msg_type == CAMERA_MSG_VIDEO_FRAME) {
-        ALOGE("Received video frame with timestamp: %lld ns, buffer index: %u\n",
-              (long long)timestamp, index);
+    adapter_camera3_device_t* adapter = hal3on1_dev;
+    adapter->video_buffer = (uint8_t*)data->data;
+    adapter->video_buffer_size = data->size;
+    adapter->video_frame_timestamp = timestamp;
 
-        if (data && data->data)
-            process_camera_frame(data->data, data->size, timestamp);
-        else
-            ALOGE("Error: Data buffer is null!\n");
-
-    } else
-        ALOGE("Unexpected message type: %d\n", msg_type);
+    while (adapter->video_buffer_size > 0) { usleep(1); }
 }
 
 void release_memory(camera_memory_t* memory)
@@ -218,39 +202,26 @@ camera_memory_t* get_memory(int fd, size_t buf_size, uint_t num_bufs, void* user
         return nullptr;
     }
 
-    size_t total_size = buf_size * num_bufs;
     if (fd < 0) {
         if (properties.use_memfd)
             fd = memfd_create("CameraHeap", 0);
         else
-            fd = ashmem_create_region("CameraHeap", total_size);
+            fd = ashmem_create_region("CameraHeap", buf_size);
 
         if (fd < 0) {
             ALOGE("Error: Failed to create memfd.");
             free(cameraMem);
             return nullptr;
         }
-        ftruncate(fd, total_size);
+        if (properties.use_memfd)
+            ftruncate(fd, buf_size);
     }
 
     cameraMem->fd = fd;
-    cameraMem->data = mmap(nullptr, total_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-
-    if (cameraMem->data == MAP_FAILED) {
-        ALOGW("Warning: Failed to mmap memfd region: %s, trying to alloc and swap new fd (%d)",
-              strerror(errno), fd);
-
-        int newfd = memfd_create("CameraHeap", 0);
-
-        cameraMem->data = mmap(nullptr, total_size, PROT_READ | PROT_WRITE, MAP_SHARED,
-                               dup2(dup(newfd), fd), 0);
-
-        if (cameraMem->data == MAP_FAILED)
-            ALOGE("Error: Failed to mmap new memfd: %s", strerror(errno));
-    }
+    cameraMem->data = mmap(nullptr, buf_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 
     cameraMem->mem.data = cameraMem->data;
-    cameraMem->mem.size = total_size;
+    cameraMem->mem.size = buf_size;
     cameraMem->mem.handle = cameraMem;
     cameraMem->mem.release = release_memory;
 
@@ -356,15 +327,6 @@ static int camera3_configure_streams(const struct camera3_device *dev, camera3_s
     if (!hal1_device) {
         return -ENODEV;
     }
-
-    if (adapter->video_stream) {
-        HAL1_CALL(hal3on1_dev->hal1_device, disable_msg_type, CAMERA_MSG_VIDEO_FRAME);
-        HAL1_CALL(hal3on1_dev->hal1_device, stop_recording);
-        adapter->video_buffer_size = 0;
-        adapter->video_stream = false;
-    }
-
-ALOGE("Processing frame CONFIGURE STREAMS");
 
     char *settings = HAL1_CALL(hal1_device, get_parameters);
     CameraParameters preview_params;
@@ -1290,6 +1252,9 @@ skip_mwb:
             properties.use_hwcomposer)
             usage = GRALLOC_USAGE_HW_COMPOSER;
 
+        if (output_buffer.stream->format == HAL_PIXEL_FORMAT_NV12_ENCODEABLE)
+            usage = GRALLOC_USAGE_HW_VIDEO_ENCODER;
+
         GraphicBufferMapper::get().lock(*output_buffer.buffer, usage, rect, (void **)&buf);
 
         buffers.setCapacity(request->num_output_buffers);
@@ -1321,6 +1286,9 @@ skip_mwb:
             if (output_buffer.stream->format == HAL_PIXEL_FORMAT_NV12_ENCODEABLE) {
                 if (adapter->video_stream != true) {
                     current_params.set("video-frame-format", "nv12-venus");
+                    current_params.set("iso", "auto");
+                    current_params.set("exposure-time", "0");
+                    current_params.set("zsl", "on");
                     HAL1_CALL(hal1_device, set_parameters, current_params.flatten());
                     HAL1_CALL(hal1_device, enable_msg_type, CAMERA_MSG_VIDEO_FRAME);
                     HAL1_CALL(hal1_device, start_recording);
@@ -1393,15 +1361,15 @@ static int camera3_flush(const struct camera3_device *dev)
     adapter_camera3_device_t *adapter = (adapter_camera3_device_t *)dev;
 
     if (adapter->video_stream) {
-            HAL1_CALL(hal3on1_dev->hal1_device, disable_msg_type, CAMERA_MSG_VIDEO_FRAME);
+        HAL1_CALL(hal3on1_dev->hal1_device, disable_msg_type, CAMERA_MSG_VIDEO_FRAME);
         HAL1_CALL(hal3on1_dev->hal1_device, stop_recording);
-         adapter->video_stream = false;
+        adapter->video_stream = false;
     } else {
-    HAL1_CALL(hal3on1_dev->hal1_device, disable_msg_type, CAMERA_MSG_COMPRESSED_IMAGE);
-    HAL1_CALL(hal3on1_dev->hal1_device, cancel_picture);
-}
+        HAL1_CALL(hal3on1_dev->hal1_device, disable_msg_type, CAMERA_MSG_COMPRESSED_IMAGE);
+        HAL1_CALL(hal3on1_dev->hal1_device, cancel_picture);
+    }
 
-HAL1_CALL(hal3on1_dev->hal1_device, release);
+    HAL1_CALL(hal3on1_dev->hal1_device, release);
 
     return NO_ERROR;
 }
