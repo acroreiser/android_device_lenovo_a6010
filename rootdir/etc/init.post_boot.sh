@@ -65,3 +65,7 @@ echo 20480 > /dev/cpuctl/rt/cpu.shares
 
 echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb
 echo 128 > /sys/block/mmcblk1/queue/read_ahead_kb
+
+if [ "$(getprop ro.product.device)" == "sisleyr" ]; then
+  kill $(ps -A | grep ndroid.hardware.camera.provider | awk '{print $2}')
+fi
