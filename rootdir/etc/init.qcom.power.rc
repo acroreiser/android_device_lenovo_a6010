@@ -21,11 +21,18 @@ on enable-low-power
 
     # Update foreground and background cpusets
     # Reserve CPU 3 for the top app
-    write /dev/cpuset/foreground/cpus 0-2
-    write /dev/cpuset/background/cpus 0-2
-    write /dev/cpuset/system-background/cpus 0-1
-    write /dev/cpuset/top-app/cpus 0-3
-    write /dev/cpuset/restricted/cpus 1
+    write /dev/cpuset/foreground/cpuset.cpus 0-2
+    write /dev/cpuset/foreground/cpuset.mems 0
+    write /dev/cpuset/background/cpuset.cpus 0-2
+    write /dev/cpuset/background/cpuset.mems 0
+    write /dev/cpuset/system-background/cpuset.cpus 0-1
+    write /dev/cpuset/system-background/cpuset.mems 0
+    write /dev/cpuset/top-app/cpuset.cpus 0-3
+    write /dev/cpuset/top-app/cpuset.mems 0
+    write /dev/cpuset/restricted/cpuset.cpus 1
+    write /dev/cpuset/restricted/cpuset.mems 0
+    write /dev/cpuset/camera-daemon/cpuset.cpus 0-3
+    write /dev/cpuset/camera-daemon/cpuset.mems 0
 
     # Set perfd properties
     setprop sys.post_boot.parsed 1

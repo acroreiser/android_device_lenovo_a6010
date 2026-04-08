@@ -31,6 +31,8 @@ import /vendor/etc/init/hw/init.qcom.usb.rc
 import /vendor/etc/init/hw/init.target.rc
 
 on early-init
+    mount cgroup cpuset /dev/cpuset cpuset
+
     # GPS
     chown root gps /dev/subsys_modem
     chmod 0660 /dev/subsys_modem
