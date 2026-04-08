@@ -760,9 +760,6 @@ PRODUCT_VENDOR_PROPERTIES += \
     external_storage.casefold.enabled=0 \
     external_storage.sdcardfs.enabled=0
 
-# APN(s)
-PRODUCT_COPY_FILES += vendor/lineage/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
-
 # Mount point for modem firmware partition
 PRODUCT_PACKAGES += \
     vendor_firmware_mnt_mountpoint
