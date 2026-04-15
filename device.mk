@@ -715,6 +715,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay-service.sysfs
 
+$(call soong_config_set_bool,livedisplay_sysfs,enable_dcc,true)
+
 # Touch
 PRODUCT_PACKAGES += \
     vendor.lineage.touch-service.a6010
