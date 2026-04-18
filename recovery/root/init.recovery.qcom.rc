@@ -2,6 +2,16 @@ on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
 
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    install_keyring
+    start gatekeeper-1-0
+    start keymaster-4-1
+
+on property:twrp.all.users.decrypted=true
+    setprop crypto.ready 0
+    stop gatekeeper-1-0
+    stop keymaster-4-1
+
 on early-init
     mkdir /dev/cpuset 0664 root system
     mount cgroup cpuset /dev/cpuset cpuset
