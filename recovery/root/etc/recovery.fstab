@@ -4,7 +4,7 @@
 
 /dev/block/bootdevice/by-name/system         /system      ext4    ro,discard                                                wait,first_stage_mount
 
-# comment vendor for a6000
+# comment vendor for sisleyr and a6000
 /dev/block/bootdevice/by-name/vendor         /vendor      ext4    ro,discard                                                wait,first_stage_mount
 
 /dev/block/bootdevice/by-name/userdata       /data        ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,journal_async_commit,discard              latemount,fileencryption=adiantum,wait,check,formattable,quota,reservedsize=128M
@@ -15,5 +15,6 @@
 /dev/block/bootdevice/by-name/misc           /misc        emmc    defaults                                                    defaults
 /dev/block/bootdevice/by-name/modem          /vendor/firmware_mnt    vfat    ro,shortname=lower,uid=1000,gid=1026,dmask=227,fmask=337    wait
 
+# comment external_sd for sisleyr
 /devices/soc.0/7864900.sdhci/mmc_host*       auto         auto    defaults                                                    voldmanaged=sdcard1:auto,encryptable=userdata
 /devices/platform/msm_hsusb*                 auto         auto    defaults                                                    voldmanaged=usbdisk:auto

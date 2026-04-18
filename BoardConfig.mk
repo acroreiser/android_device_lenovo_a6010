@@ -60,6 +60,9 @@ endif
 ifeq ($(TARGET_DEVICE),a6000)
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/zImage-dtb-a6010
 endif
+ifeq ($(TARGET_DEVICE),sisleyr)
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/zImage-dtb-sisleyr
+endif
 
 BOARD_RAMDISK_USE_XZ := true
 

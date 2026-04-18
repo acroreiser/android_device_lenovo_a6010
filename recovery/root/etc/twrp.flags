@@ -6,7 +6,7 @@
 /system			ext4	/dev/block/bootdevice/by-name/system
 /system_image	        emmc	/dev/block/bootdevice/by-name/system
 
-# comment vendor for a6000
+# comment vendor for sisleyr and a6000
 /vendor                 ext4    /dev/block/bootdevice/by-name/vendor
 /vendor_image           emmc    /dev/block/bootdevice/by-name/vendor
 
@@ -38,4 +38,5 @@
 /config			emmc	/dev/block/bootdevice/by-name/config		flags=subpartitionof=/oem;backup=1
 /pad			emmc	/dev/block/bootdevice/by-name/pad		flags=subpartitionof=/oem;backup=1
 
+# comment external_sd for sisleyr
 /external_sd 		auto	/dev/block/mmcblk1p1 /dev/block/mmcblk1 	flags=display="Micro SDCard";storage;wipeingui;removable
