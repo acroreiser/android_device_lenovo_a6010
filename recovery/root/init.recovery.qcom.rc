@@ -32,6 +32,14 @@ service vm_bms /system/bin/vm_bms
     group root
     seclabel u:r:init:s0
 
+service health-2-1 /system/bin/android.hardware.health@2.1-service
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    disabled
+    seclabel u:r:recovery:s0
+
 on property:ro.twrp.boot=1
     write /proc/boot_completed_prop 1
     setprop persist.sys.usb.config mtp,adb
+    start health-2-1
