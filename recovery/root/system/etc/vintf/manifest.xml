@@ -1,0 +1,27 @@
+<!--
+    Input:
+        manifest.xml
+-->
+<manifest version="2.0" type="framework">
+    <hal>
+        <name>android.hidl.manager</name>
+        <transport>hwbinder</transport>
+        <version>1.2</version>
+        <interface>
+            <name>IServiceManager</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
+        <name>android.hidl.token</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ITokenManager</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <sepolicy>
+        <version>30.0</version>
+    </sepolicy>
+</manifest>
