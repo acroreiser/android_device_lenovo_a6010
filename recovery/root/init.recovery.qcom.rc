@@ -55,8 +55,6 @@ on init
     chmod 0664 /dev/ion
     chown system system /dev/ion
 
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-
 service vm_bms /system/bin/vm_bms
     user root
     group root
