@@ -2,6 +2,26 @@ on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
 
+on early-init
+    mkdir /dev/cpuset 0664 root system
+    mount cgroup cpuset /dev/cpuset cpuset
+    mkdir /dev/cpuset/foreground 0664 root system
+    mkdir /dev/cpuset/background 0664 root system
+    mkdir /dev/cpuset/system-background 0664 root system
+    mkdir /dev/cpuset/top-app 0664 root system
+    mkdir /dev/cpuset/restricted 0664 root system
+
+    write /dev/cpuset/foreground/cpuset.cpus 0-2
+    write /dev/cpuset/foreground/cpuset.mems 0
+    write /dev/cpuset/background/cpuset.cpus 0-1
+    write /dev/cpuset/background/cpuset.mems 0
+    write /dev/cpuset/system-background/cpuset.cpus 0-1
+    write /dev/cpuset/system-background/cpuset.mems 0
+    write /dev/cpuset/top-app/cpuset.cpus 0-3
+    write /dev/cpuset/top-app/cpuset.mems 0
+    write /dev/cpuset/restricted/cpuset.cpus 1
+    write /dev/cpuset/restricted/cpuset.mems 0
+
 on init
     chmod 0660 /dev/vm_bms
     chown system system /dev/vm_bms
