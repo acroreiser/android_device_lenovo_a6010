@@ -97,3 +97,8 @@ TWRP_EVENT_LOGGING := true
 
 #adbd insecure
 BOARD_ALWAYS_INSECURE := true
+
+# FBE support.
+# We don't need qcom scripts!
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
