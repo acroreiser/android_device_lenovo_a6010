@@ -84,5 +84,11 @@ TW_NO_USB_STORAGE := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 
+# Logging.
+# Also look for logd patch in patches/ subdir
+TARGET_USES_LOGD := true
+TWRP_INCLUDE_LOGCAT := true
+TWRP_EVENT_LOGGING := true
+
 #adbd insecure
 BOARD_ALWAYS_INSECURE := true

@@ -1,0 +1,54 @@
+commit 2792350ff5e0f6cdef4252a4340270c439c61d27
+Author: Yaroslav Zviezda <acroreiser@gmail.com>
+Date:   Sat Apr 18 21:24:07 2026 +0300
+
+    HACK: logd: there is no reason to die if you cannot drop your privs
+    
+    Change-Id: Iff8e6ae1d53136416c50d50f3617ddc9e3c93072
+
+diff --git a/logd/main.cpp b/logd/main.cpp
+index d0d2ac7..426f4e1 100644
+--- a/logd/main.cpp
++++ b/logd/main.cpp
+@@ -75,35 +75,35 @@ using android::base::SetProperty;
+ // handle the user, groups, capabilities, files, etc setup.
+ static void DropPrivs(bool klogd, bool auditd) {
+     if (set_sched_policy(0, SP_BACKGROUND) < 0) {
+-        PLOG(FATAL) << "failed to set background scheduling policy";
++   //     PLOG(FATAL) << "failed to set background scheduling policy";
+     }
+ 
+     if (!GetBoolProperty("ro.debuggable", false)) {
+         if (prctl(PR_SET_DUMPABLE, 0) == -1) {
+-            PLOG(FATAL) << "failed to clear PR_SET_DUMPABLE";
++    //        PLOG(FATAL) << "failed to clear PR_SET_DUMPABLE";
+         }
+     }
+ 
+     std::unique_ptr<struct _cap_struct, int (*)(void*)> caps(cap_init(), cap_free);
+     if (cap_clear(caps.get()) < 0) {
+-        PLOG(FATAL) << "cap_clear() failed";
++    //    PLOG(FATAL) << "cap_clear() failed";
+     }
+     if (klogd) {
+         cap_value_t cap_syslog = CAP_SYSLOG;
+         if (cap_set_flag(caps.get(), CAP_PERMITTED, 1, &cap_syslog, CAP_SET) < 0 ||
+             cap_set_flag(caps.get(), CAP_EFFECTIVE, 1, &cap_syslog, CAP_SET) < 0) {
+-            PLOG(FATAL) << "Failed to set CAP_SYSLOG";
++    //        PLOG(FATAL) << "Failed to set CAP_SYSLOG";
+         }
+     }
+     if (auditd) {
+         cap_value_t cap_audit_control = CAP_AUDIT_CONTROL;
+         if (cap_set_flag(caps.get(), CAP_PERMITTED, 1, &cap_audit_control, CAP_SET) < 0 ||
+             cap_set_flag(caps.get(), CAP_EFFECTIVE, 1, &cap_audit_control, CAP_SET) < 0) {
+-            PLOG(FATAL) << "Failed to set CAP_AUDIT_CONTROL";
++    //        PLOG(FATAL) << "Failed to set CAP_AUDIT_CONTROL";
+         }
+     }
+     if (cap_set_proc(caps.get()) < 0) {
+-        PLOG(FATAL) << "cap_set_proc() failed";
++   //     PLOG(FATAL) << "cap_set_proc() failed";
+     }
+ }
+ 

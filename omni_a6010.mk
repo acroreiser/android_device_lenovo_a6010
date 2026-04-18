@@ -39,6 +39,10 @@ PRODUCT_PACKAGES += \
     charger_res_images \
     charger
 
+# Logging
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.logd.kernel=false
+
 # Define time zone data path
 ifneq ($(wildcard bionic/libc/zoneinfo),)
     TZDATAPATH := bionic/libc/zoneinfo
