@@ -39,6 +39,9 @@ PRODUCT_PACKAGES += \
     charger_res_images \
     charger
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    keymaster_ver=4.1
+
 # Logging
 PRODUCT_VENDOR_PROPERTIES += \
     ro.logd.kernel=false
