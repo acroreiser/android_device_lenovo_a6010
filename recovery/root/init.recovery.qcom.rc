@@ -52,6 +52,13 @@ service vm_bms /system/bin/vm_bms
     group root
     seclabel u:r:init:s0
 
+service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service.software
+    user root
+    group root
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
+    disabled
+    seclabel u:r:recovery:s0
+
 service health-2-1 /system/bin/android.hardware.health@2.1-service
     user root
     group root
