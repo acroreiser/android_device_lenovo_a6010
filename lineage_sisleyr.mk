@@ -22,7 +22,7 @@ $(call inherit-product, vendor/lineage/config/common_mini_go_phone.mk)
 TARGET_BOARD_PLATFORM_VARIANT := msm8916
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := a6010
+TARGET_OTA_ASSERT_DEVICE := sisleyr
 
 TARGET_VENDOR := Lenovo
 PRODUCT_DEVICE := sisleyr
