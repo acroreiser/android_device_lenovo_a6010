@@ -1,0 +1,56 @@
+commit dcc2a95d044c67db0612b0e8f370e3c07ff22a56
+Author: Yaroslav Zviezda <acroreiser@gmail.com>
+Date:   Sat Apr 18 21:20:50 2026 +0300
+
+    HACK: servicemanager: in permissive TWRP SELinux issues should not be fatal
+    
+    Change-Id: I206860b8b5a1e82ea2d0fc9a8a5d0de95f8d7b37
+
+diff --git a/cmds/servicemanager/Access.cpp b/cmds/servicemanager/Access.cpp
+index b7e520f..6153d58 100644
+--- a/cmds/servicemanager/Access.cpp
++++ b/cmds/servicemanager/Access.cpp
+@@ -43,24 +43,6 @@ static std::string getPidcon(pid_t pid) {
+     return result;
+ }
+ 
+-static struct selabel_handle* getSehandle() {
+-    static struct selabel_handle* gSehandle = nullptr;
+-
+-    if (gSehandle != nullptr && selinux_status_updated()) {
+-        selabel_close(gSehandle);
+-        gSehandle = nullptr;
+-    }
+-
+-    if (gSehandle == nullptr) {
+-        gSehandle = kIsVendor
+-            ? selinux_android_vendor_service_context_handle()
+-            : selinux_android_service_context_handle();
+-    }
+-
+-    CHECK(gSehandle != nullptr);
+-    return gSehandle;
+-}
+-
+ struct AuditCallbackData {
+     const Access::CallingContext* context;
+     const std::string* tname;
+@@ -135,16 +117,8 @@ bool Access::actionAllowed(const CallingContext& sctx, const char* tctx, const c
+         reinterpret_cast<void*>(&data));
+ }
+ 
+-bool Access::actionAllowedFromLookup(const CallingContext& sctx, const std::string& name, const char *perm) {
+-    char *tctx = nullptr;
+-    if (selabel_lookup(getSehandle(), &tctx, name.c_str(), SELABEL_CTX_ANDROID_SERVICE) != 0) {
+-        LOG(ERROR) << "SELinux: No match for " << name << " in service_contexts.\n";
+-        return false;
+-    }
+-
+-    bool allowed = actionAllowed(sctx, tctx, perm, name);
+-    freecon(tctx);
+-    return allowed;
++bool Access::actionAllowedFromLookup(const CallingContext&, const std::string&, const char *) {
++    return true;
+ }
+ 
+ }  // android
