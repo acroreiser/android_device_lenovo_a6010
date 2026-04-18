@@ -95,6 +95,9 @@ TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
 TWRP_EVENT_LOGGING := true
 
+# Misc
+TW_EXCLUDE_APEX := true
+
 #adbd insecure
 BOARD_ALWAYS_INSECURE := true
 
