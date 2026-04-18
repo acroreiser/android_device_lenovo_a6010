@@ -1,2 +1,0 @@
-add_lunch_combo omni_a6010-eng
-add_lunch_combo omni_a6010-userdebug
