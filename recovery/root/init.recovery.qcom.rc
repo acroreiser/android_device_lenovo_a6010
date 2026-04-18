@@ -27,7 +27,7 @@ on init
 
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
 
-service vm_bms /sbin/vm_bms
+service vm_bms /system/bin/vm_bms
     user root
     group root
     seclabel u:r:init:s0
