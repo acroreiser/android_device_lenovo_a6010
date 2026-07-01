@@ -470,10 +470,6 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
     android.hardware.health@2.1-service
 
-# Lineage Health
-PRODUCT_PACKAGES += \
-    vendor.lineage.health-service.default
-
 # Vibrator
 PRODUCT_PACKAGES += \
     android.hardware.vibrator-service.msm8916
