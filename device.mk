@@ -93,7 +93,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.renderer=opengl \
     ro.hwui.render_ahead=20 \
     ro.config.night_mode_on_battery_saver=false \
-    sys.use_fifo_ui=1
+    sys.use_fifo_ui=1 \
+    ro.sf.disable_triple_buffer=1
 
 # Disable surfaceflinger prime_shader cache to improve post boot memory.
 PRODUCT_PROPERTY_OVERRIDES += service.sf.prime_shader_cache=0
