@@ -16,5 +16,5 @@
 
 # Android ramdisk fstab file.
 
-/dev/block/platform/soc.0/7824900.sdhci/by-name/system         /system      ext4    ro,barrier=1,discard                                                wait,first_stage_mount
-/dev/block/platform/soc.0/7824900.sdhci/by-name/vendor         /vendor      ext4    ro,barrier=1,discard                                                wait,first_stage_mount
+/dev/block/platform/soc.0/7824900.sdhci/by-name/system         /system      ext4    ro,barrier=1,discard,inode_readahead_blks=8                                                 wait,first_stage_mount
+/dev/block/platform/soc.0/7824900.sdhci/by-name/vendor         /vendor      ext4    ro,barrier=1,discard,inode_readahead_blks=8                                                 wait,first_stage_mount
