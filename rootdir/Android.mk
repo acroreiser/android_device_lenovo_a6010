@@ -6,6 +6,7 @@ LOCAL_MODULE       := set_baseband.sh
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_SRC_FILES    := etc/set_baseband.sh
+LOCAL_CHECK_ELF_FILES := false
 LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
 
@@ -14,6 +15,7 @@ LOCAL_MODULE       := set_zram.sh
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_SRC_FILES    := etc/set_zram.sh
+LOCAL_CHECK_ELF_FILES := false
 LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
 
@@ -22,6 +24,7 @@ LOCAL_MODULE       := init.post_boot.sh
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_SRC_FILES    := etc/init.post_boot.sh
+LOCAL_CHECK_ELF_FILES := false
 LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
 
@@ -30,6 +33,7 @@ LOCAL_MODULE       := target_config.sh
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_SRC_FILES    := etc/target_config.sh
+LOCAL_CHECK_ELF_FILES := false
 LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
 
@@ -38,6 +42,7 @@ LOCAL_MODULE       := xtra_daemon_toggler.sh
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_SRC_FILES    := etc/xtra_daemon_toggler.sh
+LOCAL_CHECK_ELF_FILES := false
 LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
 
