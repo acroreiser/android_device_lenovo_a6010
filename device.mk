@@ -297,7 +297,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # System
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.binary_xml=false
+    persist.sys.binary_xml=false \
+    ro.hw_timeout_multiplier=6
 
 # Charger
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -503,8 +504,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.omx_default_rank=0 \
     vendor.mediacodec.binder.size=4 \
     media.stagefright.thumbnail.prefer_hw_codecs=true \
-    vidc.enc.narrow.searchrange=1 \
-    ro.media.maxmem=268435456
+    vidc.enc.narrow.searchrange=1
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -572,12 +572,6 @@ DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
 PRODUCT_PACKAGES += \
     SystemUIGo
 
-# Animation
-TARGET_BOOT_ANIMATION_RES := 720
-TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
-TARGET_BOOTANIMATION_PRELOAD := true
-TARGET_BOOTANIMATION_TEXTURE_CACHE := true
-
 # Strip debug
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
@@ -594,16 +588,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.dalvik.vm.lib.2=libart.so \
     dalvik.vm.systemservercompilerfilter=speed-profile
 
-# Improve scrolling
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.scrollingcache=0 \
-    ro.min.fling_velocity=160 \
-    ro.max.fling_velocity=20000
-
-# IO Cgroups
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.iocgrp.config=1
-
 # Zygote
 PRODUCT_PROPERTY_OVERRIDES += \
     zygote.critical_window.minute=10
@@ -613,13 +597,6 @@ $(call inherit-product, build/make/target/product/go_defaults_512.mk)
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
-
-# Memory optimizations
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.max_starting_bg=8 \
-    ro.am.no_kill_cached_processes_until_boot_completed=false \
-    ro.am.no_kill_cached_processes_post_boot_completed_duration_millis=0 \
-    ro.hw_timeout_multiplier=6
 
 # Dexopt
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -633,16 +610,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.vendor.shutdown.waittime=500 \
     ro.build.shutdown_timeout=0
-
 # Battery
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.small_battery=true
-
-# TextClassifier
-PRODUCT_COPY_FILES += \
-    external/libtextclassifier/native/models/textclassifier.ru.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.ru.model \
-    external/libtextclassifier/native/models/textclassifier.fr.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.fr.model \
-    external/libtextclassifier/native/models/textclassifier.pl.model:$(TARGET_COPY_OUT_SYSTEM)/etc/textclassifier/textclassifier.pl.model
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \

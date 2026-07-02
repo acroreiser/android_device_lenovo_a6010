@@ -1,8 +1,6 @@
 #!/system/bin/sh
 
-setprop ro.vendor.qti.sys.fw.trim_enable_memory 2147483648
 setprop persist.device_config.runtime_native.usap_pool_enabled false
-setprop ro.vendor.qti.sys.fw.bg_apps_limit 16
 setprop pm.dexopt.bg-dexopt speed-profile
 setprop pm.dexopt.install speed-profile
 setprop dalvik.vm.usejit true
