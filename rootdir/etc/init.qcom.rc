@@ -120,6 +120,9 @@ on post-fs-data
     write /sys/class/leds/red/trigger none
     write /sys/class/leds/green/trigger blinking
 
+    write /sys/bus/i2c/drivers/ft5x06_ts/5-0038/disable_keys 1
+    write /sys/bus/i2c/drivers/mms200_i2c/5-0048/disable_keys 1
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864

@@ -666,7 +666,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.add_power_save=1 \
     persist.sys.fflag.override.settings_network_and_internet_v2=true \
     persist.data.netmgrd.qos.enable=true \
-    fw.max_users=3
+    fw.max_users=3 \
+    qemu.hw.mainkeys=0
 
 # RIL
 PRODUCT_COPY_FILES += \
