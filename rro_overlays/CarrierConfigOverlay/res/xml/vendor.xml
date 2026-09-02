@@ -5,7 +5,7 @@
         <boolean name="carrier_wfc_ims_available_bool" value="true" />
         <boolean name="carrier_wfc_supports_wifi_only_bool" value="true" />
         <boolean name="carrier_default_wfc_ims_enabled_bool" value="true" />
-        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <int name="carrier_default_wfc_ims_mode_int" value="1" />
 
         <!-- Fix com.google.android.iwlan crash:
              remove AES-XCBC-96 / algorithm 5 from Child SA proposal path -->
