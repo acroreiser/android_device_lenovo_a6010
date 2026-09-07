@@ -589,6 +589,21 @@ DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
 PRODUCT_PACKAGES += \
     SystemUIGo
 
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUIGo \
+    Settings \
+    TeleService \
+    PhhIms \
+    Dialer \
+    Contacts \
+    messaging \
+    DocumentsUI \
+    CredentialManager \
+    Aperture \
+    Glimpse \
+    Twelve \
+    Etar \
+    StorageManager
+
 # Strip debug
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 
