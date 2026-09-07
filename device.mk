@@ -485,6 +485,15 @@ PRODUCT_PACKAGES += \
     android.hardware.radio.config@1.1-service.msm8916 \
     android.hardware.radio@1.4-service.msm8916
 
+# IMS over Wi-Fi data service and network qualification service.
+PRODUCT_PACKAGES += \
+    Iwlan \
+    QualifiedNetworksService \
+    PhhIms
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/permissions/privapp-permissions-me.phh.ims.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-me.phh.ims.xml
+
 # Configuring device during boot
 PRODUCT_PACKAGES += \
     set_baseband.sh \
