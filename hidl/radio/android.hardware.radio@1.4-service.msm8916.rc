@@ -18,3 +18,10 @@ service vendor.radio-1-4-msm8916-2 /vendor/bin/hw/android.hardware.radio@1.4-ser
     user system
     group system
 
+on property:init.svc.vendor.radio-1-4-msm8916=restarting
+    stop vendor.ril-daemon
+    start vendor.ril-daemon
+
+on property:init.svc.vendor.radio-1-4-msm8916-2=restarting
+    stop vendor.ril-daemon2
+    start vendor.ril-daemon2
