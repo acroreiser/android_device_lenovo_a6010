@@ -1,0 +1,5 @@
+runtime_resource_overlay {
+    name: "CarrierConfigOverlay",
+    product_specific: true,
+    resource_dirs: ["res"],
+}

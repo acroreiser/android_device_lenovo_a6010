@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.lineageos.carrierconfigrescommon">
+
+    <overlay
+        android:targetPackage="com.android.carrierconfig"
+        android:isStatic="true"
+        android:priority="800" />
+</manifest>

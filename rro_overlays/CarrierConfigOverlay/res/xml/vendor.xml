@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<carrier_config_list>
+    <carrier_config>
+        <!-- Make WFC availability deterministic -->
+        <boolean name="carrier_wfc_ims_available_bool" value="true" />
+        <boolean name="carrier_wfc_supports_wifi_only_bool" value="true" />
+        <boolean name="carrier_default_wfc_ims_enabled_bool" value="true" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+
+        <!-- Fix com.google.android.iwlan crash:
+             remove AES-XCBC-96 / algorithm 5 from Child SA proposal path -->
+        <int-array name="iwlan.supported_integrity_algorithms_int_array" num="4">
+            <item value="2" />
+            <item value="12" />
+            <item value="13" />
+            <item value="14" />
+        </int-array>
+
+        <!-- Allow IMS handover between LTE/NR and IWLAN for VoLTE <-> VoWiFi
+             transitions. Keep GERAN/UTRAN <-> IWLAN disabled because older
+             Samsung DATA HALs do not handle those handovers safely. -->
+        <string-array name="iwlan_handover_policy_string_array" num="3">
+            <item value="source=IWLAN, target=GERAN|UTRAN, type=disallowed" />
+            <item value="source=GERAN|UTRAN, target=IWLAN, type=disallowed" />
+            <item value="source=EUTRAN|NGRAN|IWLAN, target=EUTRAN|NGRAN|IWLAN, type=allowed" />
+        </string-array>
+    </carrier_config>
+</carrier_config_list>
