@@ -53,4 +53,4 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, vendor/lenovo/a6010/a6010-vendor.mk)
 $(call inherit-product, vendor/lenovo/a6010/a60x0.mk)
 $(call inherit-product, vendor/lenovo/a6010/a6010.mk)
-$(call inherit-product, vendor/lenovo/a6010/oreoril.mk)
+$(call inherit-product, vendor/lenovo/a6010/legacyril.mk)
